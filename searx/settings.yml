@@ -331,6 +331,10 @@ engines:
     shortcut: 9g
     disabled: true
 
+  - name: abadis
+    engine: abadis
+    shortcut: abd
+
   - name: adobe stock
     engine: adobe_stock
     shortcut: asi
