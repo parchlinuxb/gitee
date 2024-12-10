@@ -1,0 +1,19 @@
+{
+    "browserslist": "cover 95% and last 2 versions and not dead",
+    "scripts": {
+        "style:watch:rtl": "parcel ./src/scss/rtl-style.scss --no-source-maps --dist-dir ./css -p 10020",
+        "style:watch:ltr": "parcel ./src/scss/ltr-style.scss --no-source-maps --dist-dir ./css -p 10021",
+        "style:watch": "concurrently -k -n \"RTL,LTR\" -c \"bgYellow.bold,bgGreen.bold\" -p \" {name} \" \"npm:style:watch:rtl\" \"npm:style:watch:ltr\"",
+        "style:build:rtl": "parcel build ./src/scss/rtl-style.scss --no-source-maps --dist-dir ./css",
+        "style:build:ltr": "parcel build ./src/scss/ltr-style.scss --no-source-maps --dist-dir ./css",
+        "style:build": "concurrently -k -n \"RTL,LTR\" -c \"bgYellow.dim,bgGreen.dim\" -p \" {name} \" \"npm:style:build:rtl\" \"npm:style:build:ltr\"",
+        "script:watch": "parcel ./src/ts/app.ts --no-source-maps --dist-dir ./js -p 10030",
+        "script:build": "parcel build ./src/ts/app.ts --no-source-maps --dist-dir ./js",
+        "dev": "concurrently -k -n \"STYLE,SCRIPT\" -c \"bgRed.bold,bgBlue.bold\" -p \" {name} \" \"npm:style:watch\" \"npm:script:watch\"",
+        "build": "concurrently -n \"STYLE,SCRIPT\" -c \"bgRed.dim,bgBlue.dim\" -p \" {name} \" \"npm:style:build\" \"npm:script:build\""
+    },
+    "devDependencies": {
+        "concurrently": "^9.1.0",
+        "parcel": "^2.13.0"
+    }
+}
