@@ -13,6 +13,7 @@
         "build": "concurrently -n \"STYLE,SCRIPT\" -c \"bgRed.dim,bgBlue.dim\" -p \" {name} \" \"npm:style:build\" \"npm:script:build\""
     },
     "devDependencies": {
+        "@parcel/transformer-sass": "^2.13.0",
         "concurrently": "^9.1.0",
         "parcel": "^2.13.0"
     }

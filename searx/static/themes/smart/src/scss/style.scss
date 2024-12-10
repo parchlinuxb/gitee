@@ -1,0 +1,10 @@
+// In fiist place, Reset all browser default styles
+@forward './reset.scss';
+
+// Then, import all the definitions
+@use './definitions.scss';
+
+// Then, import all the mixins
+$dir: ltr !default;
+@forward './mixins.scss' with ($dir: $dir !default);
+@use './mixins.scss' as mixin;
