@@ -379,6 +379,10 @@ engines:
   #   aa_ext: 'pdf'  # pdf, epub, ..
   #   aa_sort: oldest'  # newest, oldest, largest, smallest
 
+  - name: aparat
+    shortcut: apt
+    engine: aparat
+
   - name: apk mirror
     engine: apkmirror
     timeout: 4.0
