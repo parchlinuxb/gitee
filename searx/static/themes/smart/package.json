@@ -16,5 +16,10 @@
         "@parcel/transformer-sass": "^2.13.0",
         "concurrently": "^9.1.0",
         "parcel": "^2.13.0"
+    },
+    "dependencies": {
+        "ejs": "^3.1.10",
+        "remixicon": "^4.5.0",
+        "svgo": "^3.3.2"
     }
 }
