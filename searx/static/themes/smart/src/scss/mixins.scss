@@ -4,13 +4,17 @@
 $dir: ltr !default;
 
 // Corner radius mixin
-@mixin rounded($radius) {
+@mixin rounded($radius: "md") {
     @if $radius =="sm" {
         border-radius: $border-radius-sm;
     }
 
     @else if $radius =="lg" {
         border-radius: $border-radius-lg;
+    }
+
+    @else if $radius =="full" {
+        border-radius: 9999px;
     }
 
     @else {
@@ -27,9 +31,11 @@ $dir: ltr !default;
     }
 }
 
-@include screens($screen-xs, $screen-sm) {
-    .foo {
-        color: red;
+@mixin max-screens($screens...) {
+    @each $screen in $screens {
+        @media (max-width: $screen) {
+            @content;
+        }
     }
 }
 

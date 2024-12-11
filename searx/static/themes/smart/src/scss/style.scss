@@ -2,9 +2,67 @@
 @forward './reset.scss';
 
 // Then, import all the definitions
-@use './definitions.scss';
+@use './definitions.scss' as *;
 
 // Then, import all the mixins
 $dir: ltr !default;
 @forward './mixins.scss' with ($dir: $dir !default);
 @use './mixins.scss' as mixin;
+
+// CSS Color varables
+@use 'colors';
+
+#index {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "header"
+        "main"
+        "footer";
+    height: 100svh;
+    overflow: hidden;
+
+
+
+    header {
+        grid-area: header;
+    }
+
+    main {
+
+        grid-area: main;
+    }
+
+    footer {
+        grid-area: footer;
+    }
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+
+    @include mixin.max-screens($screen-md) {
+        justify-content: center;
+    }
+
+    .links {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        a {
+            display: inline-block;
+            padding: .5rem 1rem;
+            background-color: var(--primary-color);
+            color: var(--filled-text-color);
+            @include mixin.rounded(full)
+        }
+    }
+}

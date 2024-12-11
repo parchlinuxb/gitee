@@ -2,8 +2,20 @@
 
 // - Colors -
 // Light theme
+$primary-color: #009688;
+$secondary-color: #009688;
+$background-color: #ffffff;
+$secondary-background-color: #f5f5f5;
+$text-color: #000000;
+$filled-text-color: #ffffff;
 
 // Dark theme
+$primary-color-dark: #0290ee;
+$secondary-color-dark: #009688;
+$background-color-dark: #000000;
+$secondary-background-color-dark: #0f0f0f;
+$text-color-dark: #ffffff;
+$filled-text-color-dark: #ffffff;
 
 // - Screens -
 
@@ -15,8 +27,8 @@ $screen-xl: 1200px;
 
 // - Rounded corners -
 
-$border-radius: 4px;
-$border-radius-sm: 2px;
-$border-radius-lg: 8px;
+$border-radius: 1rem;
+$border-radius-sm: .5rem;
+$border-radius-lg: 2rem;
 
 // - Transitions -

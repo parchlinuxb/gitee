@@ -1,69 +1,98 @@
 <!DOCTYPE html>
-<html lang="{{ locale_rfc5646 }}" {% if rtl %} dir="rtl"{% endif %}>
-<head>
-  <meta charset="UTF-8" />
-  <meta name="description" content="Moa, a SearXNG-based and free metasearch that respects your privacy">
-  <meta name="keywords" content="MOA, SearXNG, search, search engine, metasearch, meta search">
-  <meta name="generator" content="searxng/{{ searx_version }}">
-  <meta name="referrer" content="no-referrer">
-  <meta name="robots" content="noarchive">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="HandheldFriendly" content="True">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-  <title>{{ instance_name }} {% block title %}{% endblock %}</title>
-  {% block meta %}{% endblock %}
-  {% if rtl %}
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/rtl-style.css') }}" type="text/css" media="screen" />
-  {% else %}
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/ltr-style.css') }}" type="text/css" media="screen" />
-  {% endif %}
-  {% if get_setting('server.limiter') or get_setting('server.public_instance') %}
-  <link rel="stylesheet" href="{{ url_for('client_token', token=link_token) }}" type="text/css" />
-  {% endif %}
-  {% block styles %}{% endblock %}
-  {% block head %}
-  <link title="{{ instance_name }}" type="application/opensearchdescription+xml" rel="search" href="{{ opensearch_url }}"/>
-  {% endblock %}
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  {# <link rel="icon" href="{{ url_for('static', filename='img/favicon.svg') }}" type="image/svg+xml"> #}
-  <link rel="apple-touch-icon" href="/favicon.ico"/>
-</head>
-<body class="{{ endpoint }}_endpoint" >
-  <main id="main_{{  self._TemplateReference__context.name|replace("simple/", "")|replace(".html", "") }}" class="{{body_class}}">
-    {% if errors %}
-        <div class="dialog-error" role="alert">
-            <a href="#" class="close" aria-label="close" title="close">×</a>
-            <ul>
-            {% for message in errors %}
-                <li>{{ message }}</li>
-            {% endfor %}
-            </ul>
-        </div>
-    {% endif %}
-    {% block header %}
-    {% endblock %}
-    {% block content %}
-    {% endblock %}
-  </main>
-  <footer>
-    <p>
-      {{ _('a privacy-respecting, open metasearch engine') }} - {{ searx_version }}
-    </p><p>
-      <a href="{{ get_setting('brand.issue_url') }}">{{ _('Issue tracker') }}</a>
-      {% if enable_metrics %}| <a href="{{ url_for('stats') }}">{{ _('Engine stats') }}</a>{% endif %}
-      {% if get_setting('brand.public_instances') %}
-      | <a href="{{ get_setting('brand.public_instances') }}">{{ _('Public instances') }}</a>
-      {% endif %}
-      {% if get_setting('general.privacypolicy_url') %}
-      | <a href="{{ get_setting('general.privacypolicy_url') }}">{{ _('Privacy policy') }}</a>
-      {% endif %}
-      {% if get_setting('general.contact_url') %}
-      | <a href="{{ get_setting('general.contact_url') }}">{{ _('Contact instance maintainer') }}</a>
-      {% endif %}
-    </p>
-  </footer>
-  <!--[if gte IE 9]>-->
-  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
-  <!--<![endif]-->
-</body>
+<html lang="{{ locale_rfc5646 }}" {% if rtl %} dir="rtl" {% endif %}>
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="description"
+            content="Moa, a SearXNG-based and free metasearch that respects your privacy"
+        />
+        <meta
+            name="keywords"
+            content="MOA, SearXNG, search, search engine, metasearch, meta search"
+        />
+        <meta name="generator" content="searxng/{{ searx_version }}" />
+        <meta name="referrer" content="no-referrer" />
+        <meta name="robots" content="noarchive" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="HandheldFriendly" content="True" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+        <title>{{ instance_name }} {% block title %}{% endblock %}</title>
+        {% block meta %}{% endblock %} {% if rtl %}
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='css/rtl-style.css') }}"
+            type="text/css"
+            media="screen"
+        />
+        {% else %}
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='css/ltr-style.css') }}"
+            type="text/css"
+            media="screen"
+        />
+        {% endif %} {% if get_setting('server.limiter') or
+        get_setting('server.public_instance') %}
+        <link
+            rel="stylesheet"
+            href="{{ url_for('client_token', token=link_token) }}"
+            type="text/css"
+        />
+        {% endif %} {% block styles %}{% endblock %} {% block head %}
+        <link
+            title="{{ instance_name }}"
+            type="application/opensearchdescription+xml"
+            rel="search"
+            href="{{ opensearch_url }}"
+        />
+        {% endblock %}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        {#
+        <link
+            rel="icon"
+            href="{{ url_for('static', filename='img/favicon.svg') }}"
+            type="image/svg+xml"
+        />
+        #}
+        <link rel="apple-touch-icon" href="/favicon.ico" />
+    </head>
+    <body id="{{ endpoint }}">
+        <header>{% block header %} {% endblock %}</header>
+        <main>
+            {% if errors %}
+            <div class="dialog-error" role="alert">
+                <a href="#" class="close" aria-label="close" title="close">×</a>
+                <ul>
+                    {% for message in errors %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %} {% block content %} {% endblock %}
+        </main>
+        <footer>
+            <p>
+                {{ _('a privacy-respecting, open metasearch engine') }} - {{
+                searx_version }}
+            </p>
+            <div class="links">
+                {% if enable_metrics %}
+                <a href="{{ url_for('stats') }}">{{ _('Engine stats') }}</a>{%
+                endif %} {% if get_setting('brand.public_instances') %}
+                <a href="{{ get_setting('brand.public_instances') }}"
+                    >{{ _('Public instances') }}</a
+                >
+                {% endif %} {% if get_setting('general.privacypolicy_url') %}
+                <a href="{{ get_setting('general.privacypolicy_url') }}"
+                    >{{ _('Privacy policy') }}</a
+                >
+                {% endif %} {% if get_setting('general.contact_url') %}
+                <a href="{{ get_setting('general.contact_url') }}"
+                    >{{ _('Contact instance maintainer') }}</a
+                >
+                {% endif %}
+            </div>
+        </footer>
+        <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    </body>
 </html>
