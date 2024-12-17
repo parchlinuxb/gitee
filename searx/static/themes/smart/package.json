@@ -9,8 +9,11 @@
         "style:build": "concurrently -k -n \"RTL,LTR\" -c \"bgYellow.dim,bgGreen.dim\" -p \" {name} \" \"npm:style:build:rtl\" \"npm:style:build:ltr\"",
         "script:watch": "parcel ./src/ts/app.ts --no-source-maps --dist-dir ./js -p 10030",
         "script:build": "parcel build ./src/ts/app.ts --no-source-maps --dist-dir ./js",
-        "dev": "concurrently -k -n \"STYLE,SCRIPT\" -c \"bgRed.bold,bgBlue.bold\" -p \" {name} \" \"npm:style:watch\" \"npm:script:watch\"",
-        "build": "concurrently -n \"STYLE,SCRIPT\" -c \"bgRed.dim,bgBlue.dim\" -p \" {name} \" \"npm:style:build\" \"npm:script:build\""
+        "icon:run": "node ./scripts/svg2jinja.js",
+        "icon:watch": "nodemon --watch ./scripts/svg2jinja.js --exec npm run icon:run",
+        "icon:build": "node ./scripts/svg2jinja.js --build",
+        "dev": "concurrently -k -n \"STYLE,SCRIPT,ICON\" -c \"bgRed.bold,bgBlue.bold,bgMagenta\" -p \" {name} \" \"npm:style:watch\" \"npm:script:watch\" \"npm:icon:watch\"",
+        "build": "concurrently -n \"STYLE,SCRIPT\" -c \"bgRed.dim,bgBlue.dim\" -p \" {name} \" \"npm:style:build\" \"npm:script:build\"; npm run icon:build"
     },
     "devDependencies": {
         "@parcel/transformer-sass": "^2.13.0",
@@ -19,6 +22,7 @@
     },
     "dependencies": {
         "ejs": "^3.1.10",
+        "nodemon": "^3.1.9",
         "remixicon": "^4.5.0",
         "svgo": "^3.3.2"
     }
