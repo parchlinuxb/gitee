@@ -1,16 +1,21 @@
-{% extends "smart/base.html" %} {% block header %}
+{% from 'smart/icons.html' import icon_small %} {% extends "smart/base.html" %}
+{% block header %}
 
-<div class="logo"></div>
-<div class="links"></div>
+<header>
+    <a href="/" class="logo">
+        {# - for times there's no logo, use the instance name
+        <span>{{ instance_name }}</span>
+        #}
+        <img src="/static/img/logo.svg" alt="{{ instance_name }}" />
+    </a>
+    <div class="links">
+        <a href="" class="link">{{icon_small('donate')}}</a>
+        {% include 'smart/sidebar.html' %}
+    </div>
+</header>
 
 {% endblock %} {% block content %}
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h1>Test</h1>
-        </div>
-    </div>
-</div>
+<div class="container">{% include 'smart/search_box.html' %}</div>
 
 {% endblock %}

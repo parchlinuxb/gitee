@@ -56,43 +56,66 @@
         #}
         <link rel="apple-touch-icon" href="/favicon.ico" />
     </head>
-    <body id="{{ endpoint }}">
-        <header>{% block header %} {% endblock %}</header>
-        <main>
-            {% if errors %}
-            <div class="dialog-error" role="alert">
-                <a href="#" class="close" aria-label="close" title="close">×</a>
-                <ul>
-                    {% for message in errors %}
-                    <li>{{ message }}</li>
-                    {% endfor %}
-                </ul>
+    <body>
+        <div id="{{ endpoint }}" class="container">
+            <div>
+                {% block header %}{% endblock %}
+                <main>
+                    {% if errors %}
+                    <div class="dialog-error" role="alert">
+                        <a
+                            href="#"
+                            class="close"
+                            aria-label="close"
+                            title="close"
+                            >×</a
+                        >
+                        <ul>
+                            {% for message in errors %}
+                            <li>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %} {% block content %} {% endblock %}
+                </main>
+                <footer>
+                    <p>
+                        {{ _('a privacy-respecting, open metasearch engine') }}
+                        - {{ searx_version }}
+                    </p>
+                    <div class="links">
+                        {% if enable_metrics %}
+                        <a href="{{ url_for('stats') }}"
+                            >{{ _('Engine stats') }}</a
+                        >{% endif %} {% if get_setting('brand.public_instances')
+                        %}
+                        <a href="{{ get_setting('brand.public_instances') }}"
+                            >{{ _('Public instances') }}</a
+                        >
+                        {% endif %} {% if
+                        get_setting('general.privacypolicy_url') %}
+                        <a href="{{ get_setting('general.privacypolicy_url') }}"
+                            >{{ _('Privacy policy') }}</a
+                        >
+                        {% endif %} {% if get_setting('general.contact_url') %}
+                        <a href="{{ get_setting('general.contact_url') }}"
+                            >{{ _('Contact instance maintainer') }}</a
+                        >
+                        {% endif %}
+                    </div>
+                </footer>
             </div>
-            {% endif %} {% block content %} {% endblock %}
-        </main>
-        <footer>
-            <p>
-                {{ _('a privacy-respecting, open metasearch engine') }} - {{
-                searx_version }}
-            </p>
-            <div class="links">
-                {% if enable_metrics %}
-                <a href="{{ url_for('stats') }}">{{ _('Engine stats') }}</a>{%
-                endif %} {% if get_setting('brand.public_instances') %}
-                <a href="{{ get_setting('brand.public_instances') }}"
-                    >{{ _('Public instances') }}</a
-                >
-                {% endif %} {% if get_setting('general.privacypolicy_url') %}
-                <a href="{{ get_setting('general.privacypolicy_url') }}"
-                    >{{ _('Privacy policy') }}</a
-                >
-                {% endif %} {% if get_setting('general.contact_url') %}
-                <a href="{{ get_setting('general.contact_url') }}"
-                    >{{ _('Contact instance maintainer') }}</a
-                >
-                {% endif %}
+        </div>
+        <div id="sidebar">
+            <div class="container">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid
+                inventore repellat totam eius consequatur neque laborum corrupti
+                repellendus optio obcaecati! Et voluptates omnis, adipisci modi
+                officiis aliquid, debitis perferendis illum enim tenetur sequi
+                rerum at error expedita harum dolorum ex assumenda! Voluptatibus
+                velit suscipit, aut voluptas fugit saepe natus eum?
             </div>
-        </footer>
+        </div>
         <script src="{{ url_for('static', filename='js/app.js') }}"></script>
     </body>
 </html>

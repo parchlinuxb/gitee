@@ -12,6 +12,31 @@ $dir: ltr !default;
 // CSS Color varables
 @use 'colors';
 
+@function toPx($value) {
+    @return $value * 16px;
+}
+
+body {
+    display: flex;
+    gap: 0;
+    overflow: hidden;
+    transition: padding 150ms ease-in-out,
+        gap 200ms ease-in-out;
+
+    .container {
+        flex: 3;
+        background-color: var(--background-color);
+        color: var(--text-color);
+        @include mixin.rounded();
+    }
+}
+
+
+*:focus-visible {
+    outline: 3px solid var(--primary-color);
+    outline-offset: .1rem;
+}
+
 #index {
     display: grid;
     grid-template-rows: auto 1fr auto;
@@ -22,20 +47,104 @@ $dir: ltr !default;
         "footer";
     height: 100svh;
     overflow: hidden;
-
+    transition: height 100ms ease-in-out;
 
 
     header {
         grid-area: header;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 2rem;
+
+        .logo {
+            font-size: 2rem;
+            display: block;
+            text-align: center;
+
+            img {
+                max-width: clamp(70px, 25vw, 150px);
+            }
+        }
+
+        .links {
+            display: flex;
+
+            .link {
+                display: inline-block;
+                padding: 0.5rem;
+                height: min-content;
+                @include mixin.rounded(full);
+                transition: background-color 100ms ease-in-out;
+
+                &:is(:hover, :focus-within) {
+                    background-color: var(--secondary-background-color);
+                }
+
+                svg {
+                    width: 1.5rem;
+                }
+
+                &.config {
+                    transition: transform 1s ease-in-out;
+                }
+            }
+        }
     }
 
     main {
-
         grid-area: main;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
     footer {
         grid-area: footer;
+    }
+}
+
+body:has(.sidebar_btn[open]) {
+    padding: .5rem;
+    gap: .5rem;
+    background-color: var(--secondary-background-color);
+
+    #sidebar {
+        flex: 1;
+        min-width: $screen-xs;
+        padding: 1rem;
+    }
+
+    #index {
+        height: calc(100svh - 1rem);
+    }
+
+    header .links .link.config {
+        background-color: var(--secondary-background-color);
+        transform: rotate(60deg);
+    }
+
+}
+
+#sidebar {
+    flex: 0;
+    min-width: 0;
+    @include mixin.rounded();
+    overflow: hidden;
+    background: var(--background-color);
+    transition: flex 300ms ease-in-out,
+        min-width 300ms ease-in-out,
+        padding 200ms ease-in-out;
+    position: relative;
+
+    .container {
+        width: calc(100% - 2rem);
+        height: calc(100% - 2rem);
+        overflow-y: auto;
+        position: absolute;
+        min-width: $screen-xs - toPx(2);
+        transition: width 500ms ease-in-out;
     }
 }
 
@@ -64,5 +173,44 @@ footer {
             color: var(--filled-text-color);
             @include mixin.rounded(full)
         }
+    }
+}
+
+#search {
+    #search_categories .categories {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 1rem;
+
+        label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+    }
+
+    #search_box {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+    }
+
+}
+
+@media (scripting: none) {
+    .js-only {
+        display: none;
+    }
+
+    .js-alt {
+        display: inherit;
+    }
+}
+
+@media (scripting: enabled) {
+    .js-alt {
+        display: none;
     }
 }

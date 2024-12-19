@@ -1,0 +1,56 @@
+<form
+    id="search"
+    method="{{ method or 'POST' }}"
+    action="{{ url_for('search') }}"
+    role="search"
+>
+    <div id="search_categories">
+        <div class="categories">
+            {% for category in selected_categories %}
+            <label for="category_{{ category }}" class="js-only">
+                <input type="checkbox" name="category_{{ category }}" />
+                <span>{{ category }}</span>
+            </label>
+        </div>
+        {% endfor %}
+        <div class="search_box">
+            <input
+                id="q"
+                name="q"
+                type="text"
+                placeholder="{{ _('Search for...') }}"
+                autocomplete="off"
+                autocapitalize="none"
+                spellcheck="false"
+                autocorrect="off"
+                dir="auto"
+                value="{{ q or '' }}"
+            />
+            <button
+                id="clear_search"
+                type="reset"
+                aria-label="{{ _('clear') }}"
+            >
+                <span class="js-only">Clear</span
+                ><span class="js-alt">{{ _('clear') }}</span>
+            </button>
+            <button
+                id="send_search"
+                type="submit"
+                aria-label="{{ _('search') }}"
+            >
+                <span class="js-only">Search</span
+                ><span class="js-alt">{{ _('search') }}</span>
+            </button>
+        </div>
+    </div>
+    <input type="hidden" name="language" value="{{ current_language }}" />
+    <input type="hidden" name="time_range" value="{{ time_range }}" />
+    <input type="hidden" name="safesearch" value="{{ safesearch }}" />
+    <input type="hidden" name="theme" value="{{ theme }}" />
+    {% if timeout_limit %}<input
+        type="hidden"
+        name="timeout_limit"
+        value="{{ timeout_limit|e }}"
+    />{% endif %}
+</form>

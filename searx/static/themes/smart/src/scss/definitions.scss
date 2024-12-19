@@ -2,7 +2,7 @@
 
 // - Colors -
 // Light theme
-$primary-color: #009688;
+$primary-color: #0290ee;
 $secondary-color: #009688;
 $background-color: #ffffff;
 $secondary-background-color: #f5f5f5;
@@ -10,12 +10,12 @@ $text-color: #000000;
 $filled-text-color: #ffffff;
 
 // Dark theme
-$primary-color-dark: #0290ee;
-$secondary-color-dark: #009688;
-$background-color-dark: #000000;
-$secondary-background-color-dark: #0f0f0f;
-$text-color-dark: #ffffff;
-$filled-text-color-dark: #ffffff;
+$primary-color-dark: $primary-color;
+$secondary-color-dark: $secondary-color;
+$background-color-dark: $background-color;
+$secondary-background-color-dark: $secondary-background-color;
+$text-color-dark: $text-color;
+$filled-text-color-dark: $filled-text-color;
 
 // - Screens -
 
