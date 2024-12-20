@@ -1,0 +1,17 @@
+<fieldset>
+    <div class="container">
+        <legend id="pref_autocomplete">{{- _('Autocomplete') -}}</legend>
+        <select name="autocomplete" aria-labelledby="pref_autocomplete" aria-describedby="desc_autocomplete">
+        <option value=""> - </option>
+        {%- for backend in autocomplete_backends -%}
+            <option value="{{ backend }}"
+            {%- if backend == autocomplete %} selected="selected" {%- endif -%}>
+            {{- backend -}}
+            </option>
+        {%- endfor -%}
+        </select>
+    </div>
+    <div class="description" id="desc_autocomplete">
+      {{- _('Find stuff as you type') }}
+    </div>
+</fieldset>  

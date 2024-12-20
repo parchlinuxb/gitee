@@ -609,6 +609,8 @@ def index():
         'index.html',
         selected_categories=get_selected_categories(request.preferences, request.form),
         current_locale = request.preferences.get_value("locale"),
+        autocomplete_backends = autocomplete_backends,
+        locales = LOCALE_NAMES,
         # fmt: on
     )
 

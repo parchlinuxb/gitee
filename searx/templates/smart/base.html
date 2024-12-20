@@ -100,16 +100,8 @@
                 {% endif %} {% block content %} {% endblock %}
             </main>
         </div>
-        <div id="sidebar">
-            <div class="container">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid
-                inventore repellat totam eius consequatur neque laborum corrupti
-                repellendus optio obcaecati! Et voluptates omnis, adipisci modi
-                officiis aliquid, debitis perferendis illum enim tenetur sequi
-                rerum at error expedita harum dolorum ex assumenda! Voluptatibus
-                velit suscipit, aut voluptas fugit saepe natus eum?
-            </div>
-        </div>
+        {% if endpoint == 'index' or endpoint == 'results' %} {% include
+        'smart/madules/sidebar.html' %} {% endif %}
         <script src="{{ url_for('static', filename='js/app.js') }}"></script>
     </body>
 </html>

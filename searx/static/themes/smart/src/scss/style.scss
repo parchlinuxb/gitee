@@ -121,6 +121,7 @@ main:has(.not-found) {
 
         .links {
             display: flex;
+            gap: .5rem;
 
             .link {
                 display: inline-block;
@@ -178,13 +179,54 @@ body:has(.sidebar_btn[open]) {
         padding 200ms ease-in-out;
     position: relative;
 
-    .container {
+    &>.container {
         width: calc(100% - 2rem);
         height: calc(100% - 2rem);
         overflow-y: auto;
         position: absolute;
         min-width: $screen-xs - toPx(2);
         transition: width 500ms ease-in-out;
+
+        fieldset {
+            padding: .5rem 0;
+
+            .container {
+                display: flex;
+                padding: 0 .5rem;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: .5rem;
+
+                select {
+                    padding: .5rem 1rem;
+                    background-color: var(--secondary-background-color);
+                    color: var(--text-color);
+                    @include mixin.rounded(sm);
+                    max-width: 250px;
+                }
+            }
+
+            .description {
+                margin: .5rem;
+                text-align: justify;
+                color: var(--text-color);
+                font-size: .8rem;
+            }
+        }
+
+        button {
+            padding: .5rem;
+            background-color: var(--primary-color);
+            width: 100%;
+            color: var(--filled-text-color);
+            @include mixin.rounded(sm);
+            margin: .5rem 0;
+
+            &.reset {
+                background-color: var(--secondary-color);
+            }
+        }
     }
 }
 

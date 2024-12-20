@@ -1,0 +1,22 @@
+<div id="sidebar">
+    <div class="container">
+        <form
+            id="search_form"
+            method="post"
+            action="{{ url_for('preferences') }}"
+            autocomplete="off"
+        >
+            {%- if 'language' not in locked_preferences -%} {%- include
+            'smart/madules/settings/language.html' -%} {% endif %} {%- if
+            'autocomplete' not in locked_preferences -%} {%- include
+            'smart/madules/settings/autocomplete.html' -%} {%- endif -%} {%- if
+            'safesearch' not in locked_preferences -%} {%- include
+            'smart/madules/settings/safe_search.html' -%} {%- endif -%} {%- if
+            'ui_locale' not in locked_preferences -%} {%- include
+            'smart/madules/settings/interface_lang.html' -%} {%- endif -%}
+
+            <button type="submit" class="save">{{- _('Save') -}}</button>
+            <button type="reset" class="reset">{{- _('Reset') -}}</button>
+        </form>
+    </div>
+</div>

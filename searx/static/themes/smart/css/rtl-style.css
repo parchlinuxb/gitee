@@ -280,6 +280,7 @@ main:has(.not-found) .button {
 }
 
 #index header .links {
+  gap: .5rem;
   display: flex;
 }
 
@@ -334,13 +335,54 @@ body:has(.sidebar_btn[open]) header .links .link.config {
   overflow: hidden;
 }
 
-#sidebar .container {
+#sidebar > .container {
   width: calc(100% - 2rem);
   min-width: 308px;
   height: calc(100% - 2rem);
   transition: width .5s ease-in-out;
   position: absolute;
   overflow-y: auto;
+}
+
+#sidebar > .container fieldset {
+  padding: .5rem 0;
+}
+
+#sidebar > .container fieldset .container {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: .5rem;
+  padding: 0 .5rem;
+  display: flex;
+}
+
+#sidebar > .container fieldset .container select {
+  background-color: var(--secondary-background-color);
+  color: var(--text-color);
+  border-radius: .5rem;
+  max-width: 250px;
+  padding: .5rem 1rem;
+}
+
+#sidebar > .container fieldset .description {
+  text-align: justify;
+  color: var(--text-color);
+  margin: .5rem;
+  font-size: .8rem;
+}
+
+#sidebar > .container button {
+  background-color: var(--primary-color);
+  width: 100%;
+  color: var(--filled-text-color);
+  border-radius: .5rem;
+  margin: .5rem 0;
+  padding: .5rem;
+}
+
+#sidebar > .container button.reset {
+  background-color: var(--secondary-color);
 }
 
 footer {

@@ -1,0 +1,17 @@
+<fieldset>
+    <div class="container">
+        <legend id="pref_ui_locale">{{- _('Interface language') -}}</legend>
+        <select name='locale' aria-labelledby="pref_ui_locale" aria-describedby="desc_ui_locale">
+        {%- for locale_id,locale_name in locales.items() | sort -%}
+            <option value="{{ locale_id }}"
+                    {%- if locale_id == current_locale %} selected="selected" {%- endif %}>
+                    {{- locale_name -}}
+            </option>
+        {%- endfor -%}
+        </select>
+    </div>
+    <div class="description" id="desc_ui_locale">
+      {{- _('Change the language of the layout') -}}
+    </div>
+</fieldset>
+  
