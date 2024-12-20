@@ -57,54 +57,48 @@
         <link rel="apple-touch-icon" href="/favicon.ico" />
     </head>
     <body>
-        <div id="{{ endpoint }}" class="container">
-            <div>
-                {% block header %}{% endblock %}
-                <main>
-                    {% if errors %}
-                    <div class="dialog-error" role="alert">
-                        <a
-                            href="#"
-                            class="close"
-                            aria-label="close"
-                            title="close"
-                            >×</a
-                        >
-                        <ul>
-                            {% for message in errors %}
-                            <li>{{ message }}</li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    {% endif %} {% block content %} {% endblock %}
-                </main>
-                <footer>
-                    <p>
-                        {{ _('a privacy-respecting, open metasearch engine') }}
-                        - {{ searx_version }}
-                    </p>
-                    <div class="links">
-                        {% if enable_metrics %}
-                        <a href="{{ url_for('stats') }}"
-                            >{{ _('Engine stats') }}</a
-                        >{% endif %} {% if get_setting('brand.public_instances')
-                        %}
-                        <a href="{{ get_setting('brand.public_instances') }}"
-                            >{{ _('Public instances') }}</a
-                        >
-                        {% endif %} {% if
-                        get_setting('general.privacypolicy_url') %}
-                        <a href="{{ get_setting('general.privacypolicy_url') }}"
-                            >{{ _('Privacy policy') }}</a
-                        >
-                        {% endif %} {% if get_setting('general.contact_url') %}
-                        <a href="{{ get_setting('general.contact_url') }}"
-                            >{{ _('Contact instance maintainer') }}</a
-                        >
-                        {% endif %}
-                    </div>
-                </footer>
-            </div>
+        <div id="{{ endpoint }}" class="body-container">
+            <footer>
+                {% block footer %}
+                <p>
+                    {{ _('a privacy-respecting, open metasearch engine') }} - {{
+                    searx_version }}
+                </p>
+                <div class="links">
+                    {% if enable_metrics %}
+                    <a href="{{ url_for('stats') }}">{{ _('Engine stats') }}</a
+                    >{% endif %} {% if get_setting('brand.public_instances') %}
+                    <a href="{{ get_setting('brand.public_instances') }}"
+                        >{{ _('Public instances') }}</a
+                    >
+                    {% endif %} {% if get_setting('general.privacypolicy_url')
+                    %}
+                    <a href="{{ get_setting('general.privacypolicy_url') }}"
+                        >{{ _('Privacy policy') }}</a
+                    >
+                    {% endif %} {% if get_setting('general.contact_url') %}
+                    <a href="{{ get_setting('general.contact_url') }}"
+                        >{{ _('Contact instance maintainer') }}</a
+                    >
+                    {% endif %}
+                </div>
+                {% endblock %}
+            </footer>
+            <header>{% block header %} {% endblock %}</header>
+            <main>
+                {% if errors %}
+                <div class="dialog-error" role="alert">
+                    <a href="#" class="close" aria-label="close" title="close"
+                        >×</a
+                    >
+                    <ul>
+                        {% for message in errors %}
+                        <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %} {% block content %} {% endblock %}
+            </main>
         </div>
         <div id="sidebar">
             <div class="container">

@@ -1,0 +1,9 @@
+{% extends "smart/base.html" %} {% block content %}
+
+<div class="background not-found">404</div>
+<h1>{{ _('Page not found') }}</h1>
+{% autoescape false %}
+<a href="{{ url_for('index') }}" class="button"
+    >{{ _('Go to %(search_page)s', search_page=_('search page')) }}</a
+>
+{% endautoescape %} {% endblock %}
