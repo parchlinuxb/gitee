@@ -13,10 +13,17 @@
             'safesearch' not in locked_preferences -%} {%- include
             'smart/madules/settings/safe_search.html' -%} {%- endif -%} {%- if
             'ui_locale' not in locked_preferences -%} {%- include
-            'smart/madules/settings/interface_lang.html' -%} {%- endif -%}
+            'smart/madules/settings/interface_lang.html' -%} {%- endif -%} {%-
+            if 'results_on_new_tab' not in locked_preferences -%} {%- include
+            'smart/madules/settings/results_on_new_tab.html' -%} {%- endif -%}
+            {%- if 'infinite_scroll' not in locked_preferences -%} {%- include
+            'smart/madules/settings/infinite_scroll.html' -%} {%- endif -%} {%-
+            if 'method' not in locked_preferences -%} {%- include
+            'smart/madules/settings/http_method.html' -%} {%- endif -%} {%- if
+            'image_proxy' not in locked_preferences -%} {%- include
+            'smart/madules/settings/image_proxy.html' -%} {%- endif -%}
 
             <button type="submit" class="save">{{- _('Save') -}}</button>
-            <button type="reset" class="reset">{{- _('Reset') -}}</button>
         </form>
     </div>
 </div>

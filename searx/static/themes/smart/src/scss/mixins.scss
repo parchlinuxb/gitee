@@ -78,3 +78,21 @@ $dir: ltr !default;
         margin-left: $margin;
     }
 }
+
+@mixin left($amount) {
+    @if $dir =='ltr' {
+        left: $amount;
+    }
+
+    @else {
+        right: $amount;
+    }
+}
+
+@mixin right($amount) {
+    @if $dir =='ltr' {
+        right: $amount;
+    }
+
+    left: $amount;
+}

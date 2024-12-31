@@ -176,6 +176,7 @@ img, video {
   --secondary-background-color: #f5f5f5;
   --text-color: #000;
   --filled-text-color: #fff;
+  --border-color: gray;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -186,6 +187,7 @@ img, video {
     --secondary-background-color: #f5f5f5;
     --text-color: #000;
     --filled-text-color: #fff;
+    --border-color: gray;
   }
 }
 
@@ -199,7 +201,7 @@ footer .links a, main:has(.not-found) .button {
 
 body {
   gap: 0;
-  transition: padding .15s ease-in-out, gap .2s ease-in-out;
+  transition: gap .25s ease-in-out, padding .5s ease-in-out;
   display: flex;
   overflow: hidden;
 }
@@ -325,7 +327,11 @@ body:has(.sidebar_btn[open]) {
 body:has(.sidebar_btn[open]) #sidebar {
   flex: 1;
   min-width: 340px;
-  padding: 1rem;
+}
+
+body:has(.sidebar_btn[open]) #sidebar > .container {
+  margin-left: 0;
+  transition: margin-left .15s ease-in-out .1s;
 }
 
 body:has(.sidebar_btn[open]) #index {
@@ -342,16 +348,18 @@ body:has(.sidebar_btn[open]) header .links .link.config {
   border-radius: 1rem;
   flex: 0;
   min-width: 0;
-  transition: flex .3s ease-in-out, min-width .3s ease-in-out, padding .2s ease-in-out;
+  transition: flex .3s ease-in-out, min-width .3s ease-in-out;
   position: relative;
   overflow: hidden;
 }
 
 #sidebar > .container {
-  width: calc(100% - 2rem);
+  width: 100%;
   min-width: 308px;
-  height: calc(100% - 2rem);
-  transition: width .5s ease-in-out;
+  height: 100%;
+  margin-left: 50rem;
+  padding: 1rem;
+  transition: margin-left 50ms ease-in-out;
   position: absolute;
   overflow-y: auto;
 }
@@ -375,6 +383,44 @@ body:has(.sidebar_btn[open]) header .links .link.config {
   border-radius: .5rem;
   max-width: 250px;
   padding: .5rem 1rem;
+}
+
+#sidebar > .container fieldset .container input[type="checkbox"].switch {
+  appearance: none;
+  background-color: var(--secondary-background-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  box-sizing: border-box;
+  border-radius: .5rem;
+  width: 40px;
+  height: 20px;
+  min-height: 20px;
+  margin-right: .5rem;
+  transition: background-color .2s ease-in-out;
+  display: inline-block;
+  position: relative;
+}
+
+#sidebar > .container fieldset .container input[type="checkbox"].switch:after {
+  content: "";
+  background-color: var(--text-color);
+  border-radius: .5rem;
+  width: 15px;
+  height: 15px;
+  transition: background-color .2s ease-in-out, left .2s ease-in-out, right .2s ease-in-out;
+  position: absolute;
+  top: 50%;
+  left: 2.5px;
+  transform: translateY(-50%);
+}
+
+#sidebar > .container fieldset .container input[type="checkbox"].switch:checked {
+  background-color: var(--primary-color);
+}
+
+#sidebar > .container fieldset .container input[type="checkbox"].switch:checked:after {
+  background-color: var(--filled-text-color);
+  left: calc(100% - 17.5px);
 }
 
 #sidebar > .container fieldset .description {

@@ -28,8 +28,8 @@ body {
     display: flex;
     gap: 0;
     overflow: hidden;
-    transition: padding 150ms ease-in-out,
-        gap 200ms ease-in-out;
+    transition: gap 250ms ease-in-out,
+        padding 500ms ease-in-out;
 
     .body-container {
         flex: 3;
@@ -166,7 +166,11 @@ body:has(.sidebar_btn[open]) {
     #sidebar {
         flex: 1;
         min-width: $screen-xs;
-        padding: 1rem;
+
+        &>.container {
+            @include mixin.margin-left(0);
+            transition: margin-left 150ms ease-in-out 100ms;
+        }
     }
 
     #index {
@@ -187,17 +191,18 @@ body:has(.sidebar_btn[open]) {
     overflow: hidden;
     background: var(--background-color);
     transition: flex 300ms ease-in-out,
-        min-width 300ms ease-in-out,
-        padding 200ms ease-in-out;
+        min-width 300ms ease-in-out;
     position: relative;
 
     &>.container {
-        width: calc(100% - 2rem);
-        height: calc(100% - 2rem);
+        width: 100%;
+        height: 100%;
         overflow-y: auto;
         position: absolute;
         min-width: $screen-xs - toPx(2);
-        transition: width 500ms ease-in-out;
+        padding: 1rem;
+        @include mixin.margin-left(50rem);
+        transition: margin-left 50ms ease-in-out;
 
         fieldset {
             padding: .5rem 0;
@@ -216,6 +221,46 @@ body:has(.sidebar_btn[open]) {
                     color: var(--text-color);
                     @include mixin.rounded(sm);
                     max-width: 250px;
+                }
+
+                input[type="checkbox"].switch {
+                    appearance: none;
+                    margin-right: .5rem;
+                    background-color: var(--secondary-background-color);
+                    color: var(--text-color);
+                    @include mixin.rounded(sm);
+                    width: 40px;
+                    height: 20px;
+                    min-height: 20px;
+                    display: inline-block;
+                    position: relative;
+                    border: 1px solid var(--border-color);
+                    box-sizing: border-box;
+                    transition: background-color 200ms ease-in-out;
+
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        @include mixin.left(2.5px);
+                        width: 15px;
+                        height: 15px;
+                        background-color: var(--text-color);
+                        @include mixin.rounded(sm);
+                        transition: background-color 200ms ease-in-out,
+                            left 200ms ease-in-out,
+                            right 200ms ease-in-out;
+                    }
+
+                    &:checked {
+                        background-color: var(--primary-color);
+
+                        &::after {
+                            background-color: var(--filled-text-color);
+                            @include mixin.left(calc(100% - 17.5px));
+                        }
+                    }
                 }
             }
 
