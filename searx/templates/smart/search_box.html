@@ -1,4 +1,4 @@
-{% from 'smart/icons.html' import icon %}
+{% from 'smart/icons.html' import icon_small %}
 
 <form
     id="search"
@@ -9,7 +9,7 @@
     <div id="search_categories">
         <div class="categories js-only">
             {% if endpoint == 'index' %} {% for category in range(4) %}
-            <label for="category_{{ categories[category] }}">
+            <label for="category_{{ categories[category] }}" class="category">
                 <input
                     type="checkbox"
                     name="category_{{ categories[category] }}"
@@ -26,7 +26,9 @@
                     id="category_{{ categories[category] }}"
                     hidden
                 />
-                {{ icon(categories[category] )}}
+                <div class="category-icon">
+                    {{ icon_small(categories[category] )}}
+                </div>
                 <span>{{ categories[category] }}</span>
             </label>
             {% endfor %} {% endif %}

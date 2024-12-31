@@ -222,46 +222,6 @@ body:has(.sidebar_btn[open]) {
                     @include mixin.rounded(sm);
                     max-width: 250px;
                 }
-
-                input[type="checkbox"].switch {
-                    appearance: none;
-                    margin-right: .5rem;
-                    background-color: var(--secondary-background-color);
-                    color: var(--text-color);
-                    @include mixin.rounded(sm);
-                    width: 40px;
-                    height: 20px;
-                    min-height: 20px;
-                    display: inline-block;
-                    position: relative;
-                    border: 1px solid var(--border-color);
-                    box-sizing: border-box;
-                    transition: background-color 200ms ease-in-out;
-
-                    &::after {
-                        content: "";
-                        position: absolute;
-                        top: 50%;
-                        transform: translateY(-50%);
-                        @include mixin.left(2.5px);
-                        width: 15px;
-                        height: 15px;
-                        background-color: var(--text-color);
-                        @include mixin.rounded(sm);
-                        transition: background-color 200ms ease-in-out,
-                            left 200ms ease-in-out,
-                            right 200ms ease-in-out;
-                    }
-
-                    &:checked {
-                        background-color: var(--primary-color);
-
-                        &::after {
-                            background-color: var(--filled-text-color);
-                            @include mixin.left(calc(100% - 17.5px));
-                        }
-                    }
-                }
             }
 
             .description {
@@ -320,6 +280,32 @@ footer {
         flex-wrap: wrap;
         gap: 1rem;
 
+        @include mixin.max-screens($screen-md) {
+            transform: scale(0.8);
+        }
+
+        @include mixin.max-screens($screen-sm) {
+            display: none;
+        }
+
+        label:nth-child(1) .category-icon {
+            background-color: #32e258;
+        }
+
+        label:nth-child(2) .category-icon {
+            background-color: #2196f3;
+        }
+
+        label:nth-child(3) .category-icon {
+            background-color: #e49928;
+
+        }
+
+        label:nth-child(4) .category-icon {
+            background-color: #5b2ae0;
+
+        }
+
         label {
             display: flex;
             flex-direction: column;
@@ -328,6 +314,16 @@ footer {
             padding: 1rem;
             height: 100%;
             cursor: pointer;
+            @include mixin.rounded();
+
+            .category-icon {
+                padding: 1rem;
+                @include mixin.rounded(full);
+
+                svg {
+                    color: #fff;
+                }
+            }
 
             &:has(input:checked) {
                 background-color: var(--secondary-background-color);
@@ -338,9 +334,19 @@ footer {
     .search_box {
         background-color: var(--secondary-background-color);
         padding: .5rem;
+        width: clamp(400px, 50vw, 40rem);
         @include mixin.rounded(full);
+        margin-top: 1rem;
         display: flex;
+        align-items: center;
+        flex-wrap: wrap;
         gap: 1rem;
+
+        @include mixin.max-screens($screen-sm) {
+            width: 70vw;
+            @include mixin.rounded();
+        }
+
 
         input {
             flex: 1;
@@ -349,6 +355,7 @@ footer {
             color: var(--text-color);
             @include mixin.rounded(full);
             padding: .5rem;
+
 
             &:focus {
                 outline: none;
@@ -388,6 +395,46 @@ footer {
             &:focus {
                 outline: none;
             }
+        }
+    }
+}
+
+input[type="checkbox"].switch {
+    appearance: none;
+    margin-right: .5rem;
+    background-color: var(--secondary-background-color);
+    color: var(--text-color);
+    @include mixin.rounded(sm);
+    width: 40px;
+    height: 20px;
+    min-height: 20px;
+    display: inline-block;
+    position: relative;
+    border: 1px solid var(--border-color);
+    box-sizing: border-box;
+    transition: background-color 200ms ease-in-out;
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        @include mixin.left(2.5px);
+        width: 15px;
+        height: 15px;
+        background-color: var(--text-color);
+        @include mixin.rounded(sm);
+        transition: background-color 200ms ease-in-out,
+            left 200ms ease-in-out,
+            right 200ms ease-in-out;
+    }
+
+    &:checked {
+        background-color: var(--primary-color);
+
+        &::after {
+            background-color: var(--filled-text-color);
+            @include mixin.left(calc(100% - 17.5px));
         }
     }
 }
