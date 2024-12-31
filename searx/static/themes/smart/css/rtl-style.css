@@ -216,6 +216,18 @@ body .body-container {
   outline-offset: .1rem;
 }
 
+.icon-big {
+  width: 4rem;
+}
+
+.icon {
+  width: 2.25rem;
+}
+
+.icon-small {
+  width: 1.5rem;
+}
+
 .body-container {
   grid-template: "header"
                  "main" 1fr
@@ -409,15 +421,24 @@ footer .links {
 
 #search #search_categories .categories {
   flex-flow: wrap;
+  justify-content: center;
+  align-items: center;
   gap: 1rem;
   display: flex;
 }
 
 #search #search_categories .categories label {
   cursor: pointer;
+  flex-direction: column;
   align-items: center;
   gap: .5rem;
+  height: 100%;
+  padding: 1rem;
   display: flex;
+}
+
+#search #search_categories .categories label:has(input:checked) {
+  background-color: var(--secondary-background-color);
 }
 
 #search .search_box {

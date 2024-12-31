@@ -1,3 +1,5 @@
+{% from 'smart/icons.html' import icon %}
+
 <form
     id="search"
     method="{{ method or 'POST' }}"
@@ -5,14 +7,30 @@
     role="search"
 >
     <div id="search_categories">
-        <div class="categories">
-            {% for category in selected_categories %}
-            <label for="category_{{ category }}" class="js-only">
-                <input type="checkbox" name="category_{{ category }}" />
-                <span>{{ category }}</span>
+        <div class="categories js-only">
+            {% if endpoint == 'index' %} {% for category in range(4) %}
+            <label for="category_{{ categories[category] }}">
+                <input
+                    type="checkbox"
+                    name="category_{{ categories[category] }}"
+                    {%
+                    if
+                    categories[category]
+                    in
+                    selected_categories
+                    %}
+                    checked
+                    {%
+                    endif
+                    %}
+                    id="category_{{ categories[category] }}"
+                    hidden
+                />
+                {{ icon(categories[category] )}}
+                <span>{{ categories[category] }}</span>
             </label>
+            {% endfor %} {% endif %}
         </div>
-        {% endfor %}
         <div class="search_box">
             <input
                 id="q"

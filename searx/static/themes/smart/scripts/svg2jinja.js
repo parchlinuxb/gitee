@@ -1,6 +1,10 @@
 const svgList = {
   config: "node_modules/remixicon/icons/System/settings-3-fill.svg",
   donate: "node_modules/remixicon/icons/Finance/copper-coin-fill.svg",
+  general: "node_modules/remixicon/icons/Business/global-fill.svg",
+  images: "node_modules/remixicon/icons/Media/image-fill.svg",
+  videos: "node_modules/remixicon/icons/Media/video-fill.svg",
+  news: "node_modules/remixicon/icons/Document/newspaper-fill.svg",
 };
 
 const ejs = require("ejs"),
