@@ -173,7 +173,7 @@ img, video {
   --primary-color: #0290ee;
   --secondary-color: #ffd30d;
   --background-color: #fff;
-  --secondary-background-color: #f5f5f5;
+  --secondary-background-color: #f8f8f8;
   --text-color: #000;
   --filled-text-color: #fff;
   --border-color: gray;
@@ -184,7 +184,7 @@ img, video {
     --primary-color: #0290ee;
     --secondary-color: #ffd30d;
     --background-color: #fff;
-    --secondary-background-color: #f5f5f5;
+    --secondary-background-color: #f8f8f8;
     --text-color: #000;
     --filled-text-color: #fff;
     --border-color: gray;
@@ -200,12 +200,9 @@ img, video {
   display: inline-block;
 }
 
-:is(button, .btn):is(.primary, .secondary) {
-  color: var(--filled-text-color);
-}
-
 :is(button, .btn).primary {
   background-color: var(--primary-color);
+  color: var(--filled-text-color);
 }
 
 :is(button, .btn).secondary {
@@ -232,14 +229,15 @@ br {
 }
 
 body {
+  transition: gap .25s ease-in-out, padding .5s ease-in-out background-color .3s ease-in-out;
+  background-color: var(--secondary-background-color);
   gap: 0;
-  transition: gap .25s ease-in-out, padding .5s ease-in-out;
   display: flex;
   overflow: hidden;
 }
 
 body .body-container {
-  background-color: var(--background-color);
+  background-color: var(--secondary-background-color);
   color: var(--text-color);
   border-radius: 1rem;
   flex: 3;
@@ -351,12 +349,13 @@ main:has(.not-found) .button {
 }
 
 body:has(.sidebar_btn[open]) {
-  background-color: var(--secondary-background-color);
+  background-color: var(--background-color);
   gap: .5rem;
   padding: .5rem;
 }
 
 body:has(.sidebar_btn[open]) #sidebar {
+  border-width: 5px;
   flex: 1;
   min-width: 340px;
 }
@@ -376,8 +375,9 @@ body:has(.sidebar_btn[open]) header .links .link.config {
 }
 
 #sidebar {
-  background: var(--background-color);
-  border: var(--background-color) 5px solid;
+  background: var(--secondary-background-color);
+  border: var(--secondary-background-color) solid;
+  border-width: 0;
   border-radius: 1rem;
   flex: 0;
   min-width: 0;
@@ -403,7 +403,7 @@ body:has(.sidebar_btn[open]) header .links .link.config {
 
 #sidebar > .container h1 {
   text-align: center;
-  background-color: var(--secondary-color);
+  background-color: var(--background-color);
   color: var(--text-color);
   border-radius: 9999px;
   padding: .25rem 0;
@@ -424,7 +424,7 @@ body:has(.sidebar_btn[open]) header .links .link.config {
 }
 
 #sidebar > .container fieldset .container select {
-  background-color: var(--secondary-background-color);
+  background-color: var(--background-color);
   color: var(--text-color);
   border-radius: .5rem;
   max-width: 250px;
@@ -513,6 +513,10 @@ footer .links {
   background-color: #5b2ae0;
 }
 
+#search #search_categories .categories label:nth-child(5) .category-icon {
+  background-color: red;
+}
+
 #search #search_categories .categories label {
   cursor: pointer;
   border-radius: 1rem;
@@ -534,11 +538,11 @@ footer .links {
 }
 
 #search #search_categories .categories label:has(input:checked) {
-  background-color: var(--secondary-background-color);
+  background-color: var(--background-color);
 }
 
 #search .search_box {
-  background-color: var(--secondary-background-color);
+  background-color: var(--background-color);
   border-radius: 9999px;
   flex-wrap: wrap;
   align-items: center;

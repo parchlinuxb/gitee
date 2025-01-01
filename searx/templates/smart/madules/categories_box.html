@@ -1,13 +1,13 @@
 <div id="search_categories">
     <div class="categories js-only">
-        {% for category in range(4) %}
-        <label for="category_{{ categories[category] }}" class="category">
+        {% for category in categories_as_tabs %} {% if not loop.index > 4 %}
+        <label for="category_{{ category }}" class="category">
             <input
                 type="checkbox"
-                name="category_{{ categories[category] }}"
+                name="category_{{ category }}"
                 {%
                 if
-                categories[category]
+                category
                 in
                 selected_categories
                 %}
@@ -15,14 +15,12 @@
                 {%
                 endif
                 %}
-                id="category_{{ categories[category] }}"
+                id="category_{{ category }}"
                 hidden
             />
-            <div class="category-icon">
-                {{ icon_small(categories[category] )}}
-            </div>
-            <span>{{ categories[category] }}</span>
+            <div class="category-icon">{{ icon_small(category )}}</div>
+            <span>{{ category }}</span>
         </label>
-        {% endfor %}
+        {% endif %}{% endfor %}
     </div>
 </div>

@@ -39,11 +39,13 @@ body {
     gap: 0;
     overflow: hidden;
     transition: gap 250ms ease-in-out,
-        padding 500ms ease-in-out;
+        padding 500ms ease-in-out background-color 300ms ease-in-out;
+
+    background-color: var(--secondary-background-color);
 
     .body-container {
         flex: 3;
-        background-color: var(--background-color);
+        background-color: var(--secondary-background-color);
         color: var(--text-color);
         @include mixin.rounded();
     }
@@ -171,11 +173,12 @@ main:has(.not-found) {
 body:has(.sidebar_btn[open]) {
     padding: .5rem;
     gap: .5rem;
-    background-color: var(--secondary-background-color);
+    background-color: var(--background-color);
 
     #sidebar {
         flex: 1;
         min-width: $screen-xs;
+        border-width: 5px;
 
         &>.container {
             @include mixin.margin-left(0);
@@ -199,8 +202,9 @@ body:has(.sidebar_btn[open]) {
     min-width: 0;
     @include mixin.rounded();
     overflow: hidden;
-    background: var(--background-color);
-    border: var(--background-color) 5px solid;
+    background: var(--secondary-background-color);
+    border: var(--secondary-background-color) solid;
+    border-width: 0;
     transition: flex 300ms ease-in-out,
         min-width 300ms ease-in-out;
     position: relative;
@@ -223,7 +227,7 @@ body:has(.sidebar_btn[open]) {
             font-size: 1.5rem;
             padding: .25rem 0;
             text-align: center;
-            background-color: var(--secondary-color);
+            background-color: var(--background-color);
             color: var(--text-color);
             @include mixin.rounded(full);
         }
@@ -241,7 +245,7 @@ body:has(.sidebar_btn[open]) {
 
                 select {
                     padding: .5rem 1rem;
-                    background-color: var(--secondary-background-color);
+                    background-color: var(--background-color);
                     color: var(--text-color);
                     @include mixin.rounded(sm);
                     max-width: 250px;
@@ -334,6 +338,11 @@ footer {
 
         }
 
+        label:nth-child(5) .category-icon {
+            background-color: #ff0000;
+
+        }
+
         label {
             display: flex;
             flex-direction: column;
@@ -354,13 +363,13 @@ footer {
             }
 
             &:has(input:checked) {
-                background-color: var(--secondary-background-color);
+                background-color: var(--background-color);
             }
         }
     }
 
     .search_box {
-        background-color: var(--secondary-background-color);
+        background-color: var(--background-color);
         padding: .5rem;
         width: clamp(400px, 50vw, 40rem);
         @include mixin.rounded(full);

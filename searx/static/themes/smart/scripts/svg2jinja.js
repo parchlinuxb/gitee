@@ -5,6 +5,7 @@ const svgList = {
   images: "node_modules/remixicon/icons/Media/image-fill.svg",
   videos: "node_modules/remixicon/icons/Media/video-fill.svg",
   news: "node_modules/remixicon/icons/Document/newspaper-fill.svg",
+  music: "node_modules/remixicon/icons/Media/music-2-fill.svg",
   search: "node_modules/remixicon/icons/System/search-line.svg",
 };
 

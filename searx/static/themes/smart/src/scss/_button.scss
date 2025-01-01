@@ -8,12 +8,9 @@
     @include mixin.rounded(sm);
     margin-trim: all;
 
-    &:is(.primary, .secondary) {
-        color: var(--filled-text-color);
-    }
-
     &.primary {
         background-color: var(--primary-color);
+        color: var(--filled-text-color);
     }
 
     &.secondary {

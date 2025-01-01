@@ -318,12 +318,12 @@ categories_as_tabs:
   images:
   videos:
   news:
-  map:
+  # map:
   music:
-  it:
-  science:
-  files:
-  social media:
+  # it:
+  # science:
+  # files:
+  # social media:
 
 engines:
   - name: 9gag

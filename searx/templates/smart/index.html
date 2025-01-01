@@ -1,5 +1,5 @@
-{% from 'smart/icons.html' import icon_small %} {% from 'smart/macros.html'
-import search_form %} {% extends "smart/base.html" %} {% block header %}
+{% from 'smart/icons.html' import icon_small %}{% extends "smart/base.html" %}
+{% block header %}
 
 <a href="/" class="logo">
     {# - for times there's no logo, use the instance name
@@ -15,8 +15,25 @@ import search_form %} {% extends "smart/base.html" %} {% block header %}
 {% endblock %} {% block content %}
 
 <div class="container">
-    {% call search_form() %}{% include 'smart/madules/categories_box.html' %} {%
-    include 'smart/madules/search_box.html' %} {% endcall %}
+    <form
+        id="search"
+        method="{{ method or 'POST' }}"
+        action="{{ url_for('search') }}"
+        role="search"
+    >
+        {% include 'smart/madules/categories_box.html' %} {% include
+        'smart/madules/search_box.html' %}
+
+        <input type="hidden" name="language" value="{{ current_language }}" />
+        <input type="hidden" name="time_range" value="{{ time_range }}" />
+        <input type="hidden" name="safesearch" value="{{ safesearch }}" />
+        <input type="hidden" name="theme" value="{{ theme }}" />
+        {% if timeout_limit %}<input
+            type="hidden"
+            name="timeout_limit"
+            value="{{ timeout_limit|e }}"
+        />{% endif %}
+    </form>
 </div>
 
 {% endblock %}
