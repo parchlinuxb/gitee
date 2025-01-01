@@ -1,5 +1,6 @@
 <div id="sidebar">
     <div class="container">
+        <h1>{{- _('Preferences') -}}</h1>
         <form
             id="search_form"
             method="post"
@@ -23,7 +24,15 @@
             'image_proxy' not in locked_preferences -%} {%- include
             'smart/madules/settings/image_proxy.html' -%} {%- endif -%}
 
-            <button type="submit" class="save">{{- _('Save') -}}</button>
+            <button type="submit" class="primary full-width">
+                {{- _('Save') -}}
+            </button>
         </form>
+        <a href="{{ url_for('preferences') }}" class="btn full-width"
+            >{{- _('See all preferences') -}}</a
+        >
+        <br />
+        <h1>{{- _('About') -}}</h1>
+        <div class="about">{{- about_section | safe -}}</div>
     </div>
 </div>

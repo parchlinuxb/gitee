@@ -171,7 +171,7 @@ img, video {
 
 :root {
   --primary-color: #0290ee;
-  --secondary-color: #009688;
+  --secondary-color: #ffd30d;
   --background-color: #fff;
   --secondary-background-color: #f5f5f5;
   --text-color: #000;
@@ -182,7 +182,7 @@ img, video {
 @media (prefers-color-scheme: dark) {
   :root {
     --primary-color: #0290ee;
-    --secondary-color: #009688;
+    --secondary-color: #ffd30d;
     --background-color: #fff;
     --secondary-background-color: #f5f5f5;
     --text-color: #000;
@@ -191,12 +191,44 @@ img, video {
   }
 }
 
+:is(button, .btn) {
+  background-color: var(--secondary-background-color);
+  color: var(--text-color);
+  margin-trim: all;
+  border-radius: .5rem;
+  padding: .5rem 1rem;
+  display: inline-block;
+}
+
+:is(button, .btn):is(.primary, .secondary) {
+  color: var(--filled-text-color);
+}
+
+:is(button, .btn).primary {
+  background-color: var(--primary-color);
+}
+
+:is(button, .btn).secondary {
+  background-color: var(--secondary-color);
+}
+
+:is(button, .btn).full-width {
+  width: 100%;
+}
+
 footer .links a, main:has(.not-found) .button {
   background-color: var(--primary-color);
   color: var(--filled-text-color);
   border-radius: 9999px;
   padding: .5rem 1rem;
   display: inline-block;
+}
+
+br {
+  content: " ";
+  width: 100%;
+  height: 1rem;
+  display: block;
 }
 
 body {
@@ -345,6 +377,7 @@ body:has(.sidebar_btn[open]) header .links .link.config {
 
 #sidebar {
   background: var(--background-color);
+  border: var(--background-color) 5px solid;
   border-radius: 1rem;
   flex: 0;
   min-width: 0;
@@ -362,6 +395,19 @@ body:has(.sidebar_btn[open]) header .links .link.config {
   transition: margin-left 50ms ease-in-out;
   position: absolute;
   overflow-y: auto;
+}
+
+#sidebar > .container :is(button, .btn) {
+  margin-bottom: .5rem;
+}
+
+#sidebar > .container h1 {
+  text-align: center;
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  border-radius: 9999px;
+  padding: .25rem 0;
+  font-size: 1.5rem;
 }
 
 #sidebar > .container fieldset {
@@ -392,17 +438,21 @@ body:has(.sidebar_btn[open]) header .links .link.config {
   font-size: .8rem;
 }
 
-#sidebar > .container button {
-  background-color: var(--primary-color);
-  width: 100%;
-  color: var(--filled-text-color);
-  border-radius: .5rem;
-  margin: .5rem 0;
+#sidebar > .container .about {
   padding: .5rem;
 }
 
-#sidebar > .container button.reset {
-  background-color: var(--secondary-color);
+#sidebar > .container .about p {
+  text-align: justify;
+  font-size: .8rem;
+}
+
+#sidebar > .container .about ul {
+  padding-left: 1rem;
+}
+
+#sidebar > .container .about ul li {
+  margin: .5rem 0;
 }
 
 footer {

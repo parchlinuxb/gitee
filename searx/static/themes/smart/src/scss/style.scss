@@ -12,6 +12,9 @@ $dir: ltr !default;
 // CSS Color varables
 @use 'colors';
 
+// Button
+@use 'button';
+
 @function toPx($value) {
     @return $value * 16px;
 }
@@ -22,6 +25,13 @@ $dir: ltr !default;
     background-color: var(--primary-color);
     color: var(--filled-text-color);
     @include mixin.rounded(full)
+}
+
+br {
+    height: 1rem;
+    width: 100%;
+    display: block;
+    content: " ";
 }
 
 body {
@@ -190,6 +200,7 @@ body:has(.sidebar_btn[open]) {
     @include mixin.rounded();
     overflow: hidden;
     background: var(--background-color);
+    border: var(--background-color) 5px solid;
     transition: flex 300ms ease-in-out,
         min-width 300ms ease-in-out;
     position: relative;
@@ -203,6 +214,19 @@ body:has(.sidebar_btn[open]) {
         padding: 1rem;
         @include mixin.margin-left(50rem);
         transition: margin-left 50ms ease-in-out;
+
+        :is(button, .btn) {
+            margin-bottom: .5rem;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            padding: .25rem 0;
+            text-align: center;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            @include mixin.rounded(full);
+        }
 
         fieldset {
             padding: .5rem 0;
@@ -232,16 +256,20 @@ body:has(.sidebar_btn[open]) {
             }
         }
 
-        button {
+        .about {
             padding: .5rem;
-            background-color: var(--primary-color);
-            width: 100%;
-            color: var(--filled-text-color);
-            @include mixin.rounded(sm);
-            margin: .5rem 0;
 
-            &.reset {
-                background-color: var(--secondary-color);
+            p {
+                text-align: justify;
+                font-size: .8rem;
+            }
+
+            ul {
+                padding-left: 1rem;
+
+                li {
+                    margin: .5rem 0;
+                }
             }
         }
     }

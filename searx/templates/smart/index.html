@@ -1,5 +1,5 @@
-{% from 'smart/icons.html' import icon_small %} {% extends "smart/base.html" %}
-{% block header %}
+{% from 'smart/icons.html' import icon_small %} {% from 'smart/macros.html'
+import search_form %} {% extends "smart/base.html" %} {% block header %}
 
 <a href="/" class="logo">
     {# - for times there's no logo, use the instance name
@@ -14,6 +14,9 @@
 
 {% endblock %} {% block content %}
 
-<div class="container">{% include 'smart/search_box.html' %}</div>
+<div class="container">
+    {% call search_form() %}{% include 'smart/madules/categories_box.html' %} {%
+    include 'smart/madules/search_box.html' %} {% endcall %}
+</div>
 
 {% endblock %}

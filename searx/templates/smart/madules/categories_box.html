@@ -1,0 +1,28 @@
+<div id="search_categories">
+    <div class="categories js-only">
+        {% for category in range(4) %}
+        <label for="category_{{ categories[category] }}" class="category">
+            <input
+                type="checkbox"
+                name="category_{{ categories[category] }}"
+                {%
+                if
+                categories[category]
+                in
+                selected_categories
+                %}
+                checked
+                {%
+                endif
+                %}
+                id="category_{{ categories[category] }}"
+                hidden
+            />
+            <div class="category-icon">
+                {{ icon_small(categories[category] )}}
+            </div>
+            <span>{{ categories[category] }}</span>
+        </label>
+        {% endfor %}
+    </div>
+</div>

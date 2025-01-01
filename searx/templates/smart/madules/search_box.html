@@ -1,0 +1,31 @@
+{% from 'smart/icons.html' import icon_small %}
+
+<div class="search_box">
+    <div class="icon">{{ icon_small('search') }}</div>
+    <input
+        id="q"
+        name="q"
+        type="text"
+        placeholder="{{ _('Search for...') }}"
+        autocomplete="off"
+        autocapitalize="none"
+        spellcheck="false"
+        autocorrect="off"
+        dir="auto"
+        value="{{ q or '' }}"
+    />
+    <button id="clear_search" type="reset" aria-label="{{ _('clear') }}">
+        <span class="js-only">Clear</span
+        ><span class="js-alt">{{ _('clear') }}</span>
+    </button>
+    {% if endpoint == 'index' %}
+    <button
+        id="send_search"
+        type="submit"
+        class="secondary"
+        aria-label="{{ _('search') }}"
+    >
+        {{ _('search') }}
+    </button>
+    {% endif %}
+</div>

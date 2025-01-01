@@ -604,13 +604,17 @@ def index():
         query = ('?' + request.query_string.decode()) if request.query_string else ''
         return redirect(url_for('search') + query, 308)
 
+    current_locale = request.preferences.get_value("locale")
+    about_section = infopage.INFO_PAGES.get_page('about', current_locale).html.split('<h2>')[1]
+    
     return render(
         # fmt: off
         'index.html',
         selected_categories=get_selected_categories(request.preferences, request.form),
-        current_locale = request.preferences.get_value("locale"),
+        current_locale = current_locale,
         autocomplete_backends = autocomplete_backends,
         locales = LOCALE_NAMES,
+        about_section = about_section,
         # fmt: on
     )
 
