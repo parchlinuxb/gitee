@@ -39,7 +39,8 @@ body {
     gap: 0;
     overflow: hidden;
     transition: gap 250ms ease-in-out,
-        padding 500ms ease-in-out background-color 300ms ease-in-out;
+        padding 500ms ease-in-out,
+        background-color 300ms ease-in-out;
 
     background-color: var(--secondary-background-color);
 
@@ -142,31 +143,27 @@ main:has(.not-found) {
                 max-width: clamp(70px, 25vw, 150px);
             }
         }
+    }
+}
 
-        .links {
-            display: flex;
-            gap: .5rem;
+#results {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-areas:
+        "search links"
+        "search amount"
+        "results sidebox"
+        "footer footer";
+    gap: 1rem;
+    padding: 0 6rem;
 
-            .link {
-                display: inline-block;
-                padding: 0.5rem;
-                height: min-content;
-                @include mixin.rounded(full);
-                transition: background-color 100ms ease-in-out;
+    .links {
+        grid-area: links;
+    }
 
-                &:is(:hover, :focus-within) {
-                    background-color: var(--secondary-background-color);
-                }
-
-                svg {
-                    width: 1.5rem;
-                }
-
-                &.config {
-                    transition: transform 1s ease-in-out;
-                }
-            }
-        }
+    footer {
+        grid-area: footer;
     }
 }
 
@@ -261,7 +258,10 @@ body:has(.sidebar_btn[open]) {
         }
 
         .about {
-            padding: .5rem;
+            background-color: var(--background-color);
+            overflow: hidden;
+            @include mixin.rounded();
+            padding: 1rem;
 
             p {
                 text-align: justify;
@@ -275,6 +275,32 @@ body:has(.sidebar_btn[open]) {
                     margin: .5rem 0;
                 }
             }
+
+        }
+    }
+}
+
+.links {
+    display: flex;
+    gap: .5rem;
+
+    .link {
+        display: inline-block;
+        padding: 0.5rem;
+        height: min-content;
+        @include mixin.rounded(full);
+        transition: background-color 100ms ease-in-out;
+
+        &:is(:hover, :focus-within) {
+            background-color: var(--background-color);
+        }
+
+        svg {
+            width: 1.5rem;
+        }
+
+        &.config {
+            transition: transform 1s ease-in-out;
         }
     }
 }
@@ -303,7 +329,7 @@ footer {
     }
 }
 
-#search {
+#search.screen {
     #search_categories .categories {
         display: flex;
         flex-direction: row;
@@ -431,6 +457,43 @@ footer {
 
             &:focus {
                 outline: none;
+            }
+        }
+    }
+}
+
+#search.header {
+    grid-area: search;
+    padding: 1rem 0;
+
+    .header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 1rem;
+        align-items: center;
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100px;
+
+            img {
+                width: 100%;
+            }
+        }
+
+        .search_box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+
+            input {
+                width: 100%;
+                padding: 1rem;
+                @include mixin.rounded(full);
             }
         }
     }

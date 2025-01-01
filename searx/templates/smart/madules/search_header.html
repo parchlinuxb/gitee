@@ -1,0 +1,57 @@
+<form
+    id="search"
+    method="{{ method or 'POST' }}"
+    action="{{ url_for('search') }}"
+    role="search"
+    class="header"
+>
+    <div class="header">
+        <div class="logo">
+            <img src="/static/img/logo.svg" alt="{{ instance_name }}" />
+        </div>
+        <div class="search_box">
+            <input
+                id="q"
+                name="q"
+                type="text"
+                placeholder="{{ _('Search for...') }}"
+                tabindex="1"
+                autocomplete="off"
+                autocapitalize="none"
+                spellcheck="false"
+                autocorrect="off"
+                dir="auto"
+                value="{{ q or '' }}"
+            />
+            <button
+                id="clear_search"
+                type="reset"
+                aria-label="{{ _('clear') }}"
+                class="hide_if_nojs"
+            >
+                <span>c</span><span class="js-alt">{{ _('clear') }}</span>
+            </button>
+        </div>
+    </div>
+    <div class="selections">
+        <div class="categories"></div>
+        <label for="filter">
+            <input type="checkbox" id="filter-btn" hidden />
+            <div class="filter-btn">
+                {{ _('Filters') }} {{ icon_small('filter') }}
+            </div>
+        </label>
+    </div>
+    <div class="filters">
+        {% include 'simple/filters/languages.html' %} {% include
+        'simple/filters/time_range.html' %} {% include
+        'simple/filters/safesearch.html' %}
+    </div>
+
+    <input type="hidden" name="theme" value="{{ theme }}" />
+    {% if timeout_limit %}<input
+        type="hidden"
+        name="timeout_limit"
+        value="{{ timeout_limit|e }}"
+    />{% endif %}
+</form>

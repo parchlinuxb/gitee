@@ -404,6 +404,15 @@ def render(template_name: str, **kwargs):
     kwargs['categories_as_tabs'] = list(settings['categories_as_tabs'].keys())
     kwargs['categories'] = get_enabled_categories(settings['categories_as_tabs'].keys())
     kwargs['DEFAULT_CATEGORY'] = DEFAULT_CATEGORY
+    
+    # values for sidebar
+    current_locale = request.preferences.get_value("locale")
+    kwargs['current_locale'] = current_locale
+    kwargs['autocomplete_backends'] = autocomplete_backends
+    kwargs['locales'] = LOCALE_NAMES
+    if kwargs['endpoint'] == 'index' or kwargs['endpoint'] == 'results':
+        about_section = infopage.INFO_PAGES.get_page('about', current_locale).html.split('<h2>')[1]
+        kwargs['about_section'] = about_section
 
     # i18n
     kwargs['sxng_locales'] = [l for l in sxng_locales if l[0] in settings['search']['languages']]
@@ -604,17 +613,10 @@ def index():
         query = ('?' + request.query_string.decode()) if request.query_string else ''
         return redirect(url_for('search') + query, 308)
 
-    current_locale = request.preferences.get_value("locale")
-    about_section = infopage.INFO_PAGES.get_page('about', current_locale).html.split('<h2>')[1]
-    
     return render(
         # fmt: off
         'index.html',
         selected_categories=get_selected_categories(request.preferences, request.form),
-        current_locale = current_locale,
-        autocomplete_backends = autocomplete_backends,
-        locales = LOCALE_NAMES,
-        about_section = about_section,
         # fmt: on
     )
 

@@ -229,9 +229,9 @@ br {
 }
 
 body {
-  transition: gap .25s ease-in-out, padding .5s ease-in-out background-color .3s ease-in-out;
   background-color: var(--secondary-background-color);
   gap: 0;
+  transition: gap .25s ease-in-out, padding .5s ease-in-out, background-color .3s ease-in-out;
   display: flex;
   overflow: hidden;
 }
@@ -323,29 +323,23 @@ main:has(.not-found) .button {
   max-width: clamp(70px, 25vw, 150px);
 }
 
-#index header .links {
-  gap: .5rem;
-  display: flex;
+#results {
+  grid-template: "search links"
+                 "search amount"
+                 "results sidebox" 1fr
+                 "footer footer"
+                 / 2fr 1fr;
+  gap: 1rem;
+  padding: 0 6rem;
+  display: grid;
 }
 
-#index header .links .link {
-  border-radius: 9999px;
-  height: min-content;
-  padding: .5rem;
-  transition: background-color .1s ease-in-out;
-  display: inline-block;
+#results .links {
+  grid-area: links;
 }
 
-#index header .links .link:is(:hover, :focus-within) {
-  background-color: var(--secondary-background-color);
-}
-
-#index header .links .link svg {
-  width: 1.5rem;
-}
-
-#index header .links .link.config {
-  transition: transform 1s ease-in-out;
+#results footer {
+  grid-area: footer;
 }
 
 body:has(.sidebar_btn[open]) {
@@ -439,7 +433,10 @@ body:has(.sidebar_btn[open]) header .links .link.config {
 }
 
 #sidebar > .container .about {
-  padding: .5rem;
+  background-color: var(--background-color);
+  border-radius: 1rem;
+  padding: 1rem;
+  overflow: hidden;
 }
 
 #sidebar > .container .about p {
@@ -453,6 +450,31 @@ body:has(.sidebar_btn[open]) header .links .link.config {
 
 #sidebar > .container .about ul li {
   margin: .5rem 0;
+}
+
+.links {
+  gap: .5rem;
+  display: flex;
+}
+
+.links .link {
+  border-radius: 9999px;
+  height: min-content;
+  padding: .5rem;
+  transition: background-color .1s ease-in-out;
+  display: inline-block;
+}
+
+.links .link:is(:hover, :focus-within) {
+  background-color: var(--background-color);
+}
+
+.links .link svg {
+  width: 1.5rem;
+}
+
+.links .link.config {
+  transition: transform 1s ease-in-out;
 }
 
 footer {
@@ -477,7 +499,7 @@ footer .links {
   display: flex;
 }
 
-#search #search_categories .categories {
+#search.screen #search_categories .categories {
   flex-flow: wrap;
   justify-content: center;
   align-items: center;
@@ -486,38 +508,38 @@ footer .links {
 }
 
 @media (width <= 768px) {
-  #search #search_categories .categories {
+  #search.screen #search_categories .categories {
     transform: scale(.8);
   }
 }
 
 @media (width <= 480px) {
-  #search #search_categories .categories {
+  #search.screen #search_categories .categories {
     display: none;
   }
 }
 
-#search #search_categories .categories label:first-child .category-icon {
+#search.screen #search_categories .categories label:first-child .category-icon {
   background-color: #32e258;
 }
 
-#search #search_categories .categories label:nth-child(2) .category-icon {
+#search.screen #search_categories .categories label:nth-child(2) .category-icon {
   background-color: #2196f3;
 }
 
-#search #search_categories .categories label:nth-child(3) .category-icon {
+#search.screen #search_categories .categories label:nth-child(3) .category-icon {
   background-color: #e49928;
 }
 
-#search #search_categories .categories label:nth-child(4) .category-icon {
+#search.screen #search_categories .categories label:nth-child(4) .category-icon {
   background-color: #5b2ae0;
 }
 
-#search #search_categories .categories label:nth-child(5) .category-icon {
+#search.screen #search_categories .categories label:nth-child(5) .category-icon {
   background-color: red;
 }
 
-#search #search_categories .categories label {
+#search.screen #search_categories .categories label {
   cursor: pointer;
   border-radius: 1rem;
   flex-direction: column;
@@ -528,20 +550,20 @@ footer .links {
   display: flex;
 }
 
-#search #search_categories .categories label .category-icon {
+#search.screen #search_categories .categories label .category-icon {
   border-radius: 9999px;
   padding: 1rem;
 }
 
-#search #search_categories .categories label .category-icon svg {
+#search.screen #search_categories .categories label .category-icon svg {
   color: #fff;
 }
 
-#search #search_categories .categories label:has(input:checked) {
+#search.screen #search_categories .categories label:has(input:checked) {
   background-color: var(--background-color);
 }
 
-#search .search_box {
+#search.screen .search_box {
   background-color: var(--background-color);
   border-radius: 9999px;
   flex-wrap: wrap;
@@ -554,13 +576,13 @@ footer .links {
 }
 
 @media (width <= 480px) {
-  #search .search_box {
+  #search.screen .search_box {
     border-radius: 1rem;
     width: 70vw;
   }
 }
 
-#search .search_box input {
+#search.screen .search_box input {
   color: var(--text-color);
   background-color: #0000;
   border: none;
@@ -569,11 +591,11 @@ footer .links {
   padding: .5rem;
 }
 
-#search .search_box input:focus {
+#search.screen .search_box input:focus {
   outline: none;
 }
 
-#search .search_box button {
+#search.screen .search_box button {
   color: var(--text-color);
   background-color: #0000;
   border: none;
@@ -581,11 +603,11 @@ footer .links {
   padding: .5rem;
 }
 
-#search .search_box button:focus {
+#search.screen .search_box button:focus {
   outline: none;
 }
 
-#search .search_box #clear_search {
+#search.screen .search_box #clear_search {
   color: var(--text-color);
   background-color: #0000;
   border: none;
@@ -593,19 +615,56 @@ footer .links {
   padding: .5rem;
 }
 
-#search .search_box #clear_search:focus {
+#search.screen .search_box #clear_search:focus {
   outline: none;
 }
 
-#search .search_box #send_search {
+#search.screen .search_box #send_search {
   background-color: var(--primary-color);
   color: var(--filled-text-color);
   border-radius: 9999px;
   padding: 0 1rem;
 }
 
-#search .search_box #send_search:focus {
+#search.screen .search_box #send_search:focus {
   outline: none;
+}
+
+#search.header {
+  grid-area: search;
+  padding: 1rem 0;
+}
+
+#search.header .header {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  display: flex;
+}
+
+#search.header .header .logo {
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  display: flex;
+}
+
+#search.header .header .logo img {
+  width: 100%;
+}
+
+#search.header .header .search_box {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  display: flex;
+}
+
+#search.header .header .search_box input {
+  border-radius: 9999px;
+  width: 100%;
+  padding: 1rem;
 }
 
 input[type="checkbox"].switch {
