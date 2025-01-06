@@ -9,7 +9,7 @@
     --secondary-background-color: #{$secondary-background-color};
     --text-color: #{$text-color};
     --filled-text-color: #{$filled-text-color};
-    --border-color: #{color.mix($text-color, $background-color, 50%)};
+    --border-color: #{color.mix($text-color, $background-color, 30%)};
 }
 
 
@@ -22,6 +22,6 @@
         --secondary-background-color: #{$secondary-background-color-dark};
         --text-color: #{$text-color-dark};
         --filled-text-color: #{$filled-text-color-dark};
-        --border-color: #{color.mix($text-color, $background-color, 50%)};
+        --border-color: #{color.mix($text-color, $background-color, 30%)};
     }
 }

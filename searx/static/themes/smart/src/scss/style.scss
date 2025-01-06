@@ -91,6 +91,31 @@ body {
     }
 }
 
+.links {
+    display: flex;
+    gap: .5rem;
+
+    .link {
+        display: inline-block;
+        padding: 0.5rem;
+        height: min-content;
+        @include mixin.rounded(full);
+        transition: background-color 100ms ease-in-out;
+
+        &:is(:hover, :focus-within) {
+            background-color: var(--background-color);
+        }
+
+        svg {
+            width: 1.5rem;
+        }
+
+        &.config {
+            transition: transform 1s ease-in-out;
+        }
+    }
+}
+
 #index,
 #None {
     main {
@@ -149,17 +174,33 @@ main:has(.not-found) {
 #results {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    grid-template-rows: auto auto 1fr auto;
+    grid-template-rows: 5rem min-content 1fr auto;
     grid-template-areas:
         "search links"
         "search amount"
         "results sidebox"
         "footer footer";
     gap: 1rem;
-    padding: 0 6rem;
+    margin: 0 auto;
+    padding: 0 1rem;
+    max-width: 1800px;
 
-    .links {
+    @include mixin.screens($screen-lg) {
+        padding: 0 4rem;
+    }
+
+
+    &>.links {
         grid-area: links;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: end;
+
+        :is(.link, .sidebar_btn) {
+            width: 40px;
+            height: 40px;
+        }
     }
 
     footer {
@@ -224,7 +265,6 @@ body:has(.sidebar_btn[open]) {
             font-size: 1.5rem;
             padding: .25rem 0;
             text-align: center;
-            background-color: var(--background-color);
             color: var(--text-color);
             @include mixin.rounded(full);
         }
@@ -280,31 +320,6 @@ body:has(.sidebar_btn[open]) {
     }
 }
 
-.links {
-    display: flex;
-    gap: .5rem;
-
-    .link {
-        display: inline-block;
-        padding: 0.5rem;
-        height: min-content;
-        @include mixin.rounded(full);
-        transition: background-color 100ms ease-in-out;
-
-        &:is(:hover, :focus-within) {
-            background-color: var(--background-color);
-        }
-
-        svg {
-            width: 1.5rem;
-        }
-
-        &.config {
-            transition: transform 1s ease-in-out;
-        }
-    }
-}
-
 footer {
     display: flex;
     justify-content: space-between;
@@ -329,10 +344,87 @@ footer {
     }
 }
 
+.search_box {
+    background-color: var(--background-color);
+    padding: .25rem .5rem;
+    width: clamp(400px, 50vw, 40rem);
+    @include mixin.rounded(full);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .5rem;
+
+    @include mixin.max-screens($screen-sm) {
+        width: 70vw;
+        @include mixin.rounded();
+    }
+
+    .icon {
+        @include mixin.margin-left(.5rem);
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+
+    input {
+        flex: 1;
+        background-color: transparent;
+        border: none;
+        color: var(--text-color);
+        @include mixin.rounded(full);
+        padding: .5rem;
+
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    button {
+        background-color: transparent;
+        border: none;
+        color: var(--text-color);
+        @include mixin.rounded(full);
+        padding: .5rem;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    #clear_search {
+        background-color: transparent;
+        border: none;
+        color: var(--border-color);
+        @include mixin.rounded(full);
+        padding: .5rem;
+
+        &:focus {
+            outline: none;
+        }
+
+        &:hover {
+            color: var(--text-color);
+        }
+    }
+
+    #send_search {
+        background-color: var(--secondary-color);
+        padding: .5rem 1.5rem;
+
+        &:focus {
+            outline: none;
+        }
+    }
+}
+
 #search.screen {
+    .search_box {
+        margin-top: 1rem;
+    }
+
     #search_categories .categories {
         display: flex;
-        flex-direction: row;
         justify-content: center;
         align-items: center;
         flex-wrap: wrap;
@@ -394,81 +486,16 @@ footer {
         }
     }
 
-    .search_box {
-        background-color: var(--background-color);
-        padding: .5rem;
-        width: clamp(400px, 50vw, 40rem);
-        @include mixin.rounded(full);
-        margin-top: 1rem;
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 1rem;
-
-        @include mixin.max-screens($screen-sm) {
-            width: 70vw;
-            @include mixin.rounded();
-        }
-
-
-        input {
-            flex: 1;
-            background-color: transparent;
-            border: none;
-            color: var(--text-color);
-            @include mixin.rounded(full);
-            padding: .5rem;
-
-
-            &:focus {
-                outline: none;
-            }
-        }
-
-        button {
-            background-color: transparent;
-            border: none;
-            color: var(--text-color);
-            @include mixin.rounded(full);
-            padding: .5rem;
-
-            &:focus {
-                outline: none;
-            }
-        }
-
-        #clear_search {
-            background-color: transparent;
-            border: none;
-            color: var(--text-color);
-            @include mixin.rounded(full);
-            padding: .5rem;
-
-            &:focus {
-                outline: none;
-            }
-        }
-
-        #send_search {
-            background-color: var(--primary-color);
-            color: var(--filled-text-color);
-            @include mixin.rounded(full);
-            padding: 0 1rem;
-
-            &:focus {
-                outline: none;
-            }
-        }
-    }
 }
 
 #search.header {
+    position: relative;
     grid-area: search;
     padding: 1rem 0;
 
     .header {
         display: flex;
-        flex-direction: row;
+
         justify-content: space-between;
         gap: 1rem;
         align-items: center;
@@ -485,26 +512,81 @@ footer {
         }
 
         .search_box {
-            display: flex;
-            align-items: center;
-            justify-content: center;
             width: 100%;
+        }
+    }
 
-            input {
-                width: 100%;
-                padding: 1rem;
+
+    .selections {
+        margin-top: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+
+            .category {
+                display: inline-block;
+                background-color: var(--background-color);
+                padding: .5rem 1rem;
+                cursor: pointer;
                 @include mixin.rounded(full);
+
+                &.selected {
+                    background-color: #000;
+                    color: #fff;
+                }
             }
         }
+
+        .filter-btn {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            color: var(--border-color);
+
+            input {
+                transform: scale(.8);
+            }
+        }
+
+    }
+
+    .filters {
+        display: flex;
+        position: absolute;
+        align-items: center;
+        gap: 1rem;
+        top: 100%;
+        opacity: 0;
+        height: 0;
+        transition: opacity 150ms ease-in-out, height 100ms ease-in-out;
+
+        .filter {
+            display: inline-block;
+            background-color: var(--background-color);
+            padding: .25rem .5rem;
+            @include mixin.rounded();
+        }
+    }
+
+    &:has(#filter:checked) .filters {
+        opacity: 1;
+        height: 2rem;
     }
 }
 
 input[type="checkbox"].switch {
     appearance: none;
     margin-right: .5rem;
-    background-color: var(--secondary-background-color);
+    background-color: var(--border-color);
     color: var(--text-color);
-    @include mixin.rounded(sm);
+    @include mixin.rounded(full);
     width: 40px;
     height: 20px;
     min-height: 20px;
@@ -522,7 +604,7 @@ input[type="checkbox"].switch {
         @include mixin.left(2.5px);
         width: 15px;
         height: 15px;
-        background-color: var(--text-color);
+        background-color: var(--filled-text-color);
         @include mixin.rounded(sm);
         transition: background-color 200ms ease-in-out,
             left 200ms ease-in-out,

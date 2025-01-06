@@ -1,3 +1,5 @@
+{% from 'smart/icons.html' import icon_small %}
+
 <form
     id="search"
     method="{{ method or 'POST' }}"
@@ -6,10 +8,11 @@
     class="header"
 >
     <div class="header">
-        <div class="logo">
+        <a class="logo" href="/">
             <img src="/static/img/logo.svg" alt="{{ instance_name }}" />
-        </div>
+        </a>
         <div class="search_box">
+            <div class="icon">{{ icon_small('search') }}</div>
             <input
                 id="q"
                 name="q"
@@ -29,24 +32,30 @@
                 aria-label="{{ _('clear') }}"
                 class="hide_if_nojs"
             >
-                <span>c</span><span class="js-alt">{{ _('clear') }}</span>
+                <span class="js-only">{{ icon_small('close') }}</span
+                ><span class="js-alt">{{ _('clear') }}</span>
             </button>
         </div>
     </div>
     <div class="selections">
-        <div class="categories"></div>
-        <label for="filter">
-            <input type="checkbox" id="filter-btn" hidden />
-            <div class="filter-btn">
-                {{ _('Filters') }} {{ icon_small('filter') }}
-            </div>
+        <div class="categories">
+            {% for category in categories_as_tabs %}
+            <button
+                type="submit"
+                name="category_{{ category }}"
+                class="category {% if category in selected_categories %} selected {% endif %}"
+            >
+                {{ category}}
+            </button>
+
+            {% endfor %}
+        </div>
+        <label for="filter" class="filter-btn">
+            <input type="checkbox" id="filter" class="switch" />
+            <span> {{ _('Filters') }} </span>
         </label>
     </div>
-    <div class="filters">
-        {% include 'simple/filters/languages.html' %} {% include
-        'simple/filters/time_range.html' %} {% include
-        'simple/filters/safesearch.html' %}
-    </div>
+    {% include 'smart/madules/filters.html' %}
 
     <input type="hidden" name="theme" value="{{ theme }}" />
     {% if timeout_limit %}<input
