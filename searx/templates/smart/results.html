@@ -4,4 +4,52 @@
     <a href="" class="link">{{icon_small('donate')}}</a>
     {% include 'smart/madules/sidebar_btn.html' %}
 </div>
+{% if results and results|map(attribute='template')|unique|list|count and
+'images' in results|map(attribute='template')|unique|list %} {% set
+is_image_page = 'only_template_images' %} {% endif %}
+<div class="results-container {{ 'image-page' if is_image_page else '' }}">
+    {% if answers %}
+    <div class="answer-container">
+        <div class="title">
+            {{ icon_small('plugin') }}
+            <h3>{{ _('Answers by Plugins and Engines') }}</h3>
+        </div>
+        {%- for answer in answers.values() -%}
+        <div class="message-box">
+            <p class="message">{{ answer.answer }}</p>
+            {%- if answer.url -%}
+            <div class="reference">
+                Based on
+                <a
+                    href="{{ answer.url }}"
+                    {%-
+                    if
+                    results_on_new_tab
+                    %}target="_blank"
+                    rel="noopener noreferrer"
+                    {%-
+                    else
+                    -%}rel="noreferrer"
+                    {%-
+                    endif
+                    -%}
+                    >{{ urlparse(answer.url).hostname }}</a
+                >
+            </div>
+            {% endif %}
+        </div>
+        {%- endfor -%}
+    </div>
+    {% endif %} {% for result in results %} {% if result.open_group and not
+    is_image_page %}
+    <div
+        class="{{ result['template']|replace('.html', '') }}_group result-group"
+    >
+        {% endif %} {% set template = get_result_template('smart',
+        result['template']) if 'smart' in get_result_template('smart',
+        result['template']) else get_result_template('smart', 'default.html') %}
+        {% include template %} {% if result.close_group and not is_image_page %}
+    </div>
+    {% endif %} {% endfor %}
+</div>
 {% include 'smart/footer.html' %} {% endblock %}

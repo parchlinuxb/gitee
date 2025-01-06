@@ -8,6 +8,7 @@ const svgList = {
   music: "node_modules/remixicon/icons/Media/music-2-fill.svg",
   search: "node_modules/remixicon/icons/System/search-line.svg",
   close: "node_modules/remixicon/icons/System/close-line.svg",
+  plugin: "node_modules/remixicon/icons/Development/puzzle-2-fill.svg",
 };
 
 const ejs = require("ejs"),

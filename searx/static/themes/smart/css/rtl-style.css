@@ -359,6 +359,7 @@ main:has(.not-found) .button {
   margin: 0 auto;
   padding: 0 1rem;
   display: grid;
+  overflow: auto;
 }
 
 @media (width >= 992px) {
@@ -382,6 +383,64 @@ main:has(.not-found) .button {
 
 #results footer {
   grid-area: footer;
+}
+
+#results:has(#filter:checked) .results-container {
+  margin-top: 2rem;
+}
+
+#results .results-container {
+  grid-area: results;
+}
+
+#results .results-container .answer-container {
+  background-color: var(--background-color);
+  border-radius: 2rem;
+  padding: 1.5rem;
+}
+
+#results .results-container .answer-container .title {
+  align-items: center;
+  gap: .5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  display: flex;
+}
+
+#results .results-container .answer-container .title svg {
+  fill: var(--primary-color);
+}
+
+#results .results-container .answer-container .message-box {
+  border-radius: 1rem;
+  margin-top: 1rem;
+}
+
+#results .results-container .answer-container .message-box .message {
+  background-color: var(--secondary-background-color);
+  border-radius: 1.5rem 1.5rem 1.5rem .5rem;
+  width: 80%;
+  max-width: 800px;
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
+#results .results-container .answer-container .message-box .reference {
+  color: var(--text-color);
+  font-size: .8rem;
+}
+
+#results .results-container .answer-container .message-box .reference a {
+  background-color: var(--secondary-background-color);
+  padding: 0 .5rem;
+  display: inline-block;
+}
+
+#results .results-container .result-group {
+  background-color: var(--background-color);
+  border-radius: 2rem;
+  margin-top: 1rem;
+  padding: 1rem;
 }
 
 body:has(.sidebar_btn[open]) {

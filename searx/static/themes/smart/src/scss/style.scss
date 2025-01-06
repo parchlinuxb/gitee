@@ -184,6 +184,7 @@ main:has(.not-found) {
     margin: 0 auto;
     padding: 0 1rem;
     max-width: 1800px;
+    overflow: auto;
 
     @include mixin.screens($screen-lg) {
         padding: 0 4rem;
@@ -205,6 +206,64 @@ main:has(.not-found) {
 
     footer {
         grid-area: footer;
+    }
+
+    &:has(#filter:checked) .results-container {
+        margin-top: 2rem;
+    }
+
+    .results-container {
+        grid-area: results;
+
+        .answer-container {
+            background-color: var(--background-color);
+            padding: 1.5rem;
+            @include mixin.rounded(lg);
+
+            .title {
+                display: flex;
+                align-items: center;
+                font-weight: 700;
+                gap: .5rem;
+                font-size: 1.5rem;
+
+                svg {
+                    fill: var(--primary-color);
+                }
+            }
+
+            .message-box {
+                margin-top: 1rem;
+                @include mixin.rounded();
+
+                .message {
+                    background-color: var(--secondary-background-color);
+                    margin-bottom: 1rem;
+                    padding: 1rem;
+                    border-radius: 1.5rem 1.5rem 1.5rem .5rem;
+                    width: 80%;
+                    max-width: 800px;
+                }
+
+                .reference {
+                    font-size: .8rem;
+                    color: var(--text-color);
+
+                    a {
+                        display: inline-block;
+                        background-color: var(--secondary-background-color);
+                        padding: 0 .5rem;
+                    }
+                }
+            }
+        }
+
+        .result-group {
+            margin-top: 1rem;
+            padding: 1rem;
+            @include mixin.rounded(lg);
+            background-color: var(--background-color);
+        }
     }
 }
 
