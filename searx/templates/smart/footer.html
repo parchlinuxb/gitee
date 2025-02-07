@@ -1,0 +1,25 @@
+<footer>
+    {% block footer %}
+    <p>
+        {{ _('a privacy-respecting, open metasearch engine') }} - {{
+        searx_version }}
+    </p>
+    <div class="links">
+        {% if enable_metrics %}
+        <a href="{{ url_for('stats') }}">{{ _('Engine stats') }}</a>{% endif %}
+        {% if get_setting('brand.public_instances') %}
+        <a href="{{ get_setting('brand.public_instances') }}"
+            >{{ _('Public instances') }}</a
+        >
+        {% endif %} {% if get_setting('general.privacypolicy_url') %}
+        <a href="{{ get_setting('general.privacypolicy_url') }}"
+            >{{ _('Privacy policy') }}</a
+        >
+        {% endif %} {% if get_setting('general.contact_url') %}
+        <a href="{{ get_setting('general.contact_url') }}"
+            >{{ _('Contact instance maintainer') }}</a
+        >
+        {% endif %}
+    </div>
+    {% endblock %}
+</footer>

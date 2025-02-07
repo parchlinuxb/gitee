@@ -1,0 +1,34 @@
+//  --- Definitions ---
+
+// - Colors -
+// Light theme
+$primary-color: #0290ee;
+$secondary-color: #f8b600;
+$background-color: #ffffff;
+$secondary-background-color: #f8f8f8;
+$text-color: #000000;
+$filled-text-color: #ffffff;
+
+// Dark theme
+$primary-color-dark: $primary-color;
+$secondary-color-dark: $secondary-color;
+$background-color-dark: $background-color;
+$secondary-background-color-dark: $secondary-background-color;
+$text-color-dark: $text-color;
+$filled-text-color-dark: $filled-text-color;
+
+// - Screens -
+
+$screen-xs: 340px;
+$screen-sm: 480px;
+$screen-md: 768px;
+$screen-lg: 992px;
+$screen-xl: 1200px;
+
+// - Rounded corners -
+
+$border-radius: 1rem;
+$border-radius-sm: .5rem;
+$border-radius-lg: 2rem;
+
+// - Transitions -

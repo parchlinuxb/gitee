@@ -1,0 +1,16 @@
+<fieldset>
+  <div class="container">
+    <legend id="pref_http_method">{{- _('HTTP method') -}}</legend>
+    <select name='method' aria-labelledby="pref_http_method" aria-describedby="desc_http_method">
+      <option value="POST"
+              {%- if method == 'POST' %} selected="selected"{%- endif -%}>POST
+      </option>
+      <option value="GET"
+              {%- if method == 'GET' %} selected="selected"{%- endif -%}>GET
+      </option>
+    </select>
+  </div>
+  <div class="description" id="desc_http_method">
+    {{- _('Change how forms are submitted') }} <a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods" rel="external">🔗</a>
+  </div>
+</fieldset>

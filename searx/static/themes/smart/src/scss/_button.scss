@@ -1,0 +1,23 @@
+@use './mixins.scss' as mixin;
+
+:is(button, .btn) {
+    display: inline-block;
+    padding: .5rem 1rem;
+    background-color: var(--secondary-background-color);
+    color: var(--text-color);
+    @include mixin.rounded(sm);
+    margin-trim: all;
+
+    &.primary {
+        background-color: var(--primary-color);
+        color: var(--filled-text-color);
+    }
+
+    &.secondary {
+        background-color: var(--secondary-color);
+    }
+
+    &.full-width {
+        width: 100%;
+    }
+}

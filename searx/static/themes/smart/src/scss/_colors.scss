@@ -1,0 +1,27 @@
+@use 'sass:color';
+@use "definitions.scss" as *;
+
+// Light
+:root {
+    --primary-color: #{$primary-color};
+    --secondary-color: #{$secondary-color};
+    --background-color: #{$background-color};
+    --secondary-background-color: #{$secondary-background-color};
+    --text-color: #{$text-color};
+    --filled-text-color: #{$filled-text-color};
+    --border-color: #{color.mix($text-color, $background-color, 30%)};
+}
+
+
+// Dark
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary-color: #{$primary-color-dark};
+        --secondary-color: #{$secondary-color-dark};
+        --background-color: #{$background-color-dark};
+        --secondary-background-color: #{$secondary-background-color-dark};
+        --text-color: #{$text-color-dark};
+        --filled-text-color: #{$filled-text-color-dark};
+        --border-color: #{color.mix($text-color, $background-color, 30%)};
+    }
+}

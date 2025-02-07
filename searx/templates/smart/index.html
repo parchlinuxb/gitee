@@ -1,0 +1,40 @@
+{% from 'smart/icons.html' import icon_small %}{% extends "smart/base.html" %}
+{% block header %}
+
+<a href="/" class="logo">
+    {# - for times there's no logo, use the instance name
+    <span>{{ instance_name }}</span>
+    #}
+    <img src="/static/img/logo.svg" alt="{{ instance_name }}" />
+</a>
+<div class="links">
+    <a href="" class="link">{{icon_small('donate')}}</a>
+    {% include 'smart/madules/sidebar_btn.html' %}
+</div>
+
+{% endblock %} {% block content %}
+
+<div class="container">
+    <form
+        id="search"
+        method="{{ method or 'POST' }}"
+        action="{{ url_for('search') }}"
+        role="search"
+        class="screen"
+    >
+        {% include 'smart/madules/categories_box.html' %} {% include
+        'smart/madules/search_box.html' %}
+
+        <input type="hidden" name="language" value="{{ current_language }}" />
+        <input type="hidden" name="time_range" value="{{ time_range }}" />
+        <input type="hidden" name="safesearch" value="{{ safesearch }}" />
+        <input type="hidden" name="theme" value="{{ theme }}" />
+        {% if timeout_limit %}<input
+            type="hidden"
+            name="timeout_limit"
+            value="{{ timeout_limit|e }}"
+        />{% endif %}
+    </form>
+</div>
+
+{% endblock %}

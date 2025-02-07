@@ -18,7 +18,9 @@ gh-pages/
 *.egg-info/
 
 /package-lock.json
-/node_modules/
+**/node_modules
+**/.parcel-cache
+pnpm-lock.yaml
 
 .idea/
 
@@ -26,3 +28,4 @@ searx/version_frozen.py
 .dir-locals.el
 
 .python-version
+

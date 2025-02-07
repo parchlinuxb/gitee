@@ -1,0 +1,12 @@
+<fieldset>
+    <div class="container">
+        <legend id="pref_image_proxy">{{ _('Image proxy') }}</legend>
+        <input type="checkbox" name="image_proxy"
+        aria-labelledby="pref_image_proxy" aria-describedby="desc_image_proxy"
+        class="switch" {%- if preferences.get_value('image_proxy') -%} checked
+        {%- endif -%} >
+    </div>
+    <div class="description" id="desc_image_proxy">
+        {{- _('Proxying image results through SearXNG') -}}
+    </div>
+</fieldset>

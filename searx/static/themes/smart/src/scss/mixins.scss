@@ -1,0 +1,98 @@
+// Import all the definitions
+@use './definitions.scss' as *;
+
+$dir: ltr !default;
+
+// Corner radius mixin
+@mixin rounded($radius: "md") {
+    @if $radius =="sm" {
+        border-radius: $border-radius-sm;
+    }
+
+    @else if $radius =="lg" {
+        border-radius: $border-radius-lg;
+    }
+
+    @else if $radius =="full" {
+        border-radius: 9999px;
+    }
+
+    @else {
+        border-radius: $border-radius;
+    }
+}
+
+// Screens mixin
+@mixin screens($screens...) {
+    @each $screen in $screens {
+        @media (min-width: $screen) {
+            @content;
+        }
+    }
+}
+
+@mixin max-screens($screens...) {
+    @each $screen in $screens {
+        @media (max-width: $screen) {
+            @content;
+        }
+    }
+}
+
+// -- Direction based mixins --
+
+// Float mixin
+@mixin float($float) {
+    @if $dir =='ltr' {
+        float: $float;
+    }
+
+    @else {
+        @if $float =='left' {
+            float: right;
+        }
+
+        @else if $float =='right' {
+            float: left;
+        }
+    }
+}
+
+// Margin mixin
+@mixin margin-left($margin) {
+    @if $dir =='ltr' {
+        margin-left: $margin;
+    }
+
+    @else {
+        margin-right: $margin;
+    }
+}
+
+@mixin margin-right($margin) {
+    @if $dir =='ltr' {
+        margin-right: $margin;
+    }
+
+    @else {
+        margin-left: $margin;
+    }
+}
+
+@mixin left($amount) {
+    @if $dir =='ltr' {
+        left: $amount;
+    }
+
+    @else {
+        right: $amount;
+    }
+}
+
+@mixin right($amount) {
+    @if $dir =='ltr' {
+        right: $amount;
+    }
+
+    left: $amount;
+}

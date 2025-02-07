@@ -1,0 +1,14 @@
+<fieldset>
+    <div class="container">
+        <legend id="pref_results_on_new_tab">
+            {{ _('Results on new tabs') }}
+        </legend>
+        <input type="checkbox" name="results_on_new_tab" class="switch"
+        aria-labelledby="pref_results_on_new_tab"
+        aria-describedby="desc_results_on_new_tab" {%- if
+        preferences.get_value('results_on_new_tab') -%} checked {%- endif -%} >
+    </div>
+    <div class="description" id="desc_results_on_new_tab">
+        {{- _('Open result links on new browser tabs') -}}
+    </div>
+</fieldset>

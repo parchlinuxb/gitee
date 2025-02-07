@@ -1,0 +1,43 @@
+<div class="filters">    
+    <select name="language" aria-label="{{ _('Search language') }}" class="filter">
+        <option value="all"
+                {%- if current_language == 'all' %} selected="selected" {%- endif -%}>
+                {{- _('Default language') }} [all] 
+        </option>
+        <option value="auto"
+                {%- if current_language == 'auto' %} selected="selected" {%- endif -%}>
+                {{- _('Auto-detect') }} ({{ search_language }})  
+        </option>
+        {% for sxng_tag,lang_name,country_name,english_name,flag in sxng_locales | sort(attribute=1) -%}
+            <option value="{{ sxng_tag }}"
+                    {%- if sxng_tag == current_language %} selected="selected" {%- endif -%}>
+                    {{ lang_name }}{%- if country_name -%}-{{ country_name }}{%- endif -%}
+                    [{{sxng_tag}}]
+                    {%- if flag -%}{{ flag }}{%- endif -%}
+            </option>
+        {%- endfor -%}
+    </select>
+    <select name="time_range" aria-label="{{ _('Time range') }}" class="filter">
+        <option id="time-range-anytime" value="" {{ "selected" if time_range=="" or not time_range  else ""}}>
+            {{- _('Anytime') -}}
+        </option>
+        <option id="time-range-day" value="day" {{ "selected" if time_range=="day" else ""}}>
+            {{- _('Last day') -}}
+        </option>
+        <option id="time-range-week" value="week" {{ "selected" if time_range=="week" else ""}}>
+            {{- _('Last week') -}}
+        </option>
+        <option id="time-range-month" value="month" {{ "selected" if time_range=="month" else ""}}>
+            {{- _('Last month') -}}
+        </option>
+        <option id="time-range-year" value="year" {{ "selected" if time_range=="year" else ""}}>
+            {{- _('Last year') -}}
+        </option>
+    </select>
+    <select  name="safesearch" aria-label="{{ _('SafeSearch') }}" class="filter">
+        <option value="2" {% if safesearch == '2' %}selected="selected"{% endif %} aria-label="{{ _('Strict') }}">{{ _("SafeSearch") + ": " + _('Strict') }}</option>
+        <option value="1" {% if safesearch == '1' %}selected="selected"{% endif %} aria-label="{{ _('Moderate') }}">{{ _("SafeSearch") + ": " + _('Moderate') }}</option>
+        <option value="0" {% if safesearch == '0' %}selected="selected"{% endif %} aria-label="{{ _('None') }}">{{ _("SafeSearch") + ": " + _('None') }}</option>
+    </select>
+</div>
+
