@@ -27,6 +27,7 @@ from searx.network import get  # see https://github.com/searxng/searxng/issues/7
 from searx import redisdb
 from searx.enginelib.traits import EngineTraits
 from searx.exceptions import SearxEngineCaptchaException
+from searx.result_types import EngineResults
 
 if TYPE_CHECKING:
     import logging
@@ -354,12 +355,12 @@ def is_ddg_captcha(dom):
     return bool(eval_xpath(dom, "//form[@id='challenge-form']"))
 
 
-def response(resp):
+def response(resp) -> EngineResults:
+    results = EngineResults()
 
     if resp.status_code == 303:
-        return []
+        return results
 
-    results = []
     doc = lxml.html.fromstring(resp.text)
 
     if is_ddg_captcha(doc):
@@ -397,12 +398,14 @@ def response(resp):
         and "URL Decoded:" not in zero_click
     ):
         current_query = resp.search_params["data"].get("q")
-
-        results.append(
-            {
-                'answer': zero_click,
-                'url': "https://duckduckgo.com/?" + urlencode({"q": current_query}),
-            }
+        results.add(
+            results.types.Answer(
+                answer=zero_click,
+                url="https://duckduckgo.com/?"
+                + urlencode(
+                    {"q": current_query},
+                ),
+            )
         )
 
     return results

@@ -33,9 +33,9 @@ brand:
 search:
   # Filter results. 0: None, 1: Moderate, 2: Strict
   safe_search: 0
-  # Existing autocomplete backends: "dbpedia", "duckduckgo", "google", "yandex", "mwmbl",
-  # "seznam", "startpage", "stract", "swisscows", "qwant", "wikipedia" - leave blank to turn it off
-  # by default.
+  # Existing autocomplete backends: "baidu", "brave", "dbpedia", "duckduckgo", "google", "yandex",
+  # "mwmbl", "seznam", "startpage", "stract", "swisscows", "qwant", "wikipedia" -
+  # leave blank to turn it off by default.
   autocomplete: ""
   # minimun characters to type before autocompleter starts
   autocomplete_min: 4
@@ -148,14 +148,24 @@ ui:
   # URL formatting: pretty, full or host
   url_formatting: pretty
 
-# Lock arbitrary settings on the preferences page.  To find the ID of the user
-# setting you want to lock, check the ID of the form on the page "preferences".
+# Lock arbitrary settings on the preferences page.
 #
 # preferences:
 #   lock:
+#     - categories
 #     - language
 #     - autocomplete
+#     - favicon
+#     - safesearch
 #     - method
+#     - doi_resolver
+#     - locale
+#     - theme
+#     - results_on_new_tab
+#     - infinite_scroll
+#     - search_on_category_select
+#     - method
+#     - image_proxy
 #     - query_in_title
 
 # searx supports result proxification using an external service:
@@ -217,14 +227,15 @@ outgoing:
   #    - fe80::/126
 
 # External plugin configuration, for more details see
-#   https://docs.searxng.org/dev/plugins.html
+#   https://docs.searxng.org/admin/settings/settings_plugins.html
 #
 # plugins:
-#   - plugin1
-#   - plugin2
+#   - mypackage.mymodule.MyPlugin
+#   - mypackage.mymodule.MyOtherPlugin
 #   - ...
 
 # Comment or un-comment plugin to activate / deactivate by default.
+#   https://docs.searxng.org/admin/settings/settings_plugins.html
 #
 # enabled_plugins:
 #   # these plugins are enabled if nothing is configured ..
@@ -366,6 +377,33 @@ engines:
     timeout: 6
     disabled: true
 
+  - name: alexandria
+    engine: json_engine
+    shortcut: alx
+    categories: general
+    paging: true
+    search_url: https://api.alexandria.org/?a=1&q={query}&p={pageno}
+    results_query: results
+    title_query: title
+    url_query: url
+    content_query: snippet
+    timeout: 1.5
+    disabled: true
+    about:
+      website: https://alexandria.org/
+      official_api_documentation: https://github.com/alexandria-org/alexandria-api/raw/master/README.md
+      use_official_api: true
+      require_api_key: false
+      results: JSON
+
+  # - name: astrophysics data system
+  #   engine: astrophysics_data_system
+  #   sort: asc
+  #   weight: 5
+  #   categories: [science]
+  #   api_key: your-new-key
+  #   shortcut: ads
+
   - name: alpine linux packages
     engine: alpinelinux
     disabled: true
@@ -423,6 +461,14 @@ engines:
   - name: arch linux wiki
     engine: archlinux
     shortcut: al
+
+  - name: nixos wiki
+    engine: mediawiki
+    shortcut: nixw
+    base_url: https://wiki.nixos.org/
+    search_type: text
+    disabled: true
+    categories: [it, software wikis]
 
   - name: artic
     engine: artic
@@ -1060,6 +1106,11 @@ engines:
     timeout: 3.0
     disabled: true
 
+  - name: ipernity
+    engine: ipernity
+    shortcut: ip
+    disabled: true
+
   - name: jisho
     engine: jisho
     shortcut: js
@@ -1134,8 +1185,7 @@ engines:
     engine: libretranslate
     # https://github.com/LibreTranslate/LibreTranslate?tab=readme-ov-file#mirrors
     base_url:
-      - https://translate.terraprint.co
-      - https://trans.zillyhuhn.com
+      - https://libretranslate.com/translate
     # api_key: abc123
     shortcut: lt
     disabled: true
@@ -1529,6 +1579,10 @@ engines:
       use_official_api: false
       require_api_key: false
       results: HTML
+
+  - name: public domain image archive
+    engine: public_domain_image_archive
+    shortcut: pdia
 
   - name: pubmed
     engine: pubmed

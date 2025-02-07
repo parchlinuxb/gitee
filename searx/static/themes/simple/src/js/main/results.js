@@ -52,55 +52,116 @@
       this.innerText = this.dataset.copiedText;
     });
 
-    searxng.selectImage = function (resultElement) {
-      /* eslint no-unused-vars: 0 */
-      if (resultElement) {
-        // load full size image in background
-        const imgElement = resultElement.querySelector('.result-images-source img');
-        const thumbnailElement = resultElement.querySelector('.image_thumbnail');
-        const detailElement = resultElement.querySelector('.detail');
-        if (imgElement) {
-          const imgSrc = imgElement.getAttribute('data-src');
-          if (imgSrc) {
-            const loader = d.createElement('div');
-            const imgLoader = new Image();
+    // searxng.selectImage (gallery)
+    // -----------------------------
 
-            loader.classList.add('loader');
-            detailElement.appendChild(loader);
+    // setTimeout() ID, needed to cancel *last* loadImage
+    let imgTimeoutID;
 
-            imgLoader.onload = e => {
-              imgElement.src = imgSrc;
-              loader.remove();
-            };
-            imgLoader.onerror = e => {
-              loader.remove();
-            };
-            imgLoader.src = imgSrc;
-            imgElement.src = thumbnailElement.src;
-            imgElement.removeAttribute('data-src');
-          }
-        }
-      }
+    // progress spinner, while an image is loading
+    const imgLoaderSpinner = d.createElement('div');
+    imgLoaderSpinner.classList.add('loader');
+
+    // singleton image object, which is used for all loading processes of a
+    // detailed image
+    const imgLoader = new Image();
+
+    const loadImage = (imgSrc, onSuccess) => {
+      // if defered image load exists, stop defered task.
+      if (imgTimeoutID) clearTimeout(imgTimeoutID);
+
+      // defer load of the detail image for 1 sec
+      imgTimeoutID = setTimeout(() => {
+        imgLoader.src = imgSrc;
+      }, 1000);
+
+      // set handlers in the on-properties
+      imgLoader.onload = () => {
+        onSuccess();
+        imgLoaderSpinner.remove();
+      };
+      imgLoader.onerror = () => {
+        imgLoaderSpinner.remove();
+      };
+    };
+
+    searxng.selectImage = (resultElement) => {
+
+      // add a class that can be evaluated in the CSS and indicates that the
+      // detail view is open
       d.getElementById('results').classList.add('image-detail-open');
-      searxng.scrollPageToSelected();
-    }
 
-    searxng.closeDetail = function (e) {
-      d.getElementById('results').classList.remove('image-detail-open');
+      // add a hash to the browser history so that pressing back doesn't return
+      // to the previous page this allows us to dismiss the image details on
+      // pressing the back button on mobile devices
+      window.location.hash = '#image-viewer';
+
       searxng.scrollPageToSelected();
-    }
+
+      // if there is none element given by the caller, stop here
+      if (!resultElement) return;
+
+      // find <img> object in the element, if there is none, stop here.
+      const img = resultElement.querySelector('.result-images-source img');
+      if (!img) return;
+
+      // <img src="" data-src="http://example.org/image.jpg">
+      const src = img.getAttribute('data-src');
+
+      // already loaded high-res image or no high-res image available
+      if (!src) return;
+
+      // use the image thumbnail until the image is fully loaded
+      const thumbnail = resultElement.querySelector('.image_thumbnail');
+      img.src = thumbnail.src;
+
+      // show a progress spinner
+      const detailElement = resultElement.querySelector('.detail');
+      detailElement.appendChild(imgLoaderSpinner);
+
+      // load full size image in background
+      loadImage(src, () => {
+        // after the singelton loadImage has loaded the detail image into the
+        // cache, it can be used in the origin <img> as src property.
+        img.src = src;
+        img.removeAttribute('data-src');
+      });
+    };
+
+    searxng.closeDetail = function () {
+      d.getElementById('results').classList.remove('image-detail-open');
+      // remove #image-viewer hash from url by navigating back
+      if (window.location.hash == '#image-viewer') window.history.back();
+      searxng.scrollPageToSelected();
+    };
     searxng.on('.result-detail-close', 'click', e => {
       e.preventDefault();
       searxng.closeDetail();
     });
     searxng.on('.result-detail-previous', 'click', e => {
       e.preventDefault();
-      searxng.selectPrevious(false)
+      searxng.selectPrevious(false);
     });
     searxng.on('.result-detail-next', 'click', e => {
       e.preventDefault();
       searxng.selectNext(false);
     });
+
+    // listen for the back button to be pressed and dismiss the image details when called
+    window.addEventListener('hashchange', () => {
+      if (window.location.hash != '#image-viewer') searxng.closeDetail();
+    });
+
+    d.querySelectorAll('.swipe-horizontal').forEach(
+      obj => {
+        obj.addEventListener('swiped-left', function () {
+          searxng.selectNext(false);
+        });
+        obj.addEventListener('swiped-right', function () {
+          searxng.selectPrevious(false);
+        });
+      }
+    );
 
     w.addEventListener('scroll', function () {
       var e = d.getElementById('backToTop'),

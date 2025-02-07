@@ -3,8 +3,9 @@
 
 import random
 import re
-from urllib.parse import urlencode
-from flask_babel import gettext
+import urllib.parse
+
+from searx.result_types import EngineResults
 
 about = {
     "website": 'https://codeberg.org/aryak/mozhi',
@@ -28,37 +29,33 @@ def request(_query, params):
     request_url = random.choice(base_url) if isinstance(base_url, list) else base_url
 
     args = {'from': params['from_lang'][1], 'to': params['to_lang'][1], 'text': params['query'], 'engine': mozhi_engine}
-    params['url'] = f"{request_url}/api/translate?{urlencode(args)}"
+    params['url'] = f"{request_url}/api/translate?{urllib.parse.urlencode(args)}"
     return params
 
 
-def response(resp):
+def response(resp) -> EngineResults:
+    res = EngineResults()
     translation = resp.json()
 
-    infobox = ""
+    item = res.types.Translations.Item(text=translation['translated-text'])
 
     if translation['target_transliteration'] and not re.match(
         re_transliteration_unsupported, translation['target_transliteration']
     ):
-        infobox = f"<b>{translation['target_transliteration']}</b>"
+        item.transliteration = translation['target_transliteration']
 
     if translation['word_choices']:
         for word in translation['word_choices']:
-            infobox += f"<dl><dt>{word['word']}: {word['definition']}</dt>"
+            if word.get('definition'):
+                item.definitions.append(word['definition'])
 
-            if word['examples_target']:
-                for example in word['examples_target']:
-                    infobox += f"<dd>{re.sub(r'<|>', '', example)}</dd>"
-                    infobox += f"<dd>{re.sub(r'<|>', '', example)}</dd>"
+            for example in word.get('examples_target', []):
+                item.examples.append(re.sub(r"<|>", "", example).lstrip('- '))
 
-            infobox += "</dl>"
+    item.synonyms = translation.get('source_synonyms', [])
 
-    if translation['source_synonyms']:
-        infobox += f"<dl><dt>{gettext('Synonyms')}: {', '.join(translation['source_synonyms'])}</dt></dl>"
-
-    result = {
-        'infobox': translation['translated-text'],
-        'content': infobox,
-    }
-
-    return [result]
+    url = urllib.parse.urlparse(resp.search_params["url"])
+    # remove the api path
+    url = url._replace(path="", fragment="").geturl()
+    res.add(res.types.Translations(translations=[item], url=url))
+    return res

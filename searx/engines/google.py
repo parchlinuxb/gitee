@@ -25,6 +25,7 @@ from searx.locales import language_tag, region_tag, get_official_locales
 from searx.network import get  # see https://github.com/searxng/searxng/issues/762
 from searx.exceptions import SearxEngineCaptchaException
 from searx.enginelib.traits import EngineTraits
+from searx.result_types import EngineResults
 
 if TYPE_CHECKING:
     import logging
@@ -315,12 +316,12 @@ def _parse_data_images(dom):
     return data_image_map
 
 
-def response(resp):
+def response(resp) -> EngineResults:
     """Get response from google's search request"""
     # pylint: disable=too-many-branches, too-many-statements
     detect_google_sorry(resp)
 
-    results = []
+    results = EngineResults()
 
     # convert the text to dom
     dom = html.fromstring(resp.text)
@@ -331,11 +332,11 @@ def response(resp):
     for item in answer_list:
         for bubble in eval_xpath(item, './/div[@class="nnFGuf"]'):
             bubble.drop_tree()
-        results.append(
-            {
-                'answer': extract_text(item),
-                'url': (eval_xpath(item, '../..//a/@href') + [None])[0],
-            }
+        results.add(
+            results.types.Answer(
+                answer=extract_text(item),
+                url=(eval_xpath(item, '../..//a/@href') + [None])[0],
+            )
         )
 
     # parse results
