@@ -21,9 +21,10 @@ module.exports = function (grunt) {
     pkg: grunt.file.readJSON('package.json'),
     watch: {
       scripts: {
-        files: ['gruntfile.js', 'src/**'],
+        files: ['gruntfile.js', 'eslint.config.mjs', '.stylelintrc.json', 'src/**'],
         tasks: [
           'eslint',
+          'stylelint',
           'copy',
           'uglify',
           'less',
@@ -35,7 +36,7 @@ module.exports = function (grunt) {
     },
     eslint: {
       options: {
-        overrideConfigFile: '.eslintrc.json',
+        overrideConfigFile: 'eslint.config.mjs',
         failOnError: true,
         fix: grunt.option('fix')
       },
@@ -49,6 +50,7 @@ module.exports = function (grunt) {
     stylelint: {
       options: {
         formatter: 'unix',
+        fix: grunt.option('fix')
       },
       src: [
         'src/less/**/*.less',
@@ -107,7 +109,8 @@ module.exports = function (grunt) {
           'js/searxng.head.min.js': ['src/js/head/*.js'],
           'js/searxng.min.js': [
             'src/js/main/*.js',
-            './node_modules/autocomplete-js/dist/autocomplete.js'
+            './node_modules/autocomplete-js/dist/autocomplete.js',
+            './node_modules/swiped-events/src/swiped-events.js'
           ]
         }
       }
@@ -116,9 +119,6 @@ module.exports = function (grunt) {
       production: {
         options: {
           paths: ["less"],
-          plugins: [
-            new (require('less-plugin-clean-css'))()
-          ],
           sourceMap: true,
           sourceMapURL: (name) => { const s = name.split('/'); return s[s.length - 1] + '.map'; },
           outputSourceFiles: true,
@@ -298,7 +298,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-stylelint');
   grunt.loadNpmTasks('grunt-eslint');
 
-  grunt.registerTask('test', ['eslint']);
+  grunt.registerTask('test', ['eslint', 'stylelint']);
 
   grunt.registerTask('default', [
     'eslint',

@@ -54,7 +54,7 @@ searx.engines.load_engines(searx.settings['engines'])
 jinja_contexts = {
     'searx': {
         'engines': searx.engines.engines,
-        'plugins': searx.plugins.plugins,
+        'plugins': searx.plugins.STORAGE,
         'version': {
             'node': os.getenv('NODE_MINIMUM_VERSION')
         },
@@ -127,11 +127,11 @@ extensions = [
     "sphinx_tabs.tabs", # https://github.com/djungelorm/sphinx-tabs
     'myst_parser',  # https://www.sphinx-doc.org/en/master/usage/markdown.html
     'notfound.extension',  # https://github.com/readthedocs/sphinx-notfound-page
-    'sphinxcontrib.autodoc_pydantic',  # https://github.com/mansenfranzen/autodoc_pydantic
 ]
 
+# autodoc_typehints = "description"
 autodoc_default_options = {
-    'member-order': 'groupwise',
+    'member-order': 'bysource',
 }
 
 myst_enable_extensions = [

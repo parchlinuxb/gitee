@@ -19,6 +19,14 @@ Engine Implementations
    engine_overview
 
 
+ResultList and engines
+======================
+
+.. autoclass:: searx.result_types.ResultList
+
+.. autoclass:: searx.result_types.EngineResults
+
+
 Engine Types
 ============
 
@@ -45,6 +53,7 @@ Online Engines
    demo/demo_online
    xpath
    mediawiki
+   json_engine
 
 .. toctree::
    :maxdepth: 1

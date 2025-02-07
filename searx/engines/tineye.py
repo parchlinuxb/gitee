@@ -19,6 +19,8 @@ from urllib.parse import urlencode
 from datetime import datetime
 from flask_babel import gettext
 
+from searx.result_types import EngineResults
+
 if TYPE_CHECKING:
     import logging
 
@@ -154,8 +156,9 @@ def parse_tineye_match(match_json):
     }
 
 
-def response(resp):
+def response(resp) -> EngineResults:
     """Parse HTTP response from TinEye."""
+    results = EngineResults()
 
     # handle the 422 client side errors, and the possible 400 status code error
     if resp.status_code in (400, 422):
@@ -182,14 +185,13 @@ def response(resp):
                 message = ','.join(description)
 
         # see https://github.com/searxng/searxng/pull/1456#issuecomment-1193105023
-        # results.append({'answer': message})
-        logger.error(message)
-        return []
+        # results.add(results.types.Answer(answer=message))
+        logger.info(message)
+        return results
 
     # Raise for all other responses
     resp.raise_for_status()
 
-    results = []
     json_data = resp.json()
 
     for match_json in json_data['matches']:

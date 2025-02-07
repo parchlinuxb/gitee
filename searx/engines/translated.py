@@ -3,6 +3,10 @@
 
 """
 
+import urllib.parse
+
+from searx.result_types import EngineResults
+
 # about
 about = {
     "website": 'https://mymemory.translated.net/',
@@ -15,8 +19,8 @@ about = {
 
 engine_type = 'online_dictionary'
 categories = ['general', 'translate']
-url = 'https://api.mymemory.translated.net/get?q={query}&langpair={from_lang}|{to_lang}{key}'
-web_url = 'https://mymemory.translated.net/en/{from_lang}/{to_lang}/{query}'
+api_url = "https://api.mymemory.translated.net"
+web_url = "https://mymemory.translated.net"
 weight = 100
 https_support = True
 
@@ -24,29 +28,32 @@ api_key = ''
 
 
 def request(query, params):  # pylint: disable=unused-argument
+
+    args = {"q": params["query"], "langpair": f"{params['from_lang'][1]}|{params['to_lang'][1]}"}
     if api_key:
-        key_form = '&key=' + api_key
-    else:
-        key_form = ''
-    params['url'] = url.format(
-        from_lang=params['from_lang'][1], to_lang=params['to_lang'][1], query=params['query'], key=key_form
-    )
+        args["key"] = api_key
+
+    params['url'] = f"{api_url}/get?{urllib.parse.urlencode(args)}"
     return params
 
 
-def response(resp):
-    results = []
-    results.append(
-        {
-            'url': web_url.format(
-                from_lang=resp.search_params['from_lang'][2],
-                to_lang=resp.search_params['to_lang'][2],
-                query=resp.search_params['query'],
-            ),
-            'title': '[{0}-{1}] {2}'.format(
-                resp.search_params['from_lang'][1], resp.search_params['to_lang'][1], resp.search_params['query']
-            ),
-            'content': resp.json()['responseData']['translatedText'],
-        }
-    )
+def response(resp) -> EngineResults:
+    results = EngineResults()
+    data = resp.json()
+
+    args = {
+        "q": resp.search_params["query"],
+        "lang": resp.search_params.get("searxng_locale", "en"),  # ui language
+        "sl": resp.search_params['from_lang'][1],
+        "tl": resp.search_params['to_lang'][1],
+    }
+
+    link = f"{web_url}/search.php?{urllib.parse.urlencode(args)}"
+    text = data['responseData']['translatedText']
+
+    examples = [f"{m['segment']} : {m['translation']}" for m in data['matches'] if m['translation'] != text]
+
+    item = results.types.Translations.Item(text=text, examples=examples)
+    results.add(results.types.Translations(translations=[item], url=link))
+
     return results

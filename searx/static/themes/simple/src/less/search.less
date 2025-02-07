@@ -15,8 +15,7 @@
   background: var(--color-header-background);
   border-bottom: 1px solid var(--color-header-border);
   display: grid;
-  column-gap: 1.2rem;
-  row-gap: 1rem;
+  gap: 1rem 1.2rem;
   grid-template-columns: 3rem 1fr;
   grid-template-areas:
     "logo search"
@@ -159,7 +158,7 @@ button.category_button {
   outline: none;
   color: var(--color-search-font);
   font-size: 1.1rem;
-  z-index: 10000;
+  z-index: 1000;
 
   &:hover {
     color: var(--color-search-background-hover);
@@ -184,7 +183,7 @@ html.no-js #clear_search.hide_if_nojs {
   outline: none;
   color: var(--color-search-font);
   font-size: 1.1rem;
-  z-index: 2;
+  z-index: 100;
 }
 
 #q {
@@ -268,8 +267,7 @@ html.no-js #clear_search.hide_if_nojs {
     #categories {
       width: 100%;
       .ltr-text-align-left();
-      overflow-x: scroll;
-      overflow-y: hidden;
+      overflow: scroll hidden;
       -webkit-overflow-scrolling: touch;
     }
   }
@@ -280,8 +278,7 @@ html.no-js #clear_search.hide_if_nojs {
     width: 100%;
     margin: 0;
     padding: 0.1rem 0 0 0;
-    column-gap: 0;
-    row-gap: 0;
+    gap: 0 0;
     grid-template-areas:
       "logo search"
       "categories categories";
@@ -335,7 +332,7 @@ html.no-js #clear_search.hide_if_nojs {
     top: 0;
     height: 100%;
     width: 100%;
-    z-index: 10000;
+    z-index: 2000;
 
     .search_box {
       border-bottom: 1px solid var(--color-search-border);

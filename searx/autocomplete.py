@@ -8,9 +8,11 @@ import json
 import html
 from urllib.parse import urlencode, quote_plus
 
-import lxml
+import lxml.etree
+import lxml.html
 from httpx import HTTPError
 
+from searx.extended_types import SXNG_Response
 from searx import settings
 from searx.engines import (
     engines,
@@ -26,14 +28,29 @@ def update_kwargs(**kwargs):
     kwargs['raise_for_httperror'] = True
 
 
-def get(*args, **kwargs):
+def get(*args, **kwargs) -> SXNG_Response:
     update_kwargs(**kwargs)
     return http_get(*args, **kwargs)
 
 
-def post(*args, **kwargs):
+def post(*args, **kwargs) -> SXNG_Response:
     update_kwargs(**kwargs)
     return http_post(*args, **kwargs)
+
+
+def baidu(query, _lang):
+    # baidu search autocompleter
+    base_url = "https://www.baidu.com/sugrec?"
+    response = get(base_url + urlencode({'ie': 'utf-8', 'json': 1, 'prod': 'pc', 'wd': query}))
+
+    results = []
+
+    if response.ok:
+        data = response.json()
+        if 'g' in data:
+            for item in data['g']:
+                results.append(item['q'])
+    return results
 
 
 def brave(query, _lang):
@@ -111,7 +128,7 @@ def google_complete(query, sxng_locale):
     )
     results = []
     resp = get(url.format(subdomain=google_info['subdomain'], args=args))
-    if resp.ok:
+    if resp and resp.ok:
         json_txt = resp.text[resp.text.find('[') : resp.text.find(']', -3) + 1]
         data = json.loads(json_txt)
         for item in data[0]:
@@ -205,7 +222,7 @@ def wikipedia(query, sxng_locale):
     results = []
     eng_traits = engines['wikipedia'].traits
     wiki_lang = eng_traits.get_language(sxng_locale, 'en')
-    wiki_netloc = eng_traits.custom['wiki_netloc'].get(wiki_lang, 'en.wikipedia.org')
+    wiki_netloc = eng_traits.custom['wiki_netloc'].get(wiki_lang, 'en.wikipedia.org')  # type: ignore
 
     url = 'https://{wiki_netloc}/w/api.php?{args}'
     args = urlencode(
@@ -238,17 +255,18 @@ def yandex(query, _lang):
 
 
 backends = {
+    'baidu': baidu,
+    'brave': brave,
     'dbpedia': dbpedia,
     'duckduckgo': duckduckgo,
     'google': google_complete,
     'mwmbl': mwmbl,
+    'qwant': qwant,
     'seznam': seznam,
     'startpage': startpage,
     'stract': stract,
     'swisscows': swisscows,
-    'qwant': qwant,
     'wikipedia': wikipedia,
-    'brave': brave,
     'yandex': yandex,
 }
 
