@@ -14,8 +14,10 @@ is_image_page = 'only_template_images' %} {% endif %}
             {{ icon_small('plugin') }}
             <h3>{{ _('Answers by Plugins and Engines') }}</h3>
         </div>
-        {%- for answer in answers.values() -%}
+        {%- for answer in answers -%}
         <div class="message-box">
+            {% if answer.template != "answer/legacy.html" %} {%- include
+            ("simple/" + (answer.template)) -%} {% else %}
             <p class="message">{{ answer.answer }}</p>
             {%- if answer.url -%}
             <div class="reference">
@@ -36,7 +38,7 @@ is_image_page = 'only_template_images' %} {% endif %}
                     >{{ urlparse(answer.url).hostname }}</a
                 >
             </div>
-            {% endif %}
+            {% endif %} {% endif %}
         </div>
         {%- endfor -%}
     </div>
@@ -51,5 +53,8 @@ is_image_page = 'only_template_images' %} {% endif %}
         {% include template %} {% if result.close_group and not is_image_page %}
     </div>
     {% endif %} {% endfor %}
+</div>
+<div class="info-panel">
+    {% if infoboxes %} {% include 'smart/madules/infoboxs.html' %} {% endif %}
 </div>
 {% include 'smart/footer.html' %} {% endblock %}

@@ -1,0 +1,120 @@
+@use './mixins.scss' as mixin;
+
+.info-box {
+    background: var(--background-color);
+    margin-bottom: 1rem;
+    @include mixin.rounded(lg);
+
+    .info-header {
+        padding: 2rem 1.5rem .5rem;
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            margin-top: 0.5rem;
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+    }
+
+    .image-gallery {
+        display: flex;
+        gap: 0.5rem;
+        padding: 0 1.5rem;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+
+        img {
+            height: 150px;
+            object-fit: cover;
+            @include mixin.rounded(sm);
+            flex-shrink: 0;
+            scroll-snap-align: start;
+        }
+    }
+
+    .info-content {
+        padding: 1rem 1.5rem;
+        color: var(--text-color);
+        line-height: 1.5;
+        font-size: 0.95rem;
+    }
+
+    &:has(#tab-info:checked) .info-attributes {
+        display: block;
+    }
+
+    .info-attributes {
+        padding: 0 1.5rem;
+        margin-bottom: 1.5rem;
+        display: none;
+
+        .attribute {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+
+            .label {
+                color: var(--text-color);
+            }
+
+            .value {
+                color: var(--text-color);
+            }
+        }
+    }
+
+    &:has(#tab-info:checked) .info-urls {
+        display: flex;
+    }
+
+    .info-urls {
+        display: none;
+        padding: .5rem 1.5rem 2.5rem;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        color: var(--text-color);
+        gap: 1rem;
+        align-items: center;
+        flex-wrap: wrap;
+
+        .url {
+            border-bottom: 2px solid var(--border-color);
+            padding: 0.25rem 0.5rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+    }
+
+    .info-tabs {
+        display: flex;
+        border-bottom: 1px solid var(--secondary-border-color);
+        margin-bottom: 1rem;
+
+        .tab {
+            padding: .5rem 1.25rem;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            border-bottom: 3px solid transparent;
+            transform: translateY(1px);
+
+            &:first-child {
+                @include mixin.margin-left(1.5rem);
+            }
+
+            &:has(+ input:checked) {
+                font-weight: 600;
+                border-bottom-color: var(--secondary-color);
+            }
+        }
+
+        input[type="radio"] {
+            display: none;
+        }
+    }
+}

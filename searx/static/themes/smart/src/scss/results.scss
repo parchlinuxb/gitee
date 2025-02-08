@@ -32,11 +32,23 @@
         }
     }
 
-    .result-content {
-        color: var(--text-color);
-        font-size: 0.9rem;
-        line-height: 1.5;
+    .result-body {
+        display: flex;
+        gap: 1rem;
         margin-bottom: 0.75rem;
+
+        .thumbnail {
+            width: 5rem;
+            height: 5rem;
+            object-fit: cover;
+            @include mixin.rounded();
+        }
+
+        .result-content {
+            color: var(--text-color);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
     }
 
 

@@ -16,6 +16,7 @@ $dir: ltr !default;
 @use 'button';
 
 @forward './results.scss';
+@forward './infobox.scss';
 
 @function toPx($value) {
     @return $value * 16px;
@@ -212,6 +213,10 @@ main:has(.not-found) {
 
     &:has(#filter:checked) .results-container {
         margin-top: 2rem;
+    }
+
+    .info-panel {
+        grid-area: sidebox;
     }
 
     .results-container {

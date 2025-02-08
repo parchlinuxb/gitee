@@ -25,13 +25,20 @@
         {% endif %}
     </a>
 
-    {% if result.content %}
-    <p class="result-content">{{ result.content | safe }}</p>
-    {%- else %}
-    <p class="result-content">
-        {{ _('This site did not provide any description.')|safe }}
-    </p>
-    {% endif %}
+    <div class="result-body">
+        {%- if result.thumbnail %}<img
+            class="thumbnail"
+            src="{{ image_proxify(result.thumbnail) }}"
+            title="{{ result.title|striptags }}"
+            loading="lazy"
+        />{% endif -%} {% if result.content %}
+        <p class="result-content">{{ result.content | safe }}</p>
+        {%- else %}
+        <p class="result-content">
+            {{ _('This site did not provide any description.')|safe }}
+        </p>
+        {% endif %}
+    </div>
 
     <div class="result-meta">
         <span class="result-url">
