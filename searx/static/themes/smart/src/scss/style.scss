@@ -15,6 +15,8 @@ $dir: ltr !default;
 // Button
 @use 'button';
 
+@forward './results.scss';
+
 @function toPx($value) {
     @return $value * 16px;
 }
@@ -263,6 +265,10 @@ main:has(.not-found) {
             padding: 1rem;
             @include mixin.rounded(lg);
             background-color: var(--background-color);
+        }
+
+        .result-group:first-child {
+            margin-top: 0;
         }
     }
 }

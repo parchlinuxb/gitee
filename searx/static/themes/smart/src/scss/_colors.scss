@@ -8,6 +8,7 @@
     --background-color: #{$background-color};
     --secondary-background-color: #{$secondary-background-color};
     --text-color: #{$text-color};
+    --secondary-text-color: #{color.mix($text-color, $background-color, 70%)};
     --filled-text-color: #{$filled-text-color};
     --border-color: #{color.mix($text-color, $background-color, 30%)};
 }
@@ -21,7 +22,8 @@
         --background-color: #{$background-color-dark};
         --secondary-background-color: #{$secondary-background-color-dark};
         --text-color: #{$text-color-dark};
+        --secondary-text-color: #{color.mix($text-color-dark, $background-color-dark, 70%)};
         --filled-text-color: #{$filled-text-color-dark};
-        --border-color: #{color.mix($text-color, $background-color, 30%)};
+        --border-color: #{color.mix($text-color-dark, $background-color-dark, 30%)};
     }
 }

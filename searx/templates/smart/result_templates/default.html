@@ -1,33 +1,47 @@
-{# just for testing purpose #} {% from 'simple/macros.html' import
-result_header, result_sub_header, result_sub_footer, result_footer with context
-%} {{ result_header(result, favicons, image_proxify) -}} {{-
-result_sub_header(result) -}} {% if result.iframe_src -%}
-<p class="altlink">
+<article class="result">
     <a
-        class="btn-collapse collapsed media-loader disabled_if_nojs"
-        data-target="#result-media-{{ index }}"
-        data-btn-text-collapsed="{{ _('show media') }}"
-        data-btn-text-not-collapsed="{{ _('hide media') }}"
-        >{{ icon('music-note') }} {{ _('show media') }}</a
+        href="{{ result.url }}"
+        class="result-header"
+        {%
+        if
+        results_on_new_tab
+        %}target="_blank"
+        rel="noopener noreferrer"
+        {%
+        endif
+        %}
     >
-</p>
-{%- endif %} {%- if result.content %}
-<p class="content">{{ result.content|safe }}</p>
-{%- else %}
-<p class="content empty_element">
-    {{ _('This site did not provide any description.')|safe }}
-</p>
-{% endif -%} {{- result_sub_footer(result, proxify) -}} {% if result.iframe_src
--%}
-<div id="result-media-{{ index }}" class="embedded-content invisible">
-    <iframe
-        data-src="{{result.iframe_src}}"
-        frameborder="0"
-        allowfullscreen
-    ></iframe>
-</div>
-{%- endif %} {% if result.audio_src -%}
-<div id="result-media-{{ index }}" class="audio-control">
-    <audio controls><source src="{{result.audio_src}}" /></audio>
-</div>
-{%- endif %} {{- result_footer(result) }}
+        <div class="favicon">
+            <img
+                loading="lazy"
+                src="{{ favicon_url(result.parsed_url.netloc) }}"
+            />
+        </div>
+        <span class="title"> {{ result.title | safe }} </span>
+        {% if result.publishedDate %}
+        <time class="date" datetime="{{ result.publishedDate }}">
+            {{ result.publishedDate }}
+        </time>
+        {% endif %}
+    </a>
+
+    {% if result.content %}
+    <p class="result-content">{{ result.content | safe }}</p>
+    {%- else %}
+    <p class="result-content">
+        {{ _('This site did not provide any description.')|safe }}
+    </p>
+    {% endif %}
+
+    <div class="result-meta">
+        <span class="result-url">
+            {{ result.parsed_url.netloc }}{{ result.parsed_url.path[:25] }} {%
+            if result.parsed_url.path|length > 25 %}... {% endif %}
+        </span>
+        <div class="engines">
+            {% for engine in result.engines %} {% if loop.index < 7 %}
+            <span class="engine">{{ engine }}</span>
+            {% endif %} {% endfor %}
+        </div>
+    </div>
+</article>
