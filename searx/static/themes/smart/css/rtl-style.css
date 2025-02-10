@@ -1,3 +1,75 @@
+@font-face {
+  font-family: Vazirmatn UI;
+  src: url("Vazirmatn-UI-Thin.37503ccd.woff2") format("woff2");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn UI;
+  src: url("Vazirmatn-UI-ExtraLight.cba2b231.woff2") format("woff2");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn UI;
+  src: url("Vazirmatn-UI-Light.c77d6de0.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn UI;
+  src: url("Vazirmatn-UI-Regular.a3c99ff7.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn UI;
+  src: url("Vazirmatn-UI-Medium.972fdd22.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn UI;
+  src: url("Vazirmatn-UI-SemiBold.37d9c53d.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn UI;
+  src: url("Vazirmatn-UI-Bold.b0065d44.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn UI;
+  src: url("Vazirmatn-UI-ExtraBold.c431ea38.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazirmatn UI;
+  src: url("Vazirmatn-UI-Black.bc8837bc.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 *, :before, :after {
   box-sizing: border-box;
   border-style: solid;
@@ -1066,4 +1138,8 @@ input[type="checkbox"].switch:checked:after {
   .js-alt {
     display: none !important;
   }
+}
+
+* {
+  font-family: Vazirmatn UI, sans-serif;
 }

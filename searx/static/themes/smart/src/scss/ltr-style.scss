@@ -1,3 +1,15 @@
 @use './style.scss' with ($dir: 'ltr');
 
 // Special LTR styles
+@import "../../node_modules/@fontsource-variable/inter/standard.css";
+@import "../../node_modules/@fontsource/inter/index.css";
+
+* {
+    font-family: 'Inter Variable', sans-serif;
+}
+
+@supports (font-variation-settings: normal) {
+    * {
+        font-family: 'Inter', sans-serif;
+    }
+}
