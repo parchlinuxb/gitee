@@ -94,5 +94,18 @@ $dir: ltr !default;
         right: $amount;
     }
 
-    left: $amount;
+    @else {
+        left: $amount;
+    }
+}
+
+// Fixed Direction
+@mixin direction() {
+    @if $dir =='ltr' {
+        direction: ltr;
+    }
+
+    @else {
+        direction: rtl;
+    }
 }

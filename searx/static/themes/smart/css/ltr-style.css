@@ -565,7 +565,7 @@ main:has(.not-found) .button {
   overflow: auto;
 }
 
-@media (width >= 992px) {
+@media (width >= 62rem) {
   #results {
     padding: 0 4rem;
   }
@@ -663,7 +663,7 @@ body:has(.sidebar_btn[open]) {
 body:has(.sidebar_btn[open]) #sidebar {
   border-width: 5px;
   flex: 1;
-  min-width: 340px;
+  min-width: 21rem;
 }
 
 body:has(.sidebar_btn[open]) #sidebar > .container {
@@ -694,7 +694,7 @@ body:has(.sidebar_btn[open]) header .links .link.config {
 
 #sidebar > .container {
   width: 100%;
-  min-width: 308px;
+  min-width: 19rem;
   height: 100%;
   margin-left: 50rem;
   padding: 1rem;
@@ -772,7 +772,7 @@ footer {
   display: flex;
 }
 
-@media (width <= 768px) {
+@media (width <= 48rem) {
   footer {
     justify-content: center;
   }
@@ -796,7 +796,7 @@ footer .links {
   display: flex;
 }
 
-@media (width <= 480px) {
+@media (width <= 30rem) {
   .search_box {
     border-radius: 1rem;
     width: 70vw;
@@ -811,6 +811,7 @@ footer .links {
 
 .search_box input {
   color: var(--text-color);
+  direction: ltr;
   background-color: #0000;
   border: none;
   border-radius: 9999px;
@@ -871,13 +872,13 @@ footer .links {
   display: flex;
 }
 
-@media (width <= 768px) {
+@media (width <= 48rem) {
   #search.screen #search_categories .categories {
     transform: scale(.8);
   }
 }
 
-@media (width <= 480px) {
+@media (width <= 30rem) {
   #search.screen #search_categories .categories {
     display: none;
   }

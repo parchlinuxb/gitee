@@ -18,8 +18,8 @@ $dir: ltr !default;
 @forward './results.scss';
 @forward './infobox.scss';
 
-@function toPx($value) {
-    @return $value * 16px;
+@function toRem($value) {
+    @return floor($value / 16) * 1rem;
 }
 
 %link-button {
@@ -322,7 +322,7 @@ body:has(.sidebar_btn[open]) {
         height: 100%;
         overflow-y: auto;
         position: absolute;
-        min-width: $screen-xs - toPx(2);
+        min-width: $screen-xs - 2rem;
         padding: 1rem;
         @include mixin.margin-left(50rem);
         transition: margin-left 50ms ease-in-out;
@@ -443,6 +443,7 @@ footer {
         color: var(--text-color);
         @include mixin.rounded(full);
         padding: .5rem;
+        @include mixin.direction();
 
 
         &:focus {
