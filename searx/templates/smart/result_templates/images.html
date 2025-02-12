@@ -1,0 +1,89 @@
+{% from 'smart/icons.html' import icon_small %}
+
+<a
+    href="{{ result.img_src }}"
+    class="image"
+    {%
+    if
+    results_on_new_tab
+    %}target="_blank"
+    rel="noopener noreferrer"
+    {%
+    else
+    %}rel="noreferrer"
+    {%
+    endif
+    %}
+    data-gitee-src="{{ image_proxify(result.img_src) }}"
+    data-gitee-title="{{ result.title|striptags }}"
+    data-gitee-url="{{ result.url }}"
+    data-gitee-content="{{ result.content|striptags }}"
+    {%
+    if
+    result.img_format
+    %}
+    data-gitee-format="{{ result.img_format }}"
+    {%
+    endif
+    %}
+    {%
+    if
+    result.filesize
+    %}
+    data-gitee-filesize="{{ result.filesize }}"
+    {%
+    endif
+    %}
+    {%-
+    if
+    result.source
+    %}
+    data-gitee-source="{{ result.source }}"
+    {%
+    endif
+    %}
+    data-gitee-engine="{{ result.engine }}"
+    {%
+    if
+    favicon_resolver
+    !=""
+    and
+    result.parsed_url.netloc
+    %}
+    {% set favicon_url = favicon_url(result.parsed_url.netloc) %}
+    {%
+    if
+    favicon_url
+    %}
+    data-gitee-favicon="{{ favicon_url }}"
+    {%
+    endif
+    %}
+    {%
+    endif
+    %}{{
+    result.parsed_url.netloc
+    }}
+    data-gitee-netloc="{{ result.parsed_url.netloc }}"
+>
+    <div class="image-box">
+        <img
+            src="{% if result.thumbnail_src %}{{ image_proxify(result.thumbnail_src) }}{% else %}{{ image_proxify(result.img_src) }}{% endif %}"
+            alt="{{ result.title|striptags }}"
+            loading="lazy"
+        />
+        {% if result.resolution %}
+        <span class="resolution">{{ result.resolution }}</span>
+        {% endif %}
+    </div>
+    <div class="image-info">
+        <div class="source">
+            {% if favicon_url %}
+            <div class="favicon">
+                <img loading="lazy" src="{{ favicon_url }}" />
+            </div>
+            {% endif %}{{ result.parsed_url.netloc }}
+        </div>
+        <span class="title">{{ result.title|striptags }}</span>
+    </div>
+</a>

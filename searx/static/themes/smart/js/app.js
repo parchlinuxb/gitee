@@ -585,6 +585,106 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 }
 
 },{}],"3uyIQ":[function(require,module,exports,__globalThis) {
+function $(selector) {
+    return document.querySelector(selector);
+}
+function $$(selector) {
+    return document.querySelectorAll(selector);
+}
+function handleImageDetails(image, { imageSrc, imageTitle, imageContent, imageSource, imageFilesize, imageDownload, formatSpan, filesizeSpan, engineSpan }) {
+    const resultsContainer = $("#results");
+    resultsContainer.classList.add("image-open");
+    imageSrc.src = image.getAttribute("data-gitee-src");
+    imageTitle.innerText = image.getAttribute("data-gitee-title");
+    imageContent.innerText = image.getAttribute("data-gitee-content");
+    if (image.hasAttribute("data-gitee-format")) formatSpan.innerText = image.getAttribute("data-gitee-format");
+    else formatSpan.innerText = "Unknown";
+    if (image.hasAttribute("data-gitee-filesize")) {
+        if (imageFilesize.hasAttribute("hidden")) imageFilesize.setAttribute("hidden", "");
+        filesizeSpan.innerText = image.getAttribute("data-gitee-filesize");
+    } else imageFilesize.setAttribute("hidden", "");
+    imageSource.href = image.getAttribute("data-gitee-source");
+    imageDownload.href = image.getAttribute("data-gitee-src");
+    engineSpan.innerText = image.getAttribute("data-gitee-engine");
+}
+function setupImages(resultsContainer) {
+    const imageSrc = $("#image-src");
+    const imageTitle = $("#image-title");
+    const imageContent = $("#image-content");
+    const imageFormat = $("#image-format");
+    const imageFilesize = $("#image-filesize");
+    const imageSource = $("#image-source");
+    const imageDownload = $("#image-download");
+    const imageCopy = $("#image-copy");
+    const formatSpan = imageFormat.getElementsByClassName("value")[0];
+    const filesizeSpan = imageFilesize.getElementsByClassName("value")[0];
+    const engineSpan = $("#image-engine");
+    const ImagesObserver = new MutationObserver((mutationsList)=>{
+        for (const mutation of mutationsList)if (mutation.type === "childList") mutation.addedNodes.forEach((node)=>{
+            if (node.nodeType === Node.ELEMENT_NODE) return;
+            const element = node;
+            if (element.classList.contains("image")) element.addEventListener("click", (e)=>{
+                e.preventDefault();
+                handleImageDetails(element, {
+                    imageSrc,
+                    imageTitle,
+                    imageContent,
+                    imageSource,
+                    imageFilesize,
+                    imageDownload,
+                    filesizeSpan,
+                    formatSpan,
+                    engineSpan
+                });
+            });
+        });
+    });
+    ImagesObserver.observe(resultsContainer, {
+        childList: true,
+        subtree: true
+    });
+    $$(".image").forEach((node)=>{
+        if (node.nodeType !== Node.ELEMENT_NODE) return;
+        const image = node;
+        image.addEventListener("click", (e)=>{
+            e.preventDefault();
+            handleImageDetails(image, {
+                imageSrc,
+                imageTitle,
+                imageContent,
+                imageSource,
+                imageFilesize,
+                imageDownload,
+                filesizeSpan,
+                formatSpan,
+                engineSpan
+            });
+        });
+    });
+    // Copy not working at localhost and only works in HTTPS pages
+    if (location.protocol === "http:") imageCopy.setAttribute("disabled", "true");
+    imageCopy.addEventListener("click", ()=>{
+        const canvas = document.createElement("canvas");
+        canvas.width = imageSrc.width;
+        canvas.height = imageSrc.height;
+        canvas.getContext("2d").drawImage(imageSrc, 0, 0, imageSrc.width, imageSrc.height);
+        canvas.toBlob((blob)=>{
+            if (!blob) return;
+            navigator.clipboard.write([
+                new ClipboardItem({
+                    "image/*": blob
+                })
+            ]);
+        });
+        canvas.remove();
+    });
+}
+function afterLoad() {
+    const resultsContainer = $(".results-container");
+    if (!resultsContainer || resultsContainer.nodeType !== Node.ELEMENT_NODE) return;
+    if (resultsContainer.classList.contains("image-page")) setupImages(resultsContainer);
+}
+document.addEventListener("DOMContentLoaded", afterLoad);
 
 },{}]},["1Y09f","3uyIQ"], "3uyIQ", "parcelRequire94c2")
 

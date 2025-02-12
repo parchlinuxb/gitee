@@ -1,0 +1,158 @@
+@use "../mixins.scss" as mixin;
+@use '../definitions.scss' as *;
+
+.images_group {
+    columns: 15rem;
+    gap: 1rem;
+
+    .image {
+        cursor: pointer;
+
+        .image-box {
+            overflow: hidden;
+            @include mixin.rounded();
+            position: relative;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+            }
+
+            .resolution {
+                position: absolute;
+                right: 0.5rem;
+                bottom: .5rem;
+                background: rgba(0, 0, 0, 0.7);
+                color: white;
+                padding: 0.25rem 0.5rem;
+                border-radius: 0.25rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        &:is(:hover, :focus-within) {
+            .image-box img {
+                transform: scale(1.05);
+            }
+        }
+
+
+        .image-info {
+            padding: 0.5rem;
+
+            .title {
+                display: block;
+                font-size: 0.9rem;
+                margin-bottom: 0.25rem;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .source {
+                display: flex;
+                gap: .5rem;
+                font-size: 0.7rem;
+
+                .favicon {
+                    width: .8rem;
+                    height: .8rem;
+                }
+            }
+        }
+
+    }
+}
+
+.image-details-container {
+    grid-area: image-detail;
+    @include mixin.rounded(lg);
+    overflow: hidden;
+
+    .image-details {
+        background: var(--background-color);
+        @include mixin.rounded(lg);
+        padding: 1.5rem;
+
+        @include mixin.screens($screen-xl) {
+            min-width: $screen-xs;
+        }
+
+        img {
+            height: 30%;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+
+        h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .description {
+            color: var(--text-color);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+
+        .meta {
+            display: flex;
+            flex-direction: column;
+            background-color: var(--secondary-background-color);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            @include mixin.rounded();
+
+            .meta-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .source {
+                margin-top: .5rem;
+                background-color: var(--background-color);
+                padding: .5rem 1rem;
+                @include mixin.rounded(full);
+            }
+
+        }
+
+        .engine {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+
+            .engine-name {
+                background-color: var(--secondary-background-color);
+                padding: .5rem;
+                @include mixin.rounded(sm);
+            }
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+
+            .btn {
+                flex: 1;
+                width: 100%;
+                padding: 0.75rem;
+                text-align: center;
+                font-weight: 500;
+
+                &.copy:disabled {
+                    opacity: 0.5;
+                    cursor: not-allowed;
+                }
+            }
+        }
+    }
+}

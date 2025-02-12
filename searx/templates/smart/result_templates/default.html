@@ -11,12 +11,14 @@
         endif
         %}
     >
+        {% if favicon_resolver != "" %}
         <div class="favicon">
             <img
                 loading="lazy"
                 src="{{ favicon_url(result.parsed_url.netloc) }}"
             />
         </div>
+        {% endif %}
         <span class="title"> {{ result.title | safe }} </span>
         {% if result.publishedDate %}
         <time class="date" datetime="{{ result.publishedDate }}">

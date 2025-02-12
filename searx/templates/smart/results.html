@@ -4,10 +4,9 @@
     <a href="" class="link">{{icon_small('donate')}}</a>
     {% include 'smart/madules/sidebar_btn.html' %}
 </div>
-{% if results and results|map(attribute='template')|unique|list|count and
-'images' in results|map(attribute='template')|unique|list %} {% set
-is_image_page = 'only_template_images' %} {% endif %}
-<div class="results-container {{ 'image-page' if is_image_page else '' }}">
+<div
+    class="results-container {% if results and results|map(attribute='template')|unique|list|count and 'images.html' in results|map(attribute='template')|unique|list %} image-page {% endif %}"
+>
     {% if answers %}
     <div class="answer-container">
         <div class="title">
@@ -57,4 +56,58 @@ is_image_page = 'only_template_images' %} {% endif %}
 <div class="info-panel">
     {% if infoboxes %} {% include 'smart/madules/infoboxs.html' %} {% endif %}
 </div>
-{% include 'smart/footer.html' %} {% endblock %}
+{% if 'images.html' in results|map(attribute='template')|unique|list%}
+<div class="image-details-container">
+    <div class="image-details">
+        <img src=".." alt=".." id="image-src" />
+        <div class="actions">
+            <a
+                href="..."
+                class="btn primary"
+                download="image.png"
+                id="image-download"
+            >
+                Download
+            </a>
+            <button class="btn copy" id="image-copy">Copy</button>
+        </div>
+        <div class="detail-info">
+            <h3 id="image-title">...</h3>
+            <p class="description" id="image-content">...</p>
+            <div class="meta">
+                <div class="meta-item" id="image-format">
+                    <span class="label">{{ _('Format') }}:</span>
+                    <span class="value">...</span>
+                </div>
+                <div class="meta-item" id="image-filesize">
+                    <span class="label">{{ _('Filesize') }}:</span>
+                    <span class="value">...</span>
+                </div>
+
+                <a
+                    href="..."
+                    class="source"
+                    id="image-source"
+                    {%
+                    if
+                    results_on_new_tab
+                    %}target="_blank"
+                    rel="noopener noreferrer"
+                    {%
+                    else
+                    %}rel="noreferrer"
+                    {%
+                    endif
+                    %}
+                >
+                    {{ _('View source') }}
+                </a>
+            </div>
+            <p class="engine">
+                {{ _('Engine') }}
+                <span class="engine-name" id="image-engine"></span>
+            </p>
+        </div>
+    </div>
+</div>
+{% endif %} {% include 'smart/footer.html' %} {% endblock %}

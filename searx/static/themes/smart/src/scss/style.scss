@@ -15,8 +15,11 @@ $dir: ltr !default;
 // Button
 @use 'button';
 
-@forward './results.scss';
 @forward './infobox.scss';
+
+// Result Styles
+@forward './results/default';
+@forward './results/images';
 
 @function toRem($value) {
     @return floor($value / 16) * 1rem;
@@ -188,11 +191,11 @@ main:has(.not-found) {
     padding: 0 1rem;
     max-width: 1800px;
     overflow: auto;
+    transition: grid-template-columns 300ms ease-in-out;
 
-    @include mixin.screens($screen-lg) {
+    @include mixin.screens($screen-xl) {
         padding: 0 4rem;
     }
-
 
     &>.links {
         grid-area: links;
@@ -221,6 +224,8 @@ main:has(.not-found) {
 
     .results-container {
         grid-area: results;
+        position: relative;
+        transition: margin-top 100ms ease-in-out;
 
         .answer-container {
             background-color: var(--background-color);
@@ -275,6 +280,20 @@ main:has(.not-found) {
         .result-group:first-child {
             margin-top: 0;
         }
+    }
+
+    &:has(.image-page) {
+        grid-template-columns: 2fr 1fr 0fr;
+        grid-template-areas:
+            "search links links"
+            "search amount amount"
+            "results results image-detail"
+            "footer footer footer";
+
+    }
+
+    &.image-open {
+        grid-template-columns: 2fr 0fr 1fr;
     }
 }
 
