@@ -308,7 +308,7 @@ img, video {
   position: absolute;
   bottom: 100%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -20%);
 }
 
 [tooltip]:before {
@@ -323,7 +323,7 @@ img, video {
   position: absolute;
   bottom: 100%;
   left: 50%;
-  transform: translate(calc(-50% - 1rem), 100%);
+  transform: translate(calc(-50% - 1rem), 40%);
 }
 
 [tooltip]:hover:after, [tooltip]:hover:before {
@@ -981,7 +981,7 @@ body:has(.sidebar_btn[open]) header .links .link.config {
   padding: 1rem;
   transition: margin-left 50ms ease-in-out;
   position: absolute;
-  overflow-y: auto;
+  overflow: hidden auto;
 }
 
 #sidebar > .container :is(button, .btn) {
@@ -997,6 +997,7 @@ body:has(.sidebar_btn[open]) header .links .link.config {
 }
 
 #sidebar > .container fieldset {
+  margin-bottom: .5rem;
   padding: .5rem 0;
 }
 
@@ -1007,6 +1008,21 @@ body:has(.sidebar_btn[open]) header .links .link.config {
   gap: .5rem;
   padding: 0 .5rem;
   display: flex;
+}
+
+#sidebar > .container fieldset .container .name {
+  align-items: center;
+  gap: .5rem;
+  display: flex;
+}
+
+#sidebar > .container fieldset .container .name:not(#pref_safesearch)[tooltip]:after {
+  left: 100%;
+}
+
+#sidebar > .container fieldset .container .name svg {
+  width: 1.2rem;
+  height: 1.2rem;
 }
 
 #sidebar > .container fieldset .container select {
@@ -1020,7 +1036,7 @@ body:has(.sidebar_btn[open]) header .links .link.config {
 #sidebar > .container fieldset .description {
   text-align: justify;
   color: var(--text-color);
-  margin: .5rem;
+  margin: 1rem 1rem 0;
   font-size: .8rem;
 }
 

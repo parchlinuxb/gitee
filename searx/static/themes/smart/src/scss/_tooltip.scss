@@ -9,7 +9,7 @@
     position: absolute;
     bottom: 100%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -20%);
     background: var(--tooltip-background-color);
     color: var(--filled-text-color);
     padding: .25rem 1rem;
@@ -25,7 +25,7 @@
     position: absolute;
     bottom: 100%;
     left: 50%;
-    transform: translate(calc(-50% - 1rem), 100%);
+    transform: translate(calc(-50% - 1rem), 40%);
     white-space: nowrap;
     z-index: 1;
     opacity: 0;

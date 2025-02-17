@@ -1,0 +1,16 @@
+{% from 'smart/icons.html' import icon_small %}
+
+<fieldset>
+    <div class="container">
+        <legend
+            id="pref_image_proxy"
+            class="name"
+            tooltip="{{- _('Proxy image results through SearXNG') }}"
+        >
+            <span>{{- _('Image proxy') -}}</span> {{- icon_small('info') -}}
+        </legend>
+        <input type="checkbox" name="image_proxy"
+        aria-labelledby="pref_image_proxy" class="switch" {%- if
+        preferences.get_value('image_proxy') -%} checked {%- endif -%} >
+    </div>
+</fieldset>

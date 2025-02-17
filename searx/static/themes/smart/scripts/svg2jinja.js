@@ -9,6 +9,7 @@ const svgList = {
   search: "node_modules/remixicon/icons/System/search-line.svg",
   close: "node_modules/remixicon/icons/System/close-line.svg",
   plugin: "node_modules/remixicon/icons/Development/puzzle-2-fill.svg",
+  info: "node_modules/remixicon/icons/System/information-2-fill.svg",
 };
 
 const ejs = require("ejs"),

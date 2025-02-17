@@ -8,21 +8,21 @@
             autocomplete="off"
         >
             {%- if 'language' not in locked_preferences -%} {%- include
-            'smart/madules/settings/language.html' -%} {% endif %} {%- if
+            'smart/madules/sidebar/language.html' -%} {% endif %} {%- if
             'autocomplete' not in locked_preferences -%} {%- include
-            'smart/madules/settings/autocomplete.html' -%} {%- endif -%} {%- if
+            'smart/madules/sidebar/autocomplete.html' -%} {%- endif -%} {%- if
             'safesearch' not in locked_preferences -%} {%- include
-            'smart/madules/settings/safe_search.html' -%} {%- endif -%} {%- if
+            'smart/madules/sidebar/safe_search.html' -%} {%- endif -%} {%- if
             'ui_locale' not in locked_preferences -%} {%- include
-            'smart/madules/settings/interface_lang.html' -%} {%- endif -%} {%-
-            if 'results_on_new_tab' not in locked_preferences -%} {%- include
-            'smart/madules/settings/results_on_new_tab.html' -%} {%- endif -%}
+            'smart/madules/sidebar/interface_lang.html' -%} {%- endif -%} {%- if
+            'results_on_new_tab' not in locked_preferences -%} {%- include
+            'smart/madules/sidebar/results_on_new_tab.html' -%} {%- endif -%}
             {%- if 'infinite_scroll' not in locked_preferences -%} {%- include
-            'smart/madules/settings/infinite_scroll.html' -%} {%- endif -%} {%-
+            'smart/madules/sidebar/infinite_scroll.html' -%} {%- endif -%} {%-
             if 'method' not in locked_preferences -%} {%- include
-            'smart/madules/settings/http_method.html' -%} {%- endif -%} {%- if
+            'smart/madules/sidebar/http_method.html' -%} {%- endif -%} {%- if
             'image_proxy' not in locked_preferences -%} {%- include
-            'smart/madules/settings/image_proxy.html' -%} {%- endif -%}
+            'smart/madules/sidebar/image_proxy.html' -%} {%- endif -%}
 
             <button type="submit" class="primary full-width">
                 {{- _('Save') -}}

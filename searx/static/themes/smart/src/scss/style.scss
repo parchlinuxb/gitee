@@ -343,6 +343,7 @@ body:has(.sidebar_btn[open]) {
         width: 100%;
         height: 100%;
         overflow-y: auto;
+        overflow-x: hidden;
         position: absolute;
         min-width: $screen-xs - 2rem;
         padding: 1rem;
@@ -362,6 +363,7 @@ body:has(.sidebar_btn[open]) {
         }
 
         fieldset {
+            margin-bottom: .5rem;
             padding: .5rem 0;
 
             .container {
@@ -371,6 +373,22 @@ body:has(.sidebar_btn[open]) {
                 align-items: center;
                 flex-wrap: wrap;
                 gap: .5rem;
+
+
+                .name {
+                    display: flex;
+                    gap: .5rem;
+                    align-items: center;
+
+                    &:not(#pref_safesearch)[tooltip]::after {
+                        left: 100%;
+                    }
+
+                    svg {
+                        height: 1.2rem;
+                        width: 1.2rem;
+                    }
+                }
 
                 select {
                     padding: .5rem 1rem;
@@ -382,7 +400,7 @@ body:has(.sidebar_btn[open]) {
             }
 
             .description {
-                margin: .5rem;
+                margin: 1rem 1rem 0;
                 text-align: justify;
                 color: var(--text-color);
                 font-size: .8rem;
