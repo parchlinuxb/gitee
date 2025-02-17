@@ -46,15 +46,42 @@
             href="{{ opensearch_url }}"
         />
         {% endblock %}
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        {#
+        <link
+            rel="icon"
+            href="{{ url_for('static', filename='img/favicon.svg') }}"
+            sizes="any"
+        />
+
         <link
             rel="icon"
             href="{{ url_for('static', filename='img/favicon.svg') }}"
             type="image/svg+xml"
         />
-        #}
-        <link rel="apple-touch-icon" href="/favicon.ico" />
+
+        <link
+            rel="apple-touch-icon"
+            href="{{ url_for('static', filename='img/favicon.svg') }}"
+        />
+
+        <link
+            rel="icon"
+            href="{{ url_for('static', filename='img/favicon-dark.svg') }}"
+            sizes="any"
+            media="(prefers-color-scheme: dark)"
+        />
+
+        <link
+            rel="icon"
+            href="{{ url_for('static', filename='img/favicon-dark.svg') }}"
+            type="image/svg+xml"
+            media="(prefers-color-scheme: dark)"
+        />
+
+        <link
+            rel="apple-touch-icon"
+            href="{{ url_for('static', filename='img/favicon-dark.svg') }}"
+            media="(prefers-color-scheme: dark)"
+        />
     </head>
     <body dir="auto">
         <div id="{{ endpoint }}" class="body-container">

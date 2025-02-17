@@ -109,3 +109,11 @@ $dir: ltr !default;
         direction: rtl;
     }
 }
+
+// Fix Color in Dark Mode
+@mixin fix-color() {
+    @media (prefers-color-scheme: dark) {
+        mix-blend-mode: luminosity;
+        filter: invert(1);
+    }
+}

@@ -172,6 +172,8 @@ main:has(.not-found) {
             font-size: 2rem;
             display: block;
             text-align: center;
+            // TODO: when dark mode colors added
+            // @include mixin.fix-color();
 
             img {
                 max-width: clamp(70px, 25vw, 150px);
@@ -616,6 +618,8 @@ footer {
             align-items: center;
             justify-content: center;
             width: 100px;
+            // TODO: when dark mode colors added
+            // @include mixin.fix-color();
 
             img {
                 width: 100%;

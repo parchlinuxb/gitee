@@ -1,5 +1,6 @@
 {% from 'smart/icons.html' import icon_small %} {% extends "smart/base.html" %}
-{% block body %} {% include 'smart/madules/search_header.html' %}
+{% block title %}{% if query_in_title %} - {{ q|e }}{% endif %}{% endblock %} {%
+block body %} {% include 'smart/madules/search_header.html' %}
 <div class="links">
     <a href="" class="link">{{icon_small('donate')}}</a>
     {% include 'smart/madules/sidebar_btn.html' %}
