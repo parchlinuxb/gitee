@@ -772,6 +772,10 @@ img, video {
   padding: 0 !important;
 }
 
+#preferences #search.header {
+  padding-top: .5rem !important;
+}
+
 #preferences .links {
   grid-area: links;
   justify-content: end;
@@ -1089,6 +1093,13 @@ main:has(.not-found) .button {
   #results {
     padding: 0 4rem;
   }
+}
+
+#results .result-count {
+  color: var(--secondary-text-color);
+  text-align: end;
+  grid-area: amount;
+  font-size: .8rem;
 }
 
 #results footer {
@@ -1436,7 +1447,7 @@ footer .footer-links {
 
 #search.header {
   grid-area: search;
-  padding: 1rem 0;
+  padding: 1.5rem 0 1rem;
   position: relative;
 }
 

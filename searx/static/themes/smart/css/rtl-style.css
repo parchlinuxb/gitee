@@ -307,7 +307,7 @@ img, video {
   transition: opacity .25s ease-in-out;
   position: absolute;
   bottom: 100%;
-  left: 50%;
+  right: 50%;
   transform: translate(-50%, -20%);
 }
 
@@ -322,7 +322,7 @@ img, video {
   transition: opacity .25s ease-in-out;
   position: absolute;
   bottom: 100%;
-  left: 50%;
+  right: 50%;
   transform: translate(calc(-50% - 1rem), 40%);
 }
 
@@ -718,6 +718,10 @@ img, video {
   padding: 0 !important;
 }
 
+#preferences #search.header {
+  padding-top: .5rem !important;
+}
+
 #preferences .links {
   grid-area: links;
   justify-content: end;
@@ -858,7 +862,7 @@ fieldset .container .name {
 }
 
 fieldset .container .name:not(#pref_safesearch)[tooltip]:after {
-  left: 100%;
+  right: 100%;
 }
 
 fieldset .container .name svg {
@@ -1035,6 +1039,13 @@ main:has(.not-found) .button {
   #results {
     padding: 0 4rem;
   }
+}
+
+#results .result-count {
+  color: var(--secondary-text-color);
+  text-align: end;
+  grid-area: amount;
+  font-size: .8rem;
 }
 
 #results footer {
@@ -1382,7 +1393,7 @@ footer .footer-links {
 
 #search.header {
   grid-area: search;
-  padding: 1rem 0;
+  padding: 1.5rem 0 1rem;
   position: relative;
 }
 

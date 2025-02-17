@@ -204,6 +204,13 @@ main:has(.not-found) {
         padding: 0 4rem;
     }
 
+    .result-count {
+        grid-area: amount;
+        font-size: .8rem;
+        color: var(--secondary-text-color);
+        text-align: end;
+    }
+
     footer {
         grid-area: footer;
     }
@@ -561,7 +568,7 @@ footer {
 #search.header {
     position: relative;
     grid-area: search;
-    padding: 1rem 0;
+    padding: 1.5rem 0 1rem;
 
     .header {
         display: flex;

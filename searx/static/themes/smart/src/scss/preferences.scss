@@ -17,9 +17,14 @@
         padding: 1rem 4rem;
     }
 
+
     .header {
         grid-area: header !important;
         padding: 0 !important;
+    }
+
+    #search.header {
+        padding-top: .5rem !important;
     }
 
     .links {
@@ -162,7 +167,7 @@ fieldset {
             align-items: center;
 
             &:not(#pref_safesearch)[tooltip]::after {
-                left: 100%;
+                @include mixin.left(100%);
             }
 
             svg {

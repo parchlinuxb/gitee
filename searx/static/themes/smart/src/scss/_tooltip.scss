@@ -8,7 +8,7 @@
     content: attr(tooltip);
     position: absolute;
     bottom: 100%;
-    left: 50%;
+    @include mixin.left(50%);
     transform: translate(-50%, -20%);
     background: var(--tooltip-background-color);
     color: var(--filled-text-color);
@@ -24,7 +24,7 @@
     content: " ";
     position: absolute;
     bottom: 100%;
-    left: 50%;
+    @include mixin.left(50%);
     transform: translate(calc(-50% - 1rem), 40%);
     white-space: nowrap;
     z-index: 1;

@@ -57,7 +57,12 @@ block body %} {% include 'smart/madules/search_header.html' %}
 <div class="info-panel">
     {% if infoboxes %} {% include 'smart/madules/infoboxs.html' %} {% endif %}
 </div>
-{% if 'images.html' in results|map(attribute='template')|unique|list%}
+{%- if number_of_results != '0' -%}
+<p class="result-count">
+    <small>{{ _('Number of results') }}: {{ number_of_results }}</small>
+</p>
+{%- endif -%} {% if 'images.html' in
+results|map(attribute='template')|unique|list%}
 <div class="image-details-container">
     <div class="image-details" id="image-details">
         <img src=".." alt=".." id="image-src" />
