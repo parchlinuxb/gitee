@@ -739,6 +739,17 @@ img, video {
   cursor: not-allowed;
 }
 
+.image-details-container .image-details .close {
+  color: var(--text-color);
+  background-color: var(--secondary-background-color);
+  cursor: pointer;
+  border-radius: 9999px;
+  padding: .25rem;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
 #preferences {
   grid-template: "header links" min-content
                  "main main"

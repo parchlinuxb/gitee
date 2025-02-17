@@ -585,14 +585,27 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 }
 
 },{}],"3uyIQ":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "$", ()=>$);
+parcelHelpers.export(exports, "$$", ()=>$$);
+var _images = require("./images");
 function $(selector) {
     return document.querySelector(selector);
 }
 function $$(selector) {
     return document.querySelectorAll(selector);
 }
+(0, _images.checkImagePage)();
+document.addEventListener("DOMContentLoaded", function() {});
+
+},{"./images":"jxVSe","@parcel/transformer-js/src/esmodule-helpers.js":"j7FRh"}],"jxVSe":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "checkImagePage", ()=>checkImagePage);
+var _app = require("./app");
 function handleImageDetails(image, { imageSrc, imageTitle, imageContent, imageSource, imageFilesize, imageDownload, formatSpan, filesizeSpan, engineSpan }) {
-    const resultsContainer = $("#results");
+    const resultsContainer = (0, _app.$)("#results");
     resultsContainer.classList.add("image-open");
     imageSrc.src = image.getAttribute("data-gitee-src");
     imageTitle.innerText = image.getAttribute("data-gitee-title");
@@ -608,17 +621,17 @@ function handleImageDetails(image, { imageSrc, imageTitle, imageContent, imageSo
     engineSpan.innerText = image.getAttribute("data-gitee-engine");
 }
 function setupImages(resultsContainer) {
-    const imageSrc = $("#image-src");
-    const imageTitle = $("#image-title");
-    const imageContent = $("#image-content");
-    const imageFormat = $("#image-format");
-    const imageFilesize = $("#image-filesize");
-    const imageSource = $("#image-source");
-    const imageDownload = $("#image-download");
-    const imageCopy = $("#image-copy");
+    const imageSrc = (0, _app.$)("#image-src");
+    const imageTitle = (0, _app.$)("#image-title");
+    const imageContent = (0, _app.$)("#image-content");
+    const imageFormat = (0, _app.$)("#image-format");
+    const imageFilesize = (0, _app.$)("#image-filesize");
+    const imageSource = (0, _app.$)("#image-source");
+    const imageDownload = (0, _app.$)("#image-download");
+    const imageCopy = (0, _app.$)("#image-copy");
     const formatSpan = imageFormat.getElementsByClassName("value")[0];
     const filesizeSpan = imageFilesize.getElementsByClassName("value")[0];
-    const engineSpan = $("#image-engine");
+    const engineSpan = (0, _app.$)("#image-engine");
     const ImagesObserver = new MutationObserver((mutationsList)=>{
         for (const mutation of mutationsList)if (mutation.type === "childList") mutation.addedNodes.forEach((node)=>{
             if (node.nodeType === Node.ELEMENT_NODE) return;
@@ -643,7 +656,7 @@ function setupImages(resultsContainer) {
         childList: true,
         subtree: true
     });
-    $$(".image").forEach((node)=>{
+    (0, _app.$$)(".image").forEach((node)=>{
         if (node.nodeType !== Node.ELEMENT_NODE) return;
         const image = node;
         image.addEventListener("click", (e)=>{
@@ -678,8 +691,8 @@ function setupImages(resultsContainer) {
         });
         canvas.remove();
     });
-    const bodyContainer = $("#results");
-    const imageDetailsContainer = $("#image-details");
+    const bodyContainer = (0, _app.$)("#results");
+    const imageDetailsContainer = (0, _app.$)("#image-details");
     bodyContainer.addEventListener("scroll", function() {
         if (bodyContainer.scrollTop < 50) {
             imageDetailsContainer.style.top = "0px";
@@ -689,13 +702,45 @@ function setupImages(resultsContainer) {
         imageDetailsContainer.style.height = "95vh";
         imageDetailsContainer.style.top = `calc(${bodyContainer.scrollTop}px - 15vh)`;
     });
+    imageDetailsContainer.getElementsByClassName("close")[0].addEventListener("click", function() {
+        bodyContainer.classList.remove("image-open");
+    });
 }
-function afterLoad() {
-    const resultsContainer = $(".results-container");
+function checkImagePage() {
+    const resultsContainer = (0, _app.$)(".results-container");
     if (!resultsContainer || resultsContainer.nodeType !== Node.ELEMENT_NODE) return;
     if (resultsContainer.classList.contains("image-page")) setupImages(resultsContainer);
 }
-document.addEventListener("DOMContentLoaded", afterLoad);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"j7FRh","./app":"3uyIQ"}],"j7FRh":[function(require,module,exports,__globalThis) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, '__esModule', {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === 'default' || key === '__esModule' || Object.prototype.hasOwnProperty.call(dest, key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
 
 },{}]},["1Y09f","3uyIQ"], "3uyIQ", "parcelRequire94c2")
 
