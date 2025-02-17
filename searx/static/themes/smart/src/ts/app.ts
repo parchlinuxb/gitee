@@ -153,6 +153,18 @@ function setupImages(resultsContainer: HTMLElement) {
         });
         void canvas.remove();
     });
+
+    const bodyContainer = $("#results") as HTMLDivElement;
+    const imageDetailsContainer = $("#image-details") as HTMLDivElement;
+    bodyContainer.addEventListener("scroll", function () {
+        if (bodyContainer.scrollTop < 50) {
+            imageDetailsContainer.style.top = "0px";
+            imageDetailsContainer.style.height = "80vh";
+            return;
+        }
+        imageDetailsContainer.style.height = "95vh";
+        imageDetailsContainer.style.top = `calc(${bodyContainer.scrollTop}px - 15vh)`;
+    });
 }
 
 function afterLoad() {

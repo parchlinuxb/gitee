@@ -74,7 +74,11 @@
     .image-details {
         background: var(--background-color);
         @include mixin.rounded(lg);
+        position: relative;
+        height: 80vh;
         padding: 1.5rem;
+        transition: top 25ms ease-in-out,
+            height 250ms ease-out;
 
         @include mixin.screens($screen-xl) {
             min-width: $screen-xs;

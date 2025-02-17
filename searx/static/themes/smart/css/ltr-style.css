@@ -654,7 +654,10 @@ img, video {
 .image-details-container .image-details {
   background: var(--background-color);
   border-radius: 2rem;
+  height: 80vh;
   padding: 1.5rem;
+  transition: top 25ms ease-in-out, height .25s ease-out;
+  position: relative;
 }
 
 @media (width >= 90rem) {
