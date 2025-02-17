@@ -251,6 +251,7 @@ img, video {
   --filled-text-color: #fff;
   --border-color: #b3b3b3;
   --secondary-border-color: #d9d9d9;
+  --tooltip-background-color: #00000080;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -264,6 +265,7 @@ img, video {
     --filled-text-color: #fff;
     --border-color: #b3b3b3;
     --secondary-border-color: #d9d9d9;
+    --tooltip-background-color: #00000080;
   }
 }
 
@@ -287,6 +289,46 @@ img, video {
 
 :is(button, .btn).full-width {
   width: 100%;
+}
+
+[tooltip] {
+  position: relative;
+}
+
+[tooltip]:after {
+  content: attr(tooltip);
+  background: var(--tooltip-background-color);
+  color: var(--filled-text-color);
+  white-space: nowrap;
+  z-index: 1;
+  opacity: 0;
+  border-radius: .5rem;
+  padding: .25rem 1rem;
+  transition: opacity .25s ease-in-out;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+[tooltip]:before {
+  content: " ";
+  white-space: nowrap;
+  z-index: 1;
+  opacity: 0;
+  border-style: solid;
+  border-width: 5px;
+  border-color: var(--tooltip-background-color) transparent transparent transparent;
+  transition: opacity .25s ease-in-out;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translate(calc(-50% - 1rem), 100%);
+}
+
+[tooltip]:hover:after, [tooltip]:hover:before {
+  opacity: 1;
+  transition: opacity .25s ease-in-out .5s;
 }
 
 .info-box {

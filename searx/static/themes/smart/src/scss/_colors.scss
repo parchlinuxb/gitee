@@ -12,6 +12,7 @@
     --filled-text-color: #{$filled-text-color};
     --border-color: #{color.mix($text-color, $background-color, 30%)};
     --secondary-border-color: #{color.mix($text-color, $background-color, 15%)};
+    --tooltip-background-color: #{$tooltip-background-color};
 }
 
 
@@ -27,5 +28,6 @@
         --filled-text-color: #{$filled-text-color-dark};
         --border-color: #{color.mix($text-color-dark, $background-color-dark, 30%)};
         --secondary-border-color: #{color.mix($text-color-dark, $background-color-dark, 15%)};
+        --tooltip-background-color: #{$tooltip-background-color-dark};
     }
 }

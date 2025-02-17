@@ -15,6 +15,9 @@ $dir: ltr !default;
 // Button
 @use 'button';
 
+// Tooltip
+@use 'tooltip';
+
 @forward './infobox.scss';
 
 // Result Styles
