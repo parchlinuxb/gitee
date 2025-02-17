@@ -685,7 +685,192 @@ img, video {
   cursor: not-allowed;
 }
 
-footer .links a, main:has(.not-found) .button {
+#preferences {
+  grid-template: "header links" min-content
+                 "main main"
+                 "footer footer" min-content
+                 / 2fr 1fr;
+  gap: 1rem;
+  max-width: 1800px;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+@media (width >= 90rem) {
+  #preferences {
+    padding: 1rem 4rem;
+  }
+}
+
+#preferences .header {
+  grid-area: header !important;
+  padding: 0 !important;
+}
+
+#preferences .links {
+  grid-area: links;
+  justify-content: end;
+  align-items: center;
+}
+
+#preferences footer {
+  padding: 0;
+}
+
+#preferences #preferences_form {
+  grid-area: main;
+  grid-template-columns: subgrid;
+  grid-template-areas: "main backup";
+  display: grid;
+}
+
+#preferences #preferences_form .madules-container {
+  grid-area: main;
+  padding: 1rem;
+}
+
+#preferences #preferences_form .madules-container select {
+  background-color: var(--secondary-background-color);
+}
+
+#preferences #preferences_form .backup-container {
+  grid-area: backup;
+}
+
+#preferences #preferences_form .backup-container .backup-box {
+  width: 100%;
+  padding: 2rem;
+}
+
+#preferences #preferences_form .backup-container .backup-box .title {
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  font-size: 2rem;
+  font-weight: 700;
+  display: flex;
+}
+
+#preferences #preferences_form .backup-container .backup-box .description {
+  text-align: justify;
+  margin-bottom: 2rem;
+}
+
+#preferences #preferences_form .backup-container .backup-box > .btn {
+  text-align: center;
+  margin-top: 1rem;
+  display: block;
+}
+
+#preferences #preferences_form .backup-container .backup-box .data-box {
+  flex-direction: column;
+  display: flex;
+}
+
+#preferences #preferences_form .backup-container .backup-box .data-box input[type="radio"]:checked + .data-page {
+  margin-top: 1rem;
+  display: block;
+}
+
+#preferences #preferences_form .backup-container .backup-box .data-box .data-page {
+  background-color: var(--secondary-background-color);
+  border-radius: 1rem;
+  width: 100%;
+  padding: 1rem;
+  display: none;
+}
+
+#preferences #preferences_form .backup-container .backup-box .data-box .data-page .section {
+  border-bottom: 1px solid var(--secondary-border-color);
+  padding: .5rem 0;
+}
+
+#preferences #preferences_form .backup-container .backup-box .data-box .data-page :last-child {
+  border-bottom: none;
+}
+
+#preferences #preferences_form .backup-container .backup-box .data-box .data-page h4 {
+  margin-bottom: .5rem;
+}
+
+#preferences #preferences_form .backup-container .backup-box .data-box .data-page p {
+  text-indent: 1rem;
+  color: var(--secondary-text-color);
+  text-align: justify;
+  font-size: .9rem;
+}
+
+#preferences #preferences_form .backup-container .backup-box .data-box .data-page input {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  border-radius: .5rem;
+  width: 100%;
+  margin-bottom: .5rem;
+  padding: .5rem 1rem;
+}
+
+#preferences #preferences_form .backup-container .backup-box .data-box .data-page .sidebyside {
+  gap: .5rem;
+  display: flex;
+}
+
+#preferences #preferences_form .backup-container .backup-box .data-box .data-page .sidebyside input {
+  flex: 1;
+  margin: 0;
+}
+
+#preferences #preferences_form :is(.madules-container, .backup-box) {
+  background-color: var(--background-color);
+  border-radius: 2rem;
+}
+
+fieldset {
+  margin-bottom: .5rem;
+  padding: .5rem 0;
+}
+
+fieldset .container {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: .5rem;
+  padding: 0 .5rem;
+  display: flex;
+}
+
+fieldset .container .name {
+  align-items: center;
+  gap: .5rem;
+  display: flex;
+}
+
+fieldset .container .name:not(#pref_safesearch)[tooltip]:after {
+  left: 100%;
+}
+
+fieldset .container .name svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+fieldset .container select {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  border-radius: .5rem;
+  max-width: 250px;
+  padding: .5rem 1rem;
+}
+
+fieldset .description {
+  text-align: justify;
+  color: var(--text-color);
+  margin: 1rem 1rem 0;
+  font-size: .8rem;
+}
+
+footer .footer-links a, main:has(.not-found) .button {
   background-color: var(--primary-color);
   color: var(--filled-text-color);
   border-radius: 9999px;
@@ -841,19 +1026,6 @@ main:has(.not-found) .button {
   }
 }
 
-#results > .links {
-  grid-area: links;
-  justify-content: end;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-}
-
-#results > .links :is(.link, .sidebar_btn) {
-  width: 40px;
-  height: 40px;
-}
-
 #results footer {
   grid-area: footer;
 }
@@ -938,6 +1110,19 @@ main:has(.not-found) .button {
   grid-template-columns: 2fr 0fr 1fr;
 }
 
+.links {
+  grid-area: links;
+  justify-content: end;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.links :is(.link, .sidebar_btn) {
+  width: 40px;
+  height: 40px;
+}
+
 body:has(.sidebar_btn[open]) {
   background-color: var(--background-color);
   gap: .5rem;
@@ -999,50 +1184,6 @@ body:has(.sidebar_btn[open]) header .links .link.config {
   font-size: 1.5rem;
 }
 
-#sidebar > .container fieldset {
-  margin-bottom: .5rem;
-  padding: .5rem 0;
-}
-
-#sidebar > .container fieldset .container {
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: .5rem;
-  padding: 0 .5rem;
-  display: flex;
-}
-
-#sidebar > .container fieldset .container .name {
-  align-items: center;
-  gap: .5rem;
-  display: flex;
-}
-
-#sidebar > .container fieldset .container .name:not(#pref_safesearch)[tooltip]:after {
-  left: 100%;
-}
-
-#sidebar > .container fieldset .container .name svg {
-  width: 1.2rem;
-  height: 1.2rem;
-}
-
-#sidebar > .container fieldset .container select {
-  background-color: var(--background-color);
-  color: var(--text-color);
-  border-radius: .5rem;
-  max-width: 250px;
-  padding: .5rem 1rem;
-}
-
-#sidebar > .container fieldset .description {
-  text-align: justify;
-  color: var(--text-color);
-  margin: 1rem 1rem 0;
-  font-size: .8rem;
-}
-
 #sidebar > .container .about {
   background-color: var(--background-color);
   border-radius: 1rem;
@@ -1078,7 +1219,7 @@ footer {
   }
 }
 
-footer .links {
+footer .footer-links {
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;

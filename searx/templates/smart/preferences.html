@@ -1,0 +1,126 @@
+{% from 'smart/icons.html' import icon_small, icon_big %}{% extends
+"smart/base.html" %} {% block body %} {% include
+'smart/madules/settings_header.html' %}
+<div class="links">
+    <a href="" class="link">{{icon_small('donate')}}</a>
+</div>
+<form
+    id="preferences_form"
+    method="post"
+    action="{{ url_for('preferences') }}"
+    autocomplete="off"
+>
+    <div class="madules-container">
+        {% if 'language' not in locked_preferences %} {%- include
+        'smart/madules/settings/language.html' -%} {% endif %} {% if
+        'autocomplete' not in locked_preferences %} {%- include
+        'smart/madules/settings/autocomplete.html' -%} {% endif %} {% if
+        'safesearch' not in locked_preferences %} {%- include
+        'smart/madules/settings/safe_search.html' -%} {% endif %} {% if
+        'ui_locale' not in locked_preferences %} {%- include
+        'smart/madules/settings/interface_lang.html' -%} {% endif %} {% if
+        'results_on_new_tab' not in locked_preferences %} {%- include
+        'smart/madules/settings/results_on_new_tab.html' -%} {% endif %} {% if
+        'infinite_scroll' not in locked_preferences %} {%- include
+        'smart/madules/settings/infinite_scroll.html' -%} {% endif %} {% if
+        'method' not in locked_preferences %} {%- include
+        'smart/madules/settings/http_method.html' -%} {% endif %} {% if
+        'image_proxy' not in locked_preferences %} {%- include
+        'smart/madules/settings/image_proxy.html' -%} {% endif %} {% if
+        'query_in_title' not in locked_preferences %} {%- include
+        'smart/madules/settings/title_query.html' -%} {% endif %} {% if
+        'hotkeys' not in locked_preferences %} {%- include
+        'smart/madules/settings/hotkeys.html' -%} {% endif %} {% if
+        'urlformatting' not in locked_preferences %} {%- include
+        'smart/madules/settings/url_formatting.html' -%} {% endif %}
+
+        <button class="btn primary" type="submit">{{- _('Save') -}}</button>
+    </div>
+
+    <div class="backup-container">
+        <div class="backup-box">
+            <div class="title">
+                {{ icon_big('database') }}<span>{{ _('Your Data')}}</span>
+            </div>
+            <p class="description">
+                {{- _('This is the list of cookies and their values SearXNG is
+                storing on your computer.') }}
+                <br />{{- _('With that list, you can assess SearXNG
+                transparency.') -}}
+            </p>
+            <label class="btn" for="save-cookies">Save to Restore</label>
+            <label class="btn primary" for="restore-cookies">Restore</label>
+            <div class="data-box">
+                <input type="radio" id="save-cookies" name="cookies" hidden />
+                <div class="data-page">
+                    <div class="section">
+                        <h4>
+                            {{- _('URL to restore your preferences in another
+                            browser') -}}:
+                        </h4>
+                        <input
+                            type="text"
+                            readonly
+                            value="{{- url_for('preferences', _external=True)
+                        -}}?preferences={{- preferences_url_params|e -}}"
+                        />
+                        <p>
+                            {{- _('Specifying custom settings in the preferences
+                            URL can be used to sync preferences across
+                            devices.') -}}
+                        </p>
+                    </div>
+
+                    <div class="section">
+                        <h4>{{- _('Copy preferences hash') -}}:</h4>
+                        <div class="sidebyside">
+                            <input
+                                type="text"
+                                readonly
+                                value="{{- preferences_url_params|e }}"
+                            />
+                            <button
+                                id="copy-hash"
+                                class="btn primary"
+                                data-hash="{{- preferences_url_params|e -}}"
+                                data-copied-text="{{- _('Copied') -}}"
+                            >
+                                {{- _('Copy') -}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <input
+                    type="radio"
+                    id="restore-cookies"
+                    name="cookies"
+                    hidden
+                />
+                <div class="data-page">
+                    <h4>
+                        {{- _('Insert copied preferences hash (without URL) to
+                        restore') -}}:
+                    </h4>
+                    <div class="sidebyside">
+                        <input
+                            type="text"
+                            id="pref-hash-input"
+                            name="preferences"
+                            placeholder="{{- _('Preferences hash') -}}"
+                        />
+                        <button
+                            id="paste-hash"
+                            class="btn secondary"
+                            data-copied-text="{{- _('Copied') -}}"
+                        >
+                            {{- _('Paste') -}}
+                        </button>
+                    </div>
+                </div>
+                <input type="radio" name="cookies" hidden checked />
+            </div>
+        </div>
+    </div>
+</form>
+
+{% include 'smart/footer.html' %} {% endblock %}

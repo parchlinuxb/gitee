@@ -24,6 +24,8 @@ $dir: ltr !default;
 @forward './results/default';
 @forward './results/images';
 
+@forward './preferences';
+
 @function toRem($value) {
     @return floor($value / 16) * 1rem;
 }
@@ -202,19 +204,6 @@ main:has(.not-found) {
         padding: 0 4rem;
     }
 
-    &>.links {
-        grid-area: links;
-        width: 100%;
-        height: 100%;
-        align-items: center;
-        justify-content: end;
-
-        :is(.link, .sidebar_btn) {
-            width: 40px;
-            height: 40px;
-        }
-    }
-
     footer {
         grid-area: footer;
     }
@@ -302,6 +291,19 @@ main:has(.not-found) {
     }
 }
 
+.links {
+    grid-area: links;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: end;
+
+    :is(.link, .sidebar_btn) {
+        width: 40px;
+        height: 40px;
+    }
+}
+
 body:has(.sidebar_btn[open]) {
     padding: .5rem;
     gap: .5rem;
@@ -364,51 +366,6 @@ body:has(.sidebar_btn[open]) {
             @include mixin.rounded(full);
         }
 
-        fieldset {
-            margin-bottom: .5rem;
-            padding: .5rem 0;
-
-            .container {
-                display: flex;
-                padding: 0 .5rem;
-                justify-content: space-between;
-                align-items: center;
-                flex-wrap: wrap;
-                gap: .5rem;
-
-
-                .name {
-                    display: flex;
-                    gap: .5rem;
-                    align-items: center;
-
-                    &:not(#pref_safesearch)[tooltip]::after {
-                        left: 100%;
-                    }
-
-                    svg {
-                        height: 1.2rem;
-                        width: 1.2rem;
-                    }
-                }
-
-                select {
-                    padding: .5rem 1rem;
-                    background-color: var(--background-color);
-                    color: var(--text-color);
-                    @include mixin.rounded(sm);
-                    max-width: 250px;
-                }
-            }
-
-            .description {
-                margin: 1rem 1rem 0;
-                text-align: justify;
-                color: var(--text-color);
-                font-size: .8rem;
-            }
-        }
-
         .about {
             background-color: var(--background-color);
             overflow: hidden;
@@ -444,7 +401,7 @@ footer {
         justify-content: center;
     }
 
-    .links {
+    .footer-links {
         display: flex;
         gap: 1rem;
         flex-wrap: wrap;

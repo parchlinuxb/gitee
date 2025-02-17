@@ -4,7 +4,7 @@
         {{ _('a privacy-respecting, open metasearch engine') }} - {{
         searx_version }}
     </p>
-    <div class="links">
+    <div class="footer-links">
         {% if enable_metrics %}
         <a href="{{ url_for('stats') }}">{{ _('Engine stats') }}</a>{% endif %}
         {% if get_setting('brand.public_instances') %}
