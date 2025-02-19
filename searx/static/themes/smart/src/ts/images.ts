@@ -1,4 +1,5 @@
 import { $, $$ } from "./app";
+import { copyToClipboard } from "./utils";
 
 interface ImageDetails {
     imageSrc: HTMLImageElement;
@@ -143,7 +144,7 @@ function setupImages(resultsContainer: HTMLElement) {
         );
         canvas.toBlob((blob) => {
             if (!blob) return;
-            navigator.clipboard.write([new ClipboardItem({ "image/*": blob })]);
+            copyToClipboard(new ClipboardItem({ "image/*": blob }));
         });
         void canvas.remove();
     });

@@ -76,14 +76,17 @@
                         <div class="sidebyside">
                             <input
                                 type="text"
+                                id="preferences-hash"
                                 readonly
                                 value="{{- preferences_url_params|e }}"
                             />
                             <button
-                                id="copy-hash"
+                                id="copy-preferences-hash"
                                 class="btn primary"
+                                type="button"
                                 data-hash="{{- preferences_url_params|e -}}"
-                                data-copied-text="{{- _('Copied') -}}"
+                                data-copied-text="{{- _('Copied') -}}!"
+                                data-copy-text="{{- _('Copy') -}}"
                             >
                                 {{- _('Copy') -}}
                             </button>
@@ -104,14 +107,14 @@
                     <div class="sidebyside">
                         <input
                             type="text"
-                            id="pref-hash-input"
+                            id="paste-preferences-hash-input"
                             name="preferences"
                             placeholder="{{- _('Preferences hash') -}}"
                         />
                         <button
-                            id="paste-hash"
+                            id="paste-preferences-hash"
                             class="btn secondary"
-                            data-copied-text="{{- _('Copied') -}}"
+                            type="button"
                         >
                             {{- _('Paste') -}}
                         </button>

@@ -590,6 +590,7 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "$", ()=>$);
 parcelHelpers.export(exports, "$$", ()=>$$);
 var _images = require("./images");
+var _utils = require("./utils");
 function $(selector) {
     return document.querySelector(selector);
 }
@@ -597,13 +598,39 @@ function $$(selector) {
     return document.querySelectorAll(selector);
 }
 (0, _images.checkImagePage)();
-document.addEventListener("DOMContentLoaded", function() {});
+function afterPageLoad() {
+    // check for preferences page
+    if ($("#preferences")) {
+        // check for preferences hash
+        const hashInput = $("#preferences-hash");
+        if (!hashInput) return;
+        const copyBtn = $("#copy-preferences-hash");
+        if (!copyBtn) return;
+        copyBtn.addEventListener("click", function() {
+            (0, _utils.copyToClipboard)(hashInput.value);
+            copyBtn.innerText = copyBtn.getAttribute("data-copied-text");
+            setTimeout(()=>{
+                copyBtn.innerText = copyBtn.getAttribute("data-copy-text");
+            }, 2000);
+        });
+        const pasteBtn = $("#paste-preferences-hash");
+        const pasteInput = $("#paste-preferences-hash-input");
+        if (!pasteBtn || !pasteInput) return;
+        pasteBtn.addEventListener("click", async function() {
+            const hash = await (0, _utils.getFromClipboard)();
+            pasteInput.value = hash;
+        });
+    }
+}
+if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", afterPageLoad);
+else afterPageLoad();
 
-},{"./images":"jxVSe","@parcel/transformer-js/src/esmodule-helpers.js":"j7FRh"}],"jxVSe":[function(require,module,exports,__globalThis) {
+},{"./images":"jxVSe","@parcel/transformer-js/src/esmodule-helpers.js":"j7FRh","./utils":"hKc06"}],"jxVSe":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "checkImagePage", ()=>checkImagePage);
 var _app = require("./app");
+var _utils = require("./utils");
 function handleImageDetails(image, { imageSrc, imageTitle, imageContent, imageSource, imageFilesize, imageDownload, formatSpan, filesizeSpan, engineSpan }) {
     const resultsContainer = (0, _app.$)("#results");
     resultsContainer.classList.add("image-open");
@@ -683,11 +710,9 @@ function setupImages(resultsContainer) {
         canvas.getContext("2d").drawImage(imageSrc, 0, 0, imageSrc.width, imageSrc.height);
         canvas.toBlob((blob)=>{
             if (!blob) return;
-            navigator.clipboard.write([
-                new ClipboardItem({
-                    "image/*": blob
-                })
-            ]);
+            (0, _utils.copyToClipboard)(new ClipboardItem({
+                "image/*": blob
+            }));
         });
         canvas.remove();
     });
@@ -712,7 +737,7 @@ function checkImagePage() {
     if (resultsContainer.classList.contains("image-page")) setupImages(resultsContainer);
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"j7FRh","./app":"3uyIQ"}],"j7FRh":[function(require,module,exports,__globalThis) {
+},{"./app":"3uyIQ","@parcel/transformer-js/src/esmodule-helpers.js":"j7FRh","./utils":"hKc06"}],"j7FRh":[function(require,module,exports,__globalThis) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -742,5 +767,38 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}]},["1Y09f","3uyIQ"], "3uyIQ", "parcelRequire94c2")
+},{}],"hKc06":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "copyToClipboard", ()=>copyToClipboard);
+parcelHelpers.export(exports, "getFromClipboard", ()=>getFromClipboard);
+function copyToClipboard(item) {
+    if (navigator.clipboard) {
+        if (item instanceof ClipboardItem) navigator.clipboard.write([
+            item
+        ]);
+        else navigator.clipboard.writeText(item);
+        return;
+    }
+    if (typeof item !== "string") return;
+    const textarea = document.createElement("textarea");
+    textarea.value = item;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textarea);
+}
+async function getFromClipboard() {
+    if (navigator.clipboard) try {
+        const text = await navigator.clipboard.readText();
+        return text;
+    } catch (e) {
+        console.error(e);
+        return "";
+    }
+    alert("Clipboard not supported");
+    return "";
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"j7FRh"}]},["1Y09f","3uyIQ"], "3uyIQ", "parcelRequire94c2")
 
