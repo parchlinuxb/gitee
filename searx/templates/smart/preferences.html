@@ -11,10 +11,17 @@
     autocomplete="off"
 >
     <div class="madules-container">
-        {% if 'language' not in locked_preferences %} {%- include
-        'smart/madules/settings/language.html' -%} {% endif %} {% if
-        'autocomplete' not in locked_preferences %} {%- include
-        'smart/madules/settings/autocomplete.html' -%} {% endif %} {% if
+        {# TODO: add tabs after new theme variants settings and chat
+        <div class="tabs">
+            <label>{{ _('General') }}</label>
+            <label>{{ _('Appearance') }}</label>
+            <label>{{ _('Advanced') }}</label>
+        </div>
+        #} {% if 'language' not in locked_preferences %} {%- include
+        'smart/madules/settings/language.html' -%}{% endif %} {% if 'theme' not
+        in locked_preferences %} {%- include 'smart/madules/settings/theme.html'
+        -%}{% endif %} {% if 'autocomplete' not in locked_preferences %} {%-
+        include 'smart/madules/settings/autocomplete.html' -%} {% endif %} {% if
         'safesearch' not in locked_preferences %} {%- include
         'smart/madules/settings/safe_search.html' -%} {% endif %} {% if
         'ui_locale' not in locked_preferences %} {%- include
@@ -34,7 +41,9 @@
         'urlformatting' not in locked_preferences %} {%- include
         'smart/madules/settings/url_formatting.html' -%} {% endif %}
 
-        <button class="btn primary" type="submit">{{- _('Save') -}}</button>
+        <button class="btn primary save-btn" type="submit">
+            {{- _('Save') -}}
+        </button>
     </div>
 
     <div class="backup-container">

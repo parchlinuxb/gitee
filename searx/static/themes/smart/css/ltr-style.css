@@ -795,11 +795,18 @@ img, video {
 
 #preferences #preferences_form .madules-container {
   grid-area: main;
-  padding: 1rem;
+  padding: 1.5rem;
 }
 
 #preferences #preferences_form .madules-container select {
   background-color: var(--secondary-background-color);
+}
+
+#preferences #preferences_form .madules-container .save-btn {
+  text-align: center;
+  width: 100%;
+  margin-top: 1rem;
+  display: block;
 }
 
 #preferences #preferences_form .backup-container {

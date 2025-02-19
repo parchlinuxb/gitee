@@ -1,0 +1,16 @@
+<fieldset>
+  <div class="container">
+    <legend id="pref_theme">{{- _('Theme') -}}</legend>
+        <select name="theme" aria-labelledby="pref_theme" aria-describedby="desc_theme">
+          {%- for name in themes -%}
+            <option value="{{ name }}"
+                    {%- if name == theme %} selected="selected"{%- endif -%}>
+                    {{- name | capitalize -}}
+            </option>
+          {%- endfor -%}
+      </select>
+  </div>
+  <div class="description" id="desc_theme">
+    {{- _('Change SearXNG layout') -}}
+  </div>
+</fieldset>

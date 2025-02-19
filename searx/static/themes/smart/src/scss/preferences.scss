@@ -45,10 +45,17 @@
 
         .madules-container {
             grid-area: main;
-            padding: 1rem;
+            padding: 1.5rem;
 
             select {
                 background-color: var(--secondary-background-color);
+            }
+
+            .save-btn {
+                margin-top: 1rem;
+                display: block;
+                width: 100%;
+                text-align: center;
             }
         }
 
