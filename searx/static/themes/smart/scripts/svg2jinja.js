@@ -11,6 +11,7 @@ const svgList = {
   plugin: "node_modules/remixicon/icons/Development/puzzle-2-fill.svg",
   info: "node_modules/remixicon/icons/System/information-2-fill.svg",
   database: "node_modules/remixicon/icons/Device/database-2-fill.svg",
+  share: "node_modules/remixicon/icons/System/share-fill.svg",
 };
 
 const ejs = require("ejs"),

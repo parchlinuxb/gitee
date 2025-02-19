@@ -307,7 +307,7 @@ img, video {
   transition: opacity .25s ease-in-out;
   position: absolute;
   bottom: 100%;
-  right: 50%;
+  left: 50%;
   transform: translate(-50%, -20%);
 }
 
@@ -322,8 +322,12 @@ img, video {
   transition: opacity .25s ease-in-out;
   position: absolute;
   bottom: 100%;
-  right: 50%;
+  left: 50%;
   transform: translate(calc(-50% - 1rem), 40%);
+}
+
+[tooltip].center-tooltip:before {
+  transform: translate(-50%, 40%);
 }
 
 [tooltip]:hover:after, [tooltip]:hover:before {
@@ -869,7 +873,7 @@ fieldset .container .name {
 }
 
 fieldset .container .name:not(#pref_safesearch)[tooltip]:after {
-  right: 100%;
+  left: 100%;
 }
 
 fieldset .container .name svg {
@@ -1039,7 +1043,7 @@ main:has(.not-found) .button {
   padding: 0 1rem;
   transition: grid-template-columns .3s ease-in-out;
   display: grid;
-  overflow: auto;
+  overflow: hidden auto;
 }
 
 @media (width >= 90rem) {
@@ -1050,9 +1054,15 @@ main:has(.not-found) .button {
 
 #results .result-count {
   color: var(--secondary-text-color);
-  text-align: end;
   grid-area: amount;
   font-size: .8rem;
+}
+
+#results .result-count-container {
+  justify-content: end;
+  align-items: center;
+  gap: .5rem;
+  display: flex;
 }
 
 #results footer {
@@ -1137,6 +1147,22 @@ main:has(.not-found) .button {
 
 #results.image-open {
   grid-template-columns: 2fr 0fr 1fr;
+}
+
+#results .share_btn {
+  background-color: #0000;
+  border: none;
+  border-radius: 9999px;
+  padding: .25rem;
+}
+
+#results .share_btn:hover {
+  background-color: var(--background-color);
+}
+
+#results .share_btn svg {
+  width: 1rem;
+  height: 1rem;
 }
 
 .links {

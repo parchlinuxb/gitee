@@ -599,7 +599,7 @@ function $$(selector) {
 }
 (0, _images.checkImagePage)();
 function afterPageLoad() {
-    // check for preferences page
+    // preferences page
     if ($("#preferences")) {
         // check for preferences hash
         const hashInput = $("#preferences-hash");
@@ -619,6 +619,22 @@ function afterPageLoad() {
         pasteBtn.addEventListener("click", async function() {
             const hash = await (0, _utils.getFromClipboard)();
             pasteInput.value = hash;
+        });
+    }
+    // search page
+    if ($("#results")) {
+        const shareBtn = $("#share-url-btn");
+        if (!shareBtn) return;
+        shareBtn.addEventListener("click", function() {
+            const searchUrl = shareBtn.getAttribute("data-search-url");
+            if (!searchUrl) return;
+            (0, _utils.copyToClipboard)(searchUrl);
+            const copiedText = shareBtn.getAttribute("data-gitee-copied");
+            if (!copiedText) return;
+            shareBtn.setAttribute("tooltip", copiedText);
+            setTimeout(()=>{
+                shareBtn.removeAttribute("tooltip");
+            }, 2000);
         });
     }
 }

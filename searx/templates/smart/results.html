@@ -58,9 +58,30 @@ block body %} {% include 'smart/madules/search_header.html' %}
     {% if infoboxes %} {% include 'smart/madules/infoboxs.html' %} {% endif %}
 </div>
 {%- if number_of_results != '0' -%}
-<p class="result-count">
-    <small>{{ _('Number of results') }}: {{ number_of_results }}</small>
-</p>
+<div class="result-count">
+    <div class="result-count-container">
+        <small>{{ _('Number of results') }}: {{ number_of_results }}</small>
+        <button
+            id="share-url-btn"
+            class="share_btn center-tooltip"
+            role="button"
+            data-search-url="
+        {{ url_for('search', _external=True) }}?q={{ q|urlencode }}&amp;language={{ current_language }}&amp;time_range={{ time_range }}&amp;safesearch={{ safesearch }}
+            {%- if pageno > 1 -%}
+              &amp;pageno={{ pageno }}
+            {%- endif -%}
+            {%- if selected_categories -%}
+              &amp;categories={{ selected_categories|join(',') | replace(' ','+') }}
+            {%- endif -%}
+            {%- if timeout_limit -%}
+              &amp;timeout_limit={{ timeout_limit|urlencode }}
+            {%- endif -%}"
+            data-gitee-copied="{{ _('Copied') }}"
+        >
+            {{ icon_small('share') }}
+        </button>
+    </div>
+</div>
 {%- endif -%} {% if 'images.html' in
 results|map(attribute='template')|unique|list%}
 <div class="image-details-container">

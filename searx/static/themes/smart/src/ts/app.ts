@@ -12,7 +12,7 @@ export function $$(selector: string) {
 checkImagePage();
 
 function afterPageLoad() {
-    // check for preferences page
+    // preferences page
     if ($("#preferences")) {
         // check for preferences hash
         const hashInput = $("#preferences-hash") as HTMLInputElement;
@@ -38,6 +38,23 @@ function afterPageLoad() {
         pasteBtn.addEventListener("click", async function () {
             const hash = await getFromClipboard();
             pasteInput.value = hash;
+        });
+    }
+
+    // search page
+    if ($("#results")) {
+        const shareBtn = $("#share-url-btn") as HTMLButtonElement;
+        if (!shareBtn) return;
+        shareBtn.addEventListener("click", function () {
+            const searchUrl = shareBtn.getAttribute("data-search-url");
+            if (!searchUrl) return;
+            copyToClipboard(searchUrl);
+            const copiedText = shareBtn.getAttribute("data-gitee-copied");
+            if (!copiedText) return;
+            shareBtn.setAttribute("tooltip", copiedText);
+            setTimeout(() => {
+                shareBtn.removeAttribute("tooltip");
+            }, 2000);
         });
     }
 }

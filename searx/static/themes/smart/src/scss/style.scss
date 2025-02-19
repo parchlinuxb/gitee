@@ -197,7 +197,8 @@ main:has(.not-found) {
     margin: 0 auto;
     padding: 0 1rem;
     max-width: 1800px;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
     transition: grid-template-columns 300ms ease-in-out;
 
     @include mixin.screens($screen-xl) {
@@ -208,7 +209,13 @@ main:has(.not-found) {
         grid-area: amount;
         font-size: .8rem;
         color: var(--secondary-text-color);
-        text-align: end;
+
+        &-container {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            justify-content: end;
+        }
     }
 
     footer {
@@ -295,6 +302,22 @@ main:has(.not-found) {
 
     &.image-open {
         grid-template-columns: 2fr 0fr 1fr;
+    }
+
+    .share_btn {
+        background-color: transparent;
+        border: none;
+        @include mixin.rounded(full);
+        padding: .25rem;
+
+        &:hover {
+            background-color: var(--background-color);
+        }
+
+        svg {
+            width: 1rem;
+            height: 1rem;
+        }
     }
 }
 
