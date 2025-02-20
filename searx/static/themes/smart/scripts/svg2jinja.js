@@ -12,6 +12,9 @@ const svgList = {
   info: "node_modules/remixicon/icons/System/information-2-fill.svg",
   database: "node_modules/remixicon/icons/Device/database-2-fill.svg",
   share: "node_modules/remixicon/icons/System/share-fill.svg",
+  ai: "node_modules/remixicon/icons/System/apps-2-ai-fill.svg",
+  send: "node_modules/remixicon/icons/Business/send-plane-2-fill.svg",
+  stop: "node_modules/remixicon/icons/Media/pause-circle-line.svg",
 };
 
 const ejs = require("ejs"),

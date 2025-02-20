@@ -1137,13 +1137,13 @@ main:has(.not-found) .button {
   position: relative;
 }
 
-#results .results-container .answer-container {
+#results .results-container .message-container {
   background-color: var(--background-color);
   border-radius: 2rem;
   padding: 1.5rem;
 }
 
-#results .results-container .answer-container .title {
+#results .results-container .message-container .title {
   align-items: center;
   gap: .5rem;
   font-size: 1.5rem;
@@ -1151,16 +1151,15 @@ main:has(.not-found) .button {
   display: flex;
 }
 
-#results .results-container .answer-container .title svg {
+#results .results-container .message-container .title svg {
   fill: var(--primary-color);
 }
 
-#results .results-container .answer-container .message-box {
-  border-radius: 1rem;
+#results .results-container .message-container .message-box {
   margin-top: 1rem;
 }
 
-#results .results-container .answer-container .message-box .message {
+#results .results-container .message-container .message-box .message {
   background-color: var(--secondary-background-color);
   border-radius: 1.5rem 1.5rem 1.5rem .5rem;
   width: 80%;
@@ -1169,15 +1168,118 @@ main:has(.not-found) .button {
   padding: 1rem;
 }
 
-#results .results-container .answer-container .message-box .reference {
+#results .results-container .message-container .message-box .reference {
   color: var(--text-color);
   font-size: .8rem;
 }
 
-#results .results-container .answer-container .message-box .reference a {
+#results .results-container .message-container .message-box .reference a {
   background-color: var(--secondary-background-color);
   padding: 0 .5rem;
   display: inline-block;
+}
+
+#results .results-container .message-container .message-box.user {
+  flex-direction: row-reverse;
+  display: flex;
+}
+
+#results .results-container .message-container .message-box.user .message {
+  background-color: var(--primary-color);
+  color: var(--filled-text-color);
+  border-radius: 1.5rem 1.5rem .5rem;
+}
+
+#results .results-container .message-container .load-container {
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  display: none;
+}
+
+#results .results-container .message-container .load-container .loading-indecators {
+  background-color: var(--filled-text-color);
+  border-radius: .5rem 1.5rem 1.5rem;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem;
+  padding: 1rem;
+  display: flex;
+}
+
+#results .results-container .message-container .load-container .loading-indecators .indecator {
+  border: 2px solid var(--text-color);
+  border-radius: 9999px;
+  width: .6rem;
+  height: .6rem;
+  animation: 2s infinite loading-indecator;
+}
+
+#results .results-container .message-container .load-container .loading-indecators :nth-child(2) {
+  animation-delay: 1s;
+}
+
+#results .results-container .message-container .load-container .loading-indecators :nth-child(3) {
+  animation-delay: .5s;
+}
+
+#results .results-container .message-container .load-container .btn.stop {
+  background-color: var(--text-color);
+  color: var(--filled-text-color);
+  border-radius: 9999px;
+  align-items: center;
+  gap: 1rem;
+  display: flex;
+}
+
+#results .results-container .message-container .send-message {
+  border: 1px solid var(--border-color);
+  border-radius: 9999px;
+  align-items: center;
+  gap: .5rem;
+  margin-top: 1rem;
+  padding: 0 .5rem;
+  display: flex;
+}
+
+#results .results-container .message-container .send-message input {
+  color: var(--text-color);
+  background-color: #0000;
+  border: none;
+  border-radius: 9999px;
+  flex: 1;
+  padding: .5rem;
+}
+
+#results .results-container .message-container .send-message input:focus {
+  outline: none;
+}
+
+#results .results-container .message-container .send-message button {
+  background-color: #0000;
+  border: none;
+}
+
+#results .results-container .message-container .send-message button:focus {
+  outline: none;
+}
+
+#results .results-container .message-container.ai.loading {
+  background-color: var(--primary-color);
+  color: var(--filled-text-color);
+}
+
+#results .results-container .message-container.ai.loading svg {
+  fill: var(--filled-text-color);
+}
+
+#results .results-container .message-container.ai.loading .load-container {
+  display: flex;
+}
+
+#results .results-container .message-container.ai.loading :is(.message-box, .send-message) {
+  display: none;
 }
 
 #results .results-container .result-group {
@@ -1615,6 +1717,23 @@ input[type="checkbox"].switch:checked:after {
 @media (scripting: enabled) {
   .js-alt {
     display: none !important;
+  }
+}
+
+@keyframes loading-indecator {
+  0% {
+    background-color: #0000;
+    transform: scale(1);
+  }
+
+  50% {
+    background-color: #0000;
+    transform: scale(1);
+  }
+
+  75% {
+    background-color: var(--text-color);
+    transform: scale(.9);
   }
 }
 

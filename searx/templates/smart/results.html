@@ -8,8 +8,55 @@ block body %} {% include 'smart/madules/search_header.html' %}
 <div
     class="results-container {% if results and results|map(attribute='template')|unique|list|count and 'images.html' in results|map(attribute='template')|unique|list %} image-page {% endif %}"
 >
+    <p class="error js-alt">
+        {{_('Jabir needs JS enabled to work properly.')}}
+    </p>
+    <div class="message-container js-only ai loading" id="ai-message-container">
+        <div class="title">
+            {{ icon_small('ai') }}
+            <h3>{{ _('Answer by Jabir') }}</h3>
+        </div>
+        <div class="load-container">
+            <div class="loading-indecators">
+                <span class="indecator"> </span>
+                <span class="indecator"> </span>
+                <span class="indecator"> </span>
+            </div>
+            <button class="btn stop">
+                <span>{{ _('Stop') }}</span> {{ icon_small('stop') }}
+            </button>
+        </div>
+        <div class="user message-box">
+            <p class="message">{{ q|e }}</p>
+        </div>
+        <div class="message-box">
+            <p class="message">temporary message</p>
+            <div class="reference">
+                {{ _('Based on') }}
+                <a
+                    href=""
+                    {%-
+                    if
+                    results_on_new_tab
+                    %}target="_blank"
+                    rel="noopener noreferrer"
+                    {%-
+                    else
+                    -%}rel="noreferrer"
+                    {%-
+                    endif
+                    -%}
+                    >{{ _('Jabir') }}</a
+                >
+            </div>
+        </div>
+        <form class="send-message" id="send-message">
+            <input type="text" placeholder="{{ _('Ask Jabir anything...') }}" />
+            <button>{{ icon_small('send') }}</button>
+        </form>
+    </div>
     {% if answers %}
-    <div class="answer-container">
+    <div class="message-container">
         <div class="title">
             {{ icon_small('plugin') }}
             <h3>{{ _('Answers by Plugins and Engines') }}</h3>
@@ -21,7 +68,7 @@ block body %} {% include 'smart/madules/search_header.html' %}
             <p class="message">{{ answer.answer }}</p>
             {%- if answer.url -%}
             <div class="reference">
-                Based on
+                {{ _('Based on') }}
                 <a
                     href="{{ answer.url }}"
                     {%-
