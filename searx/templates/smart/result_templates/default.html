@@ -11,7 +11,7 @@
         endif
         %}
     >
-        {% if favicon_resolver != "" %}
+        {% if favicon_resolver != "" and result.parsed_url.netloc %}
         <div class="favicon">
             <img
                 loading="lazy"
@@ -44,8 +44,9 @@
 
     <div class="result-meta">
         <span class="result-url">
-            {{ result.parsed_url.netloc }}{{ result.parsed_url.path[:25] }} {%
-            if result.parsed_url.path|length > 25 %}... {% endif %}
+            {% if result.parsed_url.netloc %} {{ result.parsed_url.netloc }}{{
+            result.parsed_url.path[:25] }} {% if result.parsed_url.path|length >
+            25 %}... {% endif %} {% endif %}
         </span>
         <div class="engines">
             {% for engine in result.engines %} {% if loop.index < 7 %}

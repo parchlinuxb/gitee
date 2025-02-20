@@ -27,8 +27,9 @@ block body %} {% include 'smart/madules/search_header.html' %}
             </button>
         </div>
         <div class="user message-box">
-            <p class="message">{{ q|e }}</p>
+            <p class="message" id="search-query">{{ q|e }}</p>
         </div>
+        {#
         <div class="message-box">
             <p class="message">temporary message</p>
             <div class="reference">
@@ -50,6 +51,7 @@ block body %} {% include 'smart/madules/search_header.html' %}
                 >
             </div>
         </div>
+        #}
         <form class="send-message" id="send-message">
             <input type="text" placeholder="{{ _('Ask Jabir anything...') }}" />
             <button>{{ icon_small('send') }}</button>
@@ -89,8 +91,8 @@ block body %} {% include 'smart/madules/search_header.html' %}
         </div>
         {%- endfor -%}
     </div>
-    {% endif %} {% for result in results %} {% if result.open_group and not
-    is_image_page %}
+    {% endif %} {% if results %}{% for result in results %} {% if
+    result.open_group and not is_image_page %}
     <div
         class="{{ result['template']|replace('.html', '') }}_group result-group"
     >
@@ -99,7 +101,7 @@ block body %} {% include 'smart/madules/search_header.html' %}
         result['template']) else get_result_template('smart', 'default.html') %}
         {% include template %} {% if result.close_group and not is_image_page %}
     </div>
-    {% endif %} {% endfor %}
+    {% endif %} {% endfor %} {% endif %}
 </div>
 <div class="info-panel">
     {% if infoboxes %} {% include 'smart/madules/infoboxs.html' %} {% endif %}

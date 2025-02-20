@@ -1,6 +1,6 @@
 @font-face {
   font-family: Vazirmatn UI;
-  src: url("Vazirmatn-UI-Thin.37503ccd.woff2") format("woff2");
+  src: url("Vazirmatn-UI-Thin.7fd7be2d.woff2") format("woff2");
   font-weight: 100;
   font-style: normal;
   font-display: swap;
@@ -8,7 +8,7 @@
 
 @font-face {
   font-family: Vazirmatn UI;
-  src: url("Vazirmatn-UI-ExtraLight.cba2b231.woff2") format("woff2");
+  src: url("Vazirmatn-UI-ExtraLight.165c33b1.woff2") format("woff2");
   font-weight: 200;
   font-style: normal;
   font-display: swap;
@@ -16,7 +16,7 @@
 
 @font-face {
   font-family: Vazirmatn UI;
-  src: url("Vazirmatn-UI-Light.c77d6de0.woff2") format("woff2");
+  src: url("Vazirmatn-UI-Light.feccc9d1.woff2") format("woff2");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -24,7 +24,7 @@
 
 @font-face {
   font-family: Vazirmatn UI;
-  src: url("Vazirmatn-UI-Regular.a3c99ff7.woff2") format("woff2");
+  src: url("Vazirmatn-UI-Regular.65a0d014.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -32,7 +32,7 @@
 
 @font-face {
   font-family: Vazirmatn UI;
-  src: url("Vazirmatn-UI-Medium.972fdd22.woff2") format("woff2");
+  src: url("Vazirmatn-UI-Medium.9f10f335.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -40,7 +40,7 @@
 
 @font-face {
   font-family: Vazirmatn UI;
-  src: url("Vazirmatn-UI-SemiBold.37d9c53d.woff2") format("woff2");
+  src: url("Vazirmatn-UI-SemiBold.f297b6f6.woff2") format("woff2");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -48,7 +48,7 @@
 
 @font-face {
   font-family: Vazirmatn UI;
-  src: url("Vazirmatn-UI-Bold.b0065d44.woff2") format("woff2");
+  src: url("Vazirmatn-UI-Bold.bb01a60b.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -56,7 +56,7 @@
 
 @font-face {
   font-family: Vazirmatn UI;
-  src: url("Vazirmatn-UI-ExtraBold.c431ea38.woff2") format("woff2");
+  src: url("Vazirmatn-UI-ExtraBold.b1556a2a.woff2") format("woff2");
   font-weight: 800;
   font-style: normal;
   font-display: swap;
@@ -64,7 +64,7 @@
 
 @font-face {
   font-family: Vazirmatn UI;
-  src: url("Vazirmatn-UI-Black.bc8837bc.woff2") format("woff2");
+  src: url("Vazirmatn-UI-Black.eebe1f15.woff2") format("woff2");
   font-weight: 900;
   font-style: normal;
   font-display: swap;
@@ -1086,7 +1086,8 @@ main:has(.not-found) .button {
 #results .results-container .message-container {
   background-color: var(--background-color);
   border-radius: 2rem;
-  padding: 1.5rem;
+  padding: 1.5rem 1.5rem 5rem;
+  position: relative;
 }
 
 #results .results-container .message-container .title {
@@ -1110,12 +1111,12 @@ main:has(.not-found) .button {
   border-radius: 1.5rem 1.5rem 1.5rem .5rem;
   width: 80%;
   max-width: 800px;
-  margin-bottom: 1rem;
   padding: 1rem;
 }
 
 #results .results-container .message-container .message-box .reference {
   color: var(--text-color);
+  margin-top: 1rem;
   font-size: .8rem;
 }
 
@@ -1184,9 +1185,12 @@ main:has(.not-found) .button {
   border-radius: 9999px;
   align-items: center;
   gap: .5rem;
+  width: calc(100% - 3rem);
   margin-top: 1rem;
   padding: 0 .5rem;
   display: flex;
+  position: absolute;
+  bottom: 1.5rem;
 }
 
 #results .results-container .message-container .send-message input {
@@ -1214,6 +1218,7 @@ main:has(.not-found) .button {
 #results .results-container .message-container.ai.loading {
   background-color: var(--primary-color);
   color: var(--filled-text-color);
+  padding: 1.5rem;
 }
 
 #results .results-container .message-container.ai.loading svg {

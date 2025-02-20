@@ -237,7 +237,8 @@ main:has(.not-found) {
 
         .message-container {
             background-color: var(--background-color);
-            padding: 1.5rem;
+            padding: 1.5rem 1.5rem 5rem;
+            position: relative;
             @include mixin.rounded(lg);
 
             .title {
@@ -257,7 +258,6 @@ main:has(.not-found) {
 
                 .message {
                     background-color: var(--secondary-background-color);
-                    margin-bottom: 1rem;
                     padding: 1rem;
                     border-radius: 1.5rem 1.5rem 1.5rem .5rem;
                     width: 80%;
@@ -265,6 +265,7 @@ main:has(.not-found) {
                 }
 
                 .reference {
+                    margin-top: 1rem;
                     font-size: .8rem;
                     color: var(--text-color);
 
@@ -335,6 +336,9 @@ main:has(.not-found) {
                 border: 1px solid var(--border-color);
                 @include mixin.rounded(full);
                 padding: 0 .5rem;
+                position: absolute;
+                bottom: 1.5rem;
+                width: calc(100% - 3rem);
                 gap: .5rem;
                 align-items: center;
                 margin-top: 1rem;
@@ -366,6 +370,7 @@ main:has(.not-found) {
             &.ai.loading {
                 background-color: var(--primary-color);
                 color: var(--filled-text-color);
+                padding: 1.5rem;
 
                 svg {
 
