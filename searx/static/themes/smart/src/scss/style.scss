@@ -237,7 +237,7 @@ main:has(.not-found) {
 
         .message-container {
             background-color: var(--background-color);
-            padding: 1.5rem 1.5rem 5rem;
+            padding: 1.5rem;
             position: relative;
             @include mixin.rounded(lg);
 
@@ -262,6 +262,74 @@ main:has(.not-found) {
                     border-radius: 1.5rem 1.5rem 1.5rem .5rem;
                     width: 80%;
                     max-width: 800px;
+
+                    p {
+                        margin-bottom: 1.25rem;
+                    }
+
+                    a {
+                        color: var(--primary-color);
+                    }
+
+                    img {
+                        max-width: 100%;
+                    }
+
+                    pre {
+                        margin: .5rem;
+
+                        code {
+                            display: block;
+                        }
+                    }
+
+                    code {
+                        font-family: monospace;
+                        @include mixin.rounded(sm);
+                        background-color: var(--secondary-text-color);
+                        color: var(--filled-text-color);
+                        padding: .5rem .25rem;
+                    }
+
+                    :is(h1, h2, h3, h4, h5, h6) {
+                        margin-bottom: .75rem;
+                        font-weight: 700;
+                        font-size: 1.3rem;
+                    }
+
+                    li {
+                        margin-bottom: .5rem;
+                        padding-left: 1rem;
+
+                        &::marker {
+                            color: var(--text-color);
+                        }
+                    }
+
+                    :is(ol, ul) {
+                        margin-bottom: 1rem;
+                        margin-left: 1.5rem;
+                    }
+
+                    ol li {
+                        list-style-type: decimal;
+                    }
+
+                    ul li {
+                        list-style-type: disc;
+
+                        ul li {
+                            list-style-type: circle;
+
+                            ul li {
+                                list-style-type: square;
+                            }
+                        }
+                    }
+
+                    :last-child {
+                        margin-bottom: 0;
+                    }
                 }
 
                 .reference {
@@ -367,6 +435,10 @@ main:has(.not-found) {
                 }
             }
 
+            &.ai {
+                padding: 1.5rem 1.5rem 5rem;
+            }
+
             &.ai.loading {
                 background-color: var(--primary-color);
                 color: var(--filled-text-color);
@@ -408,10 +480,21 @@ main:has(.not-found) {
             "results results image-detail"
             "footer footer footer";
 
+        &:has(.multiple-results) {
+            grid-template-areas:
+                "search links links"
+                "search amount amount"
+                "results sidebox image-detail"
+                "footer footer footer";
+        }
     }
 
     &.image-open {
         grid-template-columns: 2fr 0fr 1fr;
+
+        &:has(.multiple-results) {
+            grid-template-columns: 2fr 1fr 1fr;
+        }
     }
 
     .share_btn {
@@ -621,6 +704,7 @@ footer {
     #send_search {
         background-color: var(--secondary-color);
         padding: .5rem 1.5rem;
+        text-transform: capitalize;
 
         &:focus {
             outline: none;
@@ -680,6 +764,7 @@ footer {
             height: 100%;
             cursor: pointer;
             @include mixin.rounded();
+            text-transform: capitalize;
 
             .category-icon {
                 padding: 1rem;
@@ -695,7 +780,6 @@ footer {
             }
         }
     }
-
 }
 
 #search.header {
@@ -740,9 +824,10 @@ footer {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 1rem;
+            gap: .5rem;
 
             .category {
+                text-transform: capitalize;
                 display: inline-block;
                 background-color: var(--background-color);
                 padding: .5rem 1rem;

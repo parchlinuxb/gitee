@@ -26,6 +26,7 @@
         "@fontsource-variable/inter": "^5.1.1",
         "@fontsource/inter": "^5.1.1",
         "ejs": "^3.1.10",
+        "markdown-it": "^14.1.0",
         "nodemon": "^3.1.9",
         "openai": "^4.85.3",
         "remixicon": "^4.5.0",

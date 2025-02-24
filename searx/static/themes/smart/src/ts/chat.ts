@@ -1,6 +1,7 @@
 import { ChatCompletionMessageParam } from "openai/resources/index.mjs";
 import { $ } from "./app";
 import { OpenAI } from "openai";
+import markdownit from "markdown-it";
 
 let client: OpenAI;
 
@@ -13,6 +14,8 @@ let messages: ChatCompletionMessageParam[] = [
     },
 ];
 
+let md;
+
 export function setupChat() {
     const chatContainer = $("#ai-message-container") as HTMLDivElement;
     if (!chatContainer) return;
@@ -22,8 +25,6 @@ export function setupChat() {
         "input"
     ) as HTMLInputElement;
     if (!messageInput) return;
-    const searchQuery = $("#search-query") as HTMLParagraphElement;
-    if (!searchQuery) return;
 
     client = new OpenAI({
         apiKey: "FAKE",
@@ -31,9 +32,9 @@ export function setupChat() {
         baseURL: "https://openai.jabirproject.org/v1",
     });
 
-    sendMessage(messageInput, chatContainer, searchQuery.innerText).then(() =>
-        chatContainer.classList.remove("loading")
-    );
+    md = markdownit();
+
+    sendMessage(messageInput, chatContainer);
 
     sendMessageForm.addEventListener("submit", function (e) {
         e.preventDefault();
@@ -79,23 +80,33 @@ async function sendMessage(
         content: message || userMessage,
     });
 
+    const userMessageElement = createMessage(chatContainer, "user");
+    userMessageElement.innerText = message || userMessage;
+    messageInput.value = "";
+
     const stream = await client.chat.completions.create({
         // @ts-ignore
         model: "jabir-400b-online",
         messages,
-        // do to some bugs right now i disabled it
-        // stream: true,
     });
 
+    if (!stream.choices[0].message.content) return;
+
+    chatContainer.classList.remove("loading");
     const messageElement = createMessage(chatContainer, "ai");
 
-    // for await (const chunk of stream) {
-    //     const text = chunk.choices[0].delta.content || "";
+    let messageText: string = "";
+    for (const chunk of stream.choices[0].message.content.split("\n")) {
+        for (const token of chunk.split("")) {
+            await new Promise((resolve) => setTimeout(resolve, 10));
+            messageText += token;
+            messageElement.innerHTML += token.replace(" ", "&nbsp;");
+        }
+        messageText += "\n";
 
-    //     messageElement.innerText += text;
-    // }\
-
-    messageElement.innerText = stream.choices[0].message.content || "";
+        console.log(messageText);
+        messageElement.innerHTML = md.render(messageText);
+    }
 
     if (messageElement.innerText.length <= 0) {
         messageElement.parentElement?.remove();
