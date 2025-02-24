@@ -8,8 +8,8 @@ block body %} {% include 'smart/madules/search_header.html' %}
 <div
     class="results-container {% if results and results|map(attribute='template')|unique|list|count and 'images.html' in results|map(attribute='template')|unique|list %} image-page {% if results|map(attribute='template')|unique|list|count > 1 %} multiple-results {% endif %} {% endif %}"
 >
-    {% if results and results|map(attribute='template')|unique|list|count and
-    'default.html' in results|map(attribute='template')|unique|list %}
+    {% if results and results|map(attribute='template')|unique|list|count == 1
+    and selected_categories|count == 1 and 'general' in selected_categories %}
     <p class="error js-alt">
         {{_('Jabir needs JS enabled to work properly.')}}
     </p>

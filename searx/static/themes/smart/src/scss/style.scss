@@ -857,8 +857,8 @@ footer {
                 @include mixin.rounded(full);
 
                 &.selected {
-                    background-color: #000;
-                    color: #fff;
+                    background-color: var(--text-color);
+                    color: var(--background-color);
                 }
             }
         }

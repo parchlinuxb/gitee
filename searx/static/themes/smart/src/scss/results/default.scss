@@ -1,6 +1,6 @@
 @use '../mixins.scss' as mixin;
 
-.default_group .result {
+:is(.default_group, .videos_group) .result {
     padding: 1.25rem;
     border-bottom: var(--secondary-background-color) solid 1px;
 
