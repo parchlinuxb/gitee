@@ -117,3 +117,10 @@ $dir: ltr !default;
         filter: invert(1);
     }
 }
+
+// Dark Mode
+@mixin dark-mode() {
+    @media (prefers-color-scheme: dark) {
+        @content;
+    }
+}

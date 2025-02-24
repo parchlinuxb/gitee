@@ -174,8 +174,7 @@ main:has(.not-found) {
             font-size: 2rem;
             display: block;
             text-align: center;
-            // TODO: when dark mode colors added
-            // @include mixin.fix-color();
+            @include mixin.fix-color();
 
             img {
                 max-width: clamp(70px, 25vw, 150px);
@@ -260,6 +259,7 @@ main:has(.not-found) {
                     background-color: var(--secondary-background-color);
                     padding: 1rem;
                     border-radius: 1.5rem 1.5rem 1.5rem .5rem;
+                    overflow: hidden;
                     width: 80%;
                     max-width: 800px;
 
@@ -327,6 +327,11 @@ main:has(.not-found) {
                         }
                     }
 
+                    hr {
+                        margin: 1rem;
+                        opacity: .2;
+                    }
+
                     :last-child {
                         margin-bottom: 0;
                     }
@@ -378,6 +383,11 @@ main:has(.not-found) {
                         @include mixin.rounded(full);
                         border: 2px solid var(--text-color);
                         animation: loading-indecator 2s infinite;
+
+                        @include mixin.dark-mode() {
+                            border-color: var(--background-color);
+                            animation-name: loading-indecator-dark;
+                        }
                     }
 
                     :nth-child(2) {
@@ -396,6 +406,10 @@ main:has(.not-found) {
                     align-items: center;
                     background-color: var(--text-color);
                     color: var(--filled-text-color);
+
+                    @include mixin.dark-mode() {
+                        color: var(--background-color);
+                    }
                 }
             }
 
@@ -445,7 +459,14 @@ main:has(.not-found) {
                 padding: 1.5rem;
 
                 svg {
+                    fill: var(--filled-text-color);
 
+                    @include mixin.dark-mode() {
+                        fill: var(--background-color);
+                    }
+                }
+
+                .title svg {
                     fill: var(--filled-text-color);
                 }
 
@@ -571,6 +592,7 @@ body:has(.sidebar_btn[open]) {
         height: 100%;
         overflow-y: auto;
         overflow-x: hidden;
+        color: var(--text-color);
         position: absolute;
         min-width: $screen-xs - 2rem;
         padding: 1rem;
@@ -799,8 +821,8 @@ footer {
             align-items: center;
             justify-content: center;
             width: 100px;
-            // TODO: when dark mode colors added
-            // @include mixin.fix-color();
+
+            @include mixin.fix-color();
 
             img {
                 width: 100%;
@@ -948,5 +970,22 @@ input[type="checkbox"].switch {
     75% {
         transform: scale(.9);
         background-color: var(--text-color);
+    }
+}
+
+@keyframes loading-indecator-dark {
+    0% {
+        transform: scale(1);
+        background-color: transparent;
+    }
+
+    50% {
+        transform: scale(1);
+        background-color: transparent;
+    }
+
+    75% {
+        transform: scale(.9);
+        background-color: var(--background-color);
     }
 }

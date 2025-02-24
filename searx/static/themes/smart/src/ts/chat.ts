@@ -97,14 +97,17 @@ async function sendMessage(
 
     let messageText: string = "";
     for (const chunk of stream.choices[0].message.content.split("\n")) {
+        const paragraph = document.createElement("p");
+        messageElement.appendChild(paragraph);
+
         for (const token of chunk.split("")) {
             await new Promise((resolve) => setTimeout(resolve, 10));
             messageText += token;
-            messageElement.innerHTML += token.replace(" ", "&nbsp;");
+            paragraph.textContent += token;
         }
         messageText += "\n";
 
-        console.log(messageText);
+        paragraph.remove();
         messageElement.innerHTML = md.render(messageText);
     }
 
