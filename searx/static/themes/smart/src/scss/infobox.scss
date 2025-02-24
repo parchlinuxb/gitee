@@ -97,6 +97,7 @@
 
         .tab {
             padding: .5rem 1.25rem;
+            cursor: pointer;
             color: var(--text-color);
             text-decoration: none;
             font-size: 0.9rem;
@@ -115,6 +116,30 @@
 
         input[type="radio"] {
             display: none;
+        }
+    }
+
+    &:has(#tab-related:checked) .info-related-topics {
+        display: block;
+    }
+
+    .info-related-topics {
+        display: none;
+
+        .topic {
+            padding: 0 1.5rem 1rem;
+
+            h3 {
+                font-size: 1.2rem;
+                font-weight: 600;
+                margin-bottom: 0.5rem;
+            }
+
+            .topics-list {
+                display: flex;
+                flex-wrap: wrap;
+                gap: .5rem;
+            }
         }
     }
 }

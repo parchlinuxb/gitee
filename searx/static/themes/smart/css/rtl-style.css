@@ -429,6 +429,7 @@ body {
 }
 
 .info-box .info-tabs .tab {
+  cursor: pointer;
   color: var(--text-color);
   border-bottom: 3px solid #0000;
   padding: .5rem 1.25rem;
@@ -448,6 +449,30 @@ body {
 
 .info-box .info-tabs input[type="radio"] {
   display: none;
+}
+
+.info-box:has(#tab-related:checked) .info-related-topics {
+  display: block;
+}
+
+.info-box .info-related-topics {
+  display: none;
+}
+
+.info-box .info-related-topics .topic {
+  padding: 0 1.5rem 1rem;
+}
+
+.info-box .info-related-topics .topic h3 {
+  margin-bottom: .5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.info-box .info-related-topics .topic .topics-list {
+  flex-wrap: wrap;
+  gap: .5rem;
+  display: flex;
 }
 
 :is(.default_group, .videos_group) .result {

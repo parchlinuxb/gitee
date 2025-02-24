@@ -1,16 +1,17 @@
-{% for infobox in infoboxes %}
+{% set relatedTopics = namespace(topics=[]) %} {% for infobox in infoboxes %}{%
+if infobox.content %}
 <div class="info-box">
     <div class="info-header">
         <h2>{{ infobox.infobox }}</h2>
         <span class="subtitle">{{ infobox.subtitle }}</span>
     </div>
 
-    {% if infobox.attributes or infobox.relatedTopics %}
+    {% if infobox.attributes or infobox.relatedTopics or relatedTopics.topics %}
     <div class="info-tabs">
         {% if infobox.attributes %}
         <label for="tab-info" class="tab">Info</label>
         <input type="radio" name="tab-{{loop.index}}" id="tab-info" checked />
-        {% endif %} {% if infobox.relatedTopics %}
+        {% endif %} {% if infobox.relatedTopics or relatedTopics.topics %}
         <label for="tab-related" class="tab">Related Topics</label>
         <input
             type="radio"
@@ -81,44 +82,48 @@
         </li>
         {%- endfor -%}
     </ul>
-    {%- endif -%} {%- if infobox.relatedTopics -%}
-    <div class="relatedTopics">
-        {%- for topic in infobox.relatedTopics -%}
-        <div>
+    {%- endif -%} {%- if infobox.relatedTopics or relatedTopics.topics -%}
+    <div class="info-related-topics">
+        {%- for topic in infobox.relatedTopics or relatedTopics.topics -%}
+        <div class="topic">
             <h3><bdi>{{ topic.name }}</bdi></h3>
-            {%- for suggestion in topic.suggestions -%}
-            <form
-                method="{{ method or 'POST' }}"
-                action="{{ url_for('search') }}"
-            >
-                <input type="hidden" name="q" value="{{ suggestion }}" />
-                <input
-                    type="hidden"
-                    name="time_range"
-                    value="{{ time_range }}"
-                />
-                <input
-                    type="hidden"
-                    name="language"
-                    value="{{ current_language }}"
-                />
-                <input
-                    type="hidden"
-                    name="safesearch"
-                    value="{{ safesearch }}"
-                />
-                <input type="hidden" name="theme" value="{{ theme }}" />
-                {%- if timeout_limit -%}<input
-                    type="hidden"
-                    name="timeout_limit"
-                    value="{{ timeout_limit|e }}"
-                />{%- endif -%}
-                <input type="submit" value="{{ suggestion }}" />
-            </form>
-            {%- endfor -%}
+            <div class="topics-list">
+                {%- for suggestion in topic.suggestions -%}
+                <form
+                    method="{{ method or 'POST' }}"
+                    action="{{ url_for('search') }}"
+                >
+                    <input type="hidden" name="q" value="{{ suggestion }}" />
+                    <input
+                        type="hidden"
+                        name="time_range"
+                        value="{{ time_range }}"
+                    />
+                    <input
+                        type="hidden"
+                        name="language"
+                        value="{{ current_language }}"
+                    />
+                    <input
+                        type="hidden"
+                        name="safesearch"
+                        value="{{ safesearch }}"
+                    />
+                    <input type="hidden" name="theme" value="{{ theme }}" />
+                    {%- if timeout_limit -%}<input
+                        type="hidden"
+                        name="timeout_limit"
+                        value="{{ timeout_limit|e }}"
+                    />{%- endif -%}
+                    <button type="submit">{{ suggestion }}</button>
+                </form>
+                {%- endfor -%}
+            </div>
         </div>
         {%- endfor -%}
     </div>
-    {%- endif -%}
+    {%- endif -%} {% if relatedTopics.topics %} {% set relatedTopics.topics = []
+    %} {% endif %}
 </div>
-{% endfor %}
+{% elif infobox.relatedTopics %} {% set relatedTopics.topics =
+infobox.relatedTopics %} {% endif %} {% endfor %}
