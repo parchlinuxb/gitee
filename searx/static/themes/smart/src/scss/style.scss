@@ -235,6 +235,7 @@ main:has(.not-found) {
         transition: margin-top 100ms ease-in-out;
 
         .message-container {
+            margin-top: 1rem;
             background-color: var(--background-color);
             padding: 1.5rem;
             position: relative;
@@ -488,7 +489,7 @@ main:has(.not-found) {
             background-color: var(--background-color);
         }
 
-        .result-group:first-child {
+        :first-child {
             margin-top: 0;
         }
     }
@@ -662,6 +663,7 @@ footer {
     background-color: var(--background-color);
     padding: .25rem .5rem;
     width: clamp(400px, 50vw, 40rem);
+    position: relative;
     @include mixin.rounded(full);
     display: flex;
     align-items: center;
@@ -787,6 +789,7 @@ footer {
             cursor: pointer;
             @include mixin.rounded();
             text-transform: capitalize;
+            transition: background-color 250ms ease-out;
 
             .category-icon {
                 padding: 1rem;
@@ -898,6 +901,37 @@ footer {
         opacity: 1;
         height: 2rem;
     }
+}
+
+.suggestion-box {
+    display: flex;
+    @include mixin.rounded();
+    margin-top: 1rem;
+    flex-direction: column;
+    gap: 1rem;
+    max-height: 50vh;
+    overflow-y: auto;
+
+    // no scrollbar
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &:has(button) {
+        padding: 1rem;
+        background-color: var(--background-color);
+    }
+}
+
+#results .suggestion-box {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 1;
 }
 
 input[type="checkbox"].switch {

@@ -25,6 +25,8 @@
     "dependencies": {
         "@fontsource-variable/inter": "^5.1.1",
         "@fontsource/inter": "^5.1.1",
+        "axios": "^1.7.9",
+        "debounce": "^2.2.0",
         "ejs": "^3.1.10",
         "markdown-it": "^14.1.0",
         "nodemon": "^3.1.9",

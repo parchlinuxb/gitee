@@ -1118,6 +1118,7 @@ main:has(.not-found) .button {
 #results .results-container .message-container {
   background-color: var(--background-color);
   border-radius: 2rem;
+  margin-top: 1rem;
   padding: 1.5rem;
   position: relative;
 }
@@ -1373,7 +1374,7 @@ main:has(.not-found) .button {
   padding: 1rem;
 }
 
-#results .results-container .result-group:first-child {
+#results .results-container :first-child {
   margin-top: 0;
 }
 
@@ -1542,6 +1543,7 @@ footer .footer-links {
   width: clamp(400px, 50vw, 40rem);
   padding: .25rem .5rem;
   display: flex;
+  position: relative;
 }
 
 @media (width <= 35rem) {
@@ -1662,6 +1664,7 @@ footer .footer-links {
   gap: .5rem;
   height: 100%;
   padding: 1rem;
+  transition: background-color .25s ease-out;
   display: flex;
 }
 
@@ -1770,6 +1773,35 @@ footer .footer-links {
 #search.header:has(#filter:checked) .filters {
   opacity: 1;
   height: 2rem;
+}
+
+.suggestion-box {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  border-radius: 1rem;
+  flex-direction: column;
+  gap: 1rem;
+  max-height: 50vh;
+  margin-top: 1rem;
+  display: flex;
+  overflow-y: auto;
+}
+
+.suggestion-box::-webkit-scrollbar {
+  display: none;
+}
+
+.suggestion-box:has(button) {
+  background-color: var(--background-color);
+  padding: 1rem;
+}
+
+#results .suggestion-box {
+  z-index: 1;
+  width: 100%;
+  position: absolute;
+  top: 100%;
+  left: 0;
 }
 
 input[type="checkbox"].switch {
