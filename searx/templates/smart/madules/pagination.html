@@ -1,0 +1,98 @@
+{% macro engine_data_form(engine_data) -%} {% for engine_name, kv_data in
+engine_data.items() %} {% for k, v in kv_data.items() %}
+<input
+    type="hidden"
+    name="engine_data-{{ engine_name }}-{{ k|e }}"
+    value="{{ v|e }}"
+/>
+{% endfor %} {% endfor %} {%- endmacro %} {% if paging %}
+<nav id="pagination" role="navigation">
+    {% if pageno > 1 %}
+    <form
+        method="{{ method or 'POST' }}"
+        action="{{ url_for('search') }}"
+        class="nav-button"
+    >
+        <input type="hidden" name="q" value="{{ q|e }}" />
+        {% for category in selected_categories %}
+        <input type="hidden" name="category_{{ category }}" value="1" />
+        {% endfor %}
+        <input type="hidden" name="pageno" value="{{ pageno-1 }}" />
+        <input type="hidden" name="language" value="{{ current_language }}" />
+        <input type="hidden" name="time_range" value="{{ time_range }}" />
+        <input type="hidden" name="safesearch" value="{{ safesearch }}" />
+        <input type="hidden" name="theme" value="{{ theme }}" />
+        {% if timeout_limit %}<input
+            type="hidden"
+            name="timeout_limit"
+            value="{{ timeout_limit|e }}"
+        />{% endif %} {{- engine_data_form(engine_data) -}}
+        <button role="link" type="submit" class="secondary">
+            {{ _('Previous page') }}
+        </button>
+    </form>
+    {% endif %} {% set pstart = 1 %} {% set pend = 11 %} {% if pageno > 5 %} {%
+    set pstart = pageno - 4 %} {% set pend = pageno + 6 %} {% endif %}
+    <div class="page-numbers">
+        {% for x in range(pstart, pend) %}
+        <form
+            method="{{ method or 'POST' }}"
+            action="{{ url_for('search') }}"
+            class="page_number"
+        >
+            <input type="hidden" name="q" value="{{ q|e }}" />
+            {% for category in selected_categories %}
+            <input type="hidden" name="category_{{ category }}" value="1" />
+            {% endfor %}
+            <input type="hidden" name="pageno" value="{{ x }}" />
+            <input
+                type="hidden"
+                name="language"
+                value="{{ current_language }}"
+            />
+            <input type="hidden" name="time_range" value="{{ time_range }}" />
+            <input type="hidden" name="safesearch" value="{{ safesearch }}" />
+            <input type="hidden" name="theme" value="{{ theme }}" />
+            {% if timeout_limit %}<input
+                type="hidden"
+                name="timeout_limit"
+                value="{{ timeout_limit|e }}"
+            />{% endif %} {{- engine_data_form(engine_data) -}}
+
+            <button
+                role="link"
+                type="{% if pageno == x %} button {% else %} submit {% endif %}"
+                class="page-number {% if pageno == x %} current {% endif %}"
+            >
+                {{ x }}
+            </button>
+        </form>
+        {% endfor %}
+    </div>
+    {% if results | count > 0 %}
+    <form
+        method="{{ method or 'POST' }}"
+        action="{{ url_for('search') }}"
+        class="nav-button button"
+    >
+        <input type="hidden" name="q" value="{{ q|e }}" />
+        {% for category in selected_categories %}
+        <input type="hidden" name="category_{{ category }}" value="1" />
+        {% endfor %}
+        <input type="hidden" name="pageno" value="{{ pageno+1 }}" />
+        <input type="hidden" name="language" value="{{ current_language }}" />
+        <input type="hidden" name="time_range" value="{{ time_range }}" />
+        <input type="hidden" name="safesearch" value="{{ safesearch }}" />
+        <input type="hidden" name="theme" value="{{ theme }}" />
+        {% if timeout_limit %}<input
+            type="hidden"
+            name="timeout_limit"
+            value="{{ timeout_limit|e }}"
+        />{% endif %} {{- engine_data_form(engine_data) -}}
+        <button role="link" type="submit" class="secondary">
+            {{ _('Next page') }}
+        </button>
+    </form>
+    {% endif %}
+</nav>
+{% endif %}

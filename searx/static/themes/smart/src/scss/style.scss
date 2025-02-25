@@ -26,6 +26,8 @@ $dir: ltr !default;
 
 @forward './preferences';
 
+@forward './pagination';
+
 @function toRem($value) {
     @return floor($value / 16) * 1rem;
 }
