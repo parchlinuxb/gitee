@@ -38,6 +38,7 @@ block body %} {% include 'smart/madules/search_header.html' %}
                 type="text"
                 placeholder="{{ _('Ask Jabir anything...') }}"
                 value="{{ q|e }}"
+                dir="auto"
             />
             <button>{{ icon_small('send') }}</button>
         </form>
@@ -52,7 +53,7 @@ block body %} {% include 'smart/madules/search_header.html' %}
         <div class="message-box">
             {% if answer.template != "answer/legacy.html" %} {%- include
             ("simple/" + (answer.template)) -%} {% else %}
-            <p class="message">{{ answer.answer }}</p>
+            <p class="message" dir="auto">{{ answer.answer }}</p>
             {%- if answer.url -%}
             <div class="reference">
                 {{ _('Based on') }}

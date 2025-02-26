@@ -278,10 +278,46 @@ main:has(.not-found) {
                 .message {
                     background-color: var(--secondary-background-color);
                     padding: 1rem;
-                    border-radius: 1.5rem 1.5rem 1.5rem .5rem;
+                    // Default LTR message shape
+                    border-radius: 1.5rem 1.5rem .5rem 1.5rem;
                     overflow: hidden;
                     width: 80%;
                     max-width: 800px;
+
+                    // Add RTL support
+                    &[dir="rtl"] {
+                        // RTL message shape - flip the bottom corners
+                        border-radius: 1.5rem 1.5rem .5rem 1.5rem;
+                        text-align: right;
+
+                        li {
+                            padding-right: 0;
+                            padding-left: 1rem;
+                            margin-right: 1.5rem;
+                            margin-left: 0;
+                        }
+
+                        :is(ol, ul) {
+                            padding-right: 1.5rem;
+                            padding-left: 0;
+                            margin-right: 0;
+                            margin-left: 0;
+                        }
+
+                        pre,
+                        code {
+                            direction: ltr;
+                            text-align: left;
+                            unicode-bidi: bidi-override;
+                        }
+
+                        blockquote {
+                            border-left: none;
+                            border-right: 4px solid var(--border-color);
+                            padding-right: 1rem;
+                            padding-left: 0;
+                        }
+                    }
 
                     p {
                         margin-bottom: 1.25rem;
@@ -376,7 +412,14 @@ main:has(.not-found) {
                     .message {
                         background-color: var(--primary-color);
                         color: var(--filled-text-color);
+                        // Default LTR user message shape
                         border-radius: 1.5rem 1.5rem .5rem 1.5rem;
+
+                        // Add RTL support
+                        &[dir="rtl"] {
+                            // RTL user message shape - flip the bottom corners
+                            border-radius: 1.5rem 1.5rem 1.5rem .5rem;
+                        }
                     }
                 }
             }
@@ -1072,7 +1115,7 @@ input[type="checkbox"].switch {
 
     75% {
         transform: scale(.9);
-        background-color: var(--text-color);
+        background-color: var (--text-color);
     }
 }
 
