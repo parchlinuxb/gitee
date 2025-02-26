@@ -187,13 +187,16 @@ main:has(.not-found) {
 
 #results {
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    grid-template-rows: 5rem min-content 1fr auto;
+
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content auto min-content min-content 1fr auto;
     grid-template-areas:
-        "search links"
-        "search amount"
-        "results sidebox"
-        "footer footer";
+        "links"
+        "search"
+        "amount"
+        "sidebox"
+        "results"
+        "footer";
     gap: 1rem;
     margin: 0 auto;
     padding: 0 1rem;
@@ -201,6 +204,16 @@ main:has(.not-found) {
     overflow-x: hidden;
     overflow-y: auto;
     transition: grid-template-columns 300ms ease-in-out;
+
+    @include mixin.screens($screen-md) {
+        grid-template-columns: 2fr 1fr;
+        grid-template-rows: 5rem min-content 1fr auto;
+        grid-template-areas:
+            "search links"
+            "search amount"
+            "results sidebox"
+            "footer footer";
+    }
 
     @include mixin.screens($screen-xl) {
         padding: 0 4rem;
@@ -235,6 +248,10 @@ main:has(.not-found) {
         grid-area: results;
         position: relative;
         transition: margin-top 100ms ease-in-out;
+
+        @include mixin.max-screens($screen-md) {
+            width: calc(100vw - 3rem);
+        }
 
         .message-container {
             margin-top: 1rem;
@@ -546,15 +563,19 @@ main:has(.not-found) {
     justify-content: end;
 
     :is(.link, .sidebar_btn) {
+        @include mixin.rounded(full);
         width: 40px;
         height: 40px;
     }
 }
 
-body:has(.sidebar_btn[open]) {
-    padding: .5rem;
-    gap: .5rem;
+body:has(.sidebar_btn input:checked) {
     background-color: var(--background-color);
+
+    @include mixin.screens($screen-md) {
+        padding: .5rem;
+        gap: .5rem;
+    }
 
     #sidebar {
         flex: 1;
@@ -567,8 +588,19 @@ body:has(.sidebar_btn[open]) {
         }
     }
 
+
     #index {
         height: calc(100svh - 1rem);
+
+        @include mixin.max-screens($screen-md) {
+            height: 100svh;
+        }
+    }
+
+    @include mixin.max-screens($screen-md) {
+        .body-container {
+            flex: 0;
+        }
     }
 
     header .links .link.config {
@@ -581,7 +613,6 @@ body:has(.sidebar_btn[open]) {
 #sidebar {
     flex: 0;
     min-width: 0;
-    @include mixin.rounded();
     overflow: hidden;
     background: var(--secondary-background-color);
     border: var(--secondary-background-color) solid;
@@ -589,6 +620,10 @@ body:has(.sidebar_btn[open]) {
     transition: flex 300ms ease-in-out,
         min-width 300ms ease-in-out;
     position: relative;
+
+    @include mixin.screens($screen-md) {
+        @include mixin.rounded();
+    }
 
     &>.container {
         width: 100%;
@@ -607,11 +642,23 @@ body:has(.sidebar_btn[open]) {
         }
 
         h1 {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
             font-size: 1.5rem;
             padding: .25rem 0;
             text-align: center;
             color: var(--text-color);
             @include mixin.rounded(full);
+
+            @include mixin.screens($screen-md) {
+                justify-content: center;
+
+                label {
+                    display: none;
+                }
+            }
         }
 
         .about {
@@ -647,6 +694,7 @@ footer {
 
     @include mixin.max-screens($screen-md) {
         justify-content: center;
+        text-align: center;
     }
 
     .footer-links {
@@ -669,11 +717,11 @@ footer {
     @include mixin.rounded(full);
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
     gap: .5rem;
 
     @include mixin.max-screens($screen-sm) {
-        width: 70vw;
+        width: calc(100% - 4rem);
+        margin: 0 2rem;
         @include mixin.rounded();
     }
 
@@ -684,9 +732,10 @@ footer {
     }
 
 
-    input {
+    input[type="text"] {
         flex: 1;
         background-color: transparent;
+        width: inherit;
         border: none;
         color: var(--text-color);
         @include mixin.rounded(full);
@@ -816,10 +865,14 @@ footer {
 
     .header {
         display: flex;
-
         justify-content: space-between;
         gap: 1rem;
         align-items: center;
+
+        @include mixin.max-screens($screen-md) {
+            width: calc(100vw - 3rem);
+            flex-direction: column;
+        }
 
         .logo {
             display: flex;
@@ -846,6 +899,11 @@ footer {
         align-items: center;
         justify-content: space-between;
         gap: 1rem;
+
+        @include mixin.max-screens($screen-md) {
+            width: calc(100vw - 3rem);
+            overflow-x: auto;
+        }
 
         .categories {
             display: flex;
@@ -925,6 +983,15 @@ footer {
     &:has(button) {
         padding: 1rem;
         background-color: var(--background-color);
+    }
+
+    button {
+        background-color: transparent;
+        border: none;
+
+        &:focus {
+            background-color: var(--primary-color);
+        }
     }
 }
 

@@ -41,7 +41,13 @@
         display: grid;
         grid-area: main;
         grid-template-columns: subgrid;
-        grid-template-areas: "main backup";
+        gap: 1rem;
+        grid-template-areas: "main"
+            "backup";
+
+        @include mixin.screens($screen-md) {
+            grid-template-areas: "main backup";
+        }
 
         .madules-container {
             grid-area: main;

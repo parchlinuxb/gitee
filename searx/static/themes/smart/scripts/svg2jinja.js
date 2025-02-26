@@ -15,6 +15,7 @@ const svgList = {
   ai: "node_modules/remixicon/icons/System/apps-2-ai-fill.svg",
   send: "node_modules/remixicon/icons/Business/send-plane-2-fill.svg",
   stop: "node_modules/remixicon/icons/Media/pause-circle-line.svg",
+  back: "node_modules/remixicon/icons/Arrows/arrow-go-back-fill.svg",
 };
 
 const ejs = require("ejs"),

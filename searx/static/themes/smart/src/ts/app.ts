@@ -83,17 +83,24 @@ function setupCategorySelection() {
 }
 
 function setupSuggestion() {
+    const formElement = $("#search") as HTMLFormElement;
+    if (!formElement) return;
     const queryInput = $("#q") as HTMLInputElement;
     if (!queryInput) return;
     const suggestionsContainer = $("#suggestion") as HTMLDivElement;
     if (!suggestionsContainer) return;
 
-    function setSuggestion(e: Event) {
-        queryInput.value = (e.target as HTMLButtonElement).innerText;
-        queryInput.focus();
+    const controler = new AbortController();
+
+    function setSuggestion(text: string, focus = true) {
+        console.log(text, focus);
+        queryInput.value = text;
+        if (focus) queryInput.focus();
     }
 
     const getSuggestions = debounce(async function () {
+        onSuggestion = false;
+        if (controler.signal.aborted) return;
         const query = queryInput.value;
         const res = await axios.post<Array<string | string[]>>(
             "/autocompleter",
@@ -108,23 +115,79 @@ function setupSuggestion() {
         if (res.data[1]) suggestions.push(...res.data[1]);
 
         suggestions.forEach((item) => {
-            const itemElement = document.createElement("button");
+            const itemElement = document.createElement(
+                "button"
+            ) as HTMLButtonElement;
             itemElement.setAttribute("type", "button");
             itemElement.innerText = item;
             suggestionsContainer.appendChild(itemElement);
-            itemElement.addEventListener("click", setSuggestion);
+            itemElement.addEventListener("click", function (e) {
+                setSuggestion((e.target as HTMLButtonElement).innerText);
+                controler.abort();
+                formElement.submit();
+            });
             itemElement.addEventListener("keydown", function (e) {
                 if (e.key === "Enter" || e.key === " ") {
-                    setSuggestion(e);
+                    setSuggestion((e.target as HTMLButtonElement).innerText);
+                    controler.abort();
+                    formElement.submit();
+                } else if (e.key === "ArrowDown") {
+                    const currentButton = e.target as HTMLButtonElement;
+                    const nextButton =
+                        currentButton.nextSibling as HTMLButtonElement | null;
+                    if (!nextButton) return;
+                    setSuggestion(nextButton.innerText, false);
+                    nextButton.focus();
+                } else if (e.key === "ArrowUp") {
+                    const currentButton = e.target as HTMLButtonElement;
+                    const previousButton =
+                        currentButton.previousSibling as HTMLButtonElement | null;
+                    if (previousButton) {
+                        setSuggestion(previousButton.innerText, false);
+                        previousButton.focus();
+                    } else {
+                        queryInput.focus();
+                    }
+                } else {
+                    queryInput.focus();
                 }
             });
         });
     }, 400);
 
-    queryInput.addEventListener("input", getSuggestions);
-    queryInput.addEventListener("focus", getSuggestions);
+    queryInput.addEventListener("input", getSuggestions, {
+        signal: controler.signal,
+    });
+    queryInput.addEventListener("focus", getSuggestions, {
+        signal: controler.signal,
+    });
+
+    let onSuggestion: Boolean = false;
+
     queryInput.addEventListener("blur", function () {
-        suggestionsContainer.innerHTML = "";
+        if (onSuggestion) return;
+        setTimeout(() => {
+            suggestionsContainer.innerHTML = "";
+        }, 300);
+    });
+
+    suggestionsContainer.addEventListener("focusout", function () {
+        debounce(function () {
+            if (!onSuggestion) return;
+            onSuggestion = false;
+            suggestionsContainer.innerHTML = "";
+        }, 300);
+    });
+
+    queryInput.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowDown") {
+            onSuggestion = true;
+            e.preventDefault();
+            if (suggestionsContainer.children.length <= 1) return;
+            const button = suggestionsContainer
+                .children[0] as HTMLButtonElement;
+            button.focus();
+        }
     });
 }
 
@@ -141,7 +204,7 @@ function afterPageLoad() {
     if ($("#index")) setupCategorySelection();
 
     // if there is search box
-    if ($("#search")) setupSuggestion();
+    setupSuggestion();
 
     // chat
     setupChat();

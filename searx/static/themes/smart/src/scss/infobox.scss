@@ -29,7 +29,7 @@
 
         img {
             height: 150px;
-            object-fit: cover;
+            object-fit: contain;
             @include mixin.rounded(sm);
             flex-shrink: 0;
             scroll-snap-align: start;

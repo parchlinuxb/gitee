@@ -46,6 +46,7 @@
 
         .result-content {
             color: var(--text-color);
+            overflow-wrap: anywhere;
             font-size: 0.9rem;
             line-height: 1.5;
         }
@@ -68,10 +69,12 @@
             font-size: 0.85rem;
             text-decoration: none;
             display: inline-block;
+            overflow-wrap: anywhere;
         }
 
         .engines {
             display: flex;
+            flex-wrap: wrap;
             gap: 0.5rem;
 
             .engine {
