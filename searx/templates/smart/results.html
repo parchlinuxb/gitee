@@ -36,6 +36,7 @@ block body %} {% include 'smart/madules/search_header.html' %}
         <form class="send-message" id="send-message">
             <input
                 type="text"
+                dir="auto"
                 placeholder="{{ _('Ask Jabir anything...') }}"
                 value="{{ q|e }}"
             />

@@ -51,6 +51,7 @@ function createMessage(
     messageBox.classList.add("message-box");
     messageBox.classList.add(role);
     const messageElement = document.createElement("div");
+    messageElement.setAttribute("dir", "auto");
     messageElement.classList.add("message");
     messageBox.appendChild(messageElement);
 

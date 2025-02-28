@@ -34,7 +34,7 @@
             title="{{ result.title|striptags }}"
             loading="lazy"
         />{% endif -%} {% if result.content %}
-        <p class="result-content">{{ result.content | safe }}</p>
+        <p class="result-content" dir="auto">{{ result.content | safe }}</p>
         {%- else %}
         <p class="result-content">
             {{ _('This site did not provide any description.')|safe }}
