@@ -34,7 +34,7 @@ search:
   # Filter results. 0: None, 1: Moderate, 2: Strict
   safe_search: 0
   # Existing autocomplete backends: "baidu", "brave", "dbpedia", "duckduckgo", "google", "yandex",
-  # "mwmbl", "seznam", "startpage", "stract", "swisscows", "qwant", "wikipedia" -
+  # "mwmbl", "seznam", "stract", "swisscows", "qwant", "wikipedia" -
   # leave blank to turn it off by default.
   autocomplete: "duckduckgo"
   # minimun characters to type before autocompleter starts
@@ -1094,14 +1094,8 @@ engines:
     # Instanes will be selected randomly, see https://api.invidious.io/ for
     # instances that are stable (good uptime) and close to you.
     base_url:
-      - https://invidious.io.lol
-      - https://invidious.fdn.fr
-      - https://yt.artemislena.eu
-      - https://invidious.tiekoetter.com
-      - https://invidious.flokinet.to
-      - https://vid.puffyan.us
-      - https://invidious.privacydev.net
-      - https://inv.tux.pizza
+      - https://invidious.adminforge.de
+      - https://inv.nadeko.net
     shortcut: iv
     timeout: 3.0
     disabled: true
@@ -1466,9 +1460,12 @@ engines:
     frontend_url: https://srv.piped.video
     # Instance will be selected randomly, for more see https://piped-instances.kavin.rocks/
     backend_url:
-      - https://pipedapi.kavin.rocks
-      - https://pipedapi-libre.kavin.rocks
       - https://pipedapi.adminforge.de
+      - https://pipedapi.nosebs.ru
+      - https://pipedapi.ducks.party
+      - https://pipedapi.reallyaweso.me
+      - https://api.piped.private.coffee
+      - https://pipedapi.darkness.services
 
   - name: piped.music
     engine: piped
@@ -1802,10 +1799,22 @@ engines:
   - name: startpage
     engine: startpage
     shortcut: sp
-    timeout: 6.0
-    disabled: true
+    startpage_categ: web
+    categories: [general, web]
     additional_tests:
       rosebud: *test_rosebud
+
+  - name: startpage news
+    engine: startpage
+    startpage_categ: news
+    categories: [news, web]
+    shortcut: spn
+
+  - name: startpage images
+    engine: startpage
+    startpage_categ: images
+    categories: [images, web]
+    shortcut: spi
 
   - name: tokyotoshokan
     engine: tokyotoshokan
