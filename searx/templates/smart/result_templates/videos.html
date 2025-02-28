@@ -1,0 +1,88 @@
+{% from 'smart/icons.html' import icon %}
+
+<article class="result">
+    <div class="result-body">
+        <div class="thumbnail-container">
+            {%- if result.thumbnail %}<img
+                class="thumbnail"
+                src="{{ image_proxify(result.thumbnail) }}"
+                title="{{ result.title|striptags }}"
+                loading="lazy"
+            />{% endif -%} {%- if result.length %}
+            <div class="video-length">{{ result.length }}</div>
+            {% endif -%}
+        </div>
+
+        <div class="result-detail">
+            <a
+                href="{{ result.url }}"
+                class="result-header"
+                {%
+                if
+                results_on_new_tab
+                %}target="_blank"
+                rel="noopener noreferrer"
+                {%
+                endif
+                %}
+            >
+                <span class="title"> {{ result.title | safe }} </span>
+                {% if result.publishedDate %}
+                <time class="date" datetime="{{ result.publishedDate }}">
+                    {{ result.publishedDate }}
+                </time>
+                {% endif %}
+            </a>
+            {% if result.content %}
+            <p class="result-content" dir="auto">{{ result.content | safe }}</p>
+            {%- else %}
+            <p class="result-content">
+                {{ _('This site did not provide any description.')|safe }}
+            </p>
+            {% endif %} {% if result.views or result.author %}
+            <div class="details">
+                {%- if result.views %}
+                <div class="detail">
+                    <div class="detail-header">
+                        {{ icon('eye') }}
+                        <span>{{ _('Views') }} :</span>
+                    </div>
+                    {{ result.views }}
+                </div>
+                {% endif -%} {%- if result.author %}
+                <div class="detail">
+                    <div class="detail-header">
+                        {{ icon('user') }}
+                        <span>{{ _('Author') }} :</span>
+                    </div>
+                    {{ result.author }}
+                </div>
+                {% endif -%}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="result-meta">
+        <div class="result-url">
+            {% if favicon_resolver != "" and result.parsed_url.netloc %}
+            <div class="favicon">
+                <img
+                    loading="lazy"
+                    src="{{ favicon_url(result.parsed_url.netloc) }}"
+                />
+            </div>
+            {% endif %}
+            <span class="url">
+                {% if result.parsed_url.netloc %} {{ result.parsed_url.netloc
+                }}{{ result.parsed_url.path[:25] }} {% if
+                result.parsed_url.path|length > 25 %}... {% endif %} {% endif %}
+            </span>
+        </div>
+        <div class="engines">
+            {% for engine in result.engines %} {% if loop.index < 7 %}
+            <span class="engine">{{ engine }}</span>
+            {% endif %} {% endfor %}
+        </div>
+    </div>
+</article>

@@ -1,6 +1,6 @@
 @use '../mixins.scss' as mixin;
 
-:is(.default_group, .videos_group) .result {
+.default_group .result {
     padding: 1.25rem;
     border-bottom: var(--secondary-background-color) solid 1px;
 
@@ -38,7 +38,7 @@
         margin-bottom: 0.75rem;
 
         .thumbnail {
-            width: 5rem;
+            max-width: 10rem;
             height: 5rem;
             object-fit: cover;
             @include mixin.rounded();
@@ -52,7 +52,13 @@
         }
     }
 
+    .result-meta .result-url {
+        display: inline-block;
+        overflow-wrap: anywhere;
+    }
+}
 
+:is(.default_group, .videos_group) {
     .result-meta {
         display: flex;
         justify-content: space-between;
@@ -66,10 +72,8 @@
             color: var(--secondary-text-color);
             padding: 0.25rem 0.5rem;
             @include mixin.rounded(full);
-            font-size: 0.85rem;
             text-decoration: none;
-            display: inline-block;
-            overflow-wrap: anywhere;
+            font-size: 0.85rem;
         }
 
         .engines {

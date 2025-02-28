@@ -32,9 +32,23 @@
                 aria-label="{{ _('clear') }}"
                 class="hide_if_nojs"
             >
-                <span class="js-only">{{ icon_small('close') }}</span
-                ><span class="js-alt">{{ _('clear') }}</span>
+                {{ icon_small('close') }}
             </button>
+            <button
+                {%
+                for
+                category
+                in
+                selected_categories
+                %}
+                name="category_{{ category }}"
+                {%
+                endfor
+                %}
+                type="submit"
+                hidden
+                aria-hidden="true"
+            ></button>
             <div class="suggestion-box" id="suggestion"></div>
         </div>
     </div>
