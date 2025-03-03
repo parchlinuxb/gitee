@@ -1126,6 +1126,12 @@ fieldset .description {
   overflow-x: auto;
 }
 
+@media (width <= 56rem) {
+  #pagination {
+    width: calc(100vw - 3rem);
+  }
+}
+
 #pagination .page-numbers {
   align-items: center;
   gap: .5rem;
@@ -1140,6 +1146,10 @@ fieldset .description {
   background-color: var(--primary-color);
   color: var(--filled-text-color);
   cursor: initial;
+}
+
+#pagination button {
+  white-space: nowrap;
 }
 
 footer .footer-links a, main:has(.not-found) .button {
@@ -1344,20 +1354,15 @@ main:has(.not-found) .button {
 
 #results .results-container {
   grid-area: results;
+  width: 100%;
   transition: margin-top .1s ease-in-out;
   position: relative;
-}
-
-@media (width <= 56rem) {
-  #results .results-container {
-    width: calc(100vw - 3rem);
-  }
 }
 
 #results .results-container .message-container {
   background-color: var(--background-color);
   border-radius: 2rem;
-  margin-top: 1rem;
+  margin-bottom: 1rem;
   padding: 1.5rem;
   position: relative;
 }
@@ -1385,6 +1390,12 @@ main:has(.not-found) .button {
   max-width: 800px;
   padding: 1rem;
   overflow: hidden;
+}
+
+@media (width <= 56rem) {
+  #results .results-container .message-container .message-box .message {
+    max-width: 90vw;
+  }
 }
 
 #results .results-container .message-container .message-box .message p {
@@ -1609,7 +1620,7 @@ main:has(.not-found) .button {
 #results .results-container .result-group {
   background-color: var(--background-color);
   border-radius: 2rem;
-  margin-top: 1rem;
+  margin-bottom: 1rem;
   padding: 1rem;
 }
 
@@ -1848,6 +1859,10 @@ footer .footer-links {
   outline: none;
 }
 
+.search_box input[type="text"]::placeholder {
+  text-align: left;
+}
+
 .search_box button {
   color: var(--text-color);
   background-color: #0000;
@@ -1972,7 +1987,6 @@ footer .footer-links {
 @media (width <= 56rem) {
   #search.header .header {
     flex-direction: column;
-    width: calc(100vw - 3rem);
   }
 }
 
@@ -2004,7 +2018,7 @@ footer .footer-links {
 
 @media (width <= 56rem) {
   #search.header .selections {
-    width: calc(100vw - 3rem);
+    max-width: calc(100vw - 2rem);
     overflow-x: auto;
   }
 }

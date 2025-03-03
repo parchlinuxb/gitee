@@ -5,3 +5,13 @@
 * {
     font-family: 'Vazirmatn UI', sans-serif;
 }
+
+.message-container .message-box {
+    .message {
+        border-radius: 1.5rem 1.5rem .5rem 1.5rem !important;
+    }
+
+    &.user .message {
+        border-radius: 1.5rem 1.5rem 1.5rem .5rem !important;
+    }
+}

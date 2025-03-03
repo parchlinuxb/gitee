@@ -1,3 +1,6 @@
+@use './mixins.scss' as mixin;
+@use './definitions.scss' as *;
+
 #pagination {
     display: flex;
     justify-content: space-between;
@@ -7,6 +10,10 @@
     margin-top: 1rem;
     overflow-x: auto;
     width: 100%;
+
+    @include mixin.max-screens($screen-md) {
+        width: calc(100vw - 3rem);
+    }
 
     .page-numbers {
         display: flex;
@@ -22,5 +29,9 @@
                 cursor: initial;
             }
         }
+    }
+
+    button {
+        white-space: nowrap;
     }
 }

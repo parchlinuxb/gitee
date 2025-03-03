@@ -124,3 +124,25 @@ $dir: ltr !default;
         @content;
     }
 }
+
+// Functions
+
+@function returnAlign($align) {
+    @if $dir =='rtl' {
+        @if $align =='left' {
+            @return right;
+        }
+
+        @else if $align =='right' {
+            @return left;
+        }
+
+        @else {
+            @return $align;
+        }
+    }
+
+    @else {
+        @return $align;
+    }
+}

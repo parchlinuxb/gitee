@@ -249,13 +249,10 @@ main:has(.not-found) {
         grid-area: results;
         position: relative;
         transition: margin-top 100ms ease-in-out;
-
-        @include mixin.max-screens($screen-md) {
-            width: calc(100vw - 3rem);
-        }
+        width: 100%;
 
         .message-container {
-            margin-top: 1rem;
+            margin-bottom: 1rem;
             background-color: var(--background-color);
             padding: 1.5rem;
             position: relative;
@@ -283,6 +280,10 @@ main:has(.not-found) {
                     overflow: hidden;
                     width: 80%;
                     max-width: 800px;
+
+                    @include mixin.max-screens($screen-md) {
+                        max-width: 90vw;
+                    }
 
                     p {
                         margin-bottom: 1.25rem;
@@ -503,7 +504,7 @@ main:has(.not-found) {
         }
 
         .result-group {
-            margin-top: 1rem;
+            margin-bottom: 1rem;
             padding: 1rem;
             @include mixin.rounded(lg);
             background-color: var(--background-color);
@@ -746,6 +747,10 @@ footer {
         &:focus {
             outline: none;
         }
+
+        &::placeholder {
+            text-align: mixin.returnAlign(left);
+        }
     }
 
     button {
@@ -870,7 +875,6 @@ footer {
         align-items: center;
 
         @include mixin.max-screens($screen-md) {
-            width: calc(100vw - 3rem);
             flex-direction: column;
         }
 
@@ -901,7 +905,7 @@ footer {
         gap: 1rem;
 
         @include mixin.max-screens($screen-md) {
-            width: calc(100vw - 3rem);
+            max-width: calc(100vw - 2rem);
             overflow-x: auto;
         }
 
