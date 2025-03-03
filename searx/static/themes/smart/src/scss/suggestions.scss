@@ -1,0 +1,30 @@
+@use './mixins.scss' as mixin;
+
+#suggestions {
+    margin-bottom: 1rem;
+    padding: 1rem;
+
+    .title {
+        font-size: 1.2rem;
+        font-weight: 650;
+        margin-bottom: 1rem;
+    }
+
+    .suggestions-container {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: .5rem 1rem;
+
+        .suggestion {
+            padding: .5rem 1rem;
+            background-color: var(--background-color);
+            transition: transform 200ms ease-in-out;
+
+            &:hover {
+                transform: scale(1.05);
+            }
+        }
+    }
+
+}

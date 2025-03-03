@@ -43,7 +43,8 @@ block body %} {% include 'smart/madules/search_header.html' %}
             <button>{{ icon_small('send') }}</button>
         </form>
     </div>
-    {% endif %} {% if answers %}
+    {% endif %} {% set suggestions_placed = namespace(s=false) %} {% set
+    suggestion_index = range(1, 10) | random%} {% if answers %}
     <div class="message-container">
         <div class="title">
             {{ icon_small('plugin') }}
@@ -85,23 +86,31 @@ block body %} {% include 'smart/madules/search_header.html' %}
         {% endif %} {% set template = get_result_template('smart',
         result['template']) if 'smart' in get_result_template('smart',
         result['template']) else get_result_template('smart', 'default.html') %}
-        {% include template %} {% if result.close_group and not is_image_page %}
+        {% include template %} {% if (result.close_group or ( loop.index >=
+        suggestion_index and not suggestions_placed.s)) and not is_image_page %}
     </div>
-    {% endif %} {% endfor %} {% endif %} {% include
-    'smart/madules/pagination.html' %}
-</div>
-<div class="info-panel">
-    {% if infoboxes %} {% include 'smart/madules/infoboxs.html' %} {% endif %}
-</div>
-{%- if number_of_results != '0' -%}
-<div class="result-count">
-    <div class="result-count-container">
-        <small>{{ _('Number of results') }}: {{ number_of_results }}</small>
-        <button
-            id="share-url-btn"
-            class="share_btn center-tooltip"
-            role="button"
-            data-search-url="
+    {% if not suggestions_placed.s %} {% set suggestions_placed.s = true %} {%
+    include 'smart/madules/suggestions.html' %} {% endif %} {% if not
+    result.close_group %}
+    <div
+        class="{{ result['template']|replace('.html', '') }}_group result-group"
+    >
+        {% endif %} {% endif %} {% endfor %} {% endif %} {% include
+        'smart/madules/pagination.html' %}
+    </div>
+    <div class="info-panel">
+        {% if infoboxes %} {% include 'smart/madules/infoboxs.html' %} {% endif
+        %}
+    </div>
+    {%- if number_of_results != '0' -%}
+    <div class="result-count">
+        <div class="result-count-container">
+            <small>{{ _('Number of results') }}: {{ number_of_results }}</small>
+            <button
+                id="share-url-btn"
+                class="share_btn center-tooltip"
+                role="button"
+                data-search-url="
         {{ url_for('search', _external=True) }}?q={{ q|urlencode }}&amp;language={{ current_language }}&amp;time_range={{ time_range }}&amp;safesearch={{ safesearch }}
             {%- if pageno > 1 -%}
               &amp;pageno={{ pageno }}
@@ -112,66 +121,67 @@ block body %} {% include 'smart/madules/search_header.html' %}
             {%- if timeout_limit -%}
               &amp;timeout_limit={{ timeout_limit|urlencode }}
             {%- endif -%}"
-            data-gitee-copied="{{ _('Copied') }}"
-        >
-            {{ icon_small('share') }}
-        </button>
-    </div>
-</div>
-{%- endif -%} {% if 'images.html' in
-results|map(attribute='template')|unique|list%}
-<div class="image-details-container">
-    <div class="image-details" id="image-details">
-        <img src=".." alt=".." id="image-src" />
-        <div class="actions">
-            <a
-                href="..."
-                class="btn primary"
-                download="image.png"
-                id="image-download"
+                data-gitee-copied="{{ _('Copied') }}"
             >
-                Download
-            </a>
-            <button class="btn copy" id="image-copy">Copy</button>
+                {{ icon_small('share') }}
+            </button>
         </div>
-        <div class="detail-info">
-            <div class="close">{{ icon_small('close') }}</div>
-            <h3 id="image-title">...</h3>
-            <p class="description" id="image-content">...</p>
-            <div class="meta">
-                <div class="meta-item" id="image-format">
-                    <span class="label">{{ _('Format') }}:</span>
-                    <span class="value">...</span>
-                </div>
-                <div class="meta-item" id="image-filesize">
-                    <span class="label">{{ _('Filesize') }}:</span>
-                    <span class="value">...</span>
-                </div>
-
+    </div>
+    {%- endif -%} {% if 'images.html' in
+    results|map(attribute='template')|unique|list%}
+    <div class="image-details-container">
+        <div class="image-details" id="image-details">
+            <img src=".." alt=".." id="image-src" />
+            <div class="actions">
                 <a
                     href="..."
-                    class="source"
-                    id="image-source"
-                    {%
-                    if
-                    results_on_new_tab
-                    %}target="_blank"
-                    rel="noopener noreferrer"
-                    {%
-                    else
-                    %}rel="noreferrer"
-                    {%
-                    endif
-                    %}
+                    class="btn primary"
+                    download="image.png"
+                    id="image-download"
                 >
-                    {{ _('View source') }}
+                    Download
                 </a>
+                <button class="btn copy" id="image-copy">Copy</button>
             </div>
-            <p class="engine">
-                {{ _('Engine') }}
-                <span class="engine-name" id="image-engine"></span>
-            </p>
+            <div class="detail-info">
+                <div class="close">{{ icon_small('close') }}</div>
+                <h3 id="image-title">...</h3>
+                <p class="description" id="image-content">...</p>
+                <div class="meta">
+                    <div class="meta-item" id="image-format">
+                        <span class="label">{{ _('Format') }}:</span>
+                        <span class="value">...</span>
+                    </div>
+                    <div class="meta-item" id="image-filesize">
+                        <span class="label">{{ _('Filesize') }}:</span>
+                        <span class="value">...</span>
+                    </div>
+
+                    <a
+                        href="..."
+                        class="source"
+                        id="image-source"
+                        {%
+                        if
+                        results_on_new_tab
+                        %}target="_blank"
+                        rel="noopener noreferrer"
+                        {%
+                        else
+                        %}rel="noreferrer"
+                        {%
+                        endif
+                        %}
+                    >
+                        {{ _('View source') }}
+                    </a>
+                </div>
+                <p class="engine">
+                    {{ _('Engine') }}
+                    <span class="engine-name" id="image-engine"></span>
+                </p>
+            </div>
         </div>
     </div>
+    {% endif %} {% include 'smart/footer.html' %} {% endblock %}
 </div>
-{% endif %} {% include 'smart/footer.html' %} {% endblock %}

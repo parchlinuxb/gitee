@@ -291,6 +291,10 @@ body {
   width: 100%;
 }
 
+:is(button, .btn).rounded {
+  border-radius: 9999px;
+}
+
 [tooltip] {
   position: relative;
 }
@@ -1096,6 +1100,34 @@ fieldset .description {
 
 #pagination button {
   white-space: nowrap;
+}
+
+#suggestions {
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
+#suggestions .title {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  font-weight: 650;
+}
+
+#suggestions .suggestions-container {
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem 1rem;
+  display: flex;
+}
+
+#suggestions .suggestions-container .suggestion {
+  background-color: var(--background-color);
+  padding: .5rem 1rem;
+  transition: transform .2s ease-in-out;
+}
+
+#suggestions .suggestions-container .suggestion:hover {
+  transform: scale(1.05);
 }
 
 footer .footer-links a, main:has(.not-found) .button {

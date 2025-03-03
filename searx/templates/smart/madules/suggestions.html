@@ -1,0 +1,37 @@
+{% if suggestions %}
+
+<div id="suggestions" role="complementary" aria-labelledby="suggestions-title">
+    <h4 class="title">{{ _('Suggestions') }}</h4>
+    <div class="suggestions-container">
+        {%- for suggestion in suggestions -%}
+        <form
+            method="{{ method or 'POST' }}"
+            action="{{ url_for('search') }}"
+            class="btn suggestion rounded"
+        >
+            <input type="hidden" name="q" value="{{ suggestion.url }}" />
+            {%- for category in selected_categories -%}
+            <input type="hidden" name="category_{{ category }}" value="1" />
+            {%- endfor -%}
+            <input
+                type="hidden"
+                name="language"
+                value="{{ current_language }}"
+            />
+            <input type="hidden" name="time_range" value="{{ time_range }}" />
+            <input type="hidden" name="safesearch" value="{{ safesearch }}" />
+            <input type="hidden" name="theme" value="{{ theme }}" />
+            {%- if timeout_limit -%}
+            <input
+                type="hidden"
+                name="timeout_limit"
+                value="{{ timeout_limit|e }}"
+            />
+            {%- endif -%}
+            <input type="submit" role="link" value="{{ suggestion.title }}" />
+        </form>
+        {%- endfor -%}
+    </div>
+</div>
+
+{% endif %}
