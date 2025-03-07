@@ -54,6 +54,7 @@ br {
 
 body {
     display: flex;
+    justify-content: center;
     gap: 0;
     overflow: hidden;
     transition: gap 250ms ease-in-out,
@@ -203,7 +204,6 @@ main:has(.not-found) {
         "results"
         "footer";
     gap: 1rem;
-    margin: 0 auto;
     padding: 0 1rem;
     max-width: 1800px;
     overflow-x: hidden;
@@ -512,6 +512,14 @@ main:has(.not-found) {
             padding: 1rem;
             @include mixin.rounded(lg);
             background-color: var(--background-color);
+
+            .result .highlight {
+                font-weight: 700;
+            }
+
+            .result .result-content .highlight {
+                text-decoration: wavy underline 1px var(--primary-color);
+            }
         }
 
         :first-child {

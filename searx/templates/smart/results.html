@@ -44,7 +44,10 @@ block body %} {% include 'smart/madules/search_header.html' %}
         </form>
     </div>
     {% endif %} {% set suggestions_placed = namespace(s=false) %} {% set
-    suggestion_index = range(1, 10) | random%} {% if answers %}
+    suggestion_index = range(1, 10) | random%} {% set is_image_page = results
+    and results|map(attribute='template')|unique|list|count == 1 and
+    'images.html' in results|map(attribute='template')|unique|list %} {% if
+    answers %}
     <div class="message-container">
         <div class="title">
             {{ icon_small('plugin') }}
@@ -79,15 +82,15 @@ block body %} {% include 'smart/madules/search_header.html' %}
         {%- endfor -%}
     </div>
     {% endif %} {% endif %} {% if results %}{% for result in results %} {% if
-    result.open_group and not is_image_page %}
+    result.open_group %}
     <div
         class="{{ result['template']|replace('.html', '') }}_group result-group"
     >
         {% endif %} {% set template = get_result_template('smart',
         result['template']) if 'smart' in get_result_template('smart',
         result['template']) else get_result_template('smart', 'default.html') %}
-        {% include template %} {% if (result.close_group or ( loop.index >=
-        suggestion_index and not suggestions_placed.s)) and not is_image_page %}
+        {% include template %} {% if result.close_group or ( loop.index >=
+        suggestion_index and not suggestions_placed.s and not is_image_page) %}
     </div>
     {% if not suggestions_placed.s %} {% set suggestions_placed.s = true %} {%
     include 'smart/madules/suggestions.html' %} {% endif %} {% if not

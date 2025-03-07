@@ -1306,6 +1306,7 @@ fieldset .description {
 
 #suggestions .suggestions-container .suggestion {
   background-color: var(--background-color);
+  cursor: pointer;
   padding: .5rem 1rem;
   transition: transform .2s ease-in-out;
 }
@@ -1331,6 +1332,7 @@ br {
 
 body {
   background-color: var(--secondary-background-color);
+  justify-content: center;
   gap: 0;
   transition: gap .25s ease-in-out, padding .5s ease-in-out, background-color .3s ease-in-out;
   display: flex;
@@ -1466,7 +1468,6 @@ main:has(.not-found) .button {
                  / 1fr;
   gap: 1rem;
   max-width: 1800px;
-  margin: 0 auto;
   padding: 0 1rem;
   transition: grid-template-columns .3s ease-in-out;
   display: grid;
@@ -1784,6 +1785,15 @@ main:has(.not-found) .button {
   border-radius: 2rem;
   margin-bottom: 1rem;
   padding: 1rem;
+}
+
+#results .results-container .result-group .result .highlight {
+  font-weight: 700;
+}
+
+#results .results-container .result-group .result .result-content .highlight {
+  -webkit-text-decoration: wavy underline 1px var(--primary-color);
+  text-decoration: wavy underline 1px var(--primary-color);
 }
 
 #results .results-container :first-child {

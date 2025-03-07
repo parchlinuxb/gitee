@@ -20,6 +20,7 @@
             padding: .5rem 1rem;
             background-color: var(--background-color);
             transition: transform 200ms ease-in-out;
+            cursor: pointer;
 
             &:hover {
                 transform: scale(1.05);
