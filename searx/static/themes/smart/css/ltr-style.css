@@ -1230,6 +1230,25 @@ fieldset .description {
   display: block;
 }
 
+#stats .container .bar-chart {
+  background-color: var(--secondary-border-color);
+  border-radius: 9999px;
+  justify-content: start;
+  align-items: center;
+  display: flex;
+  overflow: hidden;
+}
+
+#stats .container .bar-chart .bar {
+  background-color: var(--secondary-text-color);
+  height: .5rem;
+  transition: flex .1s ease-in-out;
+}
+
+#stats .container .bar-chart .bar.l1 {
+  background-color: var(--primary-color);
+}
+
 #pagination {
   justify-content: space-between;
   align-items: center;

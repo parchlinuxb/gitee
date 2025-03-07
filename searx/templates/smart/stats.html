@@ -45,22 +45,22 @@ icon_big %}{% extends "smart/base.html" %} {% block body %} {% include
                 >
             </td>
             <td class="engine-score">
-                {% if engine_stat.score %}
-                <span>{{ engine_stat.score_per_result|round(1) }}</span>
-                {% endif %}
+                {% if engine_stat.score %} {{
+                engine_stat.score_per_result|round(1) }} {% endif %}
             </td>
+
             <td class="engine-result-count">
                 {%- if engine_stat.result_count -%}
 
                 <div class="bar-chart-value">
                     {{- engine_stat.result_count | int -}}
                 </div>
-                {{- "" -}}
-                <div class="bar-chart-graph" aria-hidden="true">
+
+                <div class="bar-chart" aria-hidden="true">
                     <div
-                        class="bar-chart-bar bar{{ (100 * engine_stat.result_count / engine_stats.max_result_count)|round }}"
+                        class="bar"
+                        style="width: {{ (100 * engine_stat.result_count/engine_stats.max_result_count)|round }}%;"
                     ></div>
-                    {{- "" -}}
                 </div>
                 {%- endif -%}
             </td>
@@ -69,21 +69,23 @@ icon_big %}{% extends "smart/base.html" %} {% block body %} {% include
                 <div class="bar-chart-value">
                     {{- engine_stat.total | round(1) -}}
                 </div>
-                {{- "" -}}
+
                 <div
-                    class="bar-chart-graph"
+                    class="bar-chart"
                     aria-labelledby="{{engine_stat.name}}_time"
                     aria-hidden="true"
                 >
                     {% if engine_stat.http is not none and engine_stats.max_time
                     %}
                     <div
-                        class="bar-chart-serie1 bar{{ (100 * engine_stat.http / engine_stats.max_time)|round }}"
+                        class="bar l1 {{ (100 * engine_stat.processing / engine_stats.max_time) }}"
+                        style="width: {{ (100 * engine_stat.http / engine_stats.max_time)|round }}%;"
                     ></div>
                     {%- endif -%} {% if engine_stat.processing is not none and
                     engine_stats.max_time %}
                     <div
-                        class="bar-chart-serie2 bar{{ (100 * engine_stat.processing / engine_stats.max_time)|round }}"
+                        class="bar l2"
+                        style="width: {{ (100 * engine_stat.processing / engine_stats.max_time)|round }}%;"
                     ></div>
                     {%- endif -%}
                 </div>
