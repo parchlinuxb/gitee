@@ -1,7 +1,7 @@
 @use 'mixins.scss' as mixin;
 @use 'definitions.scss' as *;
 
-#preferences {
+:is(#preferences, #stats) {
     grid-template-columns: 2fr 1fr;
     grid-template-rows: min-content auto min-content;
     grid-template-areas:
@@ -36,127 +36,127 @@
     footer {
         padding: 0;
     }
+}
 
-    #preferences_form {
-        display: grid;
+#preferences_form {
+    display: grid;
+    grid-area: main;
+    grid-template-columns: subgrid;
+    gap: 1rem;
+    grid-template-areas: "main"
+        "backup";
+
+    @include mixin.screens($screen-md) {
+        grid-template-areas: "main backup";
+    }
+
+    .madules-container {
         grid-area: main;
-        grid-template-columns: subgrid;
-        gap: 1rem;
-        grid-template-areas: "main"
-            "backup";
+        padding: 1.5rem;
 
-        @include mixin.screens($screen-md) {
-            grid-template-areas: "main backup";
+        select {
+            background-color: var(--secondary-background-color);
         }
 
-        .madules-container {
-            grid-area: main;
-            padding: 1.5rem;
+        .save-btn {
+            margin-top: 1rem;
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+    }
 
-            select {
-                background-color: var(--secondary-background-color);
+    .backup-container {
+        grid-area: backup;
+
+        .backup-box {
+            padding: 2rem;
+            width: 100%;
+
+            .title {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                font-size: 2rem;
+                font-weight: 700;
+                justify-content: center;
+                padding: 1rem;
+                margin-bottom: 2rem;
             }
 
-            .save-btn {
-                margin-top: 1rem;
+            .description {
+                margin-bottom: 2rem;
+                text-align: justify;
+            }
+
+            &>.btn {
                 display: block;
-                width: 100%;
                 text-align: center;
+                margin-top: 1rem;
             }
-        }
 
-        .backup-container {
-            grid-area: backup;
+            .data-box {
+                display: flex;
+                flex-direction: column;
 
-            .backup-box {
-                padding: 2rem;
-                width: 100%;
-
-                .title {
-                    display: flex;
-                    align-items: center;
-                    gap: 1rem;
-                    font-size: 2rem;
-                    font-weight: 700;
-                    justify-content: center;
-                    padding: 1rem;
-                    margin-bottom: 2rem;
-                }
-
-                .description {
-                    margin-bottom: 2rem;
-                    text-align: justify;
-                }
-
-                &>.btn {
-                    display: block;
-                    text-align: center;
+                input[type="radio"]:checked+.data-page {
                     margin-top: 1rem;
+                    display: block;
                 }
 
-                .data-box {
-                    display: flex;
-                    flex-direction: column;
+                .data-page {
+                    padding: 1rem;
+                    width: 100%;
+                    display: none;
+                    @include mixin.rounded();
+                    background-color: var(--secondary-background-color);
 
-                    input[type="radio"]:checked+.data-page {
-                        margin-top: 1rem;
-                        display: block;
+                    .section {
+                        padding: .5rem 0;
+                        border-bottom: 1px solid var(--secondary-border-color);
                     }
 
-                    .data-page {
-                        padding: 1rem;
+                    :last-child {
+                        border-bottom: none;
+                    }
+
+                    h4 {
+                        margin-bottom: .5rem;
+                    }
+
+                    p {
+                        text-indent: 1rem;
+                        font-size: .9rem;
+                        color: var(--secondary-text-color);
+                        text-align: justify;
+                    }
+
+                    input {
+                        background-color: var(--background-color);
+                        color: var(--text-color);
+                        @include mixin.rounded(sm);
+                        padding: .5rem 1rem;
                         width: 100%;
-                        display: none;
-                        @include mixin.rounded();
-                        background-color: var(--secondary-background-color);
+                        margin-bottom: .5rem;
+                    }
 
-                        .section {
-                            padding: .5rem 0;
-                            border-bottom: 1px solid var(--secondary-border-color);
-                        }
-
-                        :last-child {
-                            border-bottom: none;
-                        }
-
-                        h4 {
-                            margin-bottom: .5rem;
-                        }
-
-                        p {
-                            text-indent: 1rem;
-                            font-size: .9rem;
-                            color: var(--secondary-text-color);
-                            text-align: justify;
-                        }
+                    .sidebyside {
+                        display: flex;
+                        gap: .5rem;
 
                         input {
-                            background-color: var(--background-color);
-                            color: var(--text-color);
-                            @include mixin.rounded(sm);
-                            padding: .5rem 1rem;
-                            width: 100%;
-                            margin-bottom: .5rem;
-                        }
-
-                        .sidebyside {
-                            display: flex;
-                            gap: .5rem;
-
-                            input {
-                                flex: 1;
-                                margin: 0;
-                            }
+                            flex: 1;
+                            margin: 0;
                         }
                     }
                 }
             }
         }
+    }
 
-        :is(.madules-container, .backup-box) {
-            background-color: var(--background-color);
-            @include mixin.rounded(lg);
-        }
+    :is(.madules-container, .backup-box) {
+        background-color: var(--background-color);
+        @include mixin.rounded(lg);
     }
 }
 

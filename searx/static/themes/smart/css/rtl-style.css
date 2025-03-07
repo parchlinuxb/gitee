@@ -861,7 +861,7 @@ body {
   height: .8rem;
 }
 
-#preferences {
+:is(#preferences, #stats) {
   grid-template: "header links" min-content
                  "main main"
                  "footer footer" min-content
@@ -873,31 +873,31 @@ body {
 }
 
 @media (width >= 90rem) {
-  #preferences {
+  :is(#preferences, #stats) {
     padding: 1rem 4rem;
   }
 }
 
-#preferences .header {
+:is(#preferences, #stats) .header {
   grid-area: header !important;
   padding: 0 !important;
 }
 
-#preferences #search.header {
+:is(#preferences, #stats) #search.header {
   padding-top: .5rem !important;
 }
 
-#preferences .links {
+:is(#preferences, #stats) .links {
   grid-area: links;
   justify-content: end;
   align-items: center;
 }
 
-#preferences footer {
+:is(#preferences, #stats) footer {
   padding: 0;
 }
 
-#preferences #preferences_form {
+#preferences_form {
   grid-area: main;
   grid-template-columns: subgrid;
   grid-template-areas: "main"
@@ -907,37 +907,37 @@ body {
 }
 
 @media (width >= 56rem) {
-  #preferences #preferences_form {
+  #preferences_form {
     grid-template-areas: "main backup";
   }
 }
 
-#preferences #preferences_form .madules-container {
+#preferences_form .madules-container {
   grid-area: main;
   padding: 1.5rem;
 }
 
-#preferences #preferences_form .madules-container select {
+#preferences_form .madules-container select {
   background-color: var(--secondary-background-color);
 }
 
-#preferences #preferences_form .madules-container .save-btn {
+#preferences_form .madules-container .save-btn {
   text-align: center;
   width: 100%;
   margin-top: 1rem;
   display: block;
 }
 
-#preferences #preferences_form .backup-container {
+#preferences_form .backup-container {
   grid-area: backup;
 }
 
-#preferences #preferences_form .backup-container .backup-box {
+#preferences_form .backup-container .backup-box {
   width: 100%;
   padding: 2rem;
 }
 
-#preferences #preferences_form .backup-container .backup-box .title {
+#preferences_form .backup-container .backup-box .title {
   justify-content: center;
   align-items: center;
   gap: 1rem;
@@ -948,28 +948,28 @@ body {
   display: flex;
 }
 
-#preferences #preferences_form .backup-container .backup-box .description {
+#preferences_form .backup-container .backup-box .description {
   text-align: justify;
   margin-bottom: 2rem;
 }
 
-#preferences #preferences_form .backup-container .backup-box > .btn {
+#preferences_form .backup-container .backup-box > .btn {
   text-align: center;
   margin-top: 1rem;
   display: block;
 }
 
-#preferences #preferences_form .backup-container .backup-box .data-box {
+#preferences_form .backup-container .backup-box .data-box {
   flex-direction: column;
   display: flex;
 }
 
-#preferences #preferences_form .backup-container .backup-box .data-box input[type="radio"]:checked + .data-page {
+#preferences_form .backup-container .backup-box .data-box input[type="radio"]:checked + .data-page {
   margin-top: 1rem;
   display: block;
 }
 
-#preferences #preferences_form .backup-container .backup-box .data-box .data-page {
+#preferences_form .backup-container .backup-box .data-box .data-page {
   background-color: var(--secondary-background-color);
   border-radius: 1rem;
   width: 100%;
@@ -977,27 +977,27 @@ body {
   display: none;
 }
 
-#preferences #preferences_form .backup-container .backup-box .data-box .data-page .section {
+#preferences_form .backup-container .backup-box .data-box .data-page .section {
   border-bottom: 1px solid var(--secondary-border-color);
   padding: .5rem 0;
 }
 
-#preferences #preferences_form .backup-container .backup-box .data-box .data-page :last-child {
+#preferences_form .backup-container .backup-box .data-box .data-page :last-child {
   border-bottom: none;
 }
 
-#preferences #preferences_form .backup-container .backup-box .data-box .data-page h4 {
+#preferences_form .backup-container .backup-box .data-box .data-page h4 {
   margin-bottom: .5rem;
 }
 
-#preferences #preferences_form .backup-container .backup-box .data-box .data-page p {
+#preferences_form .backup-container .backup-box .data-box .data-page p {
   text-indent: 1rem;
   color: var(--secondary-text-color);
   text-align: justify;
   font-size: .9rem;
 }
 
-#preferences #preferences_form .backup-container .backup-box .data-box .data-page input {
+#preferences_form .backup-container .backup-box .data-box .data-page input {
   background-color: var(--background-color);
   color: var(--text-color);
   border-radius: .5rem;
@@ -1006,17 +1006,17 @@ body {
   padding: .5rem 1rem;
 }
 
-#preferences #preferences_form .backup-container .backup-box .data-box .data-page .sidebyside {
+#preferences_form .backup-container .backup-box .data-box .data-page .sidebyside {
   gap: .5rem;
   display: flex;
 }
 
-#preferences #preferences_form .backup-container .backup-box .data-box .data-page .sidebyside input {
+#preferences_form .backup-container .backup-box .data-box .data-page .sidebyside input {
   flex: 1;
   margin: 0;
 }
 
-#preferences #preferences_form :is(.madules-container, .backup-box) {
+#preferences_form :is(.madules-container, .backup-box) {
   background-color: var(--background-color);
   border-radius: 2rem;
 }
@@ -1063,6 +1063,117 @@ fieldset .description {
   color: var(--text-color);
   margin: 1rem 1rem 0;
   font-size: .8rem;
+}
+
+#stats .container {
+  background-color: var(--background-color);
+  border-radius: 2rem;
+  grid-area: main;
+  padding: 1.5rem 2rem;
+}
+
+#stats .container h1 {
+  border-bottom: 1px solid var(--secondary-border-color);
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+#stats .container table {
+  width: 100%;
+}
+
+#stats .container table th, #stats .container table td {
+  text-align: start;
+  text-transform: capitalize;
+  padding: .5rem;
+}
+
+#stats .container table .response-details {
+  margin-top: -.5rem;
+  margin-bottom: .5rem;
+  padding: 0 1rem;
+}
+
+#stats .container table .response-details summary {
+  color: var(--border-color);
+  cursor: pointer;
+  font-size: .8rem;
+}
+
+#stats .container table .response-details table {
+  font-size: .9rem;
+}
+
+#stats .container .issue-form {
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: min(100%, 50rem);
+  margin: 3rem auto 0;
+  display: flex;
+}
+
+#stats .container .issue-form p {
+  margin-bottom: .5rem;
+  font-size: .9rem;
+}
+
+#stats .container .issue-form textarea {
+  background-color: var(--secondary-background-color);
+  color: var(--text-color);
+  field-sizing: content;
+  border-radius: .5rem;
+  width: 100%;
+  min-height: 10rem;
+  margin-bottom: 2rem;
+  padding: .5rem;
+}
+
+#stats .container .issue-form input[type="checkbox"] {
+  margin-right: .5rem;
+}
+
+#stats .container .issue-form .link {
+  -webkit-text-decoration: wavy underline var(--primary-color);
+  text-decoration: wavy underline var(--primary-color);
+}
+
+#stats .container .issue-form .step + label {
+  display: none;
+}
+
+#stats .container .issue-form .step:checked + label {
+  display: inline-block;
+}
+
+#stats .container .issue-form .step-content {
+  display: none;
+}
+
+#stats .container .issue-form .step-content:has( + input:checked), #stats .container .issue-form .step + label + .step-content {
+  display: block;
+}
+
+#stats .container .issue-form .step:checked + label + .step-content {
+  display: none;
+}
+
+#stats .container .issue-form .submit-container {
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  display: flex;
+}
+
+#stats .container .issue-form button[type="submit"] {
+  display: none;
+}
+
+#stats .container .issue-form :has(#confirm:checked) button[type="submit"] {
+  display: block;
 }
 
 #pagination {
