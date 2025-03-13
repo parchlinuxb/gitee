@@ -2,7 +2,7 @@ import { setupChat } from "./chat";
 import { checkImagePage } from "./images";
 import { copyToClipboard, getFromClipboard } from "./utils";
 import debounce from "debounce";
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 
 export function $(selector: string) {
     return document.querySelector(selector);

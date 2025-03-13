@@ -1,5 +1,6 @@
 import { $, $$ } from "./app";
 import { copyToClipboard } from "./utils";
+import debounce from "debounce";
 
 interface ImageDetails {
     imageSrc: HTMLImageElement;
@@ -85,6 +86,13 @@ function setupImages(resultsContainer: HTMLElement) {
                     if (element.classList.contains("image")) {
                         element.addEventListener("click", (e) => {
                             e.preventDefault();
+                            const currentOpen =
+                                resultsContainer.getElementsByClassName(
+                                    "current-open"
+                                )[0];
+                            if (currentOpen)
+                                currentOpen.classList.remove("current-open");
+                            element.classList.add("current-open");
                             handleImageDetails(element, {
                                 imageSrc,
                                 imageTitle,
@@ -113,6 +121,10 @@ function setupImages(resultsContainer: HTMLElement) {
         const image = node as HTMLElement;
         void image.addEventListener("click", (e) => {
             e.preventDefault();
+            const currentOpen =
+                resultsContainer.getElementsByClassName("current-open")[0];
+            if (currentOpen) currentOpen.classList.remove("current-open");
+            image.classList.add("current-open");
             handleImageDetails(image, {
                 imageSrc,
                 imageTitle,
@@ -144,22 +156,25 @@ function setupImages(resultsContainer: HTMLElement) {
         );
         canvas.toBlob((blob) => {
             if (!blob) return;
-            copyToClipboard(new ClipboardItem({ "image/*": blob }));
+            copyToClipboard(new ClipboardItem({ "image/png": blob }));
         });
         void canvas.remove();
     });
 
     const bodyContainer = $("#results") as HTMLDivElement;
     const imageDetailsContainer = $("#image-details") as HTMLDivElement;
-    bodyContainer.addEventListener("scroll", function () {
-        if (bodyContainer.scrollTop < 50) {
-            imageDetailsContainer.style.top = "0px";
-            imageDetailsContainer.style.height = "80vh";
-            return;
-        }
-        imageDetailsContainer.style.height = "95vh";
-        imageDetailsContainer.style.top = `calc(${bodyContainer.scrollTop}px - 15vh)`;
-    });
+    bodyContainer.addEventListener(
+        "scroll",
+        debounce(function () {
+            if (bodyContainer.scrollTop < 50) {
+                imageDetailsContainer.style.top = "0px";
+                imageDetailsContainer.style.height = "80vh";
+                return;
+            }
+            imageDetailsContainer.style.height = "95vh";
+            imageDetailsContainer.style.top = `calc(${bodyContainer.scrollTop}px - 15vh)`;
+        }, 500)
+    );
 
     imageDetailsContainer
         .getElementsByClassName("close")[0]

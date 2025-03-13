@@ -2,26 +2,26 @@
 @use '../definitions.scss' as *;
 
 .images_group {
-    // this thing make some lags
-    columns: 15rem;
-
-    // allternative way
-    // display: flex;
-    // flex-wrap: wrap;
+    display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
 
     .image {
         cursor: pointer;
-        // height: 15rem;
+        position: relative;
+        max-width: 20rem;
+        @include mixin.rounded();
+        flex-grow: 1;
 
         .image-box {
             overflow: hidden;
             @include mixin.rounded();
             position: relative;
+            height: 12rem;
 
             img {
-                width: 100%;
                 height: 100%;
+                width: 100%;
                 object-fit: cover;
                 transition: transform 0.3s ease;
             }
@@ -39,6 +39,8 @@
         }
 
         &:is(:hover, :focus-within) {
+            outline: none;
+
             .image-box img {
                 transform: scale(1.05);
             }
@@ -69,6 +71,17 @@
             }
         }
 
+        &.current-open::after {
+            content: '';
+            position: absolute;
+            width: calc(100% + 1.5rem);
+            height: calc(100% + 1.5rem);
+            left: -.75rem;
+            top: -.75rem;
+            @include mixin.rounded(lg);
+            background-color: var(--primary-color);
+            opacity: .5;
+        }
     }
 }
 
@@ -83,7 +96,7 @@
         position: relative;
         height: 80vh;
         padding: 1.5rem;
-        transition: top 25ms ease-in-out,
+        transition: top 250ms ease-in-out,
             height 250ms ease-out;
 
         @include mixin.screens($screen-xl) {
