@@ -11,6 +11,7 @@ engine_data.items() %} {% for k, v in kv_data.items() %}
     <form
         method="{{ method or 'POST' }}"
         action="{{ url_for('search') }}"
+        id="prev-page"
         class="nav-button"
     >
         <input type="hidden" name="q" value="{{ q|e }}" />
@@ -27,7 +28,7 @@ engine_data.items() %} {% for k, v in kv_data.items() %}
             name="timeout_limit"
             value="{{ timeout_limit|e }}"
         />{% endif %} {{- engine_data_form(engine_data) -}}
-        <button role="link" type="submit" class="secondary">
+        <button role="link" type="submit" class="secondary prev">
             {{ _('Previous page') }}
         </button>
     </form>
@@ -73,7 +74,8 @@ engine_data.items() %} {% for k, v in kv_data.items() %}
     <form
         method="{{ method or 'POST' }}"
         action="{{ url_for('search') }}"
-        class="nav-button button"
+        id="next-page"
+        class="nav-button"
     >
         <input type="hidden" name="q" value="{{ q|e }}" />
         {% for category in selected_categories %}
@@ -89,10 +91,15 @@ engine_data.items() %} {% for k, v in kv_data.items() %}
             name="timeout_limit"
             value="{{ timeout_limit|e }}"
         />{% endif %} {{- engine_data_form(engine_data) -}}
-        <button role="link" type="submit" class="secondary">
+        <button role="link" type="submit" class="secondary next">
             {{ _('Next page') }}
         </button>
     </form>
     {% endif %}
 </nav>
+<div class="loading-indicators" hidden id="page-loading">
+    <span class="indicator"> </span>
+    <span class="indicator"> </span>
+    <span class="indicator"> </span>
+</div>
 {% endif %}

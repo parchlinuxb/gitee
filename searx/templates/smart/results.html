@@ -24,10 +24,10 @@ block body %} {% include 'smart/madules/search_header.html' %}
             <h3>{{ _('Answer by Jabir') }}</h3>
         </div>
         <div class="load-container">
-            <div class="loading-indecators">
-                <span class="indecator"> </span>
-                <span class="indecator"> </span>
-                <span class="indecator"> </span>
+            <div class="loading-indicators">
+                <span class="indicator"> </span>
+                <span class="indicator"> </span>
+                <span class="indicator"> </span>
             </div>
             <button class="btn stop">
                 <span>{{ _('Stop') }}</span> {{ icon_small('stop') }}
@@ -89,12 +89,13 @@ block body %} {% include 'smart/madules/search_header.html' %}
         {% endif %} {% set template = get_result_template('smart',
         result['template']) if 'smart' in get_result_template('smart',
         result['template']) else get_result_template('smart', 'default.html') %}
-        {% include template %} {% if result.close_group or ( loop.index >=
-        suggestion_index and not suggestions_placed.s and not is_image_page) %}
+        {% include template %} {% if result.close_group or ( pageno == 1 and
+        loop.index >= suggestion_index and not suggestions_placed.s and not
+        is_image_page) %}
     </div>
-    {% if not suggestions_placed.s %} {% set suggestions_placed.s = true %} {%
-    include 'smart/madules/suggestions.html' %} {% endif %} {% if not
-    result.close_group %}
+    {% if pageno == 1 and not suggestions_placed.s %} {% set
+    suggestions_placed.s = true %} {% include 'smart/madules/suggestions.html'
+    %} {% endif %} {% if not result.close_group %}
     <div
         class="{{ result['template']|replace('.html', '') }}_group result-group"
     >

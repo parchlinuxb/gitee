@@ -1,10 +1,15 @@
 export function copyToClipboard(item: ClipboardItem | string) {
-    if (navigator.clipboard) {
-        if (item instanceof ClipboardItem) {
-            navigator.clipboard.write([item]);
-        } else {
-            navigator.clipboard.writeText(item);
-        }
+    if (navigator.clipboard && item instanceof ClipboardItem) {
+        navigator.permissions
+            // @ts-ignore
+            .query({ name: "clipboard-write" })
+            .then((result) => {
+                if (result.state === "granted" || result.state === "prompt") {
+                    navigator.clipboard.write([item]);
+                } else {
+                    alert("Clipboard unaccessible");
+                }
+            });
         return;
     }
 

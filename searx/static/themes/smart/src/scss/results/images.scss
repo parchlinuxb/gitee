@@ -75,10 +75,10 @@
             content: '';
             position: absolute;
             width: calc(100% + 1.5rem);
-            height: calc(100% + 1.5rem);
+            height: calc(100% + .75rem);
             left: -.75rem;
             top: -.75rem;
-            @include mixin.rounded(lg);
+            @include mixin.rounded();
             background-color: var(--primary-color);
             opacity: .5;
         }

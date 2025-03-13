@@ -3,6 +3,7 @@ import { checkImagePage } from "./images";
 import { copyToClipboard, getFromClipboard } from "./utils";
 import debounce from "debounce";
 import axios from "axios";
+import { setupInfiniteScroll } from "./infinite_scroll";
 
 export function $(selector: string) {
     return document.querySelector(selector);
@@ -93,7 +94,6 @@ function setupSuggestion() {
     const controler = new AbortController();
 
     function setSuggestion(text: string, focus = true) {
-        console.log(text, focus);
         queryInput.value = text;
         if (focus) queryInput.focus();
     }
@@ -208,6 +208,9 @@ function afterPageLoad() {
 
     // chat
     setupChat();
+
+    // infinite scroll
+    setupInfiniteScroll();
 }
 
 if (document.readyState === "loading") {

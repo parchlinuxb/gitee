@@ -86,13 +86,9 @@ function setupImages(resultsContainer: HTMLElement) {
                     if (element.classList.contains("image")) {
                         element.addEventListener("click", (e) => {
                             e.preventDefault();
-                            const currentOpen =
-                                resultsContainer.getElementsByClassName(
-                                    "current-open"
-                                )[0];
-                            if (currentOpen)
-                                currentOpen.classList.remove("current-open");
+                            removePrvImageClass();
                             element.classList.add("current-open");
+                            element.scrollIntoView({ behavior: "smooth" });
                             handleImageDetails(element, {
                                 imageSrc,
                                 imageTitle,
@@ -121,10 +117,9 @@ function setupImages(resultsContainer: HTMLElement) {
         const image = node as HTMLElement;
         void image.addEventListener("click", (e) => {
             e.preventDefault();
-            const currentOpen =
-                resultsContainer.getElementsByClassName("current-open")[0];
-            if (currentOpen) currentOpen.classList.remove("current-open");
+            removePrvImageClass();
             image.classList.add("current-open");
+            image.scrollIntoView({ behavior: "smooth" });
             handleImageDetails(image, {
                 imageSrc,
                 imageTitle,
@@ -179,8 +174,15 @@ function setupImages(resultsContainer: HTMLElement) {
     imageDetailsContainer
         .getElementsByClassName("close")[0]
         .addEventListener("click", function () {
+            removePrvImageClass();
             bodyContainer.classList.remove("image-open");
         });
+
+    function removePrvImageClass() {
+        const currentOpen =
+            resultsContainer.getElementsByClassName("current-open")[0];
+        if (currentOpen) currentOpen.classList.remove("current-open");
+    }
 }
 
 export function checkImagePage() {

@@ -1,0 +1,66 @@
+@use "./mixins.scss" as mixin;
+
+.loading-indicators {
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    @include mixin.rounded(lg);
+    background-color: var(--filled-text-color);
+
+    .indicator {
+        width: .6rem;
+        height: .6rem;
+        @include mixin.rounded(full);
+        border: 2px solid var(--text-color);
+        animation: loading-indecator 2s infinite;
+
+        @include mixin.dark-mode() {
+            border-color: var(--background-color);
+            animation-name: loading-indecator-dark;
+        }
+    }
+
+    :nth-child(2) {
+        animation-delay: 1s;
+    }
+
+    :nth-child(3) {
+        animation-delay: .5s;
+    }
+}
+
+@keyframes loading-indecator {
+    0% {
+        transform: scale(1);
+        background-color: transparent;
+    }
+
+    50% {
+        transform: scale(1);
+        background-color: transparent;
+    }
+
+    75% {
+        transform: scale(.9);
+        background-color: var(--text-color);
+    }
+}
+
+@keyframes loading-indecator-dark {
+    0% {
+        transform: scale(1);
+        background-color: transparent;
+    }
+
+    50% {
+        transform: scale(1);
+        background-color: transparent;
+    }
+
+    75% {
+        transform: scale(.9);
+        background-color: var(--background-color);
+    }
+}
