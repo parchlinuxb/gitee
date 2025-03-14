@@ -773,9 +773,11 @@ var _app = require("./app");
 var _utils = require("./utils");
 var _debounce = require("debounce");
 var _debounceDefault = parcelHelpers.interopDefault(_debounce);
-function handleImageDetails(image, { imageSrc, imageTitle, imageContent, imageSource, imageFilesize, imageDownload, formatSpan, filesizeSpan, engineSpan }) {
+function handleImageDetails(image, { imageSrc, imageTitle, imageContent, imageSource, imageFilesize, imageDownload, formatSpan, filesizeSpan, engineSpan, previewImg }) {
     const resultsContainer = (0, _app.$)("#results");
     resultsContainer.classList.add("image-open");
+    imageSrc.src = "";
+    previewImg.src = image.getAttribute("data-gitee-thumbnail");
     imageSrc.src = image.getAttribute("data-gitee-src");
     imageTitle.innerText = image.getAttribute("data-gitee-title");
     imageContent.innerText = image.getAttribute("data-gitee-content");
@@ -791,6 +793,7 @@ function handleImageDetails(image, { imageSrc, imageTitle, imageContent, imageSo
 }
 function setupImages(resultsContainer) {
     const imageSrc = (0, _app.$)("#image-src");
+    const previewImg = (0, _app.$)("#preview-img");
     const imageTitle = (0, _app.$)("#image-title");
     const imageContent = (0, _app.$)("#image-content");
     const imageFormat = (0, _app.$)("#image-format");
@@ -822,7 +825,8 @@ function setupImages(resultsContainer) {
                     imageDownload,
                     filesizeSpan,
                     formatSpan,
-                    engineSpan
+                    engineSpan,
+                    previewImg
                 });
             });
         });
@@ -851,7 +855,8 @@ function setupImages(resultsContainer) {
                 imageDownload,
                 filesizeSpan,
                 formatSpan,
-                engineSpan
+                engineSpan,
+                previewImg
             });
         });
     });

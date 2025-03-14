@@ -50,7 +50,10 @@
     and
     result.parsed_url.netloc
     %}
-    {% set favicon_url = favicon_url(result.parsed_url.netloc) %}
+    {%
+    set
+    favicon_url=image_proxify(favicon_url(result.parsed_url.netloc))
+    %}
     {%
     if
     favicon_url
@@ -65,6 +68,14 @@
     result.parsed_url.netloc
     }}
     data-gitee-netloc="{{ result.parsed_url.netloc }}"
+    {%
+    if
+    result.thumbnail_src
+    %}
+    data-gitee-thumbnail="{{ image_proxify(result.thumbnail_src) }}"
+    {%
+    endif
+    %}
 >
     <div class="image-box">
         <img
@@ -80,7 +91,7 @@
         <div class="source">
             {% if favicon_url %}
             <div class="favicon">
-                <img loading="lazy" src="{{ favicon_url }}" />
+                <img loading="lazy" src="{{favicon_url }}" />
             </div>
             {% endif %}{{ result.parsed_url.netloc }}
         </div>

@@ -12,6 +12,7 @@ interface ImageDetails {
     formatSpan: HTMLSpanElement;
     filesizeSpan: HTMLSpanElement;
     engineSpan: HTMLSpanElement;
+    previewImg: HTMLImageElement;
 }
 
 function handleImageDetails(
@@ -26,11 +27,14 @@ function handleImageDetails(
         formatSpan,
         filesizeSpan,
         engineSpan,
+        previewImg,
     }: ImageDetails
 ) {
     const resultsContainer = $("#results") as HTMLDivElement;
     resultsContainer.classList.add("image-open");
 
+    imageSrc.src = "";
+    previewImg.src = image.getAttribute("data-gitee-thumbnail") as string;
     imageSrc.src = image.getAttribute("data-gitee-src") as string;
     imageTitle.innerText = image.getAttribute("data-gitee-title") as string;
     imageContent.innerText = image.getAttribute("data-gitee-content") as string;
@@ -61,6 +65,7 @@ function handleImageDetails(
 
 function setupImages(resultsContainer: HTMLElement) {
     const imageSrc = $("#image-src") as HTMLImageElement;
+    const previewImg = $("#preview-img") as HTMLImageElement;
     const imageTitle = $("#image-title") as HTMLHeadingElement;
     const imageContent = $("#image-content") as HTMLParagraphElement;
     const imageFormat = $("#image-format") as HTMLDivElement;
@@ -102,6 +107,7 @@ function setupImages(resultsContainer: HTMLElement) {
                                 filesizeSpan,
                                 formatSpan,
                                 engineSpan,
+                                previewImg,
                             });
                         });
                     }
@@ -133,6 +139,7 @@ function setupImages(resultsContainer: HTMLElement) {
                 filesizeSpan,
                 formatSpan,
                 engineSpan,
+                previewImg,
             });
         });
     });

@@ -132,60 +132,7 @@ block body %} {% include 'smart/madules/search_header.html' %}
         </div>
     </div>
     {%- endif -%} {% if 'images.html' in
-    results|map(attribute='template')|unique|list%}
-    <div class="image-details-container">
-        <div class="image-details" id="image-details">
-            <img src=".." alt=".." id="image-src" />
-            <div class="actions">
-                <a
-                    href="..."
-                    class="btn primary"
-                    download="image.png"
-                    id="image-download"
-                >
-                    Download
-                </a>
-                <button class="btn copy" id="image-copy">Copy</button>
-            </div>
-            <div class="detail-info">
-                <div class="close">{{ icon_small('close') }}</div>
-                <h3 id="image-title">...</h3>
-                <p class="description" id="image-content">...</p>
-                <div class="meta">
-                    <div class="meta-item" id="image-format">
-                        <span class="label">{{ _('Format') }}:</span>
-                        <span class="value">...</span>
-                    </div>
-                    <div class="meta-item" id="image-filesize">
-                        <span class="label">{{ _('Filesize') }}:</span>
-                        <span class="value">...</span>
-                    </div>
-
-                    <a
-                        href="..."
-                        class="source"
-                        id="image-source"
-                        {%
-                        if
-                        results_on_new_tab
-                        %}target="_blank"
-                        rel="noopener noreferrer"
-                        {%
-                        else
-                        %}rel="noreferrer"
-                        {%
-                        endif
-                        %}
-                    >
-                        {{ _('View source') }}
-                    </a>
-                </div>
-                <p class="engine">
-                    {{ _('Engine') }}
-                    <span class="engine-name" id="image-engine"></span>
-                </p>
-            </div>
-        </div>
-    </div>
-    {% endif %} {% include 'smart/footer.html' %} {% endblock %}
+    results|map(attribute='template')|unique|list%} {% include
+    'smart/madules/image_details.html' %} {% endif %} {% include
+    'smart/footer.html' %} {% endblock %}
 </div>

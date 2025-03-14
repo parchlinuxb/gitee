@@ -103,10 +103,25 @@
             min-width: $screen-xs;
         }
 
-        img {
+        .image {
             height: 30%;
-            border-radius: 0.5rem;
+            @include mixin.rounded();
             margin-bottom: 1.5rem;
+            overflow: hidden;
+            position: relative;
+
+            img {
+                height: 100%;
+                width: 100%;
+                object-fit: contain;
+                position: absolute;
+                top: 0;
+                left: 0;
+
+                &#preview-img {
+                    filter: blur(10px);
+                }
+            }
         }
 
 
