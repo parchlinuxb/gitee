@@ -33,8 +33,8 @@ brand:
 search:
   # Filter results. 0: None, 1: Moderate, 2: Strict
   safe_search: 0
-  # Existing autocomplete backends: "baidu", "brave", "dbpedia", "duckduckgo", "google", "yandex",
-  # "mwmbl", "seznam", "stract", "swisscows", "qwant", "wikipedia" -
+  # Existing autocomplete backends: "360search", "baidu", "brave", "dbpedia", "duckduckgo", "google", "yandex",
+  # "mwmbl", "seznam", "sogou", "stract", "swisscows", "qwant", "wikipedia" -
   # leave blank to turn it off by default.
   autocomplete: ""
   # minimun characters to type before autocompleter starts
@@ -337,9 +337,24 @@ categories_as_tabs:
   # social media:
 
 engines:
+  - name: 360search
+    engine: 360search
+    shortcut: 360so
+    disabled: true
+
+  - name: 360search videos
+    engine: 360search_videos
+    shortcut: 360sov
+    disabled: true
+
   - name: 9gag
     engine: 9gag
     shortcut: 9g
+    disabled: true
+
+  - name: acfun
+    engine: acfun
+    shortcut: acf
     disabled: true
 
   - name: abadis
@@ -501,6 +516,11 @@ engines:
     shortcut: bc
     categories: music
 
+  - name: baidu
+    engine: baidu
+    shortcut: baidu
+    disabled: true
+
   - name: wikipedia
     engine: wikipedia
     shortcut: wp
@@ -577,6 +597,24 @@ engines:
     shortcut: chef
     # to show premium or plus results too:
     # skip_premium: false
+
+  - name: chinaso news
+    chinaso_category: news
+    engine: chinaso
+    shortcut: chinaso
+    disabled: true
+
+  - name: chinaso images
+    chinaso_category: images
+    engine: chinaso
+    shortcut: chinasoi
+    disabled: true
+
+  - name: chinaso videos
+    chinaso_category: videos
+    engine: chinaso
+    shortcut: chinasov
+    disabled: true
 
   - name: cloudflareai
     engine: cloudflareai
@@ -1105,6 +1143,11 @@ engines:
     shortcut: ip
     disabled: true
 
+  - name: iqiyi
+    engine: iqiyi
+    shortcut: iq
+    disabled: true
+
   - name: jisho
     engine: jisho
     shortcut: js
@@ -1375,6 +1418,13 @@ engines:
       use_official_api: false
       require_api_key: false
       results: JSON
+
+  - name: openclipart
+    engine: openclipart
+    shortcut: ocl
+    inactive: true
+    disabled: true
+    timeout: 30
 
   - name: openlibrary
     engine: openlibrary
@@ -1708,6 +1758,26 @@ engines:
   - name: sepiasearch
     engine: sepiasearch
     shortcut: sep
+
+  - name: sogou
+    engine: sogou
+    shortcut: sogou
+    disabled: true
+
+  - name: sogou images
+    engine: sogou_images
+    shortcut: sogoui
+    disabled: true
+
+  - name: sogou videos
+    engine: sogou_videos
+    shortcut: sogouv
+    disabled: true
+
+  - name: sogou wechat
+    engine: sogou_wechat
+    shortcut: sogouw
+    disabled: true
 
   - name: soundcloud
     engine: soundcloud
