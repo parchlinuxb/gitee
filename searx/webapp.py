@@ -362,6 +362,7 @@ def get_client_settings():
         'safesearch': str(req_pref.get_value('safesearch')),
         'theme': req_pref.get_value('theme'),
         'doi_resolver': get_doi_resolver(req_pref),
+        'ai_chat': req_pref.get_value('ai_chat'),
     }
 
 

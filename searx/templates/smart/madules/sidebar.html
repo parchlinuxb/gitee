@@ -23,8 +23,9 @@
             {%- if 'infinite_scroll' not in locked_preferences -%} {%- include
             'smart/madules/sidebar/infinite_scroll.html' -%} {%- endif -%} {%-
             if 'method' not in locked_preferences -%} {%- include
-            'smart/madules/sidebar/http_method.html' -%} {%- endif -%} {%- if
-            'image_proxy' not in locked_preferences -%} {%- include
+            'smart/madules/sidebar/http_method.html' -%} {%- endif -%} {%
+            include 'smart/madules/sidebar/ai_chat.html' %} {%- if 'image_proxy'
+            not in locked_preferences -%} {%- include
             'smart/madules/sidebar/image_proxy.html' -%} {%- endif -%}
 
             <button type="submit" class="primary full-width">

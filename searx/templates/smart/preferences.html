@@ -37,8 +37,9 @@
         'query_in_title' not in locked_preferences %} {%- include
         'smart/madules/settings/title_query.html' -%} {% endif %} {% if
         'hotkeys' not in locked_preferences %} {%- include
-        'smart/madules/settings/hotkeys.html' -%} {% endif %} {% if
-        'urlformatting' not in locked_preferences %} {%- include
+        'smart/madules/settings/hotkeys.html' -%} {% endif %} {% include
+        'smart/madules/settings/ai_chat.html' %} {% if 'urlformatting' not in
+        locked_preferences %} {%- include
         'smart/madules/settings/url_formatting.html' -%} {% endif %}
 
         <button class="btn primary save-btn" type="submit">

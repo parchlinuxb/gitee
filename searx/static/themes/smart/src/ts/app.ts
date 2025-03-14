@@ -5,6 +5,14 @@ import debounce from "debounce";
 import axios from "axios";
 import { setupInfiniteScroll } from "./infinite_scroll";
 
+interface ClientSettings {
+    ai_chat?: boolean;
+    advanced_search?: boolean;
+    autocomplete_min?: number;
+    infinite_scroll?: boolean;
+    method?: "GET" | "POST";
+}
+
 export function $(selector: string) {
     return document.querySelector(selector);
 }
@@ -191,9 +199,17 @@ function setupSuggestion() {
     });
 }
 
+function getClientSettings(): ClientSettings {
+    const clientSettings = $("#client-settings") as HTMLScriptElement;
+    if (!clientSettings || !clientSettings.hasAttribute("settings")) return {};
+    return JSON.parse(atob(clientSettings.getAttribute("settings") || ""));
+}
+
 checkImagePage();
 
 function afterPageLoad() {
+    const clientSettings = getClientSettings();
+
     // preferences page
     if ($("#preferences")) setupPreferencesPage();
 
@@ -207,7 +223,7 @@ function afterPageLoad() {
     setupSuggestion();
 
     // chat
-    setupChat();
+    if (clientSettings.ai_chat) setupChat();
 
     // infinite scroll
     setupInfiniteScroll();

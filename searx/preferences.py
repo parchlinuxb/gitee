@@ -479,6 +479,9 @@ class Preferences:
                 settings['ui']['url_formatting'],
                 choices=['pretty', 'full', 'host']
             ),
+            'ai_chat': BooleanSetting(
+                settings['ui']['ai_chat']\
+            ),
             # fmt: on
         }
 
