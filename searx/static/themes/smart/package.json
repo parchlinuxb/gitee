@@ -1,38 +1,38 @@
 {
-    "browserslist": "cover 95% and last 2 versions and not dead",
-    "scripts": {
-        "style:watch:rtl": "parcel ./src/scss/rtl-style.scss --no-source-maps --dist-dir ./css -p 10020",
-        "style:watch:ltr": "parcel ./src/scss/ltr-style.scss --no-source-maps --dist-dir ./css -p 10021",
-        "style:watch": "concurrently -k -n \"RTL,LTR\" -c \"bgYellow.bold,bgGreen.bold\" -p \" {name} \" \"npm:style:watch:rtl\" \"npm:style:watch:ltr\"",
-        "style:build:rtl": "parcel build ./src/scss/rtl-style.scss --no-source-maps --dist-dir ./css",
-        "style:build:ltr": "parcel build ./src/scss/ltr-style.scss --no-source-maps --dist-dir ./css",
-        "style:build": "concurrently -k -n \"RTL,LTR\" -c \"bgYellow.dim,bgGreen.dim\" -p \" {name} \" \"npm:style:build:rtl\" \"npm:style:build:ltr\"",
-        "script:watch": "parcel ./src/ts/app.ts --no-source-maps --dist-dir ./js -p 10030",
-        "script:build": "parcel build ./src/ts/app.ts --no-source-maps --dist-dir ./js",
-        "icon:run": "node ./scripts/svg2jinja.js",
-        "icon:watch": "nodemon --watch ./scripts/svg2jinja.js --exec npm run icon:run",
-        "icon:build": "node ./scripts/svg2jinja.js --build",
-        "dev": "concurrently -k -n \"STYLE,SCRIPT,ICON\" -c \"bgRed.bold,bgBlue.bold,bgMagenta\" -p \" {name} \" \"npm:style:watch\" \"npm:script:watch\" \"npm:icon:watch\"",
-        "build": "concurrently -n \"STYLE,SCRIPT\" -c \"bgRed.dim,bgBlue.dim\" -p \" {name} \" \"npm:style:build\" \"npm:script:build\"; npm run icon:build"
-    },
-    "devDependencies": {
-        "@parcel/transformer-sass": "2.13.0",
-        "buffer": "^6.0.3",
-        "concurrently": "^9.1.0",
-        "parcel": "^2.13.0",
-        "process": "^0.11.10"
-    },
-    "dependencies": {
-        "@fontsource-variable/inter": "^5.1.1",
-        "@fontsource/inter": "^5.1.1",
-        "axios": "^1.7.9",
-        "debounce": "^2.2.0",
-        "ejs": "^3.1.10",
-        "markdown-it": "^14.1.0",
-        "nodemon": "^3.1.9",
-        "openai": "^4.85.3",
-        "remixicon": "^4.5.0",
-        "svgo": "^3.3.2",
-        "vazirmatn": "^33.0.3"
-    }
+  "browserslist": "cover 95% and last 2 versions and not dead",
+  "scripts": {
+    "style:watch:rtl": "parcel ./src/scss/rtl-style.scss --no-source-maps --dist-dir ./css -p 10020",
+    "style:watch:ltr": "parcel ./src/scss/ltr-style.scss --no-source-maps --dist-dir ./css -p 10021",
+    "style:watch": "concurrently -k -n \"RTL,LTR\" -c \"bgYellow.bold,bgGreen.bold\" -p \" {name} \" \"npm:style:watch:rtl\" \"npm:style:watch:ltr\"",
+    "style:build:rtl": "parcel build ./src/scss/rtl-style.scss --no-source-maps --dist-dir ./css",
+    "style:build:ltr": "parcel build ./src/scss/ltr-style.scss --no-source-maps --dist-dir ./css",
+    "style:build": "concurrently -k -n \"RTL,LTR\" -c \"bgYellow.dim,bgGreen.dim\" -p \" {name} \" \"npm:style:build:rtl\" \"npm:style:build:ltr\"",
+    "script:watch": "parcel ./src/ts/app.ts --no-source-maps --dist-dir ./js -p 10030",
+    "script:build": "parcel build ./src/ts/app.ts --no-source-maps --dist-dir ./js",
+    "icon:run": "node ./scripts/svg2jinja.js",
+    "icon:watch": "nodemon --watch ./scripts/svg2jinja.js --exec npm run icon:run",
+    "icon:build": "node ./scripts/svg2jinja.js --build",
+    "dev": "concurrently -k -n \"STYLE,SCRIPT,ICON\" -c \"bgRed.bold,bgBlue.bold,bgMagenta\" -p \" {name} \" \"npm:style:watch\" \"npm:script:watch\" \"npm:icon:watch\"",
+    "build": "concurrently -n \"STYLE,SCRIPT\" -c \"bgRed.dim,bgBlue.dim\" -p \" {name} \" \"npm:style:build\" \"npm:script:build\"; npm run icon:build"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "2.13.0",
+    "buffer": "^6.0.3",
+    "concurrently": "^9.1.0",
+    "parcel": "2.13.0",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "@fontsource-variable/inter": "^5.1.1",
+    "@fontsource/inter": "^5.1.1",
+    "axios": "^1.7.9",
+    "debounce": "^2.2.0",
+    "ejs": "^3.1.10",
+    "markdown-it": "^14.1.0",
+    "nodemon": "^3.1.9",
+    "openai": "^4.85.3",
+    "remixicon": "^4.5.0",
+    "svgo": "^3.3.2",
+    "vazirmatn": "^33.0.3"
+  }
 }

@@ -95,7 +95,7 @@ function setupImages(resultsContainer: HTMLElement) {
                             element.classList.add("current-open");
                             element.scrollIntoView({
                                 behavior: "smooth",
-                                block: "center",
+                                block: "nearest",
                             });
                             handleImageDetails(element, {
                                 imageSrc,
@@ -128,7 +128,7 @@ function setupImages(resultsContainer: HTMLElement) {
             e.preventDefault();
             removePrvImageClass();
             image.classList.add("current-open");
-            image.scrollIntoView({ behavior: "smooth", block: "center" });
+            image.scrollIntoView({ behavior: "smooth", block: "nearest" });
             handleImageDetails(image, {
                 imageSrc,
                 imageTitle,
