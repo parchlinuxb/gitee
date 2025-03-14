@@ -1,0 +1,13 @@
+<fieldset>
+    <div class="container">
+        <legend id="pref_smart_variant">{{- _('Theme style') -}}</legend>
+        <select name="smart_variant" aria-labelledby="pref_smart_variant">
+        {%- for name in ['gitee', 'nord', 'dracula'] -%}
+            <option value="{{ name }}"
+                    {%- if name == preferences.get_value('smart_variant') %} selected="selected" {%- endif -%}>
+                    {{- _(name) | capitalize -}}
+            </option>
+        {%- endfor -%}
+        </select>
+    </div>
+</fieldset>

@@ -140,6 +140,8 @@ ui:
   theme_args:
     # style of simple theme: auto, light, dark
     simple_style: auto
+    # style of smart theme: gitee, nord, dracula
+    smart_variant: gitee
   # Perform search immediately if a category selected.
   # Disable to select multiple categories at once and start the search manually.
   search_on_category_select: true

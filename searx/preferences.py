@@ -482,6 +482,11 @@ class Preferences:
             'ai_chat': BooleanSetting(
                 settings['ui']['ai_chat']\
             ),
+            'smart_variant': EnumStringSetting(
+                settings['ui']['theme_args']['smart_variant'],
+                locked=is_locked('smart_variant'),
+                choices=['gitee', 'nord', 'dracula']
+            ),
             # fmt: on
         }
 

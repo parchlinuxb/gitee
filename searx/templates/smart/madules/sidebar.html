@@ -10,7 +10,9 @@
             action="{{ url_for('preferences') }}"
             autocomplete="off"
         >
-            {%- if 'language' not in locked_preferences -%} {%- include
+            {%- if 'smart_variant' not in locked_preferences -%} {%- include
+            'smart/madules/sidebar/theme.html' -%} {%- endif -%} {%- if
+            'language' not in locked_preferences -%} {%- include
             'smart/madules/sidebar/language.html' -%} {% endif %} {%- if
             'autocomplete' not in locked_preferences -%} {%- include
             'smart/madules/sidebar/autocomplete.html' -%} {%- endif -%} {%- if

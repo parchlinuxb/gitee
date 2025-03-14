@@ -85,7 +85,7 @@
 
         <script id="client-settings" settings="{{ client_settings }}"></script>
     </head>
-    <body>
+    <body class="{{preferences.get_value('smart_variant') or 'gitee'}}">
         <div id="{{ endpoint }}" class="body-container">
             {% block body %} {% include 'smart/footer.html' %}
             <header>{% block header %} {% endblock %}</header>

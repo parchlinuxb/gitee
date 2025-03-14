@@ -10,9 +10,20 @@ body {
     --text-color: #{$text-color};
     --secondary-text-color: #{color.mix($text-color, $background-color, 70%)};
     --filled-text-color: #{$filled-text-color};
+    --secondary-filled-text-color: #{$text-color};
     --border-color: #{color.mix($text-color, $background-color, 30%)};
     --secondary-border-color: #{color.mix($text-color, $background-color, 15%)};
     --tooltip-background-color: #{$tooltip-background-color};
+
+    &.nord {
+        --background-color: #{$nord-snow-2};
+        --secondary-background-color: #{$nord-snow-1};
+        --text-color: #{$nord-night-0};
+        --secondary-text-color: #{$nord-night-1};
+        --primary-color: #{$nord-forest-0};
+        --secondary-color: #{$nord-forest-3};
+        --secondary-filled-text-color: #{$filled-text-color};
+    }
 }
 
 
@@ -26,8 +37,29 @@ body {
         --text-color: #{$text-color-dark};
         --secondary-text-color: #{color.mix($text-color-dark, $background-color-dark, 70%)};
         --filled-text-color: #{$filled-text-color-dark};
+        --secondary-filled-text-color: #{$filled-text-color-dark};
         --border-color: #{color.mix($text-color-dark, $background-color-dark, 30%)};
         --secondary-border-color: #{color.mix($text-color-dark, $background-color-dark, 15%)};
         --tooltip-background-color: #{$tooltip-background-color-dark};
+
+        &.nord {
+            --background-color: #{$nord-night-0};
+            --secondary-background-color: #{$nord-night-2};
+            --text-color: #{$nord-snow-0};
+            --secondary-text-color: #{$nord-snow-2};
+            --primary-color: #{$nord-forest-1};
+            --secondary-color: #{$nord-forest-3};
+            --secondary-filled-text-color: #{$nord-snow-0};
+        }
+
+        &.dracula {
+            --background-color: #{$dracula-backrgound};
+            --text-color: #{$dracula-foreground};
+            --secondary-text-color: #{$dracula-comment};
+            --primary-color: #{$dracula-purple};
+            --secondary-color: #{$dracula-pink};
+            --secondary-filled-text-color: #{$dracula-foreground};
+            --border-color: #{$dracula-selection};
+        }
     }
 }

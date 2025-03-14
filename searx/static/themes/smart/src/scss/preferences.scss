@@ -41,12 +41,12 @@
 #preferences_form {
     display: grid;
     grid-area: main;
-    grid-template-columns: subgrid;
     gap: 1rem;
     grid-template-areas: "main"
         "backup";
 
     @include mixin.screens($screen-md) {
+        grid-template-columns: subgrid;
         grid-template-areas: "main backup";
     }
 
@@ -195,6 +195,37 @@ fieldset {
             color: var(--text-color);
             @include mixin.rounded(sm);
             max-width: 250px;
+        }
+
+        .color-container {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+
+
+            input.color {
+                appearance: none;
+                width: 2rem;
+                height: 2rem;
+                @include mixin.rounded(sm);
+
+                &.gitee {
+                    background: linear-gradient(30deg, rgba(2, 144, 224, 1) 30%, rgba(255, 255, 255, 1) 30%, rgba(255, 255, 255, 1) 60%, rgba(248, 182, 0, 1) 60%);
+                }
+
+                &.nord {
+                    background: linear-gradient(30deg, rgba(143, 188, 187, 1) 30%, rgba(236, 239, 244, 1) 30%, rgba(236, 239, 244, 1) 60%, rgba(129, 161, 193, 1) 60%);
+                }
+
+                &.dracula {
+                    background: linear-gradient(30deg, rgba(151, 86, 244, 1) 30%, rgba(40, 42, 54, 1) 30%, rgba(40, 42, 54, 1) 60%, rgba(255, 121, 198, 1) 60%);
+                }
+
+                &:checked {
+                    outline: var(--primary-color) solid 3px;
+                    outline-offset: 2px;
+                }
+            }
         }
     }
 

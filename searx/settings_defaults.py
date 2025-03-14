@@ -19,6 +19,7 @@ logger = logging.getLogger('searx')
 OUTPUT_FORMATS = ['html', 'csv', 'json', 'rss']
 SXNG_LOCALE_TAGS = ['all', 'auto'] + list(l[0] for l in sxng_locales)
 SIMPLE_STYLE = ('auto', 'light', 'dark', 'black')
+SMART_VARIANT = ('gitee', 'nord', 'dracula')
 CATEGORIES_AS_TABS = {
     'general': {},
     'images': {},
@@ -196,6 +197,7 @@ SCHEMA = {
         'default_locale': SettingsValue(str, ''),
         'theme_args': {
             'simple_style': SettingsValue(SIMPLE_STYLE, 'auto'),
+            'smart_variant': SettingsValue(SMART_VARIANT, 'gitee'),
         },
         'center_alignment': SettingsValue(bool, False),
         'results_on_new_tab': SettingsValue(bool, False),

@@ -14,3 +14,17 @@
     {{- _('Change SearXNG layout') -}}
   </div>
 </fieldset>
+
+
+<fieldset>
+    <div class="container">
+        <legend id="pref_smart_variant">{{- _('Theme style') -}}</legend>
+        {%- for name in ['gitee', 'nord', 'dracula'] -%}
+        <label for="color-{{name}}" class="color-container">
+            <input type="radio" name="smart_variant" value="{{ name }}" id="color-{{name}}" class="color {{name}}"
+            aria-labelledby="pref_smart_variant" {%- if name == preferences.get_value('smart_variant') %} checked="checked" {%- endif -%}/>
+            <span>{{- _(name) | capitalize -}}</span>
+        </label>
+        {%- endfor -%}
+    </div>
+</fieldset>
