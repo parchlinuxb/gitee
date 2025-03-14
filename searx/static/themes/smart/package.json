@@ -16,14 +16,23 @@
         "build": "concurrently -n \"STYLE,SCRIPT\" -c \"bgRed.dim,bgBlue.dim\" -p \" {name} \" \"npm:style:build\" \"npm:script:build\"; npm run icon:build"
     },
     "devDependencies": {
-        "@parcel/transformer-sass": "^2.13.0",
+        "@parcel/transformer-sass": "2.13.0",
+        "buffer": "^6.0.3",
         "concurrently": "^9.1.0",
-        "parcel": "^2.13.0"
+        "parcel": "^2.13.0",
+        "process": "^0.11.10"
     },
     "dependencies": {
+        "@fontsource-variable/inter": "^5.1.1",
+        "@fontsource/inter": "^5.1.1",
+        "axios": "^1.7.9",
+        "debounce": "^2.2.0",
         "ejs": "^3.1.10",
+        "markdown-it": "^14.1.0",
         "nodemon": "^3.1.9",
+        "openai": "^4.85.3",
         "remixicon": "^4.5.0",
-        "svgo": "^3.3.2"
+        "svgo": "^3.3.2",
+        "vazirmatn": "^33.0.3"
     }
 }

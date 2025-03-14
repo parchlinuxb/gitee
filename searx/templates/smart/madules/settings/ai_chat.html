@@ -1,0 +1,15 @@
+{% from 'smart/icons.html' import icon_small %}
+
+<fieldset>
+    <div class="container">
+        <legend id="pref_ai_chat" class="name">
+            <span>{{- _('Answer by Jabir') -}}</span> {{- icon_small('ai') -}}
+        </legend>
+        <input type="checkbox" name="ai_chat" aria-labelledby="pref_ai_chat"
+        aria-describedby="desc_ai_chat" class="switch" {%- if
+        preferences.get_value('ai_chat') -%} checked {%- endif -%} >
+    </div>
+    <div class="description" id="desc_ai_chat">
+        {{- _('Get Jabir\'s answer in results') }}
+    </div>
+</fieldset>

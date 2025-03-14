@@ -1,0 +1,37 @@
+@use './mixins.scss' as mixin;
+@use './definitions.scss' as *;
+
+#pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 2rem;
+    margin-top: 1rem;
+    overflow-x: auto;
+    width: 100%;
+
+    @include mixin.max-screens($screen-md) {
+        width: calc(100vw - 3rem);
+    }
+
+    .page-numbers {
+        display: flex;
+        gap: .5rem;
+        align-items: center;
+
+        .page-number {
+            background-color: var(--background-color);
+
+            &.current {
+                background-color: var(--primary-color);
+                color: var(--filled-text-color);
+                cursor: initial;
+            }
+        }
+    }
+
+    button {
+        white-space: nowrap;
+    }
+}

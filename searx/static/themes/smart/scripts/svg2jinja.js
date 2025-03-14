@@ -9,6 +9,15 @@ const svgList = {
   search: "node_modules/remixicon/icons/System/search-line.svg",
   close: "node_modules/remixicon/icons/System/close-line.svg",
   plugin: "node_modules/remixicon/icons/Development/puzzle-2-fill.svg",
+  info: "node_modules/remixicon/icons/System/information-2-fill.svg",
+  database: "node_modules/remixicon/icons/Device/database-2-fill.svg",
+  share: "node_modules/remixicon/icons/System/share-fill.svg",
+  ai: "node_modules/remixicon/icons/System/apps-2-ai-fill.svg",
+  send: "node_modules/remixicon/icons/Business/send-plane-2-fill.svg",
+  stop: "node_modules/remixicon/icons/Media/pause-circle-line.svg",
+  back: "node_modules/remixicon/icons/Arrows/arrow-go-back-fill.svg",
+  eye: "node_modules/remixicon/icons/System/eye-fill.svg",
+  user: "node_modules/remixicon/icons/User & Faces/user-6-fill.svg",
 };
 
 const ejs = require("ejs"),

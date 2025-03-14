@@ -1,0 +1,47 @@
+{% from 'smart/icons.html' import icon_small %}
+
+<form
+    id="search"
+    method="{{ method or 'POST' }}"
+    action="{{ url_for('search') }}"
+    role="search"
+    class="header"
+>
+    <div class="header">
+        <a class="logo" href="/">
+            <img src="/static/img/logo.svg" alt="{{ instance_name }}" />
+        </a>
+        <div class="search_box">
+            <div class="icon">{{ icon_small('search') }}</div>
+            <input
+                id="q"
+                name="q"
+                type="text"
+                placeholder="{{ _('Search for...') }}"
+                tabindex="1"
+                autocomplete="off"
+                autocapitalize="none"
+                spellcheck="false"
+                autocorrect="off"
+                dir="auto"
+                value="{{ q or '' }}"
+            />
+            <button
+                id="clear_search"
+                type="reset"
+                aria-label="{{ _('clear') }}"
+                class="hide_if_nojs"
+            >
+                <span class="js-only">{{ icon_small('close') }}</span
+                ><span class="js-alt">{{ _('clear') }}</span>
+            </button>
+        </div>
+    </div>
+    <input type="hidden" name="theme" value="{{ theme }}" />
+    {% if timeout_limit %}<input
+        type="hidden"
+        name="timeout_limit"
+        value="{{ timeout_limit|e }}"
+    />{% endif %}
+    <input type="hidden" name="category_general" />
+</form>

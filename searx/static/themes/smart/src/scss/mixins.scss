@@ -94,5 +94,55 @@ $dir: ltr !default;
         right: $amount;
     }
 
-    left: $amount;
+    @else {
+        left: $amount;
+    }
+}
+
+// Fixed Direction
+@mixin direction() {
+    @if $dir =='ltr' {
+        direction: ltr;
+    }
+
+    @else {
+        direction: rtl;
+    }
+}
+
+// Fix Color in Dark Mode
+@mixin fix-color() {
+    @media (prefers-color-scheme: dark) {
+        mix-blend-mode: luminosity;
+        filter: invert(1);
+    }
+}
+
+// Dark Mode
+@mixin dark-mode() {
+    @media (prefers-color-scheme: dark) {
+        @content;
+    }
+}
+
+// Functions
+
+@function returnAlign($align) {
+    @if $dir =='rtl' {
+        @if $align =='left' {
+            @return right;
+        }
+
+        @else if $align =='right' {
+            @return left;
+        }
+
+        @else {
+            @return $align;
+        }
+    }
+
+    @else {
+        @return $align;
+    }
 }

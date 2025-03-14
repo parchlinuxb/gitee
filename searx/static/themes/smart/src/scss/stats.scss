@@ -1,0 +1,137 @@
+@use './mixins.scss' as mixin;
+
+#stats .container {
+    grid-area: main;
+    background-color: var(--background-color);
+    padding: 1.5rem 2rem;
+    @include mixin.rounded(lg);
+
+    h1 {
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--secondary-border-color);
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+        font-weight: 700;
+
+    }
+
+    table {
+        width: 100%;
+
+        th,
+        td {
+            text-align: start;
+            padding: .5rem;
+            text-transform: capitalize;
+        }
+
+        .response-details {
+            margin-top: -.5rem;
+            margin-bottom: .5rem;
+            padding: 0 1rem;
+
+            summary {
+                font-size: .8rem;
+                color: var(--border-color);
+                cursor: pointer;
+            }
+
+            table {
+                font-size: .9rem;
+            }
+        }
+    }
+
+    .issue-form {
+        width: min(100%, 50rem);
+        margin: 3rem auto 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+
+        p {
+            font-size: .9rem;
+            margin-bottom: .5rem;
+        }
+
+        textarea {
+            background-color: var(--secondary-background-color);
+            color: var(--text-color);
+            @include mixin.rounded(sm);
+            padding: .5rem;
+            min-height: 10rem;
+            field-sizing: content;
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+
+        input[type="checkbox"] {
+            margin-right: .5rem;
+        }
+
+        .link {
+            text-decoration: wavy underline var(--primary-color);
+        }
+
+        .step+label {
+            display: none;
+        }
+
+        .step:checked+label {
+            display: inline-block;
+        }
+
+        .step-content {
+            display: none;
+        }
+
+        .step-content:has(+input:checked) {
+            display: block;
+
+        }
+
+        .step+label+.step-content {
+            display: block;
+        }
+
+        .step:checked+label+.step-content {
+            display: none;
+        }
+
+        .submit-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        button[type="submit"] {
+            display: none;
+        }
+
+        :has(#confirm:checked) button[type="submit"] {
+            display: block;
+        }
+    }
+
+    .bar-chart {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        @include mixin.rounded(full);
+        overflow: hidden;
+        background-color: var(--secondary-border-color);
+
+        .bar {
+            height: .5rem;
+            background-color: var(--secondary-text-color);
+            transition: flex 100ms ease-in-out;
+        }
+
+        .bar.l1 {
+            background-color: var(--primary-color);
+        }
+    }
+}

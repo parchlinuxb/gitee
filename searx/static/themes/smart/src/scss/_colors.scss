@@ -2,26 +2,32 @@
 @use "definitions.scss" as *;
 
 // Light
-:root {
+body {
     --primary-color: #{$primary-color};
     --secondary-color: #{$secondary-color};
     --background-color: #{$background-color};
     --secondary-background-color: #{$secondary-background-color};
     --text-color: #{$text-color};
+    --secondary-text-color: #{color.mix($text-color, $background-color, 70%)};
     --filled-text-color: #{$filled-text-color};
     --border-color: #{color.mix($text-color, $background-color, 30%)};
+    --secondary-border-color: #{color.mix($text-color, $background-color, 15%)};
+    --tooltip-background-color: #{$tooltip-background-color};
 }
 
 
 // Dark
 @media (prefers-color-scheme: dark) {
-    :root {
+    body {
         --primary-color: #{$primary-color-dark};
         --secondary-color: #{$secondary-color-dark};
         --background-color: #{$background-color-dark};
         --secondary-background-color: #{$secondary-background-color-dark};
         --text-color: #{$text-color-dark};
+        --secondary-text-color: #{color.mix($text-color-dark, $background-color-dark, 70%)};
         --filled-text-color: #{$filled-text-color-dark};
-        --border-color: #{color.mix($text-color, $background-color, 30%)};
+        --border-color: #{color.mix($text-color-dark, $background-color-dark, 30%)};
+        --secondary-border-color: #{color.mix($text-color-dark, $background-color-dark, 15%)};
+        --tooltip-background-color: #{$tooltip-background-color-dark};
     }
 }

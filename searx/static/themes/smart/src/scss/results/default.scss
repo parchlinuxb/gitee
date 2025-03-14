@@ -1,0 +1,93 @@
+@use '../mixins.scss' as mixin;
+
+.default_group .result {
+    padding: 1.25rem;
+    border-bottom: var(--secondary-background-color) solid 1px;
+
+    .result-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 0.75rem;
+
+        .favicon {
+            width: 1rem;
+            height: 1rem;
+        }
+
+        .title {
+            flex: 1;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            text-decoration: none;
+            line-height: 1.4;
+        }
+
+        .date {
+            color: var(--secondary-text-color);
+            font-size: 0.8rem;
+            background-color: var(--secondary-background-color);
+            padding: 0.25rem 0.5rem;
+            @include mixin.rounded(sm);
+        }
+    }
+
+    .result-body {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 0.75rem;
+
+        .thumbnail {
+            max-width: 10rem;
+            height: 5rem;
+            object-fit: cover;
+            @include mixin.rounded();
+        }
+
+        .result-content {
+            color: var(--text-color);
+            overflow-wrap: anywhere;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+    }
+
+    .result-meta .result-url {
+        display: inline-block;
+        overflow-wrap: anywhere;
+    }
+}
+
+:is(.default_group, .videos_group) {
+    .result-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.8rem;
+        flex-wrap: wrap;
+        gap: .5rem;
+
+        .result-url {
+            background-color: var(--secondary-background-color);
+            color: var(--secondary-text-color);
+            padding: 0.25rem 0.5rem;
+            @include mixin.rounded(full);
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+
+        .engines {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+
+            .engine {
+                border: 1px solid var(--border-color);
+                padding: 0.25rem .75rem;
+                @include mixin.rounded(full);
+                font-size: 0.7rem;
+                text-wrap: nowrap;
+            }
+        }
+    }
+}

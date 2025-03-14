@@ -1,0 +1,16 @@
+{% from 'smart/icons.html' import icon_small %}
+
+<fieldset>
+    <div class="container">
+        <legend
+            id="pref_results_on_new_tab"
+            class="name"
+            tooltip="{{- _('Open result links on new browser tabs') -}}"
+        >
+            <span>{{ _('Results on new tabs') }}</span>{{icon_small("info")}}
+        </legend>
+        <input type="checkbox" name="results_on_new_tab" class="switch"
+        aria-labelledby="pref_results_on_new_tab" {%- if
+        preferences.get_value('results_on_new_tab') -%} checked {%- endif -%} >
+    </div>
+</fieldset>

@@ -1,0 +1,25 @@
+<fieldset>
+  <div class="container">
+    <legend id="pref_url_formatting">{{- _('URL formatting') -}}</legend>
+      <select  name="url_formatting" aria-labelledby="pref_url_formatting" aria-describedby="desc_url_formatting">
+        <option value="pretty"
+        {%- if preferences.get_value('url_formatting') == 'pretty' %} selected="selected"
+        {%- endif -%}>
+        {{- _('Pretty') -}}
+        </option>
+        <option value="full"
+                {%- if preferences.get_value('url_formatting') == 'full' %} selected="selected"
+                {%- endif -%}>
+                {{- _('Full') -}}
+        </option>
+        <option value="host"
+                {%- if preferences.get_value('url_formatting') == 'host' %} selected="selected"
+                {%- endif -%}>
+                {{- _('Host') -}}
+        </option>
+      </select>
+  </div>
+  <div class="description" id="desc_url_formatting">
+    {{- _('Change result URL formatting') -}}
+  </div>
+</fieldset>

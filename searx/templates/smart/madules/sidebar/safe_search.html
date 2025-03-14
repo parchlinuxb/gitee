@@ -1,0 +1,22 @@
+{% from 'smart/icons.html' import icon_small %}
+
+<fieldset>
+    <div class="container">
+        <legend id="pref_safesearch" class="name" tooltip="{{- _('Filter content') -}}"><span>{{- _('SafeSearch') -}}</span> {{icon_small('info')}}</legend>
+          <select name='safesearch' aria-labelledby="pref_safesearch" >
+            <option value="2"
+                    {%- if safesearch == '2' %} selected="selected" {%- endif -%}>
+                    {{- _('Strict') -}}
+            </option>
+            <option value="1"
+                    {%- if safesearch == '1' %} selected="selected" {%- endif -%}>
+                    {{- _('Moderate') -}}
+            </option>
+            <option value="0"
+                    {%- if safesearch == '0' %} selected="selected" {%- endif -%}>
+                    {{- _('None') -}}
+            </option>
+        </select>
+    </div>
+</fieldset>
+  

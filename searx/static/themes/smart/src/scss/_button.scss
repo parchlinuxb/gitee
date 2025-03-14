@@ -20,4 +20,8 @@
     &.full-width {
         width: 100%;
     }
+
+    &.rounded {
+        @include mixin.rounded(full);
+    }
 }

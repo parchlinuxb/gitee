@@ -1,0 +1,207 @@
+@use 'mixins.scss' as mixin;
+@use 'definitions.scss' as *;
+
+:is(#preferences, #stats) {
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: min-content auto min-content;
+    grid-template-areas:
+        "header links"
+        "main main"
+        "footer footer";
+    padding: 1rem;
+    gap: 1rem;
+    max-width: 1800px;
+    overflow-y: auto;
+
+    @include mixin.screens($screen-xl) {
+        padding: 1rem 4rem;
+    }
+
+
+    .header {
+        grid-area: header !important;
+        padding: 0 !important;
+    }
+
+    #search.header {
+        padding-top: .5rem !important;
+    }
+
+    .links {
+        grid-area: links;
+        align-items: center;
+        justify-content: end;
+    }
+
+    footer {
+        padding: 0;
+    }
+}
+
+#preferences_form {
+    display: grid;
+    grid-area: main;
+    grid-template-columns: subgrid;
+    gap: 1rem;
+    grid-template-areas: "main"
+        "backup";
+
+    @include mixin.screens($screen-md) {
+        grid-template-areas: "main backup";
+    }
+
+    .madules-container {
+        grid-area: main;
+        padding: 1.5rem;
+
+        select {
+            background-color: var(--secondary-background-color);
+        }
+
+        .save-btn {
+            margin-top: 1rem;
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+    }
+
+    .backup-container {
+        grid-area: backup;
+
+        .backup-box {
+            padding: 2rem;
+            width: 100%;
+
+            .title {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                font-size: 2rem;
+                font-weight: 700;
+                justify-content: center;
+                padding: 1rem;
+                margin-bottom: 2rem;
+            }
+
+            .description {
+                margin-bottom: 2rem;
+                text-align: justify;
+            }
+
+            &>.btn {
+                display: block;
+                text-align: center;
+                margin-top: 1rem;
+            }
+
+            .data-box {
+                display: flex;
+                flex-direction: column;
+
+                input[type="radio"]:checked+.data-page {
+                    margin-top: 1rem;
+                    display: block;
+                }
+
+                .data-page {
+                    padding: 1rem;
+                    width: 100%;
+                    display: none;
+                    @include mixin.rounded();
+                    background-color: var(--secondary-background-color);
+
+                    .section {
+                        padding: .5rem 0;
+                        border-bottom: 1px solid var(--secondary-border-color);
+                    }
+
+                    :last-child {
+                        border-bottom: none;
+                    }
+
+                    h4 {
+                        margin-bottom: .5rem;
+                    }
+
+                    p {
+                        text-indent: 1rem;
+                        font-size: .9rem;
+                        color: var(--secondary-text-color);
+                        text-align: justify;
+                    }
+
+                    input {
+                        background-color: var(--background-color);
+                        color: var(--text-color);
+                        @include mixin.rounded(sm);
+                        padding: .5rem 1rem;
+                        width: 100%;
+                        margin-bottom: .5rem;
+                    }
+
+                    .sidebyside {
+                        display: flex;
+                        gap: .5rem;
+
+                        input {
+                            flex: 1;
+                            margin: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    :is(.madules-container, .backup-box) {
+        background-color: var(--background-color);
+        @include mixin.rounded(lg);
+    }
+}
+
+
+fieldset {
+    margin-bottom: .5rem;
+    padding: .5rem 0;
+
+    .container {
+        display: flex;
+        padding: 0 .5rem;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: .5rem;
+
+
+        .name {
+            display: flex;
+            gap: .5rem;
+            align-items: center;
+
+            &:not(#pref_safesearch)[tooltip]::after {
+                left: 100%;
+            }
+
+            svg {
+                height: 1.2rem;
+                width: 1.2rem;
+            }
+        }
+
+        select {
+            padding: .5rem 1rem;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            @include mixin.rounded(sm);
+            max-width: 250px;
+        }
+    }
+
+    .description {
+        margin: 1rem 1rem 0;
+        text-align: justify;
+        color: var(--text-color);
+        font-size: .8rem;
+    }
+}

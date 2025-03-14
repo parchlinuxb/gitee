@@ -1,0 +1,129 @@
+{% set relatedTopics = namespace(topics=[]) %} {% for infobox in infoboxes %}{%
+if infobox.content %}
+<div class="info-box" dir="auto">
+    <div class="info-header">
+        <h2>{{ infobox.infobox }}</h2>
+        <span class="subtitle">{{ infobox.subtitle }}</span>
+    </div>
+
+    {% if infobox.attributes or infobox.relatedTopics or relatedTopics.topics %}
+    <div class="info-tabs">
+        {% if infobox.attributes %}
+        <label for="tab-info" class="tab">Info</label>
+        <input type="radio" name="tab-{{loop.index}}" id="tab-info" checked />
+        {% endif %} {% if infobox.relatedTopics or relatedTopics.topics %}
+        <label for="tab-related" class="tab">Related Topics</label>
+        <input
+            type="radio"
+            name="tab-{{loop.index}}"
+            id="tab-related"
+            {%
+            if
+            not
+            infobox.attributes
+            %}
+            checked
+            {%
+            endif
+            %}
+        />
+        {% endif %}
+    </div>
+    {% endif %} {% if infobox.img_src %}
+    <div class="image-gallery">
+        <img
+            src="{{ image_proxify(infobox.img_src) }}"
+            alt="{{ infobox.infobox|striptags }}"
+        />
+    </div>
+    {% endif %}
+
+    <div class="info-content">
+        <p>{{ infobox.content | safe }}</p>
+    </div>
+
+    {% if infobox.attributes %}
+    <div class="info-attributes">
+        {% for attribute in infobox.attributes %}
+        <div class="attribute">
+            <span class="label">{{ attribute.label }}</span>
+            {% if attribute.image %}
+            <img
+                src="{{ image_proxify(attribute.image.src) }}"
+                alt="{{ attribute.image.alt }}"
+            />
+            {% else %}
+            <span class="value">{{ attribute.value }}</span>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %} {%- if infobox.urls -%}
+    <ul class="info-urls">
+        {%- for url in infobox.urls -%}
+        <li class="url">
+            <bdi
+                ><a
+                    href="{{ url.url }}"
+                    {%-
+                    if
+                    results_on_new_tab
+                    -%}target="_blank"
+                    rel="noopener noreferrer"
+                    {%-
+                    else
+                    -%}rel="noreferrer"
+                    {%-
+                    endif
+                    -%}
+                    >{{ url.title }}</a
+                ></bdi
+            >
+        </li>
+        {%- endfor -%}
+    </ul>
+    {%- endif -%} {%- if infobox.relatedTopics or relatedTopics.topics -%}
+    <div class="info-related-topics">
+        {%- for topic in infobox.relatedTopics or relatedTopics.topics -%}
+        <div class="topic">
+            <h3><bdi>{{ topic.name }}</bdi></h3>
+            <div class="topics-list">
+                {%- for suggestion in topic.suggestions -%}
+                <form
+                    method="{{ method or 'POST' }}"
+                    action="{{ url_for('search') }}"
+                >
+                    <input type="hidden" name="q" value="{{ suggestion }}" />
+                    <input
+                        type="hidden"
+                        name="time_range"
+                        value="{{ time_range }}"
+                    />
+                    <input
+                        type="hidden"
+                        name="language"
+                        value="{{ current_language }}"
+                    />
+                    <input
+                        type="hidden"
+                        name="safesearch"
+                        value="{{ safesearch }}"
+                    />
+                    <input type="hidden" name="theme" value="{{ theme }}" />
+                    {%- if timeout_limit -%}<input
+                        type="hidden"
+                        name="timeout_limit"
+                        value="{{ timeout_limit|e }}"
+                    />{%- endif -%}
+                    <button type="submit">{{ suggestion }}</button>
+                </form>
+                {%- endfor -%}
+            </div>
+        </div>
+        {%- endfor -%}
+    </div>
+    {%- endif -%} {% if relatedTopics.topics %} {% set relatedTopics.topics = []
+    %} {% endif %}
+</div>
+{% elif infobox.relatedTopics %} {% set relatedTopics.topics =
+infobox.relatedTopics %} {% endif %} {% endfor %}

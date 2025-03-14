@@ -362,6 +362,7 @@ def get_client_settings():
         'safesearch': str(req_pref.get_value('safesearch')),
         'theme': req_pref.get_value('theme'),
         'doi_resolver': get_doi_resolver(req_pref),
+        'ai_chat': req_pref.get_value('ai_chat'),
     }
 
 
@@ -392,7 +393,7 @@ def render(template_name: str, **kwargs):
     kwargs['DEFAULT_CATEGORY'] = DEFAULT_CATEGORY
     
     # values for sidebar
-    current_locale = request.preferences.get_value("locale")
+    current_locale = sxng_request.preferences.get_value("locale")
     kwargs['current_locale'] = current_locale
     kwargs['autocomplete_backends'] = autocomplete_backends
     kwargs['locales'] = LOCALE_NAMES
@@ -590,7 +591,6 @@ def index():
         # fmt: off
         'index.html',
         selected_categories=get_selected_categories(sxng_request.preferences, sxng_request.form),
-        current_locale = sxng_request.preferences.get_value("locale"),
         # fmt: on
     )
 
@@ -777,7 +777,6 @@ def search():
         unresponsive_engines = webutils.get_translated_errors(
             result_container.unresponsive_engines
         ),
-        current_locale = sxng_request.preferences.get_value("locale"),
         current_language = selected_locale,
         search_language = match_locale(
             search_obj.search_query.lang,
@@ -998,7 +997,6 @@ def preferences():
         preferences = True,
         selected_categories = get_selected_categories(sxng_request.preferences, sxng_request.form),
         locales = LOCALE_NAMES,
-        current_locale = sxng_request.preferences.get_value("locale"),
         image_proxy = image_proxy,
         engines_by_category = engines_by_category,
         stats = stats,

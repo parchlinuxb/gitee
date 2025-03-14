@@ -206,6 +206,7 @@ SCHEMA = {
         'search_on_category_select': SettingsValue(bool, True),
         'hotkeys': SettingsValue(('default', 'vim'), 'default'),
         'url_formatting': SettingsValue(('pretty', 'full', 'host'), 'pretty'),
+        'ai_chat': SettingsValue(bool, True),
     },
     'preferences': {
         'lock': SettingsValue(list, []),

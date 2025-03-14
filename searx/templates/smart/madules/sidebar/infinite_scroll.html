@@ -1,0 +1,16 @@
+{% from 'smart/icons.html' import icon_small %}
+
+<fieldset>
+    <div class="container">
+        <legend
+            id="pref_infinite_scroll"
+            class="name"
+            tooltip="{{ _('Automatically load next page when scrolling to bottom of current page') }}"
+        >
+            <span>{{- _('Infinite scroll') -}}</span> {{- icon_small('info') -}}
+        </legend>
+        <input type="checkbox" name="infinite_scroll" class="switch"
+        aria-labelledby="pref_infinite_scroll" {%- if
+        preferences.get_value('infinite_scroll') -%} checked {%- endif -%} >
+    </div>
+</fieldset>

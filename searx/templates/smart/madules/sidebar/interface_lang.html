@@ -1,0 +1,16 @@
+{% from 'smart/icons.html' import icon_small %}
+
+<fieldset>
+    <div class="container">
+        <legend id="pref_ui_locale" class="name" tooltip="{{- _('Change the language of the layout') -}}"><span>{{- _('Interface language') -}}</span> {{- icon_small('info') -}}</legend>
+        <select name='locale' aria-labelledby="pref_ui_locale" 
+        {%- for locale_id,locale_name in locales.items() | sort -%}
+            <option value="{{ locale_id }}"
+                    {%- if locale_id == current_locale %} selected="selected" {%- endif %}>
+                    {{- locale_name -}}
+            </option>
+        {%- endfor -%}
+        </select>
+    </div>
+</fieldset>
+  

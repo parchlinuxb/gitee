@@ -1,0 +1,207 @@
+@use "../mixins.scss" as mixin;
+@use '../definitions.scss' as *;
+
+.images_group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    .image {
+        cursor: pointer;
+        position: relative;
+        max-width: 20rem;
+        @include mixin.rounded();
+        flex-grow: 1;
+
+        .image-box {
+            overflow: hidden;
+            @include mixin.rounded();
+            position: relative;
+            height: 12rem;
+
+            img {
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+            }
+
+            .resolution {
+                position: absolute;
+                right: 0.5rem;
+                bottom: .5rem;
+                background: rgba(0, 0, 0, 0.7);
+                color: white;
+                padding: 0.25rem 0.5rem;
+                border-radius: 0.25rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        &:is(:hover, :focus-within) {
+            outline: none;
+
+            .image-box img {
+                transform: scale(1.05);
+            }
+        }
+
+
+        .image-info {
+            padding: 0.5rem;
+
+            .title {
+                display: block;
+                font-size: 0.9rem;
+                margin-bottom: 0.25rem;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .source {
+                display: flex;
+                gap: .5rem;
+                font-size: 0.7rem;
+
+                .favicon {
+                    width: .8rem;
+                    height: .8rem;
+                }
+            }
+        }
+
+        &.current-open::after {
+            content: '';
+            position: absolute;
+            width: calc(100% + 1.5rem);
+            height: calc(100% + .75rem);
+            left: -.75rem;
+            top: -.75rem;
+            @include mixin.rounded();
+            background-color: var(--primary-color);
+            opacity: .5;
+        }
+    }
+}
+
+.image-details-container {
+    grid-area: image-detail;
+    @include mixin.rounded(lg);
+    overflow: hidden;
+
+    .image-details {
+        background: var(--background-color);
+        @include mixin.rounded(lg);
+        position: relative;
+        height: 80vh;
+        padding: 1.5rem;
+        transition: top 250ms ease-in-out,
+            height 250ms ease-out;
+
+        @include mixin.screens($screen-xl) {
+            min-width: $screen-xs;
+        }
+
+        .image {
+            height: 30%;
+            @include mixin.rounded();
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            position: relative;
+
+            img {
+                height: 100%;
+                width: 100%;
+                object-fit: contain;
+                position: absolute;
+                top: 0;
+                left: 0;
+
+                &#preview-img {
+                    filter: blur(10px);
+                }
+            }
+        }
+
+
+        h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .description {
+            color: var(--text-color);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+
+        .meta {
+            display: flex;
+            flex-direction: column;
+            background-color: var(--secondary-background-color);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            @include mixin.rounded();
+
+            .meta-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .source {
+                margin-top: .5rem;
+                background-color: var(--background-color);
+                padding: .5rem 1rem;
+                @include mixin.rounded(full);
+            }
+
+        }
+
+        .engine {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+
+            .engine-name {
+                background-color: var(--secondary-background-color);
+                padding: .5rem;
+                @include mixin.rounded(sm);
+            }
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+
+            .btn {
+                flex: 1;
+                width: 100%;
+                padding: 0.75rem;
+                text-align: center;
+                font-weight: 500;
+
+                &.copy:disabled {
+                    opacity: 0.5;
+                    cursor: not-allowed;
+                }
+            }
+        }
+
+        .close {
+            position: absolute;
+            top: 1rem;
+            @include mixin.right(1rem);
+            color: var(--text-color);
+            @include mixin.rounded(full);
+            background-color: var(--secondary-background-color);
+            padding: 0.25rem;
+            cursor: pointer;
+        }
+    }
+}

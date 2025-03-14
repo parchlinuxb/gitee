@@ -81,7 +81,7 @@ class FaviconProxyConfig(msgspec.Struct):
             raise ValueError(f"resolver {fqn} is not implemented")
         return func
 
-    favicon_path: str = get_setting("ui.static_path") + "/themes/{theme}/img/empty_favicon.svg"  # type: ignore
+    favicon_path: str = get_setting("ui.static_path") + "/img/empty_favicon.svg"  # type: ignore
     favicon_mime_type: str = "image/svg+xml"
 
     def favicon(self, **replacements):

@@ -15,8 +15,27 @@ $dir: ltr !default;
 // Button
 @use 'button';
 
-@function toPx($value) {
-    @return $value * 16px;
+// Tooltip
+@use 'tooltip';
+
+@forward './infobox.scss';
+
+// Result Styles
+@forward './results/default';
+@forward './results/images';
+@forward './results/videos';
+
+@forward './preferences';
+
+@forward './stats.scss';
+
+@forward './pagination';
+@forward 'loading_indicator';
+
+@forward './suggestions';
+
+@function toRem($value) {
+    @return floor($value / 16) * 1rem;
 }
 
 %link-button {
@@ -36,6 +55,7 @@ br {
 
 body {
     display: flex;
+    justify-content: center;
     gap: 0;
     overflow: hidden;
     transition: gap 250ms ease-in-out,
@@ -163,6 +183,7 @@ main:has(.not-found) {
             font-size: 2rem;
             display: block;
             text-align: center;
+            @include mixin.fix-color();
 
             img {
                 max-width: clamp(70px, 25vw, 150px);
@@ -173,34 +194,47 @@ main:has(.not-found) {
 
 #results {
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    grid-template-rows: 5rem min-content 1fr auto;
+
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content auto min-content min-content 1fr auto;
     grid-template-areas:
-        "search links"
-        "search amount"
-        "results sidebox"
-        "footer footer";
+        "links"
+        "search"
+        "amount"
+        "sidebox"
+        "results"
+        "footer";
     gap: 1rem;
-    margin: 0 auto;
     padding: 0 1rem;
     max-width: 1800px;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    transition: grid-template-columns 300ms ease-in-out;
 
-    @include mixin.screens($screen-lg) {
+    @include mixin.screens($screen-md) {
+        grid-template-columns: 2fr 1fr;
+        grid-template-rows: 5rem min-content 1fr auto;
+        grid-template-areas:
+            "search links"
+            "search amount"
+            "results sidebox"
+            "footer footer";
+    }
+
+    @include mixin.screens($screen-xl) {
         padding: 0 4rem;
     }
 
+    .result-count {
+        grid-area: amount;
+        font-size: .8rem;
+        color: var(--secondary-text-color);
 
-    &>.links {
-        grid-area: links;
-        width: 100%;
-        height: 100%;
-        align-items: center;
-        justify-content: end;
-
-        :is(.link, .sidebar_btn) {
-            width: 40px;
-            height: 40px;
+        &-container {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            justify-content: end;
         }
     }
 
@@ -212,12 +246,21 @@ main:has(.not-found) {
         margin-top: 2rem;
     }
 
+    .info-panel {
+        grid-area: sidebox;
+    }
+
     .results-container {
         grid-area: results;
+        position: relative;
+        transition: margin-top 100ms ease-in-out;
+        width: 100%;
 
-        .answer-container {
+        .message-container {
+            margin-bottom: 1rem;
             background-color: var(--background-color);
             padding: 1.5rem;
+            position: relative;
             @include mixin.rounded(lg);
 
             .title {
@@ -234,18 +277,95 @@ main:has(.not-found) {
 
             .message-box {
                 margin-top: 1rem;
-                @include mixin.rounded();
 
                 .message {
                     background-color: var(--secondary-background-color);
-                    margin-bottom: 1rem;
                     padding: 1rem;
                     border-radius: 1.5rem 1.5rem 1.5rem .5rem;
+                    overflow: hidden;
                     width: 80%;
                     max-width: 800px;
+
+                    @include mixin.max-screens($screen-md) {
+                        max-width: 90vw;
+                    }
+
+                    p {
+                        margin-bottom: 1.25rem;
+                    }
+
+                    a {
+                        color: var(--primary-color);
+                    }
+
+                    img {
+                        max-width: 100%;
+                    }
+
+                    pre {
+                        margin: .5rem;
+
+                        code {
+                            display: block;
+                        }
+                    }
+
+                    code {
+                        font-family: monospace;
+                        @include mixin.rounded(sm);
+                        background-color: var(--secondary-text-color);
+                        color: var(--filled-text-color);
+                        padding: .5rem .25rem;
+                    }
+
+                    :is(h1, h2, h3, h4, h5, h6) {
+                        margin-bottom: .75rem;
+                        font-weight: 700;
+                        font-size: 1.3rem;
+                    }
+
+                    li {
+                        margin-bottom: .5rem;
+                        padding-inline-start: 1rem;
+
+                        &::marker {
+                            color: var(--text-color);
+                        }
+                    }
+
+                    :is(ol, ul) {
+                        margin-bottom: 1rem;
+                        margin-inline-start: 1.5rem;
+                    }
+
+                    ol li {
+                        list-style-type: decimal;
+                    }
+
+                    ul li {
+                        list-style-type: disc;
+
+                        ul li {
+                            list-style-type: circle;
+
+                            ul li {
+                                list-style-type: square;
+                            }
+                        }
+                    }
+
+                    hr {
+                        margin: 1rem;
+                        opacity: .2;
+                    }
+
+                    :last-child {
+                        margin-bottom: 0;
+                    }
                 }
 
                 .reference {
+                    margin-top: 1rem;
                     font-size: .8rem;
                     color: var(--text-color);
 
@@ -255,22 +375,195 @@ main:has(.not-found) {
                         padding: 0 .5rem;
                     }
                 }
+
+                &.user {
+                    display: flex;
+                    flex-direction: row-reverse;
+
+                    .message {
+                        background-color: var(--primary-color);
+                        color: var(--filled-text-color);
+                        border-radius: 1.5rem 1.5rem .5rem 1.5rem;
+                    }
+                }
             }
+
+            .load-container {
+                display: none;
+                margin-top: 1rem;
+                justify-content: space-between;
+                align-items: center;
+                gap: 1rem;
+
+                .loading-indicators {
+                    border-radius: .5rem 1.5rem 1.5rem 1.5rem;
+                }
+
+                .btn.stop {
+                    display: flex;
+                    @include mixin.rounded(full);
+                    gap: 1rem;
+                    align-items: center;
+                    background-color: var(--text-color);
+                    color: var(--filled-text-color);
+
+                    @include mixin.dark-mode() {
+                        color: var(--background-color);
+                    }
+                }
+            }
+
+            .send-message {
+                display: flex;
+                border: 1px solid var(--border-color);
+                @include mixin.rounded(full);
+                padding: 0 .5rem;
+                position: absolute;
+                bottom: 1.5rem;
+                width: calc(100% - 3rem);
+                gap: .5rem;
+                align-items: center;
+                margin-top: 1rem;
+
+                input {
+                    flex: 1;
+                    background-color: transparent;
+                    border: none;
+                    color: var(--text-color);
+                    @include mixin.rounded(full);
+                    padding: .5rem;
+
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+
+                button {
+                    background-color: transparent;
+                    border: none;
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+            }
+
+            &.ai {
+                padding: 1.5rem 1.5rem 5rem;
+            }
+
+            &.ai.loading {
+                background-color: var(--primary-color);
+                color: var(--filled-text-color);
+                padding: 1.5rem;
+
+                svg {
+                    fill: var(--filled-text-color);
+
+                    @include mixin.dark-mode() {
+                        fill: var(--background-color);
+                    }
+                }
+
+                .title svg {
+                    fill: var(--filled-text-color);
+                }
+
+                .load-container {
+                    display: flex;
+                }
+
+                :is(.message-box, .send-message) {
+                    display: none;
+                }
+            }
+
         }
 
         .result-group {
-            margin-top: 1rem;
+            margin-bottom: 1rem;
             padding: 1rem;
             @include mixin.rounded(lg);
             background-color: var(--background-color);
+
+            .result .highlight {
+                font-weight: 700;
+            }
+
+            .result .result-content .highlight {
+                text-decoration: wavy underline 1px var(--primary-color);
+            }
+        }
+
+        :first-child {
+            margin-top: 0;
+        }
+    }
+
+    &:has(.image-page) {
+        grid-template-columns: 2fr 1fr 0fr;
+        grid-template-areas:
+            "search links links"
+            "search amount amount"
+            "results results image-detail"
+            "footer footer footer";
+
+        &:has(.multiple-results) {
+            grid-template-areas:
+                "search links links"
+                "search amount amount"
+                "results sidebox image-detail"
+                "footer footer footer";
+        }
+    }
+
+    &.image-open {
+        grid-template-columns: 2fr 0fr 1fr;
+
+        &:has(.multiple-results) {
+            grid-template-columns: 2fr 1fr 1fr;
+        }
+    }
+
+    .share_btn {
+        background-color: transparent;
+        border: none;
+        @include mixin.rounded(full);
+        padding: .25rem;
+
+        &:hover {
+            background-color: var(--background-color);
+        }
+
+        svg {
+            width: 1rem;
+            height: 1rem;
         }
     }
 }
 
-body:has(.sidebar_btn[open]) {
-    padding: .5rem;
-    gap: .5rem;
+.links {
+    grid-area: links;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: end;
+
+    :is(.link, .sidebar_btn) {
+        @include mixin.rounded(full);
+        width: 40px;
+        height: 40px;
+    }
+}
+
+body:has(.sidebar_btn input:checked) {
     background-color: var(--background-color);
+
+    @include mixin.screens($screen-md) {
+        padding: .5rem;
+        gap: .5rem;
+    }
 
     #sidebar {
         flex: 1;
@@ -283,8 +576,19 @@ body:has(.sidebar_btn[open]) {
         }
     }
 
+
     #index {
         height: calc(100svh - 1rem);
+
+        @include mixin.max-screens($screen-md) {
+            height: 100svh;
+        }
+    }
+
+    @include mixin.max-screens($screen-md) {
+        .body-container {
+            flex: 0;
+        }
     }
 
     header .links .link.config {
@@ -297,7 +601,6 @@ body:has(.sidebar_btn[open]) {
 #sidebar {
     flex: 0;
     min-width: 0;
-    @include mixin.rounded();
     overflow: hidden;
     background: var(--secondary-background-color);
     border: var(--secondary-background-color) solid;
@@ -306,12 +609,18 @@ body:has(.sidebar_btn[open]) {
         min-width 300ms ease-in-out;
     position: relative;
 
+    @include mixin.screens($screen-md) {
+        @include mixin.rounded();
+    }
+
     &>.container {
         width: 100%;
         height: 100%;
         overflow-y: auto;
+        overflow-x: hidden;
+        color: var(--text-color);
         position: absolute;
-        min-width: $screen-xs - toPx(2);
+        min-width: $screen-xs - 2rem;
         padding: 1rem;
         @include mixin.margin-left(50rem);
         transition: margin-left 50ms ease-in-out;
@@ -321,38 +630,22 @@ body:has(.sidebar_btn[open]) {
         }
 
         h1 {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
             font-size: 1.5rem;
             padding: .25rem 0;
             text-align: center;
             color: var(--text-color);
             @include mixin.rounded(full);
-        }
 
-        fieldset {
-            padding: .5rem 0;
+            @include mixin.screens($screen-md) {
+                justify-content: center;
 
-            .container {
-                display: flex;
-                padding: 0 .5rem;
-                justify-content: space-between;
-                align-items: center;
-                flex-wrap: wrap;
-                gap: .5rem;
-
-                select {
-                    padding: .5rem 1rem;
-                    background-color: var(--background-color);
-                    color: var(--text-color);
-                    @include mixin.rounded(sm);
-                    max-width: 250px;
+                label {
+                    display: none;
                 }
-            }
-
-            .description {
-                margin: .5rem;
-                text-align: justify;
-                color: var(--text-color);
-                font-size: .8rem;
             }
         }
 
@@ -389,9 +682,10 @@ footer {
 
     @include mixin.max-screens($screen-md) {
         justify-content: center;
+        text-align: center;
     }
 
-    .links {
+    .footer-links {
         display: flex;
         gap: 1rem;
         flex-wrap: wrap;
@@ -407,14 +701,15 @@ footer {
     background-color: var(--background-color);
     padding: .25rem .5rem;
     width: clamp(400px, 50vw, 40rem);
+    position: relative;
     @include mixin.rounded(full);
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
     gap: .5rem;
 
     @include mixin.max-screens($screen-sm) {
-        width: 70vw;
+        width: calc(100% - 4rem);
+        margin: 0 2rem;
         @include mixin.rounded();
     }
 
@@ -425,9 +720,10 @@ footer {
     }
 
 
-    input {
+    input[type="text"] {
         flex: 1;
         background-color: transparent;
+        width: inherit;
         border: none;
         color: var(--text-color);
         @include mixin.rounded(full);
@@ -436,6 +732,10 @@ footer {
 
         &:focus {
             outline: none;
+        }
+
+        &::placeholder {
+            text-align: mixin.returnAlign(left);
         }
     }
 
@@ -470,6 +770,7 @@ footer {
     #send_search {
         background-color: var(--secondary-color);
         padding: .5rem 1.5rem;
+        text-transform: capitalize;
 
         &:focus {
             outline: none;
@@ -529,6 +830,8 @@ footer {
             height: 100%;
             cursor: pointer;
             @include mixin.rounded();
+            text-transform: capitalize;
+            transition: background-color 250ms ease-out;
 
             .category-icon {
                 padding: 1rem;
@@ -544,26 +847,30 @@ footer {
             }
         }
     }
-
 }
 
 #search.header {
     position: relative;
     grid-area: search;
-    padding: 1rem 0;
+    padding: 1.5rem 0 1rem;
 
     .header {
         display: flex;
-
         justify-content: space-between;
         gap: 1rem;
         align-items: center;
+
+        @include mixin.max-screens($screen-md) {
+            flex-direction: column;
+        }
 
         .logo {
             display: flex;
             align-items: center;
             justify-content: center;
             width: 100px;
+
+            @include mixin.fix-color();
 
             img {
                 width: 100%;
@@ -583,13 +890,19 @@ footer {
         justify-content: space-between;
         gap: 1rem;
 
+        @include mixin.max-screens($screen-md) {
+            max-width: calc(100vw - 2rem);
+            overflow-x: auto;
+        }
+
         .categories {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 1rem;
+            gap: .5rem;
 
             .category {
+                text-transform: capitalize;
                 display: inline-block;
                 background-color: var(--background-color);
                 padding: .5rem 1rem;
@@ -597,8 +910,8 @@ footer {
                 @include mixin.rounded(full);
 
                 &.selected {
-                    background-color: #000;
-                    color: #fff;
+                    background-color: var(--text-color);
+                    color: var(--background-color);
                 }
             }
         }
@@ -638,6 +951,46 @@ footer {
         opacity: 1;
         height: 2rem;
     }
+}
+
+.suggestion-box {
+    display: flex;
+    @include mixin.rounded();
+    margin-top: 1rem;
+    flex-direction: column;
+    gap: 1rem;
+    max-height: 50vh;
+    overflow-y: auto;
+
+    // no scrollbar
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &:has(button) {
+        padding: 1rem;
+        background-color: var(--background-color);
+    }
+
+    button {
+        background-color: transparent;
+        border: none;
+
+        &:focus {
+            background-color: var(--primary-color);
+        }
+    }
+}
+
+#results .suggestion-box {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 1;
 }
 
 input[type="checkbox"].switch {

@@ -1,0 +1,16 @@
+{% from 'smart/icons.html' import icon_small %}
+
+<fieldset>
+    <div class="container">
+        <legend id="pref_autocomplete" tooltip="{{- _('Find stuff as you type') }}" class="name"><span>{{- _('Autocomplete') -}}</span> {{- icon_small('info') -}}</legend>
+        <select name="autocomplete" aria-labelledby="pref_autocomplete">
+        <option value=""> - </option>
+        {%- for backend in autocomplete_backends -%}
+            <option value="{{ backend }}"
+            {%- if backend == autocomplete %} selected="selected" {%- endif -%}>
+            {{- backend -}}
+            </option>
+        {%- endfor -%}
+        </select>
+    </div>
+</fieldset>  
