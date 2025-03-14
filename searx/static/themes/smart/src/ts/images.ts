@@ -88,7 +88,10 @@ function setupImages(resultsContainer: HTMLElement) {
                             e.preventDefault();
                             removePrvImageClass();
                             element.classList.add("current-open");
-                            element.scrollIntoView({ behavior: "smooth" });
+                            element.scrollIntoView({
+                                behavior: "smooth",
+                                block: "center",
+                            });
                             handleImageDetails(element, {
                                 imageSrc,
                                 imageTitle,
@@ -119,7 +122,7 @@ function setupImages(resultsContainer: HTMLElement) {
             e.preventDefault();
             removePrvImageClass();
             image.classList.add("current-open");
-            image.scrollIntoView({ behavior: "smooth" });
+            image.scrollIntoView({ behavior: "smooth", block: "center" });
             handleImageDetails(image, {
                 imageSrc,
                 imageTitle,

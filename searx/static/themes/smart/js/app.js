@@ -656,7 +656,7 @@ function setupCategorySelection() {
         checkBox.setAttribute("checked", "");
     });
 }
-function setupSuggestion() {
+function setupSuggestion(minChars) {
     const formElement = $("#search");
     if (!formElement) return;
     const queryInput = $("#q");
@@ -672,6 +672,7 @@ function setupSuggestion() {
         onSuggestion = false;
         if (controler.signal.aborted) return;
         const query = queryInput.value;
+        if (query.length < minChars) return;
         const res = await (0, _axiosDefault.default).post("/autocompleter", `q=${query}`);
         suggestionsContainer.innerHTML = "";
         let suggestions = [];
@@ -754,12 +755,12 @@ function afterPageLoad() {
     if ($("#results")) setupShareBtn();
     // index page
     if ($("#index")) setupCategorySelection();
-    // if there is search box
-    setupSuggestion();
+    // suggestion
+    if (clientSettings.autocomplete !== "") setupSuggestion(clientSettings.autocomplete_min || 1);
     // chat
     if (clientSettings.ai_chat) (0, _chat.setupChat)();
     // infinite scroll
-    (0, _infiniteScroll.setupInfiniteScroll)();
+    if (clientSettings.infinite_scroll) (0, _infiniteScroll.setupInfiniteScroll)();
 }
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", afterPageLoad);
 else afterPageLoad();
@@ -809,7 +810,8 @@ function setupImages(resultsContainer) {
                 removePrvImageClass();
                 element.classList.add("current-open");
                 element.scrollIntoView({
-                    behavior: "smooth"
+                    behavior: "smooth",
+                    block: "center"
                 });
                 handleImageDetails(element, {
                     imageSrc,
@@ -837,7 +839,8 @@ function setupImages(resultsContainer) {
             removePrvImageClass();
             image.classList.add("current-open");
             image.scrollIntoView({
-                behavior: "smooth"
+                behavior: "smooth",
+                block: "center"
             });
             handleImageDetails(image, {
                 imageSrc,

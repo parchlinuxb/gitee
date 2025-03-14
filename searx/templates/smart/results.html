@@ -90,8 +90,8 @@ block body %} {% include 'smart/madules/search_header.html' %}
         result['template']) if 'smart' in get_result_template('smart',
         result['template']) else get_result_template('smart', 'default.html') %}
         {% include template %} {% if result.close_group or ( pageno == 1 and
-        loop.index >= suggestion_index and not suggestions_placed.s and not
-        is_image_page) %}
+        loop.index >= suggestion_index and not suggestions_placed.s and
+        suggestions|length > 0 and not is_image_page) %}
     </div>
     {% if pageno == 1 and not suggestions_placed.s %} {% set
     suggestions_placed.s = true %} {% include 'smart/madules/suggestions.html'

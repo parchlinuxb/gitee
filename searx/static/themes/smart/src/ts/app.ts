@@ -8,6 +8,7 @@ import { setupInfiniteScroll } from "./infinite_scroll";
 interface ClientSettings {
     ai_chat?: boolean;
     advanced_search?: boolean;
+    autocomplete?: string;
     autocomplete_min?: number;
     infinite_scroll?: boolean;
     method?: "GET" | "POST";
@@ -91,7 +92,7 @@ function setupCategorySelection() {
     }
 }
 
-function setupSuggestion() {
+function setupSuggestion(minChars: number) {
     const formElement = $("#search") as HTMLFormElement;
     if (!formElement) return;
     const queryInput = $("#q") as HTMLInputElement;
@@ -110,6 +111,7 @@ function setupSuggestion() {
         onSuggestion = false;
         if (controler.signal.aborted) return;
         const query = queryInput.value;
+        if (query.length < minChars) return;
         const res = await axios.post<Array<string | string[]>>(
             "/autocompleter",
             `q=${query}`
@@ -219,14 +221,15 @@ function afterPageLoad() {
     // index page
     if ($("#index")) setupCategorySelection();
 
-    // if there is search box
-    setupSuggestion();
+    // suggestion
+    if (clientSettings.autocomplete !== "")
+        setupSuggestion(clientSettings.autocomplete_min || 1);
 
     // chat
     if (clientSettings.ai_chat) setupChat();
 
     // infinite scroll
-    setupInfiniteScroll();
+    if (clientSettings.infinite_scroll) setupInfiniteScroll();
 }
 
 if (document.readyState === "loading") {

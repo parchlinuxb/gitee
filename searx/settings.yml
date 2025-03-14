@@ -147,6 +147,8 @@ ui:
   hotkeys: default
   # URL formatting: pretty, full or host
   url_formatting: pretty
+  # Jabir Ai
+  # ai_chat: false
 
 # Lock arbitrary settings on the preferences page.
 #
