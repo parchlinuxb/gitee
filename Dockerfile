@@ -12,6 +12,7 @@ RUN addgroup -g ${SEARXNG_GID} searxng && \
 ENV INSTANCE_NAME=searxng \
     AUTOCOMPLETE= \
     BASE_URL= \
+    BIND_ADDRESS=[::]:8080 \
     MORTY_KEY= \
     MORTY_URL= \
     SEARXNG_SETTINGS_PATH=/etc/searxng/settings.yml \
@@ -61,6 +62,8 @@ RUN su searxng -c "/usr/bin/python3 -m compileall -q searx" \
  && find /usr/local/searxng/searx/static -a \( -name '*.html' -o -name '*.css' -o -name '*.js' \
     -o -name '*.svg' -o -name '*.ttf' -o -name '*.eot' \) \
     -type f -exec gzip -9 -k {} \+ -exec brotli --best {} \+
+
+HEALTHCHECK CMD wget --quiet --tries=1 --spider http://localhost:8080/healthz || exit 1
 
 # Keep these arguments at the end to prevent redundant layer rebuilds
 ARG LABEL_DATE=

@@ -9,8 +9,12 @@
 
 from urllib.parse import urlencode
 from datetime import datetime
+from html import unescape
+import time
+import json
 
 from searx.exceptions import SearxEngineAPIException
+from searx.utils import html_to_text
 
 about = {
     "website": "https://www.baidu.com",
@@ -23,33 +27,86 @@ about = {
 }
 
 paging = True
-categories = ["general"]
-base_url = "https://www.baidu.com/s"
+categories = []
 results_per_page = 10
+
+baidu_category = 'general'
+
+time_range_support = True
+time_range_dict = {"day": 86400, "week": 604800, "month": 2592000, "year": 31536000}
+
+
+def init(_):
+    if baidu_category not in ('general', 'images', 'it'):
+        raise SearxEngineAPIException(f"Unsupported category: {baidu_category}")
 
 
 def request(query, params):
-    keyword = query.strip()
+    page_num = params["pageno"]
 
-    query_params = {
-        "wd": keyword,
-        "rn": results_per_page,
-        "pn": (params["pageno"] - 1) * results_per_page,
-        "tn": "json",
+    category_config = {
+        'general': {
+            'endpoint': 'https://www.baidu.com/s',
+            'params': {
+                "wd": query,
+                "rn": results_per_page,
+                "pn": (page_num - 1) * results_per_page,
+                "tn": "json",
+            },
+        },
+        'images': {
+            'endpoint': 'https://image.baidu.com/search/acjson',
+            'params': {
+                "word": query,
+                "rn": results_per_page,
+                "pn": (page_num - 1) * results_per_page,
+                "tn": "resultjson_com",
+            },
+        },
+        'it': {
+            'endpoint': 'https://kaifa.baidu.com/rest/v1/search',
+            'params': {
+                "wd": query,
+                "pageSize": results_per_page,
+                "pageNum": page_num,
+                "paramList": f"page_num={page_num},page_size={results_per_page}",
+                "position": 0,
+            },
+        },
     }
 
-    params["url"] = f"{base_url}?{urlencode(query_params)}"
+    query_params = category_config[baidu_category]['params']
+    query_url = category_config[baidu_category]['endpoint']
+
+    if params.get("time_range") in time_range_dict:
+        now = int(time.time())
+        past = now - time_range_dict[params["time_range"]]
+
+        if baidu_category == 'general':
+            query_params["gpc"] = f"stf={past},{now}|stftype=1"
+
+        if baidu_category == 'it':
+            query_params["paramList"] += f",timestamp_range={past}-{now}"
+
+    params["url"] = f"{query_url}?{urlencode(query_params)}"
     return params
 
 
 def response(resp):
-    try:
-        data = resp.json()
-    except Exception as e:
-        raise SearxEngineAPIException(f"Invalid response: {e}") from e
-    results = []
 
-    if "feed" not in data or "entry" not in data["feed"]:
+    text = resp.text
+    if baidu_category == 'images':
+        # baidu's JSON encoder wrongly quotes / and ' characters by \\ and \'
+        text = text.replace(r"\/", "/").replace(r"\'", "'")
+    data = json.loads(text, strict=False)
+    parsers = {'general': parse_general, 'images': parse_images, 'it': parse_it}
+
+    return parsers[baidu_category](data)
+
+
+def parse_general(data):
+    results = []
+    if not data.get("feed", {}).get("entry"):
         raise SearxEngineAPIException("Invalid response")
 
     for entry in data["feed"]["entry"]:
@@ -63,14 +120,63 @@ def response(resp):
             except (ValueError, TypeError):
                 published_date = None
 
+        # title and content sometimes containing characters such as &amp; &#39; &quot; etc...
+        title = unescape(entry["title"])
+        content = unescape(entry.get("abs", ""))
+
         results.append(
             {
-                "title": entry["title"],
+                "title": title,
                 "url": entry["url"],
-                "content": entry.get("abs", ""),
+                "content": content,
                 "publishedDate": published_date,
-                # "source": entry.get('source')
             }
         )
+    return results
 
+
+def parse_images(data):
+    results = []
+    if "data" in data:
+        for item in data["data"]:
+            if not item:
+                # the last item in the JSON list is empty, the JSON string ends with "}, {}]"
+                continue
+            replace_url = item.get("replaceUrl", [{}])[0]
+            width = item.get("width")
+            height = item.get("height")
+            img_date = item.get("bdImgnewsDate")
+            publishedDate = None
+            if img_date:
+                publishedDate = datetime.strptime(img_date, "%Y-%m-%d %H:%M")
+            results.append(
+                {
+                    "template": "images.html",
+                    "url": replace_url.get("FromURL"),
+                    "thumbnail_src": item.get("thumbURL"),
+                    "img_src": replace_url.get("ObjURL"),
+                    "title": html_to_text(item.get("fromPageTitle")),
+                    "source": item.get("fromURLHost"),
+                    "resolution": f"{width} x {height}",
+                    "img_format": item.get("type"),
+                    "filesize": item.get("filesize"),
+                    "publishedDate": publishedDate,
+                }
+            )
+    return results
+
+
+def parse_it(data):
+    results = []
+    if not data.get("data", {}).get("documents", {}).get("data"):
+        raise SearxEngineAPIException("Invalid response")
+
+    for entry in data["data"]["documents"]["data"]:
+        results.append(
+            {
+                'title': entry["techDocDigest"]["title"],
+                'url': entry["techDocDigest"]["url"],
+                'content': entry["techDocDigest"]["summary"],
+            }
+        )
     return results

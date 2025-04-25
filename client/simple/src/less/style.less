@@ -80,6 +80,12 @@ body {
   margin: 0;
 }
 
+@supports (height: 100dvh) {
+  body {
+    height: 100dvh;
+  }
+}
+
 main {
   width: 100%;
   margin-bottom: 2rem;
@@ -469,7 +475,7 @@ article[data-vim-selected].category-social {
     padding: 0;
     border: none;
     height: 100%;
-    width: 100%;
+    width: auto;
     object-fit: cover;
     vertical-align: bottom;
     background: var(--color-result-image-background);
@@ -1158,3 +1164,6 @@ summary.title {
 pre code {
   white-space: pre-wrap;
 }
+
+// import layouts of the Result types
+@import "result_types/keyvalue.less";

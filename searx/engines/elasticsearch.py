@@ -29,7 +29,7 @@ authentication configured to read from ``my-index`` index.
 .. code:: yaml
 
   - name: elasticsearch
-    shortcut: es
+    shortcut: els
     engine: elasticsearch
     base_url: http://localhost:9200
     username: elastic
@@ -43,17 +43,29 @@ authentication configured to read from ``my-index`` index.
 
 from json import loads, dumps
 from searx.exceptions import SearxEngineAPIException
+from searx.result_types import EngineResults
+from searx.extended_types import SXNG_Response
 
+categories = ['general']
+paging = True
+
+about = {
+    'website': 'https://www.elastic.co',
+    'wikidata_id': 'Q3050461',
+    'official_api_documentation': 'https://www.elastic.co/guide/en/elasticsearch/reference/current/search-search.html',
+    'use_official_api': True,
+    'require_api_key': False,
+    'format': 'JSON',
+}
 
 base_url = 'http://localhost:9200'
 username = ''
 password = ''
 index = ''
-search_url = '{base_url}/{index}/_search'
 query_type = 'match'
 custom_query_json = {}
 show_metadata = False
-categories = ['general']
+page_size = 10
 
 
 def init(engine_settings):
@@ -71,9 +83,16 @@ def request(query, params):
     if username and password:
         params['auth'] = (username, password)
 
-    params['url'] = search_url.format(base_url=base_url, index=index)
+    args = {
+        'from': (params['pageno'] - 1) * page_size,
+        'size': page_size,
+    }
+    data = _available_query_types[query_type](query)
+    data.update(args)
+
+    params['url'] = f"{base_url}/{index}/_search"
     params['method'] = 'GET'
-    params['data'] = dumps(_available_query_types[query_type](query))
+    params['data'] = dumps(data)
     params['headers']['Content-Type'] = 'application/json'
 
     return params
@@ -145,23 +164,20 @@ def _custom_query(query):
     return custom_query
 
 
-def response(resp):
-    results = []
+def response(resp: SXNG_Response) -> EngineResults:
+    res = EngineResults()
 
     resp_json = loads(resp.text)
     if 'error' in resp_json:
-        raise SearxEngineAPIException(resp_json['error'])
+        raise SearxEngineAPIException(resp_json["error"])
 
-    for result in resp_json['hits']['hits']:
-        r = {key: str(value) if not key.startswith('_') else value for key, value in result['_source'].items()}
-        r['template'] = 'key-value.html'
-
+    for result in resp_json["hits"]["hits"]:
+        kvmap = {key: str(value) if not key.startswith("_") else value for key, value in result["_source"].items()}
         if show_metadata:
-            r['metadata'] = {'index': result['_index'], 'id': result['_id'], 'score': result['_score']}
+            kvmap["metadata"] = {"index": result["_index"], "id": result["_id"], "score": result["_score"]}
+        res.add(res.types.KeyValue(kvmap=kvmap))
 
-        results.append(r)
-
-    return results
+    return res
 
 
 _available_query_types = {

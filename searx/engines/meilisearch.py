@@ -13,7 +13,9 @@ for storing web pages you have visited and searching in the contents later.
 
 The engine supports faceted search, so you can search in a subset of documents
 of the collection.  Furthermore, you can search in MeiliSearch_ instances that
-require authentication by setting ``auth_token``.
+require authentication by setting `auth_key`_.
+
+.. _auth_key: https://www.meilisearch.com/docs/reference/api/overview#authorization
 
 Example
 =======
@@ -28,20 +30,21 @@ Here is a simple example to query a Meilisearch instance:
     base_url: http://localhost:7700
     index: my-index
     enable_http: true
+    # auth_key: Bearer XXXXX
 
 """
 
 # pylint: disable=global-statement
 
-from json import loads, dumps
-
+from json import dumps
+from searx.result_types import EngineResults
+from searx.extended_types import SXNG_Response
 
 base_url = 'http://localhost:7700'
 index = ''
 auth_key = ''
 facet_filters = []
 _search_url = ''
-result_template = 'key-value.html'
 categories = ['general']
 paging = True
 
@@ -56,7 +59,7 @@ def init(_):
 
 def request(query, params):
     if auth_key != '':
-        params['headers']['X-Meili-API-Key'] = auth_key
+        params['headers']['Authorization'] = auth_key
 
     params['headers']['Content-Type'] = 'application/json'
     params['url'] = _search_url
@@ -75,13 +78,12 @@ def request(query, params):
     return params
 
 
-def response(resp):
-    results = []
+def response(resp: SXNG_Response) -> EngineResults:
+    res = EngineResults()
 
-    resp_json = loads(resp.text)
-    for result in resp_json['hits']:
-        r = {key: str(value) for key, value in result.items()}
-        r['template'] = result_template
-        results.append(r)
+    resp_json = resp.json()
+    for row in resp_json['hits']:
+        kvmap = {key: str(value) for key, value in row.items()}
+        res.add(res.types.KeyValue(kvmap=kvmap))
 
-    return results
+    return res
