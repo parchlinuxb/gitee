@@ -5,6 +5,10 @@ block body %} {% include 'smart/madules/search_header.html' %}
     <a href="" class="link">{{icon_small('donate')}}</a>
     {% include 'smart/madules/sidebar_btn.html' %}
 </div>
+{% if 'images.html' in results|map(attribute='template')|unique|list%} {%
+include 'smart/madules/image_details.html' %}
+<script src="{{ url_for('static', filename='js/images.js') }}" async></script>
+{% endif %}
 <div
     class="results-container {% if results and results|map(attribute='template')|unique|list|count and 'images.html' in results|map(attribute='template')|unique|list %} image-page {% if results|map(attribute='template')|unique|list|count > 1 %} multiple-results {% endif %} {% endif %}"
 >
@@ -131,8 +135,5 @@ block body %} {% include 'smart/madules/search_header.html' %}
             </button>
         </div>
     </div>
-    {%- endif -%} {% if 'images.html' in
-    results|map(attribute='template')|unique|list%} {% include
-    'smart/madules/image_details.html' %} {% endif %} {% include
-    'smart/footer.html' %} {% endblock %}
+    {%- endif -%} {% include 'smart/footer.html' %} {% endblock %}
 </div>

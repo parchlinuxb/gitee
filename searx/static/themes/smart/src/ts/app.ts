@@ -1,5 +1,4 @@
 import { setupChat } from "./chat";
-import { checkImagePage } from "./images";
 import { copyToClipboard, getFromClipboard } from "./utils";
 import debounce from "debounce";
 import axios from "axios";
@@ -206,8 +205,6 @@ function getClientSettings(): ClientSettings {
     if (!clientSettings || !clientSettings.hasAttribute("settings")) return {};
     return JSON.parse(atob(clientSettings.getAttribute("settings") || ""));
 }
-
-checkImagePage();
 
 function afterPageLoad() {
     const clientSettings = getClientSettings();

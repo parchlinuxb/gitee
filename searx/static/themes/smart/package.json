@@ -8,12 +8,14 @@
     "style:build:ltr": "parcel build ./src/scss/ltr-style.scss --no-source-maps --dist-dir ./css",
     "style:build": "concurrently -k -n \"RTL,LTR\" -c \"bgYellow.dim,bgGreen.dim\" -p \" {name} \" \"npm:style:build:rtl\" \"npm:style:build:ltr\"",
     "script:watch": "parcel ./src/ts/app.ts --no-source-maps --dist-dir ./js -p 10030",
-    "script:build": "parcel build ./src/ts/app.ts --no-source-maps --dist-dir ./js",
+    "script:build": "parcel build ./src/ts/app.ts --no-source-maps --dist-dir ./js && parcel build ./src/ts/images.ts --no-source-maps --dist-dir ./js",
+    "script:images:watch": "parcel ./src/ts/images.ts --no-source-maps --dist-dir ./js -p 10031",
+    "script:images:build": "parcel build ./src/ts/images.ts --no-source-maps --dist-dir ./js",
     "icon:run": "node ./scripts/svg2jinja.js",
     "icon:watch": "nodemon --watch ./scripts/svg2jinja.js --exec npm run icon:run",
     "icon:build": "node ./scripts/svg2jinja.js --build",
-    "dev": "concurrently -k -n \"STYLE,SCRIPT,ICON\" -c \"bgRed.bold,bgBlue.bold,bgMagenta\" -p \" {name} \" \"npm:style:watch\" \"npm:script:watch\" \"npm:icon:watch\"",
-    "build": "concurrently -n \"STYLE,SCRIPT\" -c \"bgRed.dim,bgBlue.dim\" -p \" {name} \" \"npm:style:build\" \"npm:script:build\"; npm run icon:build"
+    "dev": "concurrently -k -n \"STYLE,SCRIPT,ICON,IMAGESSCRIPT\" -c \"bgRed.bold,bgBlue.bold,bgMagenta.bold,bgWhite.bold\" -p \" {name} \" \"npm:style:watch\" \"npm:script:watch\" \"npm:icon:watch\" \"npm:script:images:watch\"",
+    "build": "concurrently -n \"STYLE,SCRIPT\" -c \"bgRed.dim,bgBlue.dim\" -p \" {name} \" \"npm:style:build\" \"npm:script:build\"; npm run icon:build; npm run script:images:build"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "2.13.0",

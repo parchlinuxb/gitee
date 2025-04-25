@@ -85,31 +85,32 @@ function setupImages(resultsContainer: HTMLElement) {
     const ImagesObserver = new MutationObserver((mutationsList) => {
         for (const mutation of mutationsList) {
             if (mutation.type === "childList") {
-                mutation.addedNodes.forEach((node) => {
-                    if (node.nodeType === Node.ELEMENT_NODE) return;
-                    const element = node as HTMLElement;
-                    if (element.classList.contains("image")) {
-                        element.addEventListener("click", (e) => {
-                            e.preventDefault();
-                            removePrvImageClass();
-                            element.classList.add("current-open");
-                            element.scrollIntoView({
-                                behavior: "smooth",
-                                block: "nearest",
-                            });
-                            handleImageDetails(element, {
-                                imageSrc,
-                                imageTitle,
-                                imageContent,
-                                imageSource,
-                                imageFilesize,
-                                imageDownload,
-                                filesizeSpan,
-                                formatSpan,
-                                engineSpan,
-                                previewImg,
-                            });
-                        });
+                mutation.addedNodes.forEach((element) => {
+                    if (!(element instanceof HTMLElement)) return;
+                    if (element.classList.contains("images_group")) {
+                        element.childNodes.forEach((node) =>
+                            node.addEventListener("click", (e) => {
+                                e.preventDefault();
+                                removePrvImageClass();
+                                element.classList.add("current-open");
+                                element.scrollIntoView({
+                                    behavior: "smooth",
+                                    block: "nearest",
+                                });
+                                handleImageDetails(element, {
+                                    imageSrc,
+                                    imageTitle,
+                                    imageContent,
+                                    imageSource,
+                                    imageFilesize,
+                                    imageDownload,
+                                    filesizeSpan,
+                                    formatSpan,
+                                    engineSpan,
+                                    previewImg,
+                                });
+                            })
+                        );
                     }
                 });
             }
@@ -122,14 +123,13 @@ function setupImages(resultsContainer: HTMLElement) {
     });
 
     $$(".image").forEach((node) => {
-        if (node.nodeType !== Node.ELEMENT_NODE) return;
-        const image = node as HTMLElement;
-        void image.addEventListener("click", (e) => {
+        if (node.tagName !== "A" || !(node instanceof HTMLElement)) return;
+        void node.addEventListener("click", (e) => {
             e.preventDefault();
             removePrvImageClass();
-            image.classList.add("current-open");
-            image.scrollIntoView({ behavior: "smooth", block: "nearest" });
-            handleImageDetails(image, {
+            node.classList.add("current-open");
+            node.scrollIntoView({ behavior: "smooth", block: "nearest" });
+            handleImageDetails(node, {
                 imageSrc,
                 imageTitle,
                 imageContent,
@@ -195,10 +195,10 @@ function setupImages(resultsContainer: HTMLElement) {
     }
 }
 
-export function checkImagePage() {
+(function checkImagePage() {
     const resultsContainer = $(".results-container");
     if (!resultsContainer || resultsContainer.nodeType !== Node.ELEMENT_NODE)
         return;
     if (resultsContainer.classList.contains("image-page"))
         setupImages(resultsContainer as HTMLDivElement);
-}
+})();

@@ -132,6 +132,7 @@ body {
 
         &.config {
             transition: transform 1s ease-in-out;
+            cursor: pointer;
         }
     }
 }
@@ -508,6 +509,8 @@ main:has(.not-found) {
             "search amount amount"
             "results results image-detail"
             "footer footer footer";
+        padding: 0;
+        padding-inline-start: 1rem;
 
         &:has(.multiple-results) {
             grid-template-areas:
@@ -523,6 +526,12 @@ main:has(.not-found) {
 
         &:has(.multiple-results) {
             grid-template-columns: 2fr 1fr 1fr;
+        }
+
+        @include mixin.max-screens($screen-md) {
+            .image-details-container {
+                @include mixin.left(0);
+            }
         }
     }
 

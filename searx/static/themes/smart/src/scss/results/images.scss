@@ -135,6 +135,8 @@
             font-size: 0.9rem;
             line-height: 1.5;
             margin-bottom: 1.5rem;
+            max-height: 20vh;
+            overflow-y: auto;
         }
 
         .meta {
@@ -202,6 +204,19 @@
             background-color: var(--secondary-background-color);
             padding: 0.25rem;
             cursor: pointer;
+        }
+    }
+
+    @include mixin.max-screens($screen-md) {
+        position: fixed;
+        width: 100vw;
+        height: 100lvh;
+        @include mixin.left(100%);
+
+        .image-details {
+            height: 100lvh !important;
+            top: 0 !important;
+            border-radius: 0;
         }
     }
 }
