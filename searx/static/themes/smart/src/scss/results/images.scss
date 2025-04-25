@@ -9,15 +9,23 @@
     .image {
         cursor: pointer;
         position: relative;
-        max-width: 20rem;
+        max-width: 10rem;
         @include mixin.rounded();
         flex-grow: 1;
+
+        @include mixin.screens($screen-md) {
+            max-width: 20rem;
+        }
 
         .image-box {
             overflow: hidden;
             @include mixin.rounded();
             position: relative;
-            height: 12rem;
+            height: 8rem;
+
+            @include mixin.screens($screen-md) {
+                height: 12rem;
+            }
 
             img {
                 height: 100%;
@@ -87,7 +95,6 @@
 
 .image-details-container {
     grid-area: image-detail;
-    @include mixin.rounded(lg);
     overflow: hidden;
 
     .image-details {
@@ -212,6 +219,9 @@
         width: 100vw;
         height: 100lvh;
         @include mixin.left(100%);
+        z-index: 50;
+        transition: left 350ms ease-in-out,
+            right 350ms ease-in-out;
 
         .image-details {
             height: 100lvh !important;
