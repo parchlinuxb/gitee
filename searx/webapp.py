@@ -1366,7 +1366,7 @@ Disallow: /*?*q=*
 @app.route("/opensearch.xml", methods=["GET"])
 def opensearch():
     method = sxng_request.preferences.get_value("method")
-    autocomplete = sxng_request.preferences.get_value("autocomplete")
+    autocomplete = sxng_request.preferences.get_value("autocomplete") or "duckduckgo"
 
     # chrome/chromium only supports HTTP GET....
     if sxng_request.headers.get("User-Agent", "").lower().find("webkit") >= 0:
