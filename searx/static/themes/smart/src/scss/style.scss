@@ -236,6 +236,7 @@ main:has(.not-found) {
             align-items: center;
             gap: .5rem;
             justify-content: end;
+            padding: 0 1rem;
         }
     }
 
@@ -273,6 +274,18 @@ main:has(.not-found) {
 
                 svg {
                     fill: var(--primary-color);
+                }
+            }
+
+            .chat-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 2rem;
+
+                select {
+                    @include mixin.rounded(full);
+                    text-transform: capitalize;
                 }
             }
 

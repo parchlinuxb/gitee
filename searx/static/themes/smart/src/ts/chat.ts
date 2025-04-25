@@ -2,6 +2,8 @@ import { ChatCompletionMessageParam } from "openai/resources/index.mjs";
 import { $ } from "./app";
 import { OpenAI } from "openai";
 import markdownit from "markdown-it";
+import MarkdownIt from "markdown-it";
+import axios from "axios";
 
 let client: OpenAI;
 
@@ -14,9 +16,12 @@ let messages: ChatCompletionMessageParam[] = [
     },
 ];
 
-let md;
+let md: MarkdownIt;
 
 export function setupChat() {
+    if (!localStorage.getItem("chat-model")) {
+        localStorage.setItem("chat-model", "jabir-400b-online");
+    }
     const chatContainer = $("#ai-message-container") as HTMLDivElement;
     if (!chatContainer) return;
     const sendMessageForm = $("#send-message") as HTMLFormElement;
@@ -25,6 +30,37 @@ export function setupChat() {
         "input"
     ) as HTMLInputElement;
     if (!messageInput) return;
+    const modelSelect = chatContainer.querySelector(
+        "#chat-model"
+    ) as HTMLSelectElement;
+    if (!modelSelect) return;
+
+    axios
+        .get<{
+            data: {
+                id: string;
+                object: string;
+                owned_by: string;
+            }[];
+        }>("https://openai.jabirproject.org/v1/models")
+        .then((res) => {
+            modelSelect.innerHTML = "";
+            for (const model of res.data.data) {
+                const option = document.createElement("option");
+
+                option.value = model.id;
+                option.innerText = model.id.replace("-", " ");
+
+                if (model.id === localStorage.getItem("chat-model"))
+                    option.selected = true;
+
+                modelSelect.appendChild(option);
+            }
+        });
+
+    modelSelect.addEventListener("change", function () {
+        localStorage.setItem("chat-model", modelSelect.value);
+    });
 
     client = new OpenAI({
         apiKey: "FAKE",
@@ -87,7 +123,7 @@ async function sendMessage(
 
     const stream = await client.chat.completions.create({
         // @ts-ignore
-        model: "jabir-400b-online",
+        model: localStorage.getItem("chat-model"),
         messages,
     });
 

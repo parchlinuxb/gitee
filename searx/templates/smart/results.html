@@ -13,45 +13,12 @@ include 'smart/madules/image_details.html' %}
     class="results-container {% if results and results|map(attribute='template')|unique|list|count and 'images.html' in results|map(attribute='template')|unique|list %} image-page {% if results|map(attribute='template')|unique|list|count > 1 %} multiple-results {% endif %} {% endif %}"
 >
     {% if pageno <= 1 %} {% if preferences.get_value('ai_chat') %} {% if results
-    and results|map(attribute='template')|unique|list|count == 1 and
-    selected_categories|count == 1 and 'general' in selected_categories %}
-    <p class="error js-alt">
-        {{_('Jabir needs JS enabled to work properly.')}}
-    </p>
-    <div
-        class="message-container js-only ai loading"
-        id="ai-message-container"
-        data-gitee-based-on="{{ _('Based on') }}"
-    >
-        <div class="title">
-            {{ icon_small('ai') }}
-            <h3>{{ _('Answer by Jabir') }}</h3>
-        </div>
-        <div class="load-container">
-            <div class="loading-indicators">
-                <span class="indicator"> </span>
-                <span class="indicator"> </span>
-                <span class="indicator"> </span>
-            </div>
-            <button class="btn stop">
-                <span>{{ _('Stop') }}</span> {{ icon_small('stop') }}
-            </button>
-        </div>
-        <form class="send-message" id="send-message">
-            <input
-                type="text"
-                dir="auto"
-                placeholder="{{ _('Ask Jabir anything...') }}"
-                value="{{ q|e }}"
-            />
-            <button>{{ icon_small('send') }}</button>
-        </form>
-    </div>
-    {% endif %} {% endif %} {% set suggestions_placed = namespace(s=false) %} {%
-    set suggestion_index = range(1, 10) | random%} {% set is_image_page =
-    results and results|map(attribute='template')|unique|list|count == 1 and
-    'images.html' in results|map(attribute='template')|unique|list %} {% if
-    answers %}
+    and 'general' in selected_categories %} {% include
+    'smart/madules/ai_chat.html' %} {% endif %} {% endif %} {% set
+    suggestions_placed = namespace(s=false) %} {% set suggestion_index =
+    range(1, 10) | random%} {% set is_image_page = results and
+    results|map(attribute='template')|unique|list|count == 1 and 'images.html'
+    in results|map(attribute='template')|unique|list %} {% if answers %}
     <div class="message-container">
         <div class="title">
             {{ icon_small('plugin') }}

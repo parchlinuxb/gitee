@@ -146,3 +146,15 @@ $dir: ltr !default;
         @return $align;
     }
 }
+
+// Value fix
+
+@function bidiValue($ltr, $rtl) {
+    @if $dir =='ltr' {
+        @return $ltr;
+    }
+
+    @else {
+        @return $rtl;
+    }
+}
