@@ -14,13 +14,14 @@
        limiter: false
        public_instance: false
        image_proxy: false
+       method: "POST"
        default_http_headers:
          X-Content-Type-Options : nosniff
          X-Download-Options : noopen
          X-Robots-Tag : noindex, nofollow
          Referrer-Policy : no-referrer
 
-``base_url`` : ``$SEARXNG_URL``
+``base_url`` : ``$SEARXNG_BASE_URL``
   The base URL where SearXNG is deployed.  Used to create correct inbound links.
 
 ``port`` & ``bind_address``: ``$SEARXNG_PORT`` & ``$SEARXNG_BIND_ADDRESS``
@@ -49,6 +50,11 @@
 
 ``image_proxy`` : ``$SEARXNG_IMAGE_PROXY``
   Allow your instance of SearXNG of being able to proxy images.  Uses memory space.
+
+.. _method:
+
+``method`` : ``$SEARXNG_METHOD``
+  Whether to use ``GET`` or ``POST`` HTTP method when searching.
 
 .. _HTTP headers: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers
 

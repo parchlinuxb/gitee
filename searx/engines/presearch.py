@@ -58,6 +58,12 @@ have to set these values in both requests we send to Presearch; in the first
 request to get the request-ID from Presearch and in the final request to get the
 result list (see ``send_accept_language_header``).
 
+The time format returned by Presearch varies depending on the language set.
+Multiple different formats can be supported by using ``dateutil`` parser, but
+it doesn't support formats such as "N time ago", "vor N time" (German),
+"Hace N time" (Spanish). Because of this, the dates are simply joined together
+with the rest of other metadata.
+
 
 Implementations
 ===============
@@ -67,7 +73,7 @@ Implementations
 from urllib.parse import urlencode, urlparse
 from searx import locales
 from searx.network import get
-from searx.utils import gen_useragent, html_to_text
+from searx.utils import gen_useragent, html_to_text, parse_duration_string
 
 about = {
     "website": "https://presearch.io",
@@ -178,6 +184,8 @@ def _fix_title(title, url):
 
 def parse_search_query(json_results):
     results = []
+    if not json_results:
+        return results
 
     for item in json_results.get('specialSections', {}).get('topStoriesCompact', {}).get('data', []):
         result = {
@@ -239,14 +247,14 @@ def response(resp):
     json_resp = resp.json()
 
     if search_type == 'search':
-        results = parse_search_query(json_resp.get('results'))
+        results = parse_search_query(json_resp.get('results', {}))
 
     elif search_type == 'images':
         for item in json_resp.get('images', []):
             results.append(
                 {
                     'template': 'images.html',
-                    'title': item['title'],
+                    'title': html_to_text(item['title']),
                     'url': item.get('link'),
                     'img_src': item.get('image'),
                     'thumbnail_src': item.get('thumbnail'),
@@ -258,25 +266,34 @@ def response(resp):
         # a video and not to a video stream --> SearXNG can't use the video template.
 
         for item in json_resp.get('videos', []):
-            metadata = [x for x in [item.get('description'), item.get('duration')] if x]
+            duration = item.get('duration')
+            if duration:
+                duration = parse_duration_string(duration)
+
             results.append(
                 {
-                    'title': item['title'],
+                    'title': html_to_text(item['title']),
                     'url': item.get('link'),
-                    'content': '',
-                    'metadata': ' / '.join(metadata),
+                    'content': item.get('description', ''),
                     'thumbnail': item.get('image'),
+                    'length': duration,
                 }
             )
 
     elif search_type == 'news':
         for item in json_resp.get('news', []):
-            metadata = [x for x in [item.get('source'), item.get('time')] if x]
+            source = item.get('source')
+            # Bug on their end, time sometimes returns "</a>"
+            time = html_to_text(item.get('time')).strip()
+            metadata = [source]
+            if time != "":
+                metadata.append(time)
+
             results.append(
                 {
-                    'title': item['title'],
+                    'title': html_to_text(item['title']),
                     'url': item.get('link'),
-                    'content': item.get('description', ''),
+                    'content': html_to_text(item.get('description', '')),
                     'metadata': ' / '.join(metadata),
                     'thumbnail': item.get('image'),
                 }

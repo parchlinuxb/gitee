@@ -11,7 +11,7 @@ from lxml import html
 from searx.network import get as http_get
 
 about = {
-    "website": "ttps://soundcloud.com",
+    "website": "https://soundcloud.com",
     "wikidata_id": "Q568769",
     "official_api_documentation": "https://developers.soundcloud.com/docs/api/guide",
     "use_official_api": False,
@@ -23,7 +23,7 @@ categories = ["music"]
 paging = True
 
 search_url = "https://api-v2.soundcloud.com/search"
-"""This is not the offical (developer) url, it is the API which is used by the
+"""This is not the official (developer) url, it is the API which is used by the
 HTML frontend of the common WEB site.
 """
 
