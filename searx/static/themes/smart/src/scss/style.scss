@@ -428,75 +428,97 @@ main:has(.not-found) {
                 }
             }
 
-            .send-message {
-                display: flex;
-                border: 1px solid var(--border-color);
-                @include mixin.rounded(full);
-                padding: 0 .5rem;
-                position: absolute;
-                bottom: 1.5rem;
-                width: calc(100% - 3rem);
-                gap: .5rem;
-                align-items: center;
-                margin-top: 1rem;
-
-                input {
-                    flex: 1;
-                    background-color: transparent;
-                    border: none;
-                    color: var(--text-color);
-                    @include mixin.rounded(full);
-                    padding: .5rem;
-
-
-                    &:focus {
-                        outline: none;
-                    }
-                }
-
-                button {
-                    background-color: transparent;
-                    border: none;
-
-                    &:focus {
-                        outline: none;
-                    }
-                }
-            }
-
             &.ai {
                 padding: 1.5rem 1.5rem 5rem;
+
+                .send-message {
+                    display: flex;
+                    border: 1px solid var(--border-color);
+                    @include mixin.rounded(full);
+                    padding: 0 .5rem;
+                    position: absolute;
+                    bottom: 1.5rem;
+                    width: calc(100% - 3rem);
+                    gap: .5rem;
+                    align-items: center;
+                    margin-top: 1rem;
+
+                    input {
+                        flex: 1;
+                        background-color: transparent;
+                        border: none;
+                        color: var(--text-color);
+                        @include mixin.rounded(full);
+                        padding: .5rem;
+
+
+                        &:focus {
+                            outline: none;
+                        }
+
+                        &:disabled {
+                            opacity: .5;
+                        }
+                    }
+
+                    button {
+                        background-color: transparent;
+                        border: none;
+
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+
+                    .loader {
+                        display: none;
+                    }
+                }
+
+                &.loading {
+                    background-color: var(--primary-color);
+                    color: var(--filled-text-color);
+                    padding: 1.5rem;
+
+                    svg {
+                        fill: var(--filled-text-color);
+
+                        @include mixin.dark-mode() {
+                            fill: var(--background-color);
+                        }
+                    }
+
+                    .title svg {
+                        fill: var(--filled-text-color);
+                    }
+
+                    .load-container {
+                        display: flex;
+                    }
+
+                    :is(.message-box, .send-message) {
+                        display: none;
+                    }
+                }
+
+                &.answering {
+                    .send-message {
+                        button {
+                            display: none;
+                        }
+
+                        .loader {
+                            display: inline-block;
+                            animation: spin 1s linear infinite;
+                        }
+                    }
+                }
             }
 
             &:has(.send-message[hidden]) {
                 padding: 1.5rem;
             }
 
-            &.ai.loading {
-                background-color: var(--primary-color);
-                color: var(--filled-text-color);
-                padding: 1.5rem;
-
-                svg {
-                    fill: var(--filled-text-color);
-
-                    @include mixin.dark-mode() {
-                        fill: var(--background-color);
-                    }
-                }
-
-                .title svg {
-                    fill: var(--filled-text-color);
-                }
-
-                .load-container {
-                    display: flex;
-                }
-
-                :is(.message-box, .send-message) {
-                    display: none;
-                }
-            }
 
         }
 
@@ -1073,5 +1095,23 @@ input[type="checkbox"].switch {
 @media (scripting: enabled) {
     .js-alt {
         display: none !important;
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(50deg);
+    }
+
+    50% {
+        transform: rotate(150deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
     }
 }

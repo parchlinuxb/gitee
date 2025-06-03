@@ -134,9 +134,13 @@ async function sendMessage({
     if (messageInput) messageInput.value = "";
     if (!summarize) {
         const userMessageElement = createMessage(chatContainer, "user");
-        userMessageElement.innerText = sededMessage;
+        userMessageElement.innerText = sededMessage.includes("Query:")
+            ? sededMessage.substring(sededMessage.indexOf("Query:") + 6)
+            : sededMessage;
     }
 
+    chatContainer.classList.add("answering");
+    if (messageInput) messageInput.disabled = true;
     const stream = await client.chat.completions.create({
         // @ts-ignore
         model: chatModel,
@@ -163,6 +167,8 @@ async function sendMessage({
         paragraph.remove();
         messageElement.innerHTML = md.render(messageText);
     }
+    chatContainer.classList.remove("answering");
+    if (messageInput) messageInput.disabled = false;
 
     if (messageElement.innerText.length <= 0) {
         messageElement.parentElement?.remove();
