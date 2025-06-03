@@ -151,8 +151,9 @@ ui:
   hotkeys: default
   # URL formatting: pretty, full or host
   url_formatting: pretty
-  # Jabir Ai
-  # ai_chat: false
+  # Ai Answer
+  # ai_chat: off # off, chat, summarize
+  # ai_chat_model: jabir-400b-online
 
 # Lock arbitrary settings on the preferences page.
 #

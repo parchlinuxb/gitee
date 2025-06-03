@@ -479,8 +479,12 @@ class Preferences:
                 settings['ui']['url_formatting'],
                 choices=['pretty', 'full', 'host']
             ),
-            'ai_chat': BooleanSetting(
-                settings['ui']['ai_chat']\
+            'ai_chat': EnumStringSetting(
+                settings['ui']['ai_chat'],
+                choices=['off', 'chat', 'summarize']
+            ),
+            'ai_chat_model': StringSetting(
+                settings['ui']['ai_chat_model']
             ),
             'smart_variant': EnumStringSetting(
                 settings['ui']['theme_args']['smart_variant'],

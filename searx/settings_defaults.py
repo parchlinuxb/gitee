@@ -208,7 +208,8 @@ SCHEMA = {
         'search_on_category_select': SettingsValue(bool, True),
         'hotkeys': SettingsValue(('default', 'vim'), 'default'),
         'url_formatting': SettingsValue(('pretty', 'full', 'host'), 'pretty'),
-        'ai_chat': SettingsValue(bool, True),
+        'ai_chat': SettingsValue(('off', 'chat', 'summarize'), 'chat'),
+        'ai_chat_model': SettingsValue(str, 'jabir-400b-online'),
     },
     'preferences': {
         'lock': SettingsValue(list, []),

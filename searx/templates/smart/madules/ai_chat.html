@@ -24,12 +24,10 @@
         </button>
     </div>
     <form class="send-message" id="send-message">
-        <input
-            type="text"
-            dir="auto"
-            placeholder="{{ _('Ask Jabir anything...') }}"
-            value="{{ q|e }}"
-        />
+        <input type="text" dir="auto" placeholder="{{ _('Ask Jabir anything...')
+        }}" {% if preferences.get_value('ai_chat') == 'chat' %} value="{{ '%s \nQuery: %s' % (current_locale, q|e) }}" {% elif
+        preferences.get_value('ai_chat') == 'summarize' %} value="{{ '%s \nQuery:%s\nResults:%s' % (current_locale, q|e, results[:5]) }}" {% endif
+        %} />
         <button>{{ icon_small('send') }}</button>
     </form>
 </div>

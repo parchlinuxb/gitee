@@ -1,24 +1,19 @@
 import { setupChat } from "./chat";
-import { copyToClipboard, getFromClipboard } from "./utils";
+import { $, copyToClipboard, getFromClipboard } from "./utils";
 import debounce from "debounce";
 import axios from "axios";
 import { setupInfiniteScroll } from "./infinite_scroll";
 
+type Method = "GET" | "POST";
+
 interface ClientSettings {
-    ai_chat?: boolean;
+    ai_chat?: "off" | "chat" | "summarize";
+    ai_chat_model?: string;
     advanced_search?: boolean;
     autocomplete?: string;
     autocomplete_min?: number;
     infinite_scroll?: boolean;
-    method?: "GET" | "POST";
-}
-
-export function $(selector: string) {
-    return document.querySelector(selector);
-}
-
-export function $$(selector: string) {
-    return document.querySelectorAll(selector);
+    method?: Method;
 }
 
 function setupShareBtn() {
@@ -91,7 +86,13 @@ function setupCategorySelection() {
     }
 }
 
-function setupSuggestion(minChars: number) {
+function setupSuggestion({
+    minChars,
+    method,
+}: {
+    minChars: number;
+    method: Method;
+}) {
     const formElement = $("#search") as HTMLFormElement;
     if (!formElement) return;
     const queryInput = $("#q") as HTMLInputElement;
@@ -111,10 +112,11 @@ function setupSuggestion(minChars: number) {
         if (controler.signal.aborted) return;
         const query = queryInput.value;
         if (query.length < minChars) return;
-        const res = await axios.post<Array<string | string[]>>(
-            "/autocompleter",
-            `q=${query}`
-        );
+        const res = await axios<Array<string | string[]>>({
+            url: "/autocompleter",
+            method,
+            data: `q=${query}`,
+        });
         suggestionsContainer.innerHTML = "";
 
         let suggestions: string[] = [];
@@ -200,6 +202,32 @@ function setupSuggestion(minChars: number) {
     });
 }
 
+function setupChatModelSelect(chatModel: string) {
+    const modelSelect = $("#chat-model") as HTMLSelectElement;
+    if (!modelSelect) return;
+    axios
+        .get<{
+            data: {
+                id: string;
+                object: string;
+                owned_by: string;
+            }[];
+        }>("https://openai.jabirproject.org/v1/models")
+        .then((res) => {
+            modelSelect.innerHTML = "";
+            for (const model of res.data.data) {
+                const option = document.createElement("option");
+
+                option.value = model.id;
+                option.innerText = model.id.replace("-", " ");
+
+                if (model.id === chatModel) option.selected = true;
+
+                modelSelect.appendChild(option);
+            }
+        });
+}
+
 function getClientSettings(): ClientSettings {
     const clientSettings = $("#client-settings") as HTMLScriptElement;
     if (!clientSettings || !clientSettings.hasAttribute("settings")) return {};
@@ -220,10 +248,22 @@ function afterPageLoad() {
 
     // suggestion
     if (clientSettings.autocomplete !== "")
-        setupSuggestion(clientSettings.autocomplete_min || 1);
+        setupSuggestion({
+            minChars: clientSettings.autocomplete_min ?? 1,
+            method: clientSettings.method ?? "POST",
+        });
 
     // chat
-    if (clientSettings.ai_chat) setupChat();
+    if (clientSettings.ai_chat && clientSettings.ai_chat !== "off") {
+        setupChat({
+            chatModel: clientSettings.ai_chat_model ?? "jabir-400b-online",
+            mode: clientSettings.ai_chat,
+        });
+        if ($("#chat-model"))
+            setupChatModelSelect(
+                clientSettings.ai_chat_model ?? "jabir-400b-online"
+            );
+    }
 
     // infinite scroll
     if (clientSettings.infinite_scroll) setupInfiniteScroll();

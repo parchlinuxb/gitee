@@ -1,3 +1,11 @@
+export function $(selector: string) {
+    return document.querySelector(selector);
+}
+
+export function $$(selector: string) {
+    return document.querySelectorAll(selector);
+}
+
 export function copyToClipboard(item: ClipboardItem | string) {
     if (navigator.clipboard && item instanceof ClipboardItem) {
         navigator.permissions

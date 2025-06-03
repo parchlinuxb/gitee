@@ -9,8 +9,13 @@
         >
             <span>{{- _('Answer by Jabir') -}}</span> {{- icon_small('ai') -}}
         </legend>
-        <input type="checkbox" name="ai_chat" aria-labelledby="pref_ai_chat"
-        class="switch" {%- if preferences.get_value('ai_chat') -%} checked {%-
-        endif -%} >
+        <select name="ai_chat" aria-labelledby="pref_ai_chat">
+            {%- for mode in ('off', 'chat', 'summarize') -%}
+                <option value="{{ mode }}"
+                {%- if mode == preferences.get_value('ai_chat') %} selected {%- endif -%}>
+                {{- _(mode) -}}
+                </option>
+            {%- endfor -%}
+        </select>
     </div>
 </fieldset>

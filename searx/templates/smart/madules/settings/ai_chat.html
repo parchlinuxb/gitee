@@ -3,13 +3,34 @@
 <fieldset>
     <div class="container">
         <legend id="pref_ai_chat" class="name">
-            <span>{{- _('Answer by Jabir') -}}</span> {{- icon_small('ai') -}}
+            <span>{{- _('Answer by Ai') -}}</span> {{- icon_small('ai') -}}
         </legend>
-        <input type="checkbox" name="ai_chat" aria-labelledby="pref_ai_chat"
-        aria-describedby="desc_ai_chat" class="switch" {%- if
-        preferences.get_value('ai_chat') -%} checked {%- endif -%} >
+        <select name="ai_chat" aria-labelledby="pref_ai_chat" aria-describedby="desc_ai_chat">
+            {%- for mode in ('off', 'chat', 'summarize') -%}
+                <option value="{{ mode }}"
+                {%- if mode == preferences.get_value('ai_chat') %} selected {%- endif -%}>
+                {{- _(mode) -}}
+                </option>
+            {%- endfor -%}
+        </select>
     </div>
     <div class="description" id="desc_ai_chat">
-        {{- _('Get Jabir\'s answer in results') }}
+        {{- _('Get Ai\'s answer in results') }}
     </div>
 </fieldset>
+
+{% if preferences.get_value('ai_chat') != 'off' %}
+<fieldset>
+    <div class="container">
+        <legend id="pref_ai_chat_model" class="name">
+            {{- _('Ai Model') -}}
+        </legend>
+        <select name="ai_chat_model" aria-labelledby="pref_ai_chat_model" aria-describedby="desc_ai_chat_model" id="chat-model">
+            <option>Loading...</option>
+        </select>
+    </div>
+    <div class="description" id="desc_ai_chat_model">
+        {{- _('Select model that answer you') }}
+    </div>
+</fieldset>
+{% endif %}

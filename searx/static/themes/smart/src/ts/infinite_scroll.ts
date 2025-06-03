@@ -1,5 +1,5 @@
-import { $ } from "./app";
 import axios, { AxiosResponse } from "axios";
+import { $ } from "./utils";
 
 let isLoading: boolean = false;
 let failedTrys: number = 0;

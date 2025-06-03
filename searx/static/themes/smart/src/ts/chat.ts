@@ -1,9 +1,9 @@
 import { ChatCompletionMessageParam } from "openai/resources/index.mjs";
-import { $ } from "./app";
 import { OpenAI } from "openai";
 import markdownit from "markdown-it";
 import MarkdownIt from "markdown-it";
-import axios from "axios";
+import Cookies from "js-cookie";
+import { $ } from "./utils";
 
 let client: OpenAI;
 
@@ -11,17 +11,20 @@ let messages: ChatCompletionMessageParam[] = [
     {
         role: "system",
         content:
-            "You are a Search Engine Assistant. You will answer questions about the search query.\
-            dont answer like previous message. try to summarize the answer little bit",
+            "Answer in language that give you in first word or language you think message comes in it.\
+            You are a Search Engine Assistant. that Engine called Gitee and based on SearXNG",
     },
 ];
 
 let md: MarkdownIt;
 
-export function setupChat() {
-    if (!localStorage.getItem("chat-model")) {
-        localStorage.setItem("chat-model", "jabir-400b-online");
-    }
+export function setupChat({
+    mode,
+    chatModel,
+}: {
+    mode: "chat" | "summarize";
+    chatModel: string;
+}) {
     const chatContainer = $("#ai-message-container") as HTMLDivElement;
     if (!chatContainer) return;
     const sendMessageForm = $("#send-message") as HTMLFormElement;
@@ -30,51 +33,53 @@ export function setupChat() {
         "input"
     ) as HTMLInputElement;
     if (!messageInput) return;
+
     const modelSelect = chatContainer.querySelector(
         "#chat-model"
     ) as HTMLSelectElement;
-    if (!modelSelect) return;
-
-    axios
-        .get<{
-            data: {
-                id: string;
-                object: string;
-                owned_by: string;
-            }[];
-        }>("https://openai.jabirproject.org/v1/models")
-        .then((res) => {
-            modelSelect.innerHTML = "";
-            for (const model of res.data.data) {
-                const option = document.createElement("option");
-
-                option.value = model.id;
-                option.innerText = model.id.replace("-", " ");
-
-                if (model.id === localStorage.getItem("chat-model"))
-                    option.selected = true;
-
-                modelSelect.appendChild(option);
-            }
+    if (modelSelect) {
+        modelSelect.addEventListener("change", function () {
+            Cookies.set("ai_chat_model", modelSelect.value);
         });
-
-    modelSelect.addEventListener("change", function () {
-        localStorage.setItem("chat-model", modelSelect.value);
-    });
+    }
 
     client = new OpenAI({
         apiKey: "FAKE",
         dangerouslyAllowBrowser: true,
         baseURL: "https://openai.jabirproject.org/v1",
     });
-
     md = markdownit();
 
-    sendMessage(messageInput, chatContainer);
+    if (mode === "chat") {
+        messages.push({
+            role: "system",
+            content:
+                "You will answer questions about the search query.\
+                dont answer like previous message. try to summarize the answer little bit",
+        });
+        sendMessage({ messageInput, chatContainer, chatModel });
+    }
+
+    if (mode == "summarize") {
+        messages.push({
+            role: "system",
+            content:
+                "You recive results and summarize it to 5-10 line text.\
+                dont say anything more than that!",
+        });
+        messageInput.parentElement?.setAttribute("hidden", "");
+        sendMessage({
+            messageInput,
+            chatContainer,
+            chatModel,
+            summarize: true,
+        });
+        return;
+    }
 
     sendMessageForm.addEventListener("submit", function (e) {
         e.preventDefault();
-        sendMessage(messageInput, chatContainer);
+        sendMessage({ messageInput, chatContainer, chatModel });
     });
 }
 
@@ -104,26 +109,37 @@ function createMessage(
     return messageElement;
 }
 
-async function sendMessage(
-    messageInput: HTMLInputElement,
-    chatContainer: HTMLDivElement,
-    message?: string
-) {
-    const userMessage = messageInput.value;
-    if (!userMessage && !message) return;
+async function sendMessage({
+    messageInput,
+    chatContainer,
+    chatModel,
+    message,
+    summarize,
+}: {
+    messageInput?: HTMLInputElement;
+    chatContainer: HTMLDivElement;
+    chatModel: string;
+    message?: string;
+    summarize?: boolean;
+}) {
+    const userMessage = messageInput ? messageInput.value : undefined;
+    const sededMessage = message ?? userMessage;
+    if (!sededMessage) return;
 
     messages.push({
         role: "user",
-        content: message || userMessage,
+        content: sededMessage,
     });
 
-    const userMessageElement = createMessage(chatContainer, "user");
-    userMessageElement.innerText = message || userMessage;
-    messageInput.value = "";
+    if (messageInput) messageInput.value = "";
+    if (!summarize) {
+        const userMessageElement = createMessage(chatContainer, "user");
+        userMessageElement.innerText = sededMessage;
+    }
 
     const stream = await client.chat.completions.create({
         // @ts-ignore
-        model: localStorage.getItem("chat-model"),
+        model: chatModel,
         messages,
     });
 

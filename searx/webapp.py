@@ -387,6 +387,7 @@ def get_client_settings():
         "theme": req_pref.get_value("theme"),
         "doi_resolver": get_doi_resolver(),
         "ai_chat": req_pref.get_value("ai_chat"),
+        "ai_chat_model": req_pref.get_value("ai_chat_model"),
     }
 
 

@@ -1,4 +1,4 @@
-import { $, $$ } from "./app";
+import { $, $$ } from "./utils";
 import { copyToClipboard } from "./utils";
 import debounce from "debounce";
 
