@@ -6,7 +6,6 @@ import Cookies from "js-cookie";
 import { $ } from "./utils";
 
 let client: OpenAI;
-
 let messages: ChatCompletionMessageParam[] = [
     {
         role: "system",
@@ -33,6 +32,8 @@ export function setupChat({
         "input"
     ) as HTMLInputElement;
     if (!messageInput) return;
+    const stopButton = $("#ai-stop") as HTMLButtonElement;
+    if (!stopButton) return;
 
     const modelSelect = chatContainer.querySelector(
         "#chat-model"
@@ -57,7 +58,7 @@ export function setupChat({
                 "You will answer questions about the search query.\
                 dont answer like previous message. try to summarize the answer little bit",
         });
-        sendMessage({ messageInput, chatContainer, chatModel });
+        sendMessage({ messageInput, stopButton, chatContainer, chatModel });
     }
 
     if (mode == "summarize") {
@@ -71,6 +72,7 @@ export function setupChat({
         sendMessage({
             messageInput,
             chatContainer,
+            stopButton,
             chatModel,
             summarize: true,
         });
@@ -79,7 +81,7 @@ export function setupChat({
 
     sendMessageForm.addEventListener("submit", function (e) {
         e.preventDefault();
-        sendMessage({ messageInput, chatContainer, chatModel });
+        sendMessage({ messageInput, stopButton, chatContainer, chatModel });
     });
 }
 
@@ -112,12 +114,14 @@ function createMessage(
 async function sendMessage({
     messageInput,
     chatContainer,
+    stopButton,
     chatModel,
     message,
     summarize,
 }: {
     messageInput?: HTMLInputElement;
     chatContainer: HTMLDivElement;
+    stopButton: HTMLButtonElement;
     chatModel: string;
     message?: string;
     summarize?: boolean;
@@ -139,17 +143,40 @@ async function sendMessage({
             : sededMessage;
     }
 
+    const controller = new AbortController();
+    stopButton.addEventListener(
+        "click",
+        function () {
+            controller.abort();
+        },
+        { signal: controller.signal }
+    );
+
     chatContainer.classList.add("answering");
     if (messageInput) messageInput.disabled = true;
-    const stream = await client.chat.completions.create({
-        // @ts-ignore
-        model: chatModel,
-        messages,
-    });
-
-    if (!stream.choices[0].message.content) return;
+    const stream = await client.chat.completions
+        .create(
+            {
+                // @ts-ignore
+                model: chatModel,
+                messages,
+            },
+            {
+                signal: controller.signal,
+            }
+        )
+        .catch((e) => {
+            const messageElement = createMessage(chatContainer, "ai");
+            messageElement.innerText = controller.signal.aborted
+                ? chatContainer.getAttribute("data-gitee-stop") ?? e.message
+                : e.message;
+            chatContainer.classList.remove("answering");
+            if (messageInput) messageInput.disabled = false;
+        });
 
     chatContainer.classList.remove("loading");
+
+    if (!stream?.choices[0].message.content) return;
     const messageElement = createMessage(chatContainer, "ai");
 
     let messageText: string = "";
