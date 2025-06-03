@@ -11,13 +11,11 @@
     autocomplete="off"
 >
     <div class="madules-container">
-        {# TODO: add tabs after new theme variants settings and chat
         <div class="tabs">
             <label>{{ _('General') }}</label>
-            <label>{{ _('Appearance') }}</label>
-            <label>{{ _('Advanced') }}</label>
+            <label>{{ _('Engines') }}</label>
         </div>
-        #} {% if 'language' not in locked_preferences %} {%- include
+        {% if 'language' not in locked_preferences %} {%- include
         'smart/madules/settings/language.html' -%}{% endif %} {% if 'theme' not
         in locked_preferences %} {%- include 'smart/madules/settings/theme.html'
         -%}{% endif %} {% if 'autocomplete' not in locked_preferences %} {%-
@@ -35,11 +33,11 @@
         'image_proxy' not in locked_preferences %} {%- include
         'smart/madules/settings/image_proxy.html' -%} {% endif %} {% if
         'query_in_title' not in locked_preferences %} {%- include
-        'smart/madules/settings/title_query.html' -%} {% endif %} {% if
-        'hotkeys' not in locked_preferences %} {%- include
-        'smart/madules/settings/hotkeys.html' -%} {% endif %} {% include
-        'smart/madules/settings/ai_chat.html' %} {% if 'urlformatting' not in
-        locked_preferences %} {%- include
+        'smart/madules/settings/title_query.html' -%} {% endif %} {# TODO: after
+        hotkeys implemented, add it back {% if 'hotkeys' not in
+        locked_preferences %} {%- include 'smart/madules/settings/hotkeys.html'
+        -%} {% endif %} #} {% include 'smart/madules/settings/ai_chat.html' %}
+        {% if 'urlformatting' not in locked_preferences %} {%- include
         'smart/madules/settings/url_formatting.html' -%} {% endif %}
 
         <button class="btn primary save-btn" type="submit">

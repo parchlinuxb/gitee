@@ -5,6 +5,7 @@
     background-color: var(--background-color);
     padding: 1.5rem 2rem;
     @include mixin.rounded(lg);
+    overflow: auto;
 
     h1 {
         padding-bottom: 1rem;
@@ -15,11 +16,18 @@
 
     }
 
-    table {
+    .table {
         width: 100%;
+        display: grid;
+        grid-template-columns: repeat(5, minmax(5rem, 1fr));
+
+        .more {
+            grid-column: span 5;
+        }
 
         th,
-        td {
+        td,
+        .cell {
             text-align: start;
             padding: .5rem;
             text-transform: capitalize;
@@ -38,6 +46,7 @@
 
             table {
                 font-size: .9rem;
+                width: 100%;
             }
         }
     }
@@ -121,11 +130,12 @@
         align-items: center;
         justify-content: start;
         @include mixin.rounded(full);
+        height: .5rem;
         overflow: hidden;
         background-color: var(--secondary-border-color);
 
         .bar {
-            height: .5rem;
+            height: 100%;
             background-color: var(--secondary-text-color);
             transition: flex 100ms ease-in-out;
         }

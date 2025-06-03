@@ -19,119 +19,117 @@ icon_big %}{% extends "smart/base.html" %} {% block body %} {% include
     </h1>
     {% if not engine_stats.get('time') %} {{ _('There is currently no data
     available. ') }} {% else %}
-    <table>
-        <tr>
-            <th scope="col" class="engine-name">
-                {{ th_sort('name', _("Engine name")) }}
-            </th>
-            <th scope="col" class="engine-score">
-                {{ th_sort('score', _('Scores')) }}
-            </th>
-            <th scope="col" class="result-count">
-                {{ th_sort('result_count', _('Result count')) }}
-            </th>
-            <th scope="col" class="response-time">
-                {{ th_sort('time', _('Response time')) }}
-            </th>
-            <th scope="col" class="engine-reliability">
-                {{ th_sort('reliability', _('Reliability')) }}
-            </th>
-        </tr>
+    <div class="table">
+        <div scope="col" class="engine-name cell">
+            {{ th_sort('name', _("Engine name")) }}
+        </div>
+        <div scope="col" class="engine-score cell">
+            {{ th_sort('score', _('Scores')) }}
+        </div>
+        <div scope="col" class="result-count cell">
+            {{ th_sort('result_count', _('Result count')) }}
+        </div>
+        <div scope="col" class="response-time cell">
+            {{ th_sort('time', _('Response time')) }}
+        </div>
+        <div scope="col" class="engine-reliability cell">
+            {{ th_sort('reliability', _('Reliability')) }}
+        </div>
+
         {% for engine_stat in engine_stats.get('time', []) %}
-        <tr>
-            <td class="engine-name">
-                <a href="{{ url_for('stats', engine=engine_stat.name|e) }}"
-                    >{{ engine_stat.name }}</a
-                >
-            </td>
-            <td class="engine-score">
-                {% if engine_stat.score %} {{
-                engine_stat.score_per_result|round(1) }} {% endif %}
-            </td>
 
-            <td class="engine-result-count">
-                {%- if engine_stat.result_count -%}
+        <div class="engine-name cell">
+            <a href="{{ url_for('stats', engine=engine_stat.name|e) }}"
+                >{{ engine_stat.name }}</a
+            >
+        </div>
+        <div class="engine-score cell">
+            {% if engine_stat.score %} {{ engine_stat.score_per_result|round(1)
+            }} {% endif %}
+        </div>
 
-                <div class="bar-chart-value">
-                    {{- engine_stat.result_count | int -}}
-                </div>
+        <div class="engine-result-count cell">
+            {%- if engine_stat.result_count -%}
 
-                <div class="bar-chart" aria-hidden="true">
-                    <div
-                        class="bar"
-                        style="width: {{ (100 * engine_stat.result_count/engine_stats.max_result_count)|round }}%;"
-                    ></div>
-                </div>
-                {%- endif -%}
-            </td>
-            <td class="response-time">
-                {%- if engine_stat.total is not none -%}
-                <div class="bar-chart-value">
-                    {{- engine_stat.total | round(1) -}}
-                </div>
+            <div class="bar-chart-value">
+                {{- engine_stat.result_count | int -}}
+            </div>
 
+            <div class="bar-chart" aria-hidden="true">
                 <div
-                    class="bar-chart"
-                    aria-labelledby="{{engine_stat.name}}_time"
-                    aria-hidden="true"
-                >
-                    {% if engine_stat.http is not none and engine_stats.max_time
-                    %}
-                    <div
-                        class="bar l1 {{ (100 * engine_stat.processing / engine_stats.max_time) }}"
-                        style="width: {{ (100 * engine_stat.http / engine_stats.max_time)|round }}%;"
-                    ></div>
-                    {%- endif -%} {% if engine_stat.processing is not none and
-                    engine_stats.max_time %}
-                    <div
-                        class="bar l2"
-                        style="width: {{ (100 * engine_stat.processing / engine_stats.max_time)|round }}%;"
-                    ></div>
-                    {%- endif -%}
-                </div>
+                    class="bar"
+                    style="width: {{ (100 * engine_stat.result_count/engine_stats.max_result_count)|round }}%;"
+                ></div>
+            </div>
+            {%- endif -%}
+        </div>
+        <div class="response-time cell">
+            {%- if engine_stat.total is not none -%}
+            <div class="bar-chart-value">
+                {{- engine_stat.total | round(1) -}}
+            </div>
+
+            <div
+                class="bar-chart"
+                aria-labelledby="{{engine_stat.name}}_time"
+                aria-hidden="true"
+            >
+                {% if engine_stat.http is not none and engine_stats.max_time %}
+                <div
+                    class="bar l1 {{ (100 * engine_stat.processing / engine_stats.max_time) }}"
+                    style="width: {{ (100 * engine_stat.http / engine_stats.max_time)|round }}%;"
+                ></div>
+                {%- endif -%} {% if engine_stat.processing is not none and
+                engine_stats.max_time %}
+                <div
+                    class="bar l2"
+                    style="width: {{ (100 * engine_stat.processing / engine_stats.max_time)|round }}%;"
+                ></div>
                 {%- endif -%}
-            </td>
-            <td class="engine-reliability">
-                {{ engine_reliabilities.get(engine_stat.name,
-                {}).get('reliability') }}
-            </td>
-        </tr>
+            </div>
+            {%- endif -%}
+        </div>
+        <div class="engine-reliability cell">
+            {{ engine_reliabilities.get(engine_stat.name, {}).get('reliability')
+            }}
+        </div>
+
         {% if engine_stat.total %}
-        <tr>
-            <td colspan="5">
-                <details class="response-details">
-                    <summary>{{ _('More') }}</summary>
-                    <table>
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col">{{ _('Total') }}</th>
-                            <th scope="col">{{ _('HTTP') }}</th>
-                            <th scope="col">{{ _('Processing') }}</th>
-                        </tr>
-                        <tr>
-                            <th scope="col">{{ _('Median') }}</th>
-                            <td>{{ engine_stat.total }}</td>
-                            <td>{{ engine_stat.http or ''}}</td>
-                            <td>{{ engine_stat.processing }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="col">{{ _('P80') }}</th>
-                            <td>{{ engine_stat.total_p80 }}</td>
-                            <td>{{ engine_stat.http_p80 or '' }}</td>
-                            <td>{{ engine_stat.processing_p80 }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="col">{{ _('P95') }}</th>
-                            <td>{{ engine_stat.total_p95 }}</td>
-                            <td>{{ engine_stat.http_p95 or '' }}</td>
-                            <td>{{ engine_stat.processing_p95 }}</td>
-                        </tr>
-                    </table>
-                </details>
-            </td>
-        </tr>
+
+        <div class="more cell">
+            <details class="response-details">
+                <summary>{{ _('More') }}</summary>
+                <table>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">{{ _('Total') }}</th>
+                        <th scope="col">{{ _('HTTP') }}</th>
+                        <th scope="col">{{ _('Processing') }}</th>
+                    </tr>
+                    <tr>
+                        <td scope="col">{{ _('Median') }}</td>
+                        <td>{{ engine_stat.total }}</td>
+                        <td>{{ engine_stat.http or ''}}</td>
+                        <td>{{ engine_stat.processing }}</td>
+                    </tr>
+                    <tr>
+                        <td scope="col">{{ _('P80') }}</td>
+                        <td>{{ engine_stat.total_p80 }}</td>
+                        <td>{{ engine_stat.http_p80 or '' }}</td>
+                        <td>{{ engine_stat.processing_p80 }}</td>
+                    </tr>
+                    <tr>
+                        <td scope="col">{{ _('P95') }}</td>
+                        <td>{{ engine_stat.total_p95 }}</td>
+                        <td>{{ engine_stat.http_p95 or '' }}</td>
+                        <td>{{ engine_stat.processing_p95 }}</td>
+                    </tr>
+                </table>
+            </details>
+        </div>
+
         {% endif%} {% endfor %}
-    </table>
+    </div>
     {% endif %} {% if selected_engine_name %} {{
     load_engine_stats(selected_engine_name,
     engine_reliabilities[selected_engine_name]) }}
@@ -147,69 +145,62 @@ icon_big %}{% extends "smart/base.html" %} {% block body %} {% include
         {% endif %}
         <table class="engine-error">
             <tbody>
-                <tr>
-                    {%- if error.exception_classname -%}
-                    <th scope="row" class="engine-error-type">
-                        {{ _('Exception') }}
-                    </th>
-                    <td>{{ error.exception_classname }}</td>
-                    {%- elif error.log_message -%}
-                    <th scope="row" class="engine-error-type">
-                        {{ _('Message') }}
-                    </th>
-                    <td>{{ error.log_message }}</td>
-                    {%- endif -%}
-                    <th scope="row" class="engine-error-type">
-                        {{ _('Percentage') }}
-                    </th>
-                    <td class="engine-error-type">{{ error.percentage }}</td>
-                </tr>
+                {%- if error.exception_classname -%}
+                <div scope="row" class="engine-error-type">
+                    {{ _('Exception') }}
+                </div>
+                <div>{{ error.exception_classname }}</div>
+                {%- elif error.log_message -%}
+                <div scope="row" class="engine-error-type">
+                    {{ _('Message') }}
+                </div>
+                <div>{{ error.log_message }}</div>
+                {%- endif -%}
+                <div scope="row" class="engine-error-type">
+                    {{ _('Percentage') }}
+                </div>
+                <div class="engine-error-type">{{ error.percentage }}</div>
+
                 {% if error.log_parameters and error.log_parameters != (None,
                 None, None) %}
-                <tr>
-                    <th scope="row">{{ _('Parameter') }}</th>
-                    {{- '' -}}
-                    <td colspan="3">
-                        {%- for param in error.log_parameters -%}
-                        <span class="log_parameters">{{ param }}</span>
-                        {%- endfor -%}
-                    </td>
-                </tr>
+
+                <div scope="row">{{ _('Parameter') }}</div>
+                {{- '' -}}
+                <div colspan="3">
+                    {%- for param in error.log_parameters -%}
+                    <span class="log_parameters">{{ param }}</span>
+                    {%- endfor -%}
+                </div>
+
                 {% endif %}
-                <tr>
-                    <th scope="row">{{ _('Filename') }}</th>
-                    <td colspan="3">
-                        {{ error.filename }}:{{ error.line_no }}
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">{{ _('Function') }}</th>
-                    <td colspan="3">{{ error.function }}</td>
-                </tr>
-                <tr>
-                    <th scope="row">{{ _('Code') }}</th>
-                    <td colspan="3">{{ error.code }}</td>
-                </tr>
+
+                <div scope="row">{{ _('Filename') }}</div>
+                <div colspan="3">{{ error.filename }}:{{ error.line_no }}</div>
+
+                <div scope="row">{{ _('Function') }}</div>
+                <div colspan="3">{{ error.function }}</div>
+
+                <div scope="row">{{ _('Code') }}</div>
+                <div colspan="3">{{ error.code }}</div>
             </tbody>
         </table>
         {% endif %} {% endfor %} {% endfor %} {% if
         engine_reliabilities[selected_engine_name].checker %}
         <h3>{{ _('Checker') }}</h3>
         <table>
-            <tr>
-                <th scope="col" class="failed-test">{{ _('Failed test') }}</th>
-                <th scope="col">{{ _('Comment(s)') }}</th>
-            </tr>
+            <div scope="col" class="failed-test">{{ _('Failed test') }}</div>
+            <div scope="col">{{ _('Comment(s)') }}</div>
+
             {% for test_name, results in
             engine_reliabilities[selected_engine_name].checker.items() %}
-            <tr>
-                <td>{{ test_name }}</td>
-                <td>
-                    {% for r in results %}
-                    <p>{{ r }}</p>
-                    {% endfor %}
-                </td>
-            </tr>
+
+            <div>{{ test_name }}</div>
+            <div>
+                {% for r in results %}
+                <p>{{ r }}</p>
+                {% endfor %}
+            </div>
+
             {% endfor %}
         </table>
         {% endif %}
