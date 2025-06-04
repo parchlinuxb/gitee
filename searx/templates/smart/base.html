@@ -105,8 +105,8 @@
             </main>
             {% endblock body %}
         </div>
-        {% if endpoint == 'index' or endpoint == 'results' or endpoint ==
-        'stats' %} {% include 'smart/madules/sidebar.html' %} {% endif %}
+        {% if endpoint != 'preferences'and status != 404 %} {% include
+        'smart/madules/sidebar.html' %} {% endif %}
         <script
             src="{{ url_for('static', filename='js/app.js') }}"
             async

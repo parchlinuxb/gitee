@@ -1,7 +1,7 @@
 @use 'mixins.scss' as mixin;
 @use 'definitions.scss' as *;
 
-:is(#preferences, #stats) {
+:is(#preferences, #stats, #info):not(:has(.not-found)) {
     grid-template-columns: 2fr 1fr;
     grid-template-rows: min-content auto min-content;
     grid-template-areas:

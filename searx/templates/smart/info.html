@@ -1,16 +1,21 @@
-{% extends 'simple/page_with_header.html' %}
-{% block title %}{{ active_page.title }} - {% endblock %}
-{% block linkto_about %}{% endblock %}
-{% block linkto_donate %}{% endblock %}
-{% block content %}
-<ul class="tabs">
-{% for pagename, locale, page in all_pages %}
-  <li>
-    <a href="{{ url_for('info', pagename=pagename, locale=locale) }}" {% if pagename == active_pagename %}class="active"{% endif %}>{{page.title}}</a>
-  </li>
-{% endfor %}
-</ul>
-<div class="info-page {{pagename}}">
-  {{- active_page.html | safe -}}
-</div>
-{% endblock %}
+{% from 'smart/icons.html' import icon_small, icon_big %}{% extends
+    "smart/base.html" %} {% block body %} {% include
+    'smart/madules/search_as_header.html' %}
+    <div class="links">
+        {%- if donation_url -%}
+        <a href="{{ donation_url }}" class="link">{{icon_small('donate')}}</a>
+        {%- endif -%} {% include 'smart/madules/sidebar_btn.html' %}
+    </div>
+    <div class="plain-text">
+        <ul class="tabs">
+            {% for pagename, locale, page in all_pages %}
+              <li>
+                <a href="{{ url_for('info', pagename=pagename, locale=locale) }}" {% if pagename == active_pagename %}class="active"{% endif %}>{{page.title}}</a>
+              </li>
+            {% endfor %}
+        </ul>
+        <div class="info-page {{pagename}}">
+            {{- active_page.html | safe -}}
+        </div>
+    </div>
+{% include 'smart/footer.html' %} {% endblock %}

@@ -8,7 +8,12 @@
     <img src="/static/img/logo.svg" alt="{{ instance_name }}" />
 </a>
 <div class="links">
-    <a href="" class="link">{{icon_small('donate')}}</a>
+    {%- if donation_url -%}
+    <a href="{{ donation_url }}" class="link">{{icon_small('donate')}}</a>
+    {%- endif -%}
+    <a href="{{ url_for('info', pagename='about') }}" class="link"
+        >{{icon_small('information')}}</a
+    >
     {% include 'smart/madules/sidebar_btn.html' %}
 </div>
 

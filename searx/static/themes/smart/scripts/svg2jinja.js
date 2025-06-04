@@ -19,6 +19,7 @@ const svgList = {
   eye: "node_modules/remixicon/icons/System/eye-fill.svg",
   user: "node_modules/remixicon/icons/User & Faces/user-6-fill.svg",
   loader: "node_modules/remixicon/icons/System/loader-line.svg",
+  information: "node_modules/remixicon/icons/System/information-fill.svg",
 };
 
 const ejs = require("ejs"),

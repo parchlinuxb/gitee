@@ -150,6 +150,11 @@ body {
 // 404 page
 
 main:has(.not-found) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
     .background {
         font-size: 60vh;
         color: var(--primary-color);
@@ -303,79 +308,6 @@ main:has(.not-found) {
 
                     @include mixin.max-screens($screen-md) {
                         max-width: 90vw;
-                    }
-
-                    p {
-                        margin-bottom: 1.25rem;
-                    }
-
-                    a {
-                        color: var(--primary-color);
-                    }
-
-                    img {
-                        max-width: 100%;
-                    }
-
-                    pre {
-                        margin: .5rem;
-
-                        code {
-                            display: block;
-                        }
-                    }
-
-                    code {
-                        font-family: monospace;
-                        @include mixin.rounded(sm);
-                        background-color: var(--secondary-text-color);
-                        color: var(--filled-text-color);
-                        padding: .5rem .25rem;
-                    }
-
-                    :is(h1, h2, h3, h4, h5, h6) {
-                        margin-bottom: .75rem;
-                        font-weight: 700;
-                        font-size: 1.3rem;
-                    }
-
-                    li {
-                        margin-bottom: .5rem;
-                        padding-inline-start: 1rem;
-
-                        &::marker {
-                            color: var(--text-color);
-                        }
-                    }
-
-                    :is(ol, ul) {
-                        margin-bottom: 1rem;
-                        margin-inline-start: 1.5rem;
-                    }
-
-                    ol li {
-                        list-style-type: decimal;
-                    }
-
-                    ul li {
-                        list-style-type: disc;
-
-                        ul li {
-                            list-style-type: circle;
-
-                            ul li {
-                                list-style-type: square;
-                            }
-                        }
-                    }
-
-                    hr {
-                        margin: 1rem;
-                        opacity: .2;
-                    }
-
-                    :last-child {
-                        margin-bottom: 0;
                     }
                 }
 
@@ -1034,12 +966,105 @@ footer {
     }
 }
 
+:is(#info, #preferences, #stats) #search {
+    position: relative;
+
+    #suggestion {
+        top: 100%;
+        position: absolute;
+        width: 100%;
+    }
+}
+
 #results .suggestion-box {
     position: absolute;
     top: 100%;
     left: 0;
     width: 100%;
     z-index: 1;
+}
+
+:is(.message, .plain-text) {
+    p {
+        margin-bottom: 1.25rem;
+    }
+
+    a {
+        color: var(--primary-color);
+    }
+
+    img {
+        max-width: 100%;
+    }
+
+    pre {
+        margin: .5rem;
+
+        code {
+            display: block;
+        }
+    }
+
+    code {
+        font-family: monospace;
+        @include mixin.rounded(sm);
+        background-color: var(--secondary-text-color);
+        color: var(--secondary-background-color);
+        padding: .5rem .25rem;
+    }
+
+    :is(h1, h2, h3, h4, h5, h6) {
+        margin-bottom: .75rem;
+        font-weight: 700;
+        font-size: 1.3rem;
+    }
+
+    li {
+        margin-bottom: .5rem;
+        padding-inline-start: 1rem;
+
+        &::marker {
+            color: var(--text-color);
+        }
+    }
+
+    :is(ol, ul) {
+        margin-bottom: 1rem;
+        margin-inline-start: 1.5rem;
+    }
+
+    ol li {
+        list-style-type: decimal;
+    }
+
+    ul li {
+        list-style-type: disc;
+
+        ul li {
+            list-style-type: circle;
+
+            ul li {
+                list-style-type: square;
+            }
+        }
+    }
+
+    hr {
+        margin: 1rem;
+        opacity: .2;
+    }
+
+    :last-child {
+        margin-bottom: 0;
+    }
+}
+
+#info .plain-text {
+    grid-area: main;
+    background-color: var(--background-color);
+    padding: 2rem;
+
+    @include mixin.rounded(lg);
 }
 
 input[type="checkbox"].switch {
@@ -1103,35 +1128,13 @@ input[type="checkbox"].switch {
         transform: rotate(0deg);
     }
 
-    25% {
-        transform: rotate(50deg);
-    }
-
-    50% {
-        transform: rotate(150deg);
+    40% {
+        transform: rotate(90deg);
     }
 
     100% {
         transform: rotate(360deg);
     }
-}
-
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--background-color);
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--text-color);
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
 }
 
 body {

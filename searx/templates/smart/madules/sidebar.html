@@ -38,6 +38,8 @@
             >{{- _('See all preferences') -}}</a
         >
         <br />
+        {% if endpoint != 'info' %}
         <div class="about">{{- about_section | safe -}}</div>
+        {% endif %}
     </div>
 </div>

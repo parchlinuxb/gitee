@@ -1,8 +1,13 @@
 {% from 'smart/icons.html' import icon_small, icon_big %}{% extends
 "smart/base.html" %} {% block body %} {% include
-'smart/madules/settings_header.html' %}
+'smart/madules/search_as_header.html' %}
 <div class="links">
-    <a href="" class="link">{{icon_small('donate')}}</a>
+    {%- if donation_url -%}
+    <a href="{{ donation_url }}" class="link">{{icon_small('donate')}}</a>
+    {%- endif -%}
+    <a href="{{ url_for('info', pagename='about') }}" class="link"
+        >{{icon_small('information')}}</a
+    >
 </div>
 <form
     id="preferences_form"

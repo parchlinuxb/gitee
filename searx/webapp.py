@@ -1469,7 +1469,7 @@ def config():
 
 @app.errorhandler(404)
 def page_not_found(_e):
-    return render("404.html"), 404
+    return render("404.html", status=404), 404
 
 
 def run():

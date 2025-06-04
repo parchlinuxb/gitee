@@ -2,7 +2,12 @@
 {% block title %}{% if query_in_title %} - {{ q|e }}{% endif %}{% endblock %} {%
 block body %} {% include 'smart/madules/search_header.html' %}
 <div class="links">
-    <a href="" class="link">{{icon_small('donate')}}</a>
+    {%- if donation_url -%}
+    <a href="{{ donation_url }}" class="link">{{icon_small('donate')}}</a>
+    {%- endif -%}
+    <a href="{{ url_for('info', pagename='about') }}" class="link"
+        >{{icon_small('information')}}</a
+    >
     {% include 'smart/madules/sidebar_btn.html' %}
 </div>
 {% if 'images.html' in results|map(attribute='template')|unique|list%} {%
