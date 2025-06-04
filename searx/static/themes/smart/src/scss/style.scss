@@ -147,6 +147,10 @@ body {
     }
 }
 
+#index:has(#suggestion button)>main {
+    justify-content: flex-start;
+}
+
 // 404 page
 
 main:has(.not-found) {
@@ -689,9 +693,14 @@ footer {
     gap: .5rem;
 
     @include mixin.max-screens($screen-sm) {
-        width: calc(100% - 4rem);
-        margin: 0 2rem;
+        width: calc(100% - 2rem);
+        margin: 0 1rem;
         @include mixin.rounded();
+
+        &+#suggestion {
+            width: calc(100% - 2rem);
+            margin: 1rem 1rem 0;
+        }
     }
 
     .icon {
@@ -752,6 +761,10 @@ footer {
         background-color: var(--secondary-color);
         padding: .5rem 1.5rem;
         text-transform: capitalize;
+
+        @include mixin.max-screens($screen-md) {
+            display: none;
+        }
 
         &:focus {
             outline: none;
