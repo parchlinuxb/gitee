@@ -149,8 +149,10 @@ body {
     }
 }
 
-#index:has(#suggestion button)>main {
-    justify-content: flex-start;
+@include mixin.max-screens($screen-md) {
+    #index:has(#suggestion button)>main {
+        justify-content: flex-start;
+    }
 }
 
 // 404 page
