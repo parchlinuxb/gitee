@@ -64,6 +64,37 @@
             width: 100%;
             text-align: center;
         }
+
+        h1 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        &:has(#general_tab:target) .btn[href="#general_tab"],
+        &:has(#engines-tab:target) .btn[href="#engines-tab"] {
+            background-color: var(--primary-color);
+            color: var(--filled-text-color);
+        }
+
+        .tab-id+div {
+            display: none;
+        }
+
+        &:not(:has(.tab-id:target)) {
+            .default {
+                display: block;
+            }
+
+            .default-btn {
+                background-color: var(--primary-color);
+                color: var(--filled-text-color);
+            }
+        }
+
+        .tab-id:target+div {
+            display: block;
+        }
     }
 
     .backup-container {

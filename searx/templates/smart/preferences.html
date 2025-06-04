@@ -16,34 +16,44 @@
     autocomplete="off"
 >
     <div class="madules-container">
+        <h1>{{ _('Preferences') }}</h1>
         <div class="tabs">
-            <label>{{ _('General') }}</label>
-            <label>{{ _('Engines') }}</label>
+            <a href="#general_tab" class="btn default-btn"
+                >{{ _('General') }}</a
+            >
+            <a href="#engines-tab" class="btn">{{ _('Engines') }}</a>
         </div>
-        {% if 'language' not in locked_preferences %} {%- include
-        'smart/madules/settings/language.html' -%}{% endif %} {% if 'theme' not
-        in locked_preferences %} {%- include 'smart/madules/settings/theme.html'
-        -%}{% endif %} {% if 'autocomplete' not in locked_preferences %} {%-
-        include 'smart/madules/settings/autocomplete.html' -%} {% endif %} {% if
-        'safesearch' not in locked_preferences %} {%- include
-        'smart/madules/settings/safe_search.html' -%} {% endif %} {% if
-        'ui_locale' not in locked_preferences %} {%- include
-        'smart/madules/settings/interface_lang.html' -%} {% endif %} {% if
-        'results_on_new_tab' not in locked_preferences %} {%- include
-        'smart/madules/settings/results_on_new_tab.html' -%} {% endif %} {% if
-        'infinite_scroll' not in locked_preferences %} {%- include
-        'smart/madules/settings/infinite_scroll.html' -%} {% endif %} {% if
-        'method' not in locked_preferences %} {%- include
-        'smart/madules/settings/http_method.html' -%} {% endif %} {% if
-        'image_proxy' not in locked_preferences %} {%- include
-        'smart/madules/settings/image_proxy.html' -%} {% endif %} {% if
-        'query_in_title' not in locked_preferences %} {%- include
-        'smart/madules/settings/title_query.html' -%} {% endif %} {# TODO: after
-        hotkeys implemented, add it back {% if 'hotkeys' not in
-        locked_preferences %} {%- include 'smart/madules/settings/hotkeys.html'
-        -%} {% endif %} #} {% include 'smart/madules/settings/ai_chat.html' %}
-        {% if 'urlformatting' not in locked_preferences %} {%- include
-        'smart/madules/settings/url_formatting.html' -%} {% endif %}
+        <span class="tab-id" id="general_tab"></span>
+        <div class="default">
+            {% if 'language' not in locked_preferences %} {%- include
+            'smart/madules/settings/language.html' -%}{% endif %} {% if 'theme'
+            not in locked_preferences %} {%- include
+            'smart/madules/settings/theme.html' -%}{% endif %} {% if
+            'autocomplete' not in locked_preferences %} {%- include
+            'smart/madules/settings/autocomplete.html' -%} {% endif %} {% if
+            'safesearch' not in locked_preferences %} {%- include
+            'smart/madules/settings/safe_search.html' -%} {% endif %} {% if
+            'ui_locale' not in locked_preferences %} {%- include
+            'smart/madules/settings/interface_lang.html' -%} {% endif %} {% if
+            'results_on_new_tab' not in locked_preferences %} {%- include
+            'smart/madules/settings/results_on_new_tab.html' -%} {% endif %} {%
+            if 'infinite_scroll' not in locked_preferences %} {%- include
+            'smart/madules/settings/infinite_scroll.html' -%} {% endif %} {% if
+            'method' not in locked_preferences %} {%- include
+            'smart/madules/settings/http_method.html' -%} {% endif %} {% if
+            'image_proxy' not in locked_preferences %} {%- include
+            'smart/madules/settings/image_proxy.html' -%} {% endif %} {% if
+            'query_in_title' not in locked_preferences %} {%- include
+            'smart/madules/settings/title_query.html' -%} {% endif %} {# TODO:
+            after hotkeys implemented, add it back {% if 'hotkeys' not in
+            locked_preferences %} {%- include
+            'smart/madules/settings/hotkeys.html' -%} {% endif %} #} {% include
+            'smart/madules/settings/ai_chat.html' %} {% if 'urlformatting' not
+            in locked_preferences %} {%- include
+            'smart/madules/settings/url_formatting.html' -%} {% endif %}
+        </div>
+        <span class="tab-id" id="engines-tab"></span>
+        <div>engines settings</div>
 
         <button class="btn primary save-btn" type="submit">
             {{- _('Save') -}}

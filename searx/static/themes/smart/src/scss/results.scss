@@ -1,0 +1,333 @@
+@use './definitions.scss' as *;
+@use './mixins.scss' as mixin;
+
+#results {
+    display: grid;
+
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content auto min-content min-content 1fr auto;
+    grid-template-areas:
+        "links"
+        "search"
+        "amount"
+        "sidebox"
+        "results"
+        "footer";
+    gap: 1rem;
+    padding: 0 1rem;
+    max-width: 1800px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    transition: grid-template-columns 300ms ease-in-out;
+
+    @include mixin.screens($screen-md) {
+        grid-template-columns: 2fr 1fr;
+        grid-template-rows: 5rem min-content 1fr auto;
+        grid-template-areas:
+            "search links"
+            "search amount"
+            "results sidebox"
+            "footer footer";
+    }
+
+    @include mixin.screens($screen-xl) {
+        padding: 0 4rem;
+    }
+
+    .result-count {
+        grid-area: amount;
+        font-size: .8rem;
+        color: var(--secondary-text-color);
+
+        &-container {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            justify-content: end;
+            padding: 0 1rem;
+        }
+    }
+
+    footer {
+        grid-area: footer;
+    }
+
+    &:has(#filter:checked) .results-container {
+        margin-top: 2rem;
+    }
+
+    .info-panel {
+        grid-area: sidebox;
+    }
+
+    .results-container {
+        grid-area: results;
+        position: relative;
+        transition: margin-top 100ms ease-in-out;
+        width: 100%;
+
+        .message-container {
+            margin-bottom: 1rem;
+            background-color: var(--background-color);
+            padding: 1.5rem;
+            position: relative;
+            @include mixin.rounded(lg);
+
+            .title {
+                display: flex;
+                align-items: center;
+                font-weight: 700;
+                gap: .5rem;
+                font-size: 1.5rem;
+
+                svg {
+                    fill: var(--primary-color);
+                }
+            }
+
+            .chat-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 2rem;
+
+                select {
+                    @include mixin.rounded(full);
+                    text-transform: capitalize;
+                }
+            }
+
+            .message-box {
+                margin-top: 1rem;
+
+                .message {
+                    background-color: var(--secondary-background-color);
+                    padding: 1rem;
+                    border-radius: 1.5rem 1.5rem 1.5rem .5rem;
+                    overflow: hidden;
+                    width: 80%;
+                    max-width: 800px;
+                    text-align: justify;
+
+                    @include mixin.max-screens($screen-md) {
+                        max-width: 90vw;
+                    }
+                }
+
+                .reference {
+                    margin-top: 1rem;
+                    font-size: .8rem;
+                    color: var(--text-color);
+
+                    a {
+                        display: inline-block;
+                        background-color: var(--secondary-background-color);
+                        padding: 0 .5rem;
+                    }
+                }
+
+                &.user {
+                    display: flex;
+                    flex-direction: row-reverse;
+
+                    .message {
+                        background-color: var(--primary-color);
+                        color: var(--filled-text-color);
+                        border-radius: 1.5rem 1.5rem .5rem 1.5rem;
+                    }
+                }
+            }
+
+            .load-container {
+                display: none;
+                margin-top: 1rem;
+                justify-content: space-between;
+                align-items: center;
+                gap: 1rem;
+
+                .loading-indicators {
+                    border-radius: .5rem 1.5rem 1.5rem 1.5rem;
+                }
+
+                .btn.stop {
+                    display: flex;
+                    @include mixin.rounded(full);
+                    gap: 1rem;
+                    align-items: center;
+                    background-color: var(--text-color);
+                    color: var(--filled-text-color);
+
+                    @include mixin.dark-mode() {
+                        color: var(--background-color);
+                    }
+                }
+            }
+
+            &.ai {
+                padding: 1.5rem 1.5rem 5rem;
+
+                .send-message {
+                    display: flex;
+                    border: 1px solid var(--border-color);
+                    @include mixin.rounded(full);
+                    padding: 0 .5rem;
+                    position: absolute;
+                    bottom: 1.5rem;
+                    width: calc(100% - 3rem);
+                    gap: .5rem;
+                    align-items: center;
+                    margin-top: 1rem;
+
+                    input {
+                        flex: 1;
+                        background-color: transparent;
+                        border: none;
+                        color: var(--text-color);
+                        @include mixin.rounded(full);
+                        padding: .5rem;
+
+
+                        &:focus {
+                            outline: none;
+                        }
+
+                        &:disabled {
+                            opacity: .5;
+                        }
+                    }
+
+                    button {
+                        background-color: transparent;
+                        border: none;
+
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+
+                    .loader {
+                        display: none;
+                    }
+                }
+
+                &.loading {
+                    background-color: var(--primary-color);
+                    color: var(--filled-text-color);
+                    padding: 1.5rem;
+
+                    svg {
+                        fill: var(--filled-text-color);
+
+                        @include mixin.dark-mode() {
+                            fill: var(--background-color);
+                        }
+                    }
+
+                    .title svg {
+                        fill: var(--filled-text-color);
+                    }
+
+                    .load-container {
+                        display: flex;
+                    }
+
+                    :is(.message-box, .send-message) {
+                        display: none;
+                    }
+                }
+
+                &.answering {
+                    .send-message {
+                        button {
+                            display: none;
+                        }
+
+                        .loader {
+                            display: inline-block;
+                            animation: spin 1s linear infinite;
+                        }
+                    }
+                }
+            }
+
+            &:has(.send-message[hidden]) {
+                padding: 1.5rem;
+            }
+
+
+        }
+
+        .result-group {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            @include mixin.rounded(lg);
+            background-color: var(--background-color);
+
+            .result .highlight {
+                font-weight: 700;
+            }
+
+            .result .result-content .highlight {
+                text-decoration: wavy underline 1px var(--primary-color);
+            }
+
+            .result:last-child {
+                border-bottom: none;
+                margin-bottom: 0;
+            }
+        }
+
+        :first-child {
+            margin-top: 0;
+        }
+    }
+
+    &:has(.image-page) {
+        grid-template-columns: 2fr 1fr 0fr;
+        grid-template-areas:
+            "search links links"
+            "search amount amount"
+            "results results image-detail"
+            "footer footer footer";
+        padding: 0;
+        padding-inline-start: 1rem;
+
+        &:has(.multiple-results) {
+            grid-template-areas:
+                "search links links"
+                "search amount amount"
+                "results sidebox image-detail"
+                "footer footer footer";
+        }
+    }
+
+    &.image-open {
+        grid-template-columns: 2fr 0fr 1fr;
+
+        &:has(.multiple-results) {
+            grid-template-columns: 2fr 1fr 1fr;
+        }
+
+        @include mixin.max-screens($screen-md) {
+            .image-details-container {
+                @include mixin.left(0);
+            }
+        }
+    }
+
+    .share_btn {
+        background-color: transparent;
+        border: none;
+        @include mixin.rounded(full);
+        padding: .25rem;
+
+        &:hover {
+            background-color: var(--background-color);
+        }
+
+        svg {
+            width: 1rem;
+            height: 1rem;
+        }
+    }
+}
