@@ -1,6 +1,24 @@
-{% from 'smart/icons.html' import icon_small, icon_big %}{% extends
-"smart/base.html" %} {% block body %} {% include
-'smart/madules/search_as_header.html' %}
+{% from 'smart/icons.html' import icon_small, icon_big %} {%- macro
+engine_reliability(engine_name) -%} {%- set r = reliabilities.get(engine_name,
+{}).get('reliability', None) -%} {%- set checker_result =
+reliabilities.get(engine_name, {}).get('checker', []) -%} {%- set errors =
+reliabilities.get(engine_name, {}).get('errors', []) -%} {%- if r != None -%}
+{%- if r <= 50 -%} {% set label = 'danger' -%} {%- elif r < 80 -%} {%- set label
+= 'warning' -%} {%- elif r < 90 %} {%- set label = '' -%} {%- else -%} {%- set
+label = 'success' -%} {%- endif -%} {% else %} {%- set r = '' -%} {%- endif -%}
+{%- if checker_result or errors -%}
+<div class="{{ label }} numbric">
+    <a href="{{ url_for('stats', engine=engine_name|e) }}">
+        <span tooltip="{{ ', '.join(errors) }}"> Error</span>
+    </a>
+</div>
+{%- else -%}
+<div class="{{ label }} numbric">
+    {% if r %}<span>{{ r }}</span>
+    {%- endif -%}
+</div>
+{%- endif -%} {%- endmacro -%} {% extends "smart/base.html" %} {% block body %}
+{% include 'smart/madules/search_as_header.html' %}
 <div class="links">
     {%- if donation_url -%}
     <a href="{{ donation_url }}" class="link">{{icon_small('donate')}}</a>
@@ -53,7 +71,144 @@
             'smart/madules/settings/url_formatting.html' -%} {% endif %}
         </div>
         <span class="tab-id" id="engines-tab"></span>
-        <div>engines settings</div>
+        <div class="engines-tab">
+            {%- for categ in categories_as_tabs + [DEFAULT_CATEGORY] -%} <input
+            type="radio" name="catergory" class="category-radio" id="{{categ}}"
+            value="{{categ}}" {%- if categ == "general" -%} checked {%- endif
+            -%} />
+            <label for="{{categ}}" class="category-btn">{{- _(categ) -}}</label>
+            <div class="category-tab">
+                {%- if categ == DEFAULT_CATEGORY -%}
+                <p class="note">
+                    {{- _('This tab does not exists in the user interface, but
+                    you can search in these engines by its !bangs.') -}} {{- ' '
+                    -}}<a href="{{ url_for('info', pagename='search-syntax') }}"
+                        >&#9432;</a
+                    >
+                </p>
+                {%- endif -%}
+                <h3>{{- _("Allow") -}}</h3>
+                <h3>{{- _("Engine name") -}}</h3>
+                <h3 class="detail">{{ _("!bang") -}}</h3>
+                <h3 class="detail">{{- _("Supports selected language") -}}</h3>
+                <h3 class="detail">{{- _("SafeSearch") -}}</h3>
+                <h3 class="detail">{{- _("Time range") -}}</h3>
+                <h3 class="detail">{{- _("Weight") }}</h3>
+                {%- if enable_metrics -%}
+                <h3 class="detail">{{- _("Response time") -}}</h3>
+                {%- endif -%}
+                <h3 class="detail">{{- _("Max time") -}}</h3>
+                {%- if enable_metrics -%}
+                <h3 class="detail">{{- _("Reliability") }}</h3>
+                {%- endif -%} {%- for group, group_bang, engines in
+                engines_by_category[categ] | group_engines_in_tab -%} {%- if
+                loop.length > 1 -%}
+                <div class="group-header">
+                    <h2
+                        class="group-name {{ 'more' if group == 'without further subgrouping' else '' }}"
+                    >
+                        {{- _(group) -}}
+                    </h2>
+                    <code class="bang">
+                        {%- if group_bang -%} {{- group_bang -}} {%- endif -%}
+                    </code>
+                </div>
+                {%- endif -%} {%- for search_engine in engines -%} {%- if not
+                search_engine.private -%} {%- set engine_id = 'engine_' +
+                search_engine.name|replace(' ', '_') + '__' + categ|replace(' ',
+                '_') -%}
+
+                <div>
+                    <input
+                        type="checkbox"
+                        name="{{ engine_id }}"
+                        id="{{ engine_id }}"
+                        {%
+                        if
+                        (search_engine.name,
+                        categ)
+                        not
+                        in
+                        disabled_engines
+                        %}
+                        checked
+                        {%
+                        endif
+                        %}
+                        class="switch"
+                    />
+                </div>
+
+                <label for="{{ engine_id }}">
+                    <h4>
+                        {{- search_engine.name -}} {%- if search_engine.about
+                        and search_engine.about.language -%} {{- " " -}}
+                        ({{search_engine.about.language | upper}}) {%- endif -%}
+                    </h4>
+                </label>
+
+                <div>
+                    <span class="bang"
+                        >{{ '!' + shortcuts[search_engine.name] }}</span
+                    >
+                </div>
+
+                <div>
+                    {% if
+                    supports[search_engine.name]['supports_selected_language']%}
+                    {{ icon_small('check') }} {% endif %}
+                </div>
+
+                <div>
+                    {% if supports[search_engine.name]['safesearch']%} {{
+                    icon_small('check') }} {% endif %}
+                </div>
+                <div>
+                    {% if supports[search_engine.name]['time_range_support']%}
+                    {{ icon_small('check') }} {% endif %}
+                </div>
+                <div>{{- search_engine.weight or '1.0' -}}</div>
+                {%- if enable_metrics -%}
+
+                <div
+                    class="{{ label }}"
+                    tooltip="{{ _('Median') }}: {{ stats[search_engine.name].time}} | {{ _('P80') }}: {{ stats[search_engine.name].rate80}} | {{ _('P95') }}: {{ stats[search_engine.name].rate95}}"
+                >
+                    {%- if stats[search_engine.name].time != None -%}
+                    <span class="stacked-bar-chart-value"
+                        >{{- stats[search_engine.name].time -}}</span
+                    >
+                    <div class="bar-chart">
+                        {%- if max_rate95 is not none and max_rate95 > 0 -%}
+                        <div
+                            class="bar l1"
+                            style="width: {{ (100 * (stats[search_engine.name].time / max_rate95))|round }}%;"
+                        ></div>
+
+                        <div
+                            class="bar l2"
+                            style="width: {{ (100 * ((stats[search_engine.name].rate80 - stats[search_engine.name].time) / max_rate95))|round }}%;"
+                        ></div>
+                        <div
+                            class="bar l3"
+                            style="width: {{ (100 * ((stats[search_engine.name].rate80 - stats[search_engine.name].time) / max_rate95))|round }}%;"
+                        ></div>
+                        {%- endif -%}
+                    </div>
+                    {%- endif -%}
+                </div>
+                {%- endif -%}
+                <div
+                    class="{{ 'danger' if stats[search_engine.name]['warn_timeout'] else '' }} numbric"
+                >
+                    {{- search_engine.timeout -}}
+                </div>
+                {%- if enable_metrics -%} {{-
+                engine_reliability(search_engine.name) -}} {%- endif -%} {%-
+                endif -%} {%- endfor -%} {%- endfor -%}
+            </div>
+            {%- endfor -%}
+        </div>
 
         <button class="btn primary save-btn" type="submit">
             {{- _('Save') -}}

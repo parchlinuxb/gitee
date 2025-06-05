@@ -18,6 +18,8 @@ $dir: ltr !default;
 // Tooltip
 @use 'tooltip';
 
+@use 'bar_chart';
+
 @forward './infobox.scss';
 
 @forward './results';

@@ -1,0 +1,25 @@
+@use './mixins.scss' as mixin;
+
+.bar-chart {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    @include mixin.rounded(full);
+    height: .5rem;
+    overflow: hidden;
+    background-color: var(--secondary-border-color);
+
+    .bar {
+        height: 100%;
+        background-color: var(--secondary-text-color);
+        transition: flex 100ms ease-in-out;
+    }
+
+    .bar.l1 {
+        background-color: var(--primary-color);
+    }
+
+    .bar.l2 {
+        background-color: #c41919;
+    }
+}

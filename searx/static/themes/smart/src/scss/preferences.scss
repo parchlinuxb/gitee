@@ -94,7 +94,135 @@
 
         .tab-id:target+div {
             display: block;
+
+            &.engines-tab {
+                display: flex;
+            }
         }
+
+        .engines-tab {
+            padding-top: 1rem;
+            flex-wrap: wrap;
+
+            .category-tab {
+                display: none;
+            }
+
+            .category-btn {
+                padding: .5rem 1rem;
+                order: 0;
+                text-transform: capitalize;
+            }
+
+            .category-radio {
+                display: none;
+            }
+
+            .category-radio:checked+.category-btn {
+                font-weight: 600;
+                text-decoration: wavy underline 1px var(--secondary-color);
+            }
+
+            .category-radio:checked+.category-btn+.category-tab {
+                display: grid;
+                order: 10;
+            }
+
+            .category-tab {
+                grid-template-columns: min-content repeat(2, minmax(10rem, 1fr)) repeat(7, min-content);
+                gap: .5rem;
+                width: 100%;
+                padding: 1rem mixin.bidiValue(1rem, .5rem) 1rem mixin.bidiValue(.5rem, 1rem);
+
+                .note {
+                    font-size: .8rem;
+                    text-align: justify;
+                    margin-bottom: 1rem;
+                    color: var(--secondary-text-color);
+                    grid-column: span 10;
+                }
+
+                .group-header {
+                    background-color: var(--secondary-background-color);
+                    padding: .5rem 1rem;
+                    grid-column: span 10;
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    margin: 1rem 0 .5rem;
+                    @include mixin.rounded(sm);
+
+                    .group-name {
+                        font-size: 1.1rem;
+                        font-weight: 700;
+                        text-transform: uppercase;
+
+                        &.more {
+                            font-size: .8rem;
+                            font-weight: 400;
+                            opacity: .5;
+                            text-transform: capitalize;
+
+                            &::after {
+                                content: "…";
+                            }
+
+                            &+.bang {
+                                display: none;
+                            }
+                        }
+                    }
+                }
+
+                h3 {
+                    text-wrap: nowrap;
+                    font-weight: 600;
+
+                    &:first-of-type {
+                        @include mixin.margin-left(.5rem);
+                    }
+
+                    &.detail {
+                        font-size: .8rem;
+                    }
+                }
+
+                h4 {
+                    font-weight: 500;
+                    text-transform: capitalize
+                }
+
+                .switch {
+                    @include mixin.margin-left(.5rem);
+                }
+
+                .bang {
+                    font-family: monospace;
+
+                    background-color: var(--border-color);
+                    @include mixin.rounded(sm);
+                    padding: .25rem .5rem;
+                }
+
+                .numbric {
+                    display: inline-block;
+                    width: 100%;
+                    text-align: center;
+                    padding: .25rem;
+                    text-wrap: nowrap;
+                    height: 1.75rem;
+
+                    &:is(.danger, .error) {
+                        background-color: rgba(255, 0, 0, .2);
+                    }
+
+                    &.success {
+                        background-color: rgba(0, 255, 0, .2);
+                    }
+                }
+            }
+        }
+
     }
 
     .backup-container {

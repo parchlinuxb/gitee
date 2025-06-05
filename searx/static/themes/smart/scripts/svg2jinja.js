@@ -20,6 +20,7 @@ const svgList = {
   user: "node_modules/remixicon/icons/User & Faces/user-6-fill.svg",
   loader: "node_modules/remixicon/icons/System/loader-line.svg",
   information: "node_modules/remixicon/icons/System/information-fill.svg",
+  check: "node_modules/remixicon/icons/System/check-line.svg",
 };
 
 const ejs = require("ejs"),
