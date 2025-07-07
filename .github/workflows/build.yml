@@ -28,7 +28,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ./container
           push: true
           tags: ghcr.io/${{ github.repository }}:${{ github.event.release.tag_name }}
           labels: latest
