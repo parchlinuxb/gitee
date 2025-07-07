@@ -4,7 +4,6 @@ on:
   release:
     types:
       - created
-  workflow_dispatch:
 
 permissions:
   contents: read
@@ -29,7 +28,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: ./container
+          context: .
+          file: ./container/Dockerfile
           push: true
           tags: ghcr.io/${{ github.repository }}:${{ github.event.release.tag_name }}
           labels: latest
