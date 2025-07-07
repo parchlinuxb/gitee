@@ -1,25 +1,23 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 /* exported AutoComplete */
 
-import AutoComplete from  "../../../node_modules/autocomplete-js/dist/autocomplete.js";
-
-(function (w, d, searxng) {
-  'use strict';
-
-  var qinput_id = "q", qinput;
+((_w, d, searxng) => {
+  const qinput_id = "q";
+  let qinput;
 
   const isMobile = window.matchMedia("only screen and (max-width: 50em)").matches;
+  const isResultsPage = document.querySelector("main").id === "main_results";
 
-  function submitIfQuery () {
-    if (qinput.value.length  > 0) {
-      var search = document.getElementById('search');
+  function submitIfQuery() {
+    if (qinput.value.length > 0) {
+      const search = document.getElementById("search");
       setTimeout(search.submit.bind(search), 0);
     }
   }
 
-  function createClearButton (qinput) {
-    var cs = document.getElementById('clear_search');
-    var updateClearButton = function () {
+  function createClearButton(qinput) {
+    const cs = document.getElementById("clear_search");
+    const updateClearButton = () => {
       if (qinput.value.length === 0) {
         cs.classList.add("empty");
       } else {
@@ -29,17 +27,71 @@ import AutoComplete from  "../../../node_modules/autocomplete-js/dist/autocomple
 
     // update status, event listener
     updateClearButton();
-    cs.addEventListener('click', function (ev) {
-      qinput.value = '';
+    cs.addEventListener("click", (ev) => {
+      qinput.value = "";
       qinput.focus();
       updateClearButton();
       ev.preventDefault();
     });
-    qinput.addEventListener('input', updateClearButton, false);
+    qinput.addEventListener("input", updateClearButton, false);
   }
 
-  searxng.ready(function () {
+  const fetchResults = async (query) => {
+    let request;
+    if (searxng.settings.method === "GET") {
+      const reqParams = new URLSearchParams();
+      reqParams.append("q", query);
+      request = fetch(`./autocompleter?${reqParams.toString()}`);
+    } else {
+      const formData = new FormData();
+      formData.append("q", query);
+      request = fetch("./autocompleter", {
+        method: "POST",
+        body: formData
+      });
+    }
+
+    request.then(async (response) => {
+      const results = await response.json();
+
+      if (!results) return;
+
+      const autocomplete = d.querySelector(".autocomplete");
+      const autocompleteList = d.querySelector(".autocomplete ul");
+      autocomplete.classList.add("open");
+      autocompleteList.innerHTML = "";
+
+      // show an error message that no result was found
+      if (!results[1] || results[1].length === 0) {
+        const noItemFoundMessage = document.createElement("li");
+        noItemFoundMessage.classList.add("no-item-found");
+        noItemFoundMessage.innerHTML = searxng.settings.translations.no_item_found;
+        autocompleteList.appendChild(noItemFoundMessage);
+        return;
+      }
+
+      for (const result of results[1]) {
+        const li = document.createElement("li");
+        li.innerText = result;
+
+        searxng.on(li, "mousedown", () => {
+          qinput.value = result;
+          const form = d.querySelector("#search");
+          form.submit();
+          autocomplete.classList.remove("open");
+        });
+        autocompleteList.appendChild(li);
+      }
+    });
+  };
+
+  searxng.ready(() => {
+    // focus search input on large screens
+    if (!isMobile && !isResultsPage) document.getElementById("q").focus();
+
     qinput = d.getElementById(qinput_id);
+    const autocomplete = d.querySelector(".autocomplete");
+    const autocompleteList = d.querySelector(".autocomplete ul");
 
     if (qinput !== null) {
       // clear button
@@ -47,109 +99,45 @@ import AutoComplete from  "../../../node_modules/autocomplete-js/dist/autocomple
 
       // autocompleter
       if (searxng.settings.autocomplete) {
-        searxng.autocomplete = AutoComplete.call(w, {
-          Url: "./autocompleter",
-          EmptyMessage: searxng.settings.translations.no_item_found,
-          HttpMethod: searxng.settings.method,
-          HttpHeaders: {
-            "Content-type": "application/x-www-form-urlencoded",
-            "X-Requested-With": "XMLHttpRequest"
-          },
-          MinChars: searxng.settings.autocomplete_min,
-          Delay: 300,
-          _Position: function () {},
-          _Open: function () {
-            var params = this;
-            Array.prototype.forEach.call(this.DOMResults.getElementsByTagName("li"), function (li) {
-              if (li.getAttribute("class") != "locked") {
-                li.onmousedown = function () {
-                  params._Select(li);
-                };
-              }
-            });
-          },
-          _Select: function (item) {
-            AutoComplete.defaults._Select.call(this, item);
-            var form = item.closest('form');
-            if (form) {
-              form.submit();
+        searxng.on(qinput, "input", () => {
+          const query = qinput.value;
+          if (query.length < searxng.settings.autocomplete_min) return;
+
+          setTimeout(() => {
+            if (query === qinput.value) fetchResults(query);
+          }, 300);
+        });
+
+        searxng.on(qinput, "keyup", (e) => {
+          let currentIndex = -1;
+          const listItems = autocompleteList.children;
+          for (let i = 0; i < listItems.length; i++) {
+            if (listItems[i].classList.contains("active")) {
+              currentIndex = i;
+              break;
             }
-          },
-          _MinChars: function () {
-            if (this.Input.value.indexOf('!') > -1) {
-              return 0;
-            } else {
-              return AutoComplete.defaults._MinChars.call(this);
-            }
-          },
-          KeyboardMappings: Object.assign({}, AutoComplete.defaults.KeyboardMappings, {
-            "KeyUpAndDown_up": Object.assign({}, AutoComplete.defaults.KeyboardMappings.KeyUpAndDown_up, {
-              Callback: function (event) {
-                AutoComplete.defaults.KeyboardMappings.KeyUpAndDown_up.Callback.call(this, event);
-                var liActive = this.DOMResults.querySelector("li.active");
-                if (liActive) {
-                  AutoComplete.defaults._Select.call(this, liActive);
-                }
-              },
-            }),
-            "Tab": Object.assign({}, AutoComplete.defaults.KeyboardMappings.Enter, {
-              Conditions: [{
-                Is: 9,
-                Not: false
-              }],
-              Callback: function (event) {
-                if (this.DOMResults.getAttribute("class").indexOf("open") != -1) {
-                  var liActive = this.DOMResults.querySelector("li.active");
-                  if (liActive !== null) {
-                    AutoComplete.defaults._Select.call(this, liActive);
-                    event.preventDefault();
-                  }
-                }
-              },
-            })
-          }),
-        }, "#" + qinput_id);
-      }
-
-      /*
-        Monkey patch autocomplete.js to fix a bug
-        With the POST method, the values are not URL encoded: query like "1 + 1" are sent as "1  1" since space are URL encoded as plus.
-        See HTML specifications:
-        * HTML5: https://url.spec.whatwg.org/#concept-urlencoded-serializer
-        * HTML4: https://www.w3.org/TR/html401/interact/forms.html#h-17.13.4.1
-
-        autocomplete.js does not URL encode the name and values:
-        https://github.com/autocompletejs/autocomplete.js/blob/87069524f3b95e68f1b54d8976868e0eac1b2c83/src/autocomplete.ts#L665
-
-        The monkey patch overrides the compiled version of the ajax function.
-        See https://github.com/autocompletejs/autocomplete.js/blob/87069524f3b95e68f1b54d8976868e0eac1b2c83/dist/autocomplete.js#L143-L158
-        The patch changes only the line 156 from
-          params.Request.send(params._QueryArg() + "=" + params._Pre());
-        to
-          params.Request.send(encodeURIComponent(params._QueryArg()) + "=" + encodeURIComponent(params._Pre()));
-
-        Related to:
-        * https://github.com/autocompletejs/autocomplete.js/issues/78
-        * https://github.com/searxng/searxng/issues/1695
-       */
-      AutoComplete.prototype.ajax = function (params, request, timeout) {
-        if (timeout === void 0) { timeout = true; }
-        if (params.$AjaxTimer) {
-          window.clearTimeout(params.$AjaxTimer);
-        }
-        if (timeout === true) {
-          params.$AjaxTimer = window.setTimeout(AutoComplete.prototype.ajax.bind(null, params, request, false), params.Delay);
-        } else {
-          if (params.Request) {
-            params.Request.abort();
           }
-          params.Request = request;
-          params.Request.send(encodeURIComponent(params._QueryArg()) + "=" + encodeURIComponent(params._Pre()));
-        }
-      };
 
-      if (!isMobile && document.querySelector('.index_endpoint')) {
-        qinput.focus();
+          let newCurrentIndex = -1;
+          if (e.key === "ArrowUp") {
+            if (currentIndex >= 0) listItems[currentIndex].classList.remove("active");
+            // we need to add listItems.length to the index calculation here because the JavaScript modulos
+            // operator doesn't work with negative numbers
+            newCurrentIndex = (currentIndex - 1 + listItems.length) % listItems.length;
+          } else if (e.key === "ArrowDown") {
+            if (currentIndex >= 0) listItems[currentIndex].classList.remove("active");
+            newCurrentIndex = (currentIndex + 1) % listItems.length;
+          } else if (e.key === "Tab" || e.key === "Enter") {
+            autocomplete.classList.remove("open");
+          }
+
+          if (newCurrentIndex !== -1) {
+            const selectedItem = listItems[newCurrentIndex];
+            selectedItem.classList.add("active");
+
+            if (!selectedItem.classList.contains("no-item-found")) qinput.value = selectedItem.innerText;
+          }
+        });
       }
     }
 
@@ -158,20 +146,20 @@ import AutoComplete from  "../../../node_modules/autocomplete-js/dist/autocomple
     // filter (safesearch, time range or language) (this requires JavaScript
     // though)
     if (
-      qinput !== null
-        && searxng.settings.search_on_category_select
+      qinput !== null &&
+      searxng.settings.search_on_category_select &&
       // If .search_filters is undefined (invisible) we are on the homepage and
       // hence don't have to set any listeners
-        && d.querySelector(".search_filters") != null
+      d.querySelector(".search_filters") != null
     ) {
-      searxng.on(d.getElementById('safesearch'), 'change', submitIfQuery);
-      searxng.on(d.getElementById('time_range'), 'change', submitIfQuery);
-      searxng.on(d.getElementById('language'), 'change', submitIfQuery);
+      searxng.on(d.getElementById("safesearch"), "change", submitIfQuery);
+      searxng.on(d.getElementById("time_range"), "change", submitIfQuery);
+      searxng.on(d.getElementById("language"), "change", submitIfQuery);
     }
 
     const categoryButtons = d.querySelectorAll("button.category_button");
-    for (let button of categoryButtons) {
-      searxng.on(button, 'click', (event) => {
+    for (const button of categoryButtons) {
+      searxng.on(button, "click", (event) => {
         if (event.shiftKey) {
           event.preventDefault();
           button.classList.toggle("selected");
@@ -180,22 +168,22 @@ import AutoComplete from  "../../../node_modules/autocomplete-js/dist/autocomple
 
         // manually deselect the old selection when a new category is selected
         const selectedCategories = d.querySelectorAll("button.category_button.selected");
-        for (let categoryButton of selectedCategories) {
+        for (const categoryButton of selectedCategories) {
           categoryButton.classList.remove("selected");
         }
         button.classList.add("selected");
-      })
+      });
     }
 
     // override form submit action to update the actually selected categories
     const form = d.querySelector("#search");
     if (form != null) {
-      searxng.on(form, 'submit', (event) => {
+      searxng.on(form, "submit", (event) => {
         event.preventDefault();
         const categoryValuesInput = d.querySelector("#selected-categories");
         if (categoryValuesInput) {
-          let categoryValues = [];
-          for (let categoryButton of categoryButtons) {
+          const categoryValues = [];
+          for (const categoryButton of categoryButtons) {
             if (categoryButton.classList.contains("selected")) {
               categoryValues.push(categoryButton.name.replace("category_", ""));
             }
@@ -206,5 +194,4 @@ import AutoComplete from  "../../../node_modules/autocomplete-js/dist/autocomple
       });
     }
   });
-
 })(window, document, window.searxng);

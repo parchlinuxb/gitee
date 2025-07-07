@@ -2,9 +2,9 @@ mock==5.2.0
 nose2[coverage_plugin]==0.15.1
 cov-core==1.15.0
 black==24.3.0
-pylint==3.3.6
+pylint==3.3.7
 splinter==0.21.0
-selenium==4.31.0
+selenium==4.34.0
 Pallets-Sphinx-Themes==2.3.0
 Sphinx==7.4.7
 sphinx-issues==5.0.1
@@ -16,7 +16,7 @@ sphinx-notfound-page==1.1.0
 myst-parser==3.0.1
 linuxdoc==20240924
 aiounittest==1.5.0
-yamllint==1.37.0
+yamllint==1.37.1
 wlc==1.15
 coloredlogs==15.0.1
 docutils>=0.21.2

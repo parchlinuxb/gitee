@@ -27,21 +27,22 @@
 # syobon <syobon@users.noreply.translate.codeberg.org>, 2025.
 # cc5efd7b0 <cc5efd7b0@noreply.codeberg.org>, 2025.
 # ayame30 <ayame30@noreply.codeberg.org>, 2025.
+# anmoti <anmoti@noreply.codeberg.org>, 2025.
+# return42 <return42@noreply.codeberg.org>, 2025.
 msgid ""
 msgstr ""
-"Project-Id-Version: searx\n"
+"Project-Id-Version:  searx\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-03-29 09:21+0000\n"
-"PO-Revision-Date: 2025-04-11 15:12+0000\n"
-"Last-Translator: ayame30 <ayame30@noreply.codeberg.org>\n"
-"Language-Team: Japanese <https://translate.codeberg.org/projects/searxng/"
-"searxng/ja/>\n"
+"POT-Creation-Date: 2025-07-03 14:46+0000\n"
+"PO-Revision-Date: 2025-06-22 17:06+0000\n"
+"Last-Translator: return42 <return42@noreply.codeberg.org>\n"
 "Language: ja\n"
+"Language-Team: Japanese "
+"<https://translate.codeberg.org/projects/searxng/searxng/ja/>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.10.2\n"
 "Generated-By: Babel 2.17.0\n"
 
 #. CONSTANT_NAMES['NO_SUBGROUPING']
@@ -85,7 +86,7 @@ msgid "videos"
 msgstr "動画"
 
 #. CATEGORY_NAMES['RADIO']
-#: searx/engines/radio_browser.py:103 searx/searxng.msg
+#: searx/engines/radio_browser.py:151 searx/searxng.msg
 msgid "radio"
 msgstr "ラジオ"
 
@@ -195,111 +196,307 @@ msgid "About"
 msgstr "関連情報"
 
 #. WEATHER_TERMS['AVERAGE TEMP.']
-#: searx/engines/wttr.py:32 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Average temp."
 msgstr "平均気温."
 
 #. WEATHER_TERMS['CLOUD COVER']
-#: searx/engines/open_meteo.py:91 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Cloud cover"
 msgstr "曇り"
 
 #. WEATHER_TERMS['CONDITION']
-#: searx/engines/duckduckgo_weather.py:45 searx/engines/wttr.py:51
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:45 searx/searxng.msg
 msgid "Condition"
 msgstr "天気"
 
 #. WEATHER_TERMS['CURRENT CONDITION']
-#: searx/engines/duckduckgo_weather.py:118 searx/engines/wttr.py:104
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:118 searx/searxng.msg
 msgid "Current condition"
 msgstr "現在の天気"
 
 #. WEATHER_TERMS['EVENING']
-#: searx/engines/wttr.py:100 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Evening"
 msgstr "夕方"
 
 #. WEATHER_TERMS['FEELS LIKE']
-#: searx/engines/duckduckgo_weather.py:53 searx/engines/open_meteo.py:81
-#: searx/engines/wttr.py:59 searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:53 searx/searxng.msg
 msgid "Feels like"
 msgstr "体感"
 
 #. WEATHER_TERMS['HUMIDITY']
-#: searx/engines/duckduckgo_weather.py:64 searx/engines/open_meteo.py:93
-#: searx/engines/wttr.py:68 searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:64 searx/searxng.msg
+#: searx/templates/simple/answer/weather.html:29
 msgid "Humidity"
 msgstr "湿度"
 
 #. WEATHER_TERMS['MAX TEMP.']
-#: searx/engines/duckduckgo_weather.py:77 searx/engines/wttr.py:34
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:77 searx/searxng.msg
 msgid "Max temp."
 msgstr "最高気温."
 
 #. WEATHER_TERMS['MIN TEMP.']
-#: searx/engines/duckduckgo_weather.py:73 searx/engines/wttr.py:33
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:73 searx/searxng.msg
 msgid "Min temp."
 msgstr "最低気温."
 
 #. WEATHER_TERMS['MORNING']
-#: searx/engines/wttr.py:100 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Morning"
 msgstr "朝"
 
 #. WEATHER_TERMS['NIGHT']
-#: searx/engines/wttr.py:100 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Night"
 msgstr "夜間"
 
 #. WEATHER_TERMS['NOON']
-#: searx/engines/wttr.py:100 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Noon"
 msgstr "昼"
 
 #. WEATHER_TERMS['PRESSURE']
-#: searx/engines/open_meteo.py:95 searx/searxng.msg
+#: searx/searxng.msg searx/templates/simple/answer/weather.html:25
 msgid "Pressure"
 msgstr "気圧"
 
 #. WEATHER_TERMS['SUNRISE']
-#: searx/engines/duckduckgo_weather.py:81 searx/engines/wttr.py:36
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:81 searx/searxng.msg
 msgid "Sunrise"
 msgstr "日の出"
 
 #. WEATHER_TERMS['SUNSET']
-#: searx/engines/duckduckgo_weather.py:82 searx/engines/wttr.py:37
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:82 searx/searxng.msg
 msgid "Sunset"
 msgstr "日の入り"
 
 #. WEATHER_TERMS['TEMPERATURE']
-#: searx/engines/duckduckgo_weather.py:48 searx/engines/open_meteo.py:76
-#: searx/engines/wttr.py:55 searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:48 searx/searxng.msg
+#: searx/templates/simple/answer/weather.html:17
 msgid "Temperature"
 msgstr "気温"
 
 #. WEATHER_TERMS['UV INDEX']
-#: searx/engines/duckduckgo_weather.py:80 searx/engines/wttr.py:35
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:80 searx/searxng.msg
 msgid "UV index"
 msgstr "UV指数"
 
 #. WEATHER_TERMS['VISIBILITY']
-#: searx/engines/duckduckgo_weather.py:62 searx/engines/wttr.py:66
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:62 searx/searxng.msg
 msgid "Visibility"
 msgstr "視界"
 
 #. WEATHER_TERMS['WIND']
-#: searx/engines/duckduckgo_weather.py:58 searx/engines/open_meteo.py:86
-#: searx/engines/wttr.py:62 searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:58 searx/searxng.msg
+#: searx/templates/simple/answer/weather.html:23
 msgid "Wind"
 msgstr "風速"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Clear sky"
+msgstr "澄んだ空"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Partly cloudy"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Cloudy"
+msgstr "曇り"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Fair"
+msgstr "晴天"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Fog"
+msgstr "濃霧"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light rain and thunder"
+msgstr "小雨と雷"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light rain showers and thunder"
+msgstr "小雨のにわか雨と雷"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light rain showers"
+msgstr "小雨のにわか雨"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light rain"
+msgstr "小雨"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Rain and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Rain showers and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Rain showers"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Rain"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy rain and thunder"
+msgstr "大雨と雷"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy rain showers and thunder"
+msgstr "激しいにわか雨と雷"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy rain showers"
+msgstr "激しいにわか雨"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy rain"
+msgstr "大雨"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light sleet and thunder"
+msgstr "小みぞれと雷"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light sleet showers and thunder"
+msgstr "小みぞれのにわか雨と雷"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light sleet showers"
+msgstr "小みぞれのにわか雨"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light sleet"
+msgstr "小みぞれ"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Sleet and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Sleet showers and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Sleet showers"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Sleet"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy sleet and thunder"
+msgstr "みぞれを伴う雷雨"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy sleet showers and thunder"
+msgstr "みぞれを伴う激しいにわか雨と雷"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy sleet showers"
+msgstr "激しいみぞれのにわか雨"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy sleet"
+msgstr "激しいみぞれ"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light snow and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light snow showers and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light snow showers"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light snow"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Snow and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Snow showers and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Snow showers"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Snow"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy snow and thunder"
+msgstr "大雪と雷"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy snow showers and thunder"
+msgstr "激しいにわか雪と雷"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy snow showers"
+msgstr "激しいにわか雪"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy snow"
+msgstr "大雪"
 
 #. SOCIAL_MEDIA_TERMS['SUBSCRIBERS']
 #: searx/engines/lemmy.py:85 searx/searxng.msg
@@ -362,93 +559,93 @@ msgstr "クローズ"
 msgid "answered"
 msgstr "回答"
 
-#: searx/webapp.py:312
+#: searx/webapp.py:292
 msgid "No item found"
 msgstr "アイテムが見つかりません"
 
 #: searx/engines/qwant.py:291
-#: searx/templates/simple/result_templates/images.html:23 searx/webapp.py:314
+#: searx/templates/simple/result_templates/images.html:23 searx/webapp.py:294
 msgid "Source"
 msgstr "ソース"
 
-#: searx/webapp.py:316
+#: searx/webapp.py:296
 msgid "Error loading the next page"
 msgstr "次のページの読み込み中にエラーが発生しました"
 
-#: searx/webapp.py:469 searx/webapp.py:875
+#: searx/webapp.py:447 searx/webapp.py:845
 msgid "Invalid settings, please edit your preferences"
 msgstr "設定が無効です、設定を変更してください"
 
-#: searx/webapp.py:485
+#: searx/webapp.py:463
 msgid "Invalid settings"
 msgstr "無効な設定です"
 
-#: searx/webapp.py:562 searx/webapp.py:652
+#: searx/webapp.py:540 searx/webapp.py:630
 msgid "search error"
 msgstr "検索エラー"
 
-#: searx/webutils.py:36
+#: searx/webutils.py:35
 msgid "timeout"
 msgstr "タイムアウト"
 
-#: searx/webutils.py:37
+#: searx/webutils.py:36
 msgid "parsing error"
 msgstr "解析エラー"
 
-#: searx/webutils.py:38
+#: searx/webutils.py:37
 msgid "HTTP protocol error"
 msgstr "HTTP プロトコルエラー"
 
-#: searx/webutils.py:39
+#: searx/webutils.py:38
 msgid "network error"
 msgstr "ネットワークエラー"
 
-#: searx/webutils.py:40
+#: searx/webutils.py:39
 msgid "SSL error: certificate validation has failed"
 msgstr "SSL エラー: 証明書の検証に失敗しました"
 
-#: searx/webutils.py:42
+#: searx/webutils.py:41
 msgid "unexpected crash"
 msgstr "予期しないクラッシュ"
 
-#: searx/webutils.py:49
+#: searx/webutils.py:48
 msgid "HTTP error"
 msgstr "HTTP エラー"
 
-#: searx/webutils.py:50
+#: searx/webutils.py:49
 msgid "HTTP connection error"
 msgstr "HTTP 接続エラー"
 
-#: searx/webutils.py:56
+#: searx/webutils.py:55
 msgid "proxy error"
 msgstr "プロキシエラー"
 
-#: searx/webutils.py:57
+#: searx/webutils.py:56
 msgid "CAPTCHA"
 msgstr "CAPTCHA"
 
-#: searx/webutils.py:58
+#: searx/webutils.py:57
 msgid "too many requests"
 msgstr "リクエストが多すぎます"
 
-#: searx/webutils.py:59
+#: searx/webutils.py:58
 msgid "access denied"
 msgstr "アクセスが拒否されました"
 
-#: searx/webutils.py:60
+#: searx/webutils.py:59
 msgid "server API error"
 msgstr "サーバー API エラー"
 
-#: searx/webutils.py:79
+#: searx/webutils.py:78
 msgid "Suspended"
 msgstr "一時停止"
 
-#: searx/webutils.py:314
+#: searx/webutils.py:313
 #, python-brace-format
 msgid "{minutes} minute(s) ago"
 msgstr "{minutes} 分前"
 
-#: searx/webutils.py:315
+#: searx/webutils.py:314
 #, python-brace-format
 msgid "{hours} hour(s), {minutes} minute(s) ago"
 msgstr "{hours} 時間と{minutes} 分前"
@@ -479,15 +676,15 @@ msgstr "このエントリは、置き換えられました:"
 msgid "Channel"
 msgstr "チャンネル"
 
-#: searx/engines/radio_browser.py:105
+#: searx/engines/radio_browser.py:153
 msgid "bitrate"
 msgstr "ビットレート"
 
-#: searx/engines/radio_browser.py:106
+#: searx/engines/radio_browser.py:154
 msgid "votes"
 msgstr "票数"
 
-#: searx/engines/radio_browser.py:107
+#: searx/engines/radio_browser.py:155
 msgid "clicks"
 msgstr "クリック"
 
@@ -496,7 +693,7 @@ msgstr "クリック"
 msgid "Language"
 msgstr "言語"
 
-#: searx/engines/semantic_scholar.py:79
+#: searx/engines/semantic_scholar.py:101
 #, python-brace-format
 msgid ""
 "{numCitations} citations from the year {firstCitationVelocityYear} to "
@@ -550,11 +747,13 @@ msgstr "検索バーで数式を計算"
 msgid "Hash plugin"
 msgstr "ハッシュプラグイン"
 
-#: searx/plugins/hash_plugin.py:35
-msgid "Converts strings to different hash digests."
-msgstr "文字列を異なるハッシュダイジェストに変換。"
+#: searx/plugins/hash_plugin.py:36
+msgid ""
+"Converts strings to different hash digests. Available functions: md5, "
+"sha1, sha224, sha256, sha384, sha512."
+msgstr ""
 
-#: searx/plugins/hash_plugin.py:62
+#: searx/plugins/hash_plugin.py:64
 msgid "hash digest"
 msgstr "ハッシュダイジェスト"
 
@@ -563,8 +762,8 @@ msgid "Hostnames plugin"
 msgstr "ホスト名プラグイン"
 
 #: searx/plugins/hostnames.py:124
-msgid "Rewrite hostnames, remove results or prioritize them based on the hostname"
-msgstr "検索結果からこのホスト名を基に削除もしくは優先的に書き換えを行う"
+msgid "Rewrite hostnames and remove or prioritize results based on the hostname"
+msgstr ""
 
 #: searx/plugins/oa_doi_rewrite.py:55
 msgid "Open Access DOI rewrite"
@@ -616,11 +815,11 @@ msgstr "あなたはTorを使用しており、外部IPアドレスが確認さ�
 msgid "You are not using Tor and you have the external IP address"
 msgstr "あなたはTorを使用しておらず、外部IPアドレスが確認されました"
 
-#: searx/plugins/tracker_url_remover.py:37
+#: searx/plugins/tracker_url_remover.py:35
 msgid "Tracker URL remover"
 msgstr "トラッカー URL リムーバー"
 
-#: searx/plugins/tracker_url_remover.py:38
+#: searx/plugins/tracker_url_remover.py:36
 msgid "Remove trackers arguments from the returned URL"
 msgstr "返された URL からトラッカー引数を消去する"
 
@@ -631,6 +830,11 @@ msgstr "単位変換プラグイン"
 #: searx/plugins/unit_converter.py:50
 msgid "Convert between units"
 msgstr "単位を変換"
+
+#: searx/result_types/answer.py:224
+#, python-brace-format
+msgid "{location}: {temperature}, {condition}"
+msgstr "{location}: {temperature}, {condition}"
 
 #: searx/templates/simple/404.html:4
 msgid "Page not found"
@@ -709,10 +913,6 @@ msgstr "作者"
 #: searx/templates/simple/macros.html:50
 msgid "cached"
 msgstr "キャッシュ"
-
-#: searx/templates/simple/macros.html:50
-msgid "proxied"
-msgstr "プロキシ"
 
 #: searx/templates/simple/new_issue.html:64
 msgid "Start submitting a new issue on GitHub"
@@ -948,6 +1148,10 @@ msgstr "定義"
 msgid "Synonyms"
 msgstr "類義語"
 
+#: searx/templates/simple/answer/weather.html:19
+msgid "Feels Like"
+msgstr ""
+
 #: searx/templates/simple/elements/answers.html:2
 msgid "Answers"
 msgstr "回答"
@@ -1125,16 +1329,16 @@ msgid "Autocomplete"
 msgstr "自動補完"
 
 #: searx/templates/simple/preferences/autocomplete.html:15
-msgid "Find stuff as you type"
-msgstr "自動補完に使う検索エンジン"
+msgid "Show possible queries as you type"
+msgstr ""
 
 #: searx/templates/simple/preferences/center_alignment.html:2
 msgid "Center Alignment"
 msgstr "中央揃え"
 
 #: searx/templates/simple/preferences/center_alignment.html:14
-msgid "Displays results in the center of the page (Oscar layout)."
-msgstr "中央揃えでページに結果表示（Oscar レイアウト)."
+msgid "Display results in the center of the page (Oscar layout)."
+msgstr ""
 
 #: searx/templates/simple/preferences/cookies.html:2
 msgid ""
@@ -1143,8 +1347,8 @@ msgid ""
 msgstr "これはクッキーのリストで、これらの値はあなたのコンピュータに保存されています。"
 
 #: searx/templates/simple/preferences/cookies.html:3
-msgid "With that list, you can assess SearXNG transparency."
-msgstr "このリストによって、あなたは SearXNG の透明性を評価できます。"
+msgid "With this list, you can assess the transparency of SearXNG."
+msgstr ""
 
 #: searx/templates/simple/preferences/cookies.html:9
 msgid "Cookie name"
@@ -1172,8 +1376,7 @@ msgstr "このURLで違うブラウザに設定を復活"
 msgid ""
 "A URL containing your preferences. This URL can be used to restore your "
 "settings on a different device."
-msgstr "設定内容が保存されたURLです。このURLを使用すると、別のデバイスで設定を復元で"
-"きます。"
+msgstr "設定内容が保存されたURLです。このURLを使用すると、別のデバイスで設定を復元できます。"
 
 #: searx/templates/simple/preferences/cookies.html:46
 msgid "Copy preferences hash"
@@ -1201,9 +1404,9 @@ msgstr "DOI書き換えにて使用するサービスを選択"
 
 #: searx/templates/simple/preferences/engines.html:9
 msgid ""
-"This tab does not exists in the user interface, but you can search in "
-"these engines by its !bangs."
-msgstr "インタフェースやタブの中にはないが、!bangを使うことでこれらのエンジンで検索できる。"
+"This tab does not exist in the user interface, but you can search with "
+"these engines via !bangs."
+msgstr ""
 
 #: searx/templates/simple/preferences/engines.html:15
 msgid "Enable all"
@@ -1239,15 +1442,13 @@ msgstr "検索結果でfaviconに合いそうなものを表示する"
 
 #: searx/templates/simple/preferences/footer.html:2
 msgid ""
-"These settings are stored in your cookies, this allows us not to store "
+"These settings are stored in your cookies. This allows us not to store "
 "this data about you."
-msgstr "これらの設定はあなたのクッキーに保存されますが、これはサーバーがあなたの情報の保存するわけではありません。"
+msgstr ""
 
 #: searx/templates/simple/preferences/footer.html:3
-msgid ""
-"These cookies serve your sole convenience, we don't use these cookies to "
-"track you."
-msgstr "クッキーはあなたが便利に使えるようにするために使うのであって、サーバーはあなたを追跡するためにクッキーを使うことはありません。"
+msgid "These cookies serve your sole convenience; we don't use them to track you."
+msgstr ""
 
 #: searx/templates/simple/preferences/footer.html:6
 msgid "Save"
@@ -1280,16 +1481,18 @@ msgid "Image proxy"
 msgstr "画像プロキシ"
 
 #: searx/templates/simple/preferences/image_proxy.html:14
-msgid "Proxying image results through SearXNG"
-msgstr "画像の結果をSearXNG経由でプロキシする"
+msgid "Proxy image results through SearXNG"
+msgstr ""
 
 #: searx/templates/simple/preferences/infinite_scroll.html:2
 msgid "Infinite scroll"
 msgstr "無限スクロール"
 
 #: searx/templates/simple/preferences/infinite_scroll.html:14
-msgid "Automatically load next page when scrolling to bottom of current page"
-msgstr "現在のページの下端でスクロールすると自動的に次のページを読み込む"
+msgid ""
+"Automatically load the next page when scrolling to the bottom of the "
+"current page"
+msgstr ""
 
 #: searx/templates/simple/preferences/language.html:24
 msgid "What language do you prefer for search?"
@@ -1318,12 +1521,12 @@ msgid ""
 msgstr "有効にすると、検索結果ページのタイトルにクエリが含まれます。お使いのブラウザはこのタイトルを記録できます"
 
 #: searx/templates/simple/preferences/results_on_new_tab.html:2
-msgid "Results on new tabs"
-msgstr "新しいタブに結果を表示"
+msgid "Results in new tabs"
+msgstr ""
 
 #: searx/templates/simple/preferences/results_on_new_tab.html:14
-msgid "Open result links on new browser tabs"
-msgstr "検索結果のリンクを新しいタブで開く"
+msgid "Open result links in new browser tabs"
+msgstr ""
 
 #: searx/templates/simple/preferences/safesearch.html:20
 msgid "Filter content"
@@ -1335,17 +1538,17 @@ msgstr "カテゴリ選択したら検索を実行"
 
 #: searx/templates/simple/preferences/search_on_category_select.html:14
 msgid ""
-"Perform search immediately if a category selected. Disable to select "
-"multiple categories"
-msgstr "カテゴリが選択されている場合はすぐに検索を行います。複数のカテゴリが選択されている場合は無効です"
+"Perform a search immediately if a category is selected. Disable to select"
+" multiple categories"
+msgstr ""
 
 #: searx/templates/simple/preferences/theme.html:2
 msgid "Theme"
 msgstr "テーマ"
 
 #: searx/templates/simple/preferences/theme.html:14
-msgid "Change SearXNG layout"
-msgstr "SearXNGレイアウトの変更"
+msgid "Change the layout of SearXNG"
+msgstr ""
 
 #: searx/templates/simple/preferences/theme.html:19
 msgid "Theme style"
@@ -1787,7 +1990,7 @@ msgstr "動画を隠す"
 #~ msgstr ""
 
 #~ msgid "Displays results in the center of the page (Oscar layout)."
-#~ msgstr ""
+#~ msgstr "中央揃えでページに結果表示（Oscar レイアウト)."
 
 #~ msgid "preferences"
 #~ msgstr "設定"
@@ -2022,3 +2225,60 @@ msgstr "動画を隠す"
 #~ "preferences URL can be used to "
 #~ "sync preferences across devices."
 #~ msgstr "初期設定URLを使うことで、特別な設定をデバイスをまたいで同期できる。"
+
+#~ msgid "proxied"
+#~ msgstr "プロキシ"
+
+#~ msgid ""
+#~ "This tab does not exists in the"
+#~ " user interface, but you can search"
+#~ " in these engines by its !bangs."
+#~ msgstr "インタフェースやタブの中にはないが、!bangを使うことでこれらのエンジンで検索できる。"
+
+#~ msgid "Results on new tabs"
+#~ msgstr "新しいタブに結果を表示"
+
+#~ msgid "Open result links on new browser tabs"
+#~ msgstr "検索結果のリンクを新しいタブで開く"
+
+#~ msgid "Find stuff as you type"
+#~ msgstr "自動補完に使う検索エンジン"
+
+#~ msgid "Converts strings to different hash digests."
+#~ msgstr "文字列を異なるハッシュダイジェストに変換。"
+
+#~ msgid ""
+#~ "Rewrite hostnames, remove results or "
+#~ "prioritize them based on the hostname"
+#~ msgstr "検索結果からこのホスト名を基に削除もしくは優先的に書き換えを行う"
+
+#~ msgid "With that list, you can assess SearXNG transparency."
+#~ msgstr "このリストによって、あなたは SearXNG の透明性を評価できます。"
+
+#~ msgid ""
+#~ "These settings are stored in your "
+#~ "cookies, this allows us not to "
+#~ "store this data about you."
+#~ msgstr "これらの設定はあなたのクッキーに保存されますが、これはサーバーがあなたの情報の保存するわけではありません。"
+
+#~ msgid ""
+#~ "These cookies serve your sole "
+#~ "convenience, we don't use these cookies"
+#~ " to track you."
+#~ msgstr "クッキーはあなたが便利に使えるようにするために使うのであって、サーバーはあなたを追跡するためにクッキーを使うことはありません。"
+
+#~ msgid "Proxying image results through SearXNG"
+#~ msgstr "画像の結果をSearXNG経由でプロキシする"
+
+#~ msgid "Automatically load next page when scrolling to bottom of current page"
+#~ msgstr "現在のページの下端でスクロールすると自動的に次のページを読み込む"
+
+#~ msgid ""
+#~ "Perform search immediately if a category"
+#~ " selected. Disable to select multiple "
+#~ "categories"
+#~ msgstr "カテゴリが選択されている場合はすぐに検索を行います。複数のカテゴリが選択されている場合は無効です"
+
+#~ msgid "Change SearXNG layout"
+#~ msgstr "SearXNGレイアウトの変更"
+

@@ -20,22 +20,24 @@
 # Fjuro <fjuro@users.noreply.translate.codeberg.org>, 2025.
 # return42 <return42@noreply.codeberg.org>, 2025.
 # Fjuro <fjuro@noreply.codeberg.org>, 2025.
+# Fjuro <git@alius.cz>, 2025.
+# L33P <l33p@noreply.codeberg.org>, 2025.
+# radekjuthner <radekjuthner@noreply.codeberg.org>, 2025.
 msgid ""
 msgstr ""
-"Project-Id-Version: searx\n"
+"Project-Id-Version:  searx\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-03-29 09:21+0000\n"
-"PO-Revision-Date: 2025-03-30 16:28+0000\n"
-"Last-Translator: Fjuro <fjuro@noreply.codeberg.org>\n"
-"Language-Team: Czech <https://translate.codeberg.org/projects/searxng/"
-"searxng/cs/>\n"
+"POT-Creation-Date: 2025-07-03 14:46+0000\n"
+"PO-Revision-Date: 2025-06-28 09:58+0000\n"
+"Last-Translator: Fjuro <git@alius.cz>\n"
 "Language: cs\n"
+"Language-Team: Czech "
+"<https://translate.codeberg.org/projects/searxng/searxng/cs/>\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && "
+"n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n "
-"<= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
-"X-Generator: Weblate 5.10.2\n"
 "Generated-By: Babel 2.17.0\n"
 
 #. CONSTANT_NAMES['NO_SUBGROUPING']
@@ -79,7 +81,7 @@ msgid "videos"
 msgstr "videa"
 
 #. CATEGORY_NAMES['RADIO']
-#: searx/engines/radio_browser.py:103 searx/searxng.msg
+#: searx/engines/radio_browser.py:151 searx/searxng.msg
 msgid "radio"
 msgstr "rádio"
 
@@ -181,7 +183,7 @@ msgstr "černý"
 #. BRAND_CUSTOM_LINKS['UPTIME']
 #: searx/searxng.msg
 msgid "Uptime"
-msgstr "Spolehlivost"
+msgstr "Doba provozu"
 
 #. BRAND_CUSTOM_LINKS['ABOUT']
 #: searx/searxng.msg searx/templates/simple/base.html:49
@@ -189,111 +191,307 @@ msgid "About"
 msgstr "O SearXNG"
 
 #. WEATHER_TERMS['AVERAGE TEMP.']
-#: searx/engines/wttr.py:32 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Average temp."
 msgstr "Prům. teplota"
 
 #. WEATHER_TERMS['CLOUD COVER']
-#: searx/engines/open_meteo.py:91 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Cloud cover"
 msgstr "Pokrytí mraky"
 
 #. WEATHER_TERMS['CONDITION']
-#: searx/engines/duckduckgo_weather.py:45 searx/engines/wttr.py:51
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:45 searx/searxng.msg
 msgid "Condition"
 msgstr "Stav"
 
 #. WEATHER_TERMS['CURRENT CONDITION']
-#: searx/engines/duckduckgo_weather.py:118 searx/engines/wttr.py:104
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:118 searx/searxng.msg
 msgid "Current condition"
 msgstr "Aktuální stav"
 
 #. WEATHER_TERMS['EVENING']
-#: searx/engines/wttr.py:100 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Evening"
 msgstr "Večer"
 
 #. WEATHER_TERMS['FEELS LIKE']
-#: searx/engines/duckduckgo_weather.py:53 searx/engines/open_meteo.py:81
-#: searx/engines/wttr.py:59 searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:53 searx/searxng.msg
 msgid "Feels like"
 msgstr "Pocitová teplota"
 
 #. WEATHER_TERMS['HUMIDITY']
-#: searx/engines/duckduckgo_weather.py:64 searx/engines/open_meteo.py:93
-#: searx/engines/wttr.py:68 searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:64 searx/searxng.msg
+#: searx/templates/simple/answer/weather.html:29
 msgid "Humidity"
 msgstr "Vlhkost"
 
 #. WEATHER_TERMS['MAX TEMP.']
-#: searx/engines/duckduckgo_weather.py:77 searx/engines/wttr.py:34
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:77 searx/searxng.msg
 msgid "Max temp."
 msgstr "Max. teplota"
 
 #. WEATHER_TERMS['MIN TEMP.']
-#: searx/engines/duckduckgo_weather.py:73 searx/engines/wttr.py:33
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:73 searx/searxng.msg
 msgid "Min temp."
 msgstr "Min. teplota"
 
 #. WEATHER_TERMS['MORNING']
-#: searx/engines/wttr.py:100 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Morning"
 msgstr "Ráno"
 
 #. WEATHER_TERMS['NIGHT']
-#: searx/engines/wttr.py:100 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Night"
 msgstr "Noc"
 
 #. WEATHER_TERMS['NOON']
-#: searx/engines/wttr.py:100 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Noon"
 msgstr "Poledne"
 
 #. WEATHER_TERMS['PRESSURE']
-#: searx/engines/open_meteo.py:95 searx/searxng.msg
+#: searx/searxng.msg searx/templates/simple/answer/weather.html:25
 msgid "Pressure"
 msgstr "Tlak"
 
 #. WEATHER_TERMS['SUNRISE']
-#: searx/engines/duckduckgo_weather.py:81 searx/engines/wttr.py:36
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:81 searx/searxng.msg
 msgid "Sunrise"
 msgstr "Východ slunce"
 
 #. WEATHER_TERMS['SUNSET']
-#: searx/engines/duckduckgo_weather.py:82 searx/engines/wttr.py:37
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:82 searx/searxng.msg
 msgid "Sunset"
 msgstr "Západ slunce"
 
 #. WEATHER_TERMS['TEMPERATURE']
-#: searx/engines/duckduckgo_weather.py:48 searx/engines/open_meteo.py:76
-#: searx/engines/wttr.py:55 searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:48 searx/searxng.msg
+#: searx/templates/simple/answer/weather.html:17
 msgid "Temperature"
 msgstr "Teplota"
 
 #. WEATHER_TERMS['UV INDEX']
-#: searx/engines/duckduckgo_weather.py:80 searx/engines/wttr.py:35
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:80 searx/searxng.msg
 msgid "UV index"
 msgstr "UV index"
 
 #. WEATHER_TERMS['VISIBILITY']
-#: searx/engines/duckduckgo_weather.py:62 searx/engines/wttr.py:66
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:62 searx/searxng.msg
 msgid "Visibility"
 msgstr "Viditelnost"
 
 #. WEATHER_TERMS['WIND']
-#: searx/engines/duckduckgo_weather.py:58 searx/engines/open_meteo.py:86
-#: searx/engines/wttr.py:62 searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:58 searx/searxng.msg
+#: searx/templates/simple/answer/weather.html:23
 msgid "Wind"
 msgstr "Vítr"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Clear sky"
+msgstr "Jasno"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Partly cloudy"
+msgstr "Částečně zataženo"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Cloudy"
+msgstr "Oblačno"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Fair"
+msgstr "Polojasno"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Fog"
+msgstr "Mlha"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light rain and thunder"
+msgstr "Slabý déšť a bouřky"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light rain showers and thunder"
+msgstr "Slabé dešťové přeháňky a bouřky"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light rain showers"
+msgstr "Slabé dešťové přeháňky"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light rain"
+msgstr "Slabý déšť"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Rain and thunder"
+msgstr "Déšť a bouřky"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Rain showers and thunder"
+msgstr "Dešťové přeháňky a bouřky"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Rain showers"
+msgstr "Dešťové přeháňky"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Rain"
+msgstr "Déšť"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy rain and thunder"
+msgstr "Silný déšť s bouří"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy rain showers and thunder"
+msgstr "Silné dešťové přeháňky a bouřky"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy rain showers"
+msgstr "Silné dešťové přeháňky"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy rain"
+msgstr "Silný déšť"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light sleet and thunder"
+msgstr "Slabý déšť se sněhem a bouřky"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light sleet showers and thunder"
+msgstr "Slabé přeháňky deště se sněhem a bouřky"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light sleet showers"
+msgstr "Slabé přeháňky deště se sněhem"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light sleet"
+msgstr "Lehké sněžení"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Sleet and thunder"
+msgstr "Déšť se sněhem a bouřky"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Sleet showers and thunder"
+msgstr "Přeháňky deště se sněhem a bouřky"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Sleet showers"
+msgstr "Přeháňky deště se sněhem"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Sleet"
+msgstr "Plískanice"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy sleet and thunder"
+msgstr "Silný déšť se sněhem a bouřky"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy sleet showers and thunder"
+msgstr "Silné přeháňky deště se sněhem a bouřky"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy sleet showers"
+msgstr "Silné přeháňky deště se sněhem"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy sleet"
+msgstr "Silný déšť se sněhem"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light snow and thunder"
+msgstr "Slabé sněžení a bouřky"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light snow showers and thunder"
+msgstr "Slabé sněhové přeháňky a bouřky"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light snow showers"
+msgstr "Slabé sněhové přeháňky"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light snow"
+msgstr "Slabé sněžení"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Snow and thunder"
+msgstr "Sníh a bouřky"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Snow showers and thunder"
+msgstr "Sněhové přeháňky a bouřky"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Snow showers"
+msgstr "Sněhové přeháňky"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Snow"
+msgstr "Sníh"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy snow and thunder"
+msgstr "Silné sněžení a bouřky"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy snow showers and thunder"
+msgstr "Silné sněhové přeháňky a bouřky"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy snow showers"
+msgstr "Silné sněhové přeháňky"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy snow"
+msgstr "Silné sněžení"
 
 #. SOCIAL_MEDIA_TERMS['SUBSCRIBERS']
 #: searx/engines/lemmy.py:85 searx/searxng.msg
@@ -356,93 +554,93 @@ msgstr "zavřené"
 msgid "answered"
 msgstr "zodpovězené"
 
-#: searx/webapp.py:312
+#: searx/webapp.py:292
 msgid "No item found"
 msgstr "Nic nenalezeno"
 
 #: searx/engines/qwant.py:291
-#: searx/templates/simple/result_templates/images.html:23 searx/webapp.py:314
+#: searx/templates/simple/result_templates/images.html:23 searx/webapp.py:294
 msgid "Source"
 msgstr "zdroj"
 
-#: searx/webapp.py:316
+#: searx/webapp.py:296
 msgid "Error loading the next page"
 msgstr "Chyba při načítání další stránky"
 
-#: searx/webapp.py:469 searx/webapp.py:875
+#: searx/webapp.py:447 searx/webapp.py:845
 msgid "Invalid settings, please edit your preferences"
 msgstr "Neplatné nastavení, upravte své předvolby"
 
-#: searx/webapp.py:485
+#: searx/webapp.py:463
 msgid "Invalid settings"
 msgstr "Neplatné nastavení"
 
-#: searx/webapp.py:562 searx/webapp.py:652
+#: searx/webapp.py:540 searx/webapp.py:630
 msgid "search error"
 msgstr "chyba vyhledávání"
 
-#: searx/webutils.py:36
+#: searx/webutils.py:35
 msgid "timeout"
 msgstr "čas vypršel"
 
-#: searx/webutils.py:37
+#: searx/webutils.py:36
 msgid "parsing error"
 msgstr "chyba parsování"
 
-#: searx/webutils.py:38
+#: searx/webutils.py:37
 msgid "HTTP protocol error"
 msgstr "chyba HTTP protokolu"
 
-#: searx/webutils.py:39
+#: searx/webutils.py:38
 msgid "network error"
 msgstr "síťová chyba"
 
-#: searx/webutils.py:40
+#: searx/webutils.py:39
 msgid "SSL error: certificate validation has failed"
 msgstr "chyba SSL: ověření certifikátu selhalo"
 
-#: searx/webutils.py:42
+#: searx/webutils.py:41
 msgid "unexpected crash"
 msgstr "nečekaná chyba"
 
-#: searx/webutils.py:49
+#: searx/webutils.py:48
 msgid "HTTP error"
 msgstr "chyba HTTP"
 
-#: searx/webutils.py:50
+#: searx/webutils.py:49
 msgid "HTTP connection error"
 msgstr "Chyba spojení HTTP"
 
-#: searx/webutils.py:56
+#: searx/webutils.py:55
 msgid "proxy error"
 msgstr "chyba proxy"
 
-#: searx/webutils.py:57
+#: searx/webutils.py:56
 msgid "CAPTCHA"
 msgstr "CAPTCHA"
 
-#: searx/webutils.py:58
+#: searx/webutils.py:57
 msgid "too many requests"
 msgstr "příliš mnoho požadavků"
 
-#: searx/webutils.py:59
+#: searx/webutils.py:58
 msgid "access denied"
 msgstr "přístup odepřen"
 
-#: searx/webutils.py:60
+#: searx/webutils.py:59
 msgid "server API error"
 msgstr "chyba API serveru"
 
-#: searx/webutils.py:79
+#: searx/webutils.py:78
 msgid "Suspended"
 msgstr "Pozastaveno"
 
-#: searx/webutils.py:314
+#: searx/webutils.py:313
 #, python-brace-format
 msgid "{minutes} minute(s) ago"
 msgstr "před {minutes} minutami"
 
-#: searx/webutils.py:315
+#: searx/webutils.py:314
 #, python-brace-format
 msgid "{hours} hour(s), {minutes} minute(s) ago"
 msgstr "před {hours} hodinami, {minutes} minutami"
@@ -473,15 +671,15 @@ msgstr "Tato položka byla nahrazena položkou"
 msgid "Channel"
 msgstr "Kanál"
 
-#: searx/engines/radio_browser.py:105
+#: searx/engines/radio_browser.py:153
 msgid "bitrate"
 msgstr "datový tok"
 
-#: searx/engines/radio_browser.py:106
+#: searx/engines/radio_browser.py:154
 msgid "votes"
 msgstr "hlasy"
 
-#: searx/engines/radio_browser.py:107
+#: searx/engines/radio_browser.py:155
 msgid "clicks"
 msgstr "kliknutí"
 
@@ -490,7 +688,7 @@ msgstr "kliknutí"
 msgid "Language"
 msgstr "Jazyk"
 
-#: searx/engines/semantic_scholar.py:79
+#: searx/engines/semantic_scholar.py:101
 #, python-brace-format
 msgid ""
 "{numCitations} citations from the year {firstCitationVelocityYear} to "
@@ -549,11 +747,15 @@ msgstr "Vypočítejte matematické výrazy pomocí vyhledávací lišty"
 msgid "Hash plugin"
 msgstr "Doplněk hashe"
 
-#: searx/plugins/hash_plugin.py:35
-msgid "Converts strings to different hash digests."
-msgstr "Převádí řetězce na různé hash hodnoty."
+#: searx/plugins/hash_plugin.py:36
+msgid ""
+"Converts strings to different hash digests. Available functions: md5, "
+"sha1, sha224, sha256, sha384, sha512."
+msgstr ""
+"Převést řetězce na různé hash digesty. Dostupné funkce: md5, sha1, "
+"sha224, sha256, sha384, sha512."
 
-#: searx/plugins/hash_plugin.py:62
+#: searx/plugins/hash_plugin.py:64
 msgid "hash digest"
 msgstr "hash hodnota"
 
@@ -562,10 +764,10 @@ msgid "Hostnames plugin"
 msgstr "Doplněk hostitelských jmen"
 
 #: searx/plugins/hostnames.py:124
-msgid "Rewrite hostnames, remove results or prioritize them based on the hostname"
+msgid "Rewrite hostnames and remove or prioritize results based on the hostname"
 msgstr ""
-"Přepsat hostitelská jména, odstranit výsledky nebo je prioritizovat na "
-"základě hostitelského jména"
+"Přepsat názvy hostitelů a odstranit nebo upřednostnit výsledky v "
+"závislosti na názvu hostitele"
 
 #: searx/plugins/oa_doi_rewrite.py:55
 msgid "Open Access DOI rewrite"
@@ -608,9 +810,9 @@ msgid ""
 "This plugin checks if the address of the request is a Tor exit-node, and "
 "informs the user if it is; like check.torproject.org, but from SearXNG."
 msgstr ""
-"Tento doplněk kontroluje, zda je adresa požadavku výstupním uzlem sítě Tor, "
-"a informuje uživatele, pokud tomu tak je; jako check.torproject.org, ale od "
-"SearXNG."
+"Tento doplněk kontroluje, zda je adresa požadavku výstupním uzlem sítě "
+"Tor, a informuje uživatele, pokud tomu tak je; jako check.torproject.org,"
+" ale od SearXNG."
 
 #: searx/plugins/tor_check.py:65
 msgid "Could not download the list of Tor exit-nodes from"
@@ -624,11 +826,11 @@ msgstr "Používáte Tor a zdá se, že máte externí IP adresu"
 msgid "You are not using Tor and you have the external IP address"
 msgstr "Nepoužíváte Tor a máte externí IP adresu"
 
-#: searx/plugins/tracker_url_remover.py:37
+#: searx/plugins/tracker_url_remover.py:35
 msgid "Tracker URL remover"
 msgstr "Odstraňovač sledovacích URL"
 
-#: searx/plugins/tracker_url_remover.py:38
+#: searx/plugins/tracker_url_remover.py:36
 msgid "Remove trackers arguments from the returned URL"
 msgstr "Odstranit sledovací parametry z načtených URL"
 
@@ -639,6 +841,11 @@ msgstr "Doplněk převodu jednotek"
 #: searx/plugins/unit_converter.py:50
 msgid "Convert between units"
 msgstr "Převod mezi jednotkami"
+
+#: searx/result_types/answer.py:224
+#, python-brace-format
+msgid "{location}: {temperature}, {condition}"
+msgstr "{location}: {temperature}, {condition}"
 
 #: searx/templates/simple/404.html:4
 msgid "Page not found"
@@ -717,10 +924,6 @@ msgstr "Autor"
 #: searx/templates/simple/macros.html:50
 msgid "cached"
 msgstr "archivovaná verze"
-
-#: searx/templates/simple/macros.html:50
-msgid "proxied"
-msgstr "přes proxy"
 
 #: searx/templates/simple/new_issue.html:64
 msgid "Start submitting a new issue on GitHub"
@@ -958,6 +1161,10 @@ msgstr "Definice"
 msgid "Synonyms"
 msgstr "Synonyma"
 
+#: searx/templates/simple/answer/weather.html:19
+msgid "Feels Like"
+msgstr "Pocity jako"
+
 #: searx/templates/simple/elements/answers.html:2
 msgid "Answers"
 msgstr "Odpovědi"
@@ -1135,16 +1342,16 @@ msgid "Autocomplete"
 msgstr "Našeptávač"
 
 #: searx/templates/simple/preferences/autocomplete.html:15
-msgid "Find stuff as you type"
-msgstr "Vyhledávat během psaní"
+msgid "Show possible queries as you type"
+msgstr "Zobrazení možných dotazů při psaní"
 
 #: searx/templates/simple/preferences/center_alignment.html:2
 msgid "Center Alignment"
 msgstr "Zarovnání na střed"
 
 #: searx/templates/simple/preferences/center_alignment.html:14
-msgid "Displays results in the center of the page (Oscar layout)."
-msgstr "Zobrazí výsledky uprostřed stránky (rozložení Oscar)."
+msgid "Display results in the center of the page (Oscar layout)."
+msgstr "Zobrazit výsledky uprostřed stránky (rozložení Oscar)."
 
 #: searx/templates/simple/preferences/cookies.html:2
 msgid ""
@@ -1155,8 +1362,8 @@ msgstr ""
 " počítači."
 
 #: searx/templates/simple/preferences/cookies.html:3
-msgid "With that list, you can assess SearXNG transparency."
-msgstr "S pomocí tohoto seznamu můžete určit transparentnost SearXNG."
+msgid "With this list, you can assess the transparency of SearXNG."
+msgstr "Pomocí tohoto seznamu můžete posoudit transparentnost SearXNG."
 
 #: searx/templates/simple/preferences/cookies.html:9
 msgid "Cookie name"
@@ -1216,11 +1423,11 @@ msgstr "Výběr služby použité při přepisu DOI"
 
 #: searx/templates/simple/preferences/engines.html:9
 msgid ""
-"This tab does not exists in the user interface, but you can search in "
-"these engines by its !bangs."
+"This tab does not exist in the user interface, but you can search with "
+"these engines via !bangs."
 msgstr ""
-"Tato karta v uživatelském rozhraní neexistuje, ale můžete v těchto "
-"vyhledávačích vyhledávat podle jejích !bang."
+"Tato karta v uživatelském rozhraní neexistuje, ale můžete v nich "
+"vyhledávat pomocí !bangs."
 
 #: searx/templates/simple/preferences/engines.html:15
 msgid "Enable all"
@@ -1256,19 +1463,17 @@ msgstr "Zobrazit ikony webů vedle výsledků vyhledávání"
 
 #: searx/templates/simple/preferences/footer.html:2
 msgid ""
-"These settings are stored in your cookies, this allows us not to store "
+"These settings are stored in your cookies. This allows us not to store "
 "this data about you."
 msgstr ""
-"Tato nastavení jsou uložena ve vašich cookies, což nám umožňuje tyto data"
-" neuchovávat nikde jinde."
+"Tato nastavení jsou uložena ve vašich souborech cookie. To nám umožňuje "
+"neukládat data o vás."
 
 #: searx/templates/simple/preferences/footer.html:3
-msgid ""
-"These cookies serve your sole convenience, we don't use these cookies to "
-"track you."
+msgid "These cookies serve your sole convenience; we don't use them to track you."
 msgstr ""
-"Tyto cookies existují výhradně pro vaše pohodlí, nepoužíváme je ke "
-"sledování."
+"Tyto soubory cookie slouží pouze pro vaše pohodlí; nepoužíváme je, "
+"abychom vás sledovali."
 
 #: searx/templates/simple/preferences/footer.html:6
 msgid "Save"
@@ -1304,16 +1509,18 @@ msgid "Image proxy"
 msgstr "Nepřímé vyhledávání obrázků"
 
 #: searx/templates/simple/preferences/image_proxy.html:14
-msgid "Proxying image results through SearXNG"
-msgstr "Používat SearXNG jako prostředníka pro vyhledávání obrázků"
+msgid "Proxy image results through SearXNG"
+msgstr "Načítat výsledky hledání obrázků skrze proxy SearXNG"
 
 #: searx/templates/simple/preferences/infinite_scroll.html:2
 msgid "Infinite scroll"
 msgstr "Nekonečné výsledky"
 
 #: searx/templates/simple/preferences/infinite_scroll.html:14
-msgid "Automatically load next page when scrolling to bottom of current page"
-msgstr "Automaticky načítat další výsledky při rolování"
+msgid ""
+"Automatically load the next page when scrolling to the bottom of the "
+"current page"
+msgstr "Automaticky načíst další stránku při posunu na konec aktuální stránky"
 
 #: searx/templates/simple/preferences/language.html:24
 msgid "What language do you prefer for search?"
@@ -1344,12 +1551,12 @@ msgstr ""
 "toto zapnete. Váš prohlížeč může tento titulek zaznamenat"
 
 #: searx/templates/simple/preferences/results_on_new_tab.html:2
-msgid "Results on new tabs"
-msgstr "Výsledky na novém panelu"
+msgid "Results in new tabs"
+msgstr "Výsledky na nových kartách"
 
 #: searx/templates/simple/preferences/results_on_new_tab.html:14
-msgid "Open result links on new browser tabs"
-msgstr "Otevírat výsledky na novém panelu prohlížeče"
+msgid "Open result links in new browser tabs"
+msgstr "Otevření odkazů na výsledky v nových kartách prohlížeče"
 
 #: searx/templates/simple/preferences/safesearch.html:20
 msgid "Filter content"
@@ -1361,19 +1568,19 @@ msgstr "Spustit vyhledávání při výběru kategorie"
 
 #: searx/templates/simple/preferences/search_on_category_select.html:14
 msgid ""
-"Perform search immediately if a category selected. Disable to select "
-"multiple categories"
+"Perform a search immediately if a category is selected. Disable to select"
+" multiple categories"
 msgstr ""
-"Pokud je vybrána kategorie, ihned provést vyhledávání. Zakažte pro "
-"vybrání několika kategorií"
+"Při výběru kategorie okamžitě provést hledání. Zakažte pro výběr více "
+"kategorií"
 
 #: searx/templates/simple/preferences/theme.html:2
 msgid "Theme"
 msgstr "Vzhled"
 
 #: searx/templates/simple/preferences/theme.html:14
-msgid "Change SearXNG layout"
-msgstr "Změnit vzhled SearXNG"
+msgid "Change the layout of SearXNG"
+msgstr "Změnit rozvržení SearXNG"
 
 #: searx/templates/simple/preferences/theme.html:19
 msgid "Theme style"
@@ -1824,7 +2031,7 @@ msgstr "skrýt video"
 #~ msgstr ""
 
 #~ msgid "Displays results in the center of the page (Oscar layout)."
-#~ msgstr ""
+#~ msgstr "Zobrazí výsledky uprostřed stránky (rozložení Oscar)."
 
 #~ msgid "preferences"
 #~ msgstr "nastavení"
@@ -2089,3 +2296,74 @@ msgstr "skrýt video"
 #~ "Zadání vlastních nastavení v URL "
 #~ "předvoleb lze použít k synchronizaci "
 #~ "předvoleb mezi zařízeními."
+
+#~ msgid "proxied"
+#~ msgstr "přes proxy"
+
+#~ msgid ""
+#~ "This tab does not exists in the"
+#~ " user interface, but you can search"
+#~ " in these engines by its !bangs."
+#~ msgstr ""
+#~ "Tato karta v uživatelském rozhraní "
+#~ "neexistuje, ale můžete v těchto "
+#~ "vyhledávačích vyhledávat podle jejích !bang."
+
+#~ msgid "Results on new tabs"
+#~ msgstr "Výsledky na novém panelu"
+
+#~ msgid "Open result links on new browser tabs"
+#~ msgstr "Otevírat výsledky na novém panelu prohlížeče"
+
+#~ msgid "Find stuff as you type"
+#~ msgstr "Vyhledávat během psaní"
+
+#~ msgid "Converts strings to different hash digests."
+#~ msgstr "Převádí řetězce na různé hash hodnoty."
+
+#~ msgid ""
+#~ "Rewrite hostnames, remove results or "
+#~ "prioritize them based on the hostname"
+#~ msgstr ""
+#~ "Přepsat hostitelská jména, odstranit výsledky"
+#~ " nebo je prioritizovat na základě "
+#~ "hostitelského jména"
+
+#~ msgid "With that list, you can assess SearXNG transparency."
+#~ msgstr "S pomocí tohoto seznamu můžete určit transparentnost SearXNG."
+
+#~ msgid ""
+#~ "These settings are stored in your "
+#~ "cookies, this allows us not to "
+#~ "store this data about you."
+#~ msgstr ""
+#~ "Tato nastavení jsou uložena ve vašich"
+#~ " cookies, což nám umožňuje tyto data"
+#~ " neuchovávat nikde jinde."
+
+#~ msgid ""
+#~ "These cookies serve your sole "
+#~ "convenience, we don't use these cookies"
+#~ " to track you."
+#~ msgstr ""
+#~ "Tyto cookies existují výhradně pro vaše"
+#~ " pohodlí, nepoužíváme je ke sledování."
+
+#~ msgid "Proxying image results through SearXNG"
+#~ msgstr "Používat SearXNG jako prostředníka pro vyhledávání obrázků"
+
+#~ msgid "Automatically load next page when scrolling to bottom of current page"
+#~ msgstr "Automaticky načítat další výsledky při rolování"
+
+#~ msgid ""
+#~ "Perform search immediately if a category"
+#~ " selected. Disable to select multiple "
+#~ "categories"
+#~ msgstr ""
+#~ "Pokud je vybrána kategorie, ihned "
+#~ "provést vyhledávání. Zakažte pro vybrání "
+#~ "několika kategorií"
+
+#~ msgid "Change SearXNG layout"
+#~ msgstr "Změnit vzhled SearXNG"
+

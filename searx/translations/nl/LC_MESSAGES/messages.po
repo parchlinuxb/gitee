@@ -36,21 +36,21 @@
 # microsoftocsharp <microsoftocsharp@users.noreply.translate.codeberg.org>,
 # return42 <return42@noreply.codeberg.org>, 2025.
 # artens <artens@noreply.codeberg.org>, 2025.
+# SecularSteve <secularsteve@noreply.codeberg.org>, 2025.
 msgid ""
 msgstr ""
-"Project-Id-Version: searx\n"
+"Project-Id-Version:  searx\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-03-29 09:21+0000\n"
-"PO-Revision-Date: 2025-03-31 14:03+0000\n"
-"Last-Translator: artens <artens@noreply.codeberg.org>\n"
-"Language-Team: Dutch <https://translate.codeberg.org/projects/searxng/"
-"searxng/nl/>\n"
+"POT-Creation-Date: 2025-07-03 14:46+0000\n"
+"PO-Revision-Date: 2025-06-24 13:04+0000\n"
+"Last-Translator: SecularSteve <secularsteve@noreply.codeberg.org>\n"
 "Language: nl\n"
+"Language-Team: Dutch "
+"<https://translate.codeberg.org/projects/searxng/searxng/nl/>\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.2\n"
 "Generated-By: Babel 2.17.0\n"
 
 #. CONSTANT_NAMES['NO_SUBGROUPING']
@@ -94,7 +94,7 @@ msgid "videos"
 msgstr "video’s"
 
 #. CATEGORY_NAMES['RADIO']
-#: searx/engines/radio_browser.py:103 searx/searxng.msg
+#: searx/engines/radio_browser.py:151 searx/searxng.msg
 msgid "radio"
 msgstr "radio"
 
@@ -204,111 +204,307 @@ msgid "About"
 msgstr "Over"
 
 #. WEATHER_TERMS['AVERAGE TEMP.']
-#: searx/engines/wttr.py:32 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Average temp."
 msgstr "Gemiddelde temp."
 
 #. WEATHER_TERMS['CLOUD COVER']
-#: searx/engines/open_meteo.py:91 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Cloud cover"
 msgstr "Bewolking"
 
 #. WEATHER_TERMS['CONDITION']
-#: searx/engines/duckduckgo_weather.py:45 searx/engines/wttr.py:51
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:45 searx/searxng.msg
 msgid "Condition"
 msgstr "Omstandigheden"
 
 #. WEATHER_TERMS['CURRENT CONDITION']
-#: searx/engines/duckduckgo_weather.py:118 searx/engines/wttr.py:104
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:118 searx/searxng.msg
 msgid "Current condition"
 msgstr "Huidige weersomstandigheden"
 
 #. WEATHER_TERMS['EVENING']
-#: searx/engines/wttr.py:100 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Evening"
 msgstr "Avond"
 
 #. WEATHER_TERMS['FEELS LIKE']
-#: searx/engines/duckduckgo_weather.py:53 searx/engines/open_meteo.py:81
-#: searx/engines/wttr.py:59 searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:53 searx/searxng.msg
 msgid "Feels like"
 msgstr "Voelt als"
 
 #. WEATHER_TERMS['HUMIDITY']
-#: searx/engines/duckduckgo_weather.py:64 searx/engines/open_meteo.py:93
-#: searx/engines/wttr.py:68 searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:64 searx/searxng.msg
+#: searx/templates/simple/answer/weather.html:29
 msgid "Humidity"
 msgstr "Luchtvochtigheid"
 
 #. WEATHER_TERMS['MAX TEMP.']
-#: searx/engines/duckduckgo_weather.py:77 searx/engines/wttr.py:34
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:77 searx/searxng.msg
 msgid "Max temp."
 msgstr "Maximum temp."
 
 #. WEATHER_TERMS['MIN TEMP.']
-#: searx/engines/duckduckgo_weather.py:73 searx/engines/wttr.py:33
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:73 searx/searxng.msg
 msgid "Min temp."
 msgstr "Minimum temp."
 
 #. WEATHER_TERMS['MORNING']
-#: searx/engines/wttr.py:100 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Morning"
 msgstr "Ochtend"
 
 #. WEATHER_TERMS['NIGHT']
-#: searx/engines/wttr.py:100 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Night"
 msgstr "Nacht"
 
 #. WEATHER_TERMS['NOON']
-#: searx/engines/wttr.py:100 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Noon"
 msgstr "Middaguur"
 
 #. WEATHER_TERMS['PRESSURE']
-#: searx/engines/open_meteo.py:95 searx/searxng.msg
+#: searx/searxng.msg searx/templates/simple/answer/weather.html:25
 msgid "Pressure"
 msgstr "Luchtdruk"
 
 #. WEATHER_TERMS['SUNRISE']
-#: searx/engines/duckduckgo_weather.py:81 searx/engines/wttr.py:36
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:81 searx/searxng.msg
 msgid "Sunrise"
 msgstr "Zonsopkomst"
 
 #. WEATHER_TERMS['SUNSET']
-#: searx/engines/duckduckgo_weather.py:82 searx/engines/wttr.py:37
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:82 searx/searxng.msg
 msgid "Sunset"
 msgstr "Zonsondergang"
 
 #. WEATHER_TERMS['TEMPERATURE']
-#: searx/engines/duckduckgo_weather.py:48 searx/engines/open_meteo.py:76
-#: searx/engines/wttr.py:55 searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:48 searx/searxng.msg
+#: searx/templates/simple/answer/weather.html:17
 msgid "Temperature"
 msgstr "Temperatuur"
 
 #. WEATHER_TERMS['UV INDEX']
-#: searx/engines/duckduckgo_weather.py:80 searx/engines/wttr.py:35
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:80 searx/searxng.msg
 msgid "UV index"
 msgstr "UV-index"
 
 #. WEATHER_TERMS['VISIBILITY']
-#: searx/engines/duckduckgo_weather.py:62 searx/engines/wttr.py:66
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:62 searx/searxng.msg
 msgid "Visibility"
 msgstr "Zichtbaarheid"
 
 #. WEATHER_TERMS['WIND']
-#: searx/engines/duckduckgo_weather.py:58 searx/engines/open_meteo.py:86
-#: searx/engines/wttr.py:62 searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:58 searx/searxng.msg
+#: searx/templates/simple/answer/weather.html:23
 msgid "Wind"
 msgstr "Wind"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Clear sky"
+msgstr "Heldere hemel"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Partly cloudy"
+msgstr "Gedeeltelijk bewolkt"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Cloudy"
+msgstr "Bewolkt"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Fair"
+msgstr "Mooi"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Fog"
+msgstr "Mist"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light rain and thunder"
+msgstr "Lichte regen met onweer"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light rain showers and thunder"
+msgstr "Lichte regen- en onweersbuien"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light rain showers"
+msgstr "Lichte regenbuien"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light rain"
+msgstr "Lichte regenval"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Rain and thunder"
+msgstr "Regen en onweer"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Rain showers and thunder"
+msgstr "Regen- en onweersbuien"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Rain showers"
+msgstr "Regenbuien"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Rain"
+msgstr "Regen"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy rain and thunder"
+msgstr "Hevige regen en onweer"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy rain showers and thunder"
+msgstr "Hevige regen- en onweersbuien"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy rain showers"
+msgstr "Hevige regenbuien"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy rain"
+msgstr "Hevige regen"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light sleet and thunder"
+msgstr "Lichte natte sneeuw en onweer"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light sleet showers and thunder"
+msgstr "Lichte natte sneeuw- en onweersbuien"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light sleet showers"
+msgstr "Lichte natte sneeuwbuien"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light sleet"
+msgstr "Lichte natte sneeuw"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Sleet and thunder"
+msgstr "Natte sneeuw en onweer"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Sleet showers and thunder"
+msgstr "Natte sneeuw- en onweersbuien"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Sleet showers"
+msgstr "Natte sneeuwbuien"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Sleet"
+msgstr "Natte sneeuw"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy sleet and thunder"
+msgstr "Zware natte sneeuw en onweer"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy sleet showers and thunder"
+msgstr "Zware natte sneeuw- en onweersbuien"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy sleet showers"
+msgstr "Zware natte sneeuwbuien"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy sleet"
+msgstr "Zware natte sneeuw"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light snow and thunder"
+msgstr "Lichte sneeuwval en onweer"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light snow showers and thunder"
+msgstr "Lichte sneeuw- en onweersbuien"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light snow showers"
+msgstr "Lichte sneeuwbuien"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light snow"
+msgstr "Lichte sneeuwval"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Snow and thunder"
+msgstr "Sneeuw en onweer"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Snow showers and thunder"
+msgstr "Sneeuw- en onweersbuien"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Snow showers"
+msgstr "Sneeuwbuien"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Snow"
+msgstr "Sneeuw"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy snow and thunder"
+msgstr "Zware sneeuwval en onweer"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy snow showers and thunder"
+msgstr "Zware sneeuw- en onweersbuien"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy snow showers"
+msgstr "Zware sneeuwbuien"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy snow"
+msgstr "Zware sneeuwval"
 
 #. SOCIAL_MEDIA_TERMS['SUBSCRIBERS']
 #: searx/engines/lemmy.py:85 searx/searxng.msg
@@ -371,93 +567,93 @@ msgstr "gesloten"
 msgid "answered"
 msgstr "beantwoord"
 
-#: searx/webapp.py:312
+#: searx/webapp.py:292
 msgid "No item found"
 msgstr "Geen resultaat gevonden"
 
 #: searx/engines/qwant.py:291
-#: searx/templates/simple/result_templates/images.html:23 searx/webapp.py:314
+#: searx/templates/simple/result_templates/images.html:23 searx/webapp.py:294
 msgid "Source"
 msgstr "Bron"
 
-#: searx/webapp.py:316
+#: searx/webapp.py:296
 msgid "Error loading the next page"
 msgstr "Fout bij het laden volgende pagina"
 
-#: searx/webapp.py:469 searx/webapp.py:875
+#: searx/webapp.py:447 searx/webapp.py:845
 msgid "Invalid settings, please edit your preferences"
 msgstr "Ongeldige instellingswaarde, controleer invoer"
 
-#: searx/webapp.py:485
+#: searx/webapp.py:463
 msgid "Invalid settings"
 msgstr "Ongeldige instellingen"
 
-#: searx/webapp.py:562 searx/webapp.py:652
+#: searx/webapp.py:540 searx/webapp.py:630
 msgid "search error"
 msgstr "zoekfout"
 
-#: searx/webutils.py:36
+#: searx/webutils.py:35
 msgid "timeout"
 msgstr "verlopen"
 
-#: searx/webutils.py:37
+#: searx/webutils.py:36
 msgid "parsing error"
 msgstr "verwerkingsfout"
 
-#: searx/webutils.py:38
+#: searx/webutils.py:37
 msgid "HTTP protocol error"
 msgstr "HTTP-protocolfout"
 
-#: searx/webutils.py:39
+#: searx/webutils.py:38
 msgid "network error"
 msgstr "netwerkfout"
 
-#: searx/webutils.py:40
+#: searx/webutils.py:39
 msgid "SSL error: certificate validation has failed"
 msgstr "SSL-fout: de certificaatvalidatie is mislukt"
 
-#: searx/webutils.py:42
+#: searx/webutils.py:41
 msgid "unexpected crash"
 msgstr "onverwachte crash"
 
-#: searx/webutils.py:49
+#: searx/webutils.py:48
 msgid "HTTP error"
 msgstr "HTTP-fout"
 
-#: searx/webutils.py:50
+#: searx/webutils.py:49
 msgid "HTTP connection error"
 msgstr "HTTP-verbindingsfout"
 
-#: searx/webutils.py:56
+#: searx/webutils.py:55
 msgid "proxy error"
 msgstr "proxyfout"
 
-#: searx/webutils.py:57
+#: searx/webutils.py:56
 msgid "CAPTCHA"
 msgstr "CAPTCHA"
 
-#: searx/webutils.py:58
+#: searx/webutils.py:57
 msgid "too many requests"
 msgstr "teveel verzoeken"
 
-#: searx/webutils.py:59
+#: searx/webutils.py:58
 msgid "access denied"
 msgstr "toegang geweigerd"
 
-#: searx/webutils.py:60
+#: searx/webutils.py:59
 msgid "server API error"
 msgstr "server-api-fout"
 
-#: searx/webutils.py:79
+#: searx/webutils.py:78
 msgid "Suspended"
 msgstr "Geschorst"
 
-#: searx/webutils.py:314
+#: searx/webutils.py:313
 #, python-brace-format
 msgid "{minutes} minute(s) ago"
 msgstr "{minutes} minu(u)t(en) geleden"
 
-#: searx/webutils.py:315
+#: searx/webutils.py:314
 #, python-brace-format
 msgid "{hours} hour(s), {minutes} minute(s) ago"
 msgstr "{hours} u(u)r(en), {minutes} minu(u)t(en) geleden"
@@ -488,15 +684,15 @@ msgstr "Dit object is vervangen door"
 msgid "Channel"
 msgstr "Kanaal"
 
-#: searx/engines/radio_browser.py:105
+#: searx/engines/radio_browser.py:153
 msgid "bitrate"
 msgstr "bitrate"
 
-#: searx/engines/radio_browser.py:106
+#: searx/engines/radio_browser.py:154
 msgid "votes"
 msgstr "stemmen"
 
-#: searx/engines/radio_browser.py:107
+#: searx/engines/radio_browser.py:155
 msgid "clicks"
 msgstr "klikken"
 
@@ -505,7 +701,7 @@ msgstr "klikken"
 msgid "Language"
 msgstr "Taal"
 
-#: searx/engines/semantic_scholar.py:79
+#: searx/engines/semantic_scholar.py:101
 #, python-brace-format
 msgid ""
 "{numCitations} citations from the year {firstCitationVelocityYear} to "
@@ -565,11 +761,15 @@ msgstr "Bereken wiskundige formules via de zoekbalk"
 msgid "Hash plugin"
 msgstr "Validatie waarde (hash) voor plugin"
 
-#: searx/plugins/hash_plugin.py:35
-msgid "Converts strings to different hash digests."
-msgstr "Zet tekstwaarden om naar verschillende soorten validatiewaarden (hashes)."
+#: searx/plugins/hash_plugin.py:36
+msgid ""
+"Converts strings to different hash digests. Available functions: md5, "
+"sha1, sha224, sha256, sha384, sha512."
+msgstr ""
+"Zet inhoud om naar hash-waarden. Beschikbare functies: md5, sha1, sha224,"
+" sha256, sha384, sha512."
 
-#: searx/plugins/hash_plugin.py:62
+#: searx/plugins/hash_plugin.py:64
 msgid "hash digest"
 msgstr "validatiewaarde"
 
@@ -578,10 +778,10 @@ msgid "Hostnames plugin"
 msgstr "Hostnamen plug-in"
 
 #: searx/plugins/hostnames.py:124
-msgid "Rewrite hostnames, remove results or prioritize them based on the hostname"
+msgid "Rewrite hostnames and remove or prioritize results based on the hostname"
 msgstr ""
-"Hernoem hostnamen, verwijder resultaten of geef prioriteit aan op basis "
-"van de hostnaam"
+"Hostnamen herschrijven en resultaten verwijderen of prioriteit geven op "
+"basis van de hostnaam"
 
 #: searx/plugins/oa_doi_rewrite.py:55
 msgid "Open Access DOI rewrite"
@@ -640,11 +840,11 @@ msgstr "Je gebruikt Tor en het lijkt er op dat het externe IP adres is"
 msgid "You are not using Tor and you have the external IP address"
 msgstr "Je gebruikt geen Tor en hebt het externe IP adres"
 
-#: searx/plugins/tracker_url_remover.py:37
+#: searx/plugins/tracker_url_remover.py:35
 msgid "Tracker URL remover"
 msgstr "Tracker-URL-verwijderaar"
 
-#: searx/plugins/tracker_url_remover.py:38
+#: searx/plugins/tracker_url_remover.py:36
 msgid "Remove trackers arguments from the returned URL"
 msgstr "Verwijdert trackerargumenten van de gekregen URL"
 
@@ -655,6 +855,11 @@ msgstr "Eenheden conversie plugin"
 #: searx/plugins/unit_converter.py:50
 msgid "Convert between units"
 msgstr "Converteren tussen eenheden"
+
+#: searx/result_types/answer.py:224
+#, python-brace-format
+msgid "{location}: {temperature}, {condition}"
+msgstr "{location}: {temperature}, {condition}"
 
 #: searx/templates/simple/404.html:4
 msgid "Page not found"
@@ -733,10 +938,6 @@ msgstr "Auteur"
 #: searx/templates/simple/macros.html:50
 msgid "cached"
 msgstr "gecachet"
-
-#: searx/templates/simple/macros.html:50
-msgid "proxied"
-msgstr "geproxyt"
 
 #: searx/templates/simple/new_issue.html:64
 msgid "Start submitting a new issue on GitHub"
@@ -976,6 +1177,10 @@ msgstr "Definities"
 msgid "Synonyms"
 msgstr "Synoniemen"
 
+#: searx/templates/simple/answer/weather.html:19
+msgid "Feels Like"
+msgstr "Voelt als"
+
 #: searx/templates/simple/elements/answers.html:2
 msgid "Answers"
 msgstr "Antwoorden"
@@ -1153,16 +1358,16 @@ msgid "Autocomplete"
 msgstr "Auto-aanvullen"
 
 #: searx/templates/simple/preferences/autocomplete.html:15
-msgid "Find stuff as you type"
-msgstr "Zoeken tijdens het typen"
+msgid "Show possible queries as you type"
+msgstr "Toon mogelijke zoekopdrachten tijdens het intypen"
 
 #: searx/templates/simple/preferences/center_alignment.html:2
 msgid "Center Alignment"
 msgstr "Centreren"
 
 #: searx/templates/simple/preferences/center_alignment.html:14
-msgid "Displays results in the center of the page (Oscar layout)."
-msgstr "Laat de resultaten gecentreerd op de pagina zien (Oscar layout)."
+msgid "Display results in the center of the page (Oscar layout)."
+msgstr "Resultaten in het midden van de pagina weergeven (Oscar opmaak)."
 
 #: searx/templates/simple/preferences/cookies.html:2
 msgid ""
@@ -1173,8 +1378,8 @@ msgstr ""
 "opslaat."
 
 #: searx/templates/simple/preferences/cookies.html:3
-msgid "With that list, you can assess SearXNG transparency."
-msgstr "Met die lijst kan je de transparantie van SearXNG beoordelen."
+msgid "With this list, you can assess the transparency of SearXNG."
+msgstr "Met deze lijst kunt u de transparantie van SearXNG beoordelen."
 
 #: searx/templates/simple/preferences/cookies.html:9
 msgid "Cookie name"
@@ -1237,11 +1442,11 @@ msgstr "Selecteer gebruikte dienst door DOI bronzoeker"
 
 #: searx/templates/simple/preferences/engines.html:9
 msgid ""
-"This tab does not exists in the user interface, but you can search in "
-"these engines by its !bangs."
+"This tab does not exist in the user interface, but you can search with "
+"these engines via !bangs."
 msgstr ""
-"Deze tab bestaat niet in de gebruikers interface, maar u kunt in deze "
-"machines zoeken via hun !bang."
+"Dit tabblad bestaat niet in de gebruikersomgeving, maar je kunt met deze "
+"machines zoeken via !bangs."
 
 #: searx/templates/simple/preferences/engines.html:15
 msgid "Enable all"
@@ -1277,19 +1482,17 @@ msgstr "Toon favicons naast zoekresultaten"
 
 #: searx/templates/simple/preferences/footer.html:2
 msgid ""
-"These settings are stored in your cookies, this allows us not to store "
+"These settings are stored in your cookies. This allows us not to store "
 "this data about you."
 msgstr ""
-"Deze instellingen worden bewaard in je cookies. Hierdoor hoeven wij niets"
-" over jou te bewaren."
+"Deze instellingen worden opgeslagen in uw koekjes. Hierdoor kunnen we "
+"deze gegevens niet over u opslaan."
 
 #: searx/templates/simple/preferences/footer.html:3
-msgid ""
-"These cookies serve your sole convenience, we don't use these cookies to "
-"track you."
+msgid "These cookies serve your sole convenience; we don't use them to track you."
 msgstr ""
-"Deze cookies zijn alleen voor je eigen gemak, we gebruiken deze cookies "
-"niet om je te volgen."
+"Deze koekjes dienen uitsluitend uw gemak; wij gebruiken ze niet om u te "
+"volgen."
 
 #: searx/templates/simple/preferences/footer.html:6
 msgid "Save"
@@ -1324,18 +1527,20 @@ msgid "Image proxy"
 msgstr "Afbeeldingenproxy"
 
 #: searx/templates/simple/preferences/image_proxy.html:14
-msgid "Proxying image results through SearXNG"
-msgstr "Gebruik SearXNG als Afbeeldingsresultaten proxy"
+msgid "Proxy image results through SearXNG"
+msgstr "Proxy-afbeeldingsresultaten via SearXNG"
 
 #: searx/templates/simple/preferences/infinite_scroll.html:2
 msgid "Infinite scroll"
 msgstr "Oneindige lijst"
 
 #: searx/templates/simple/preferences/infinite_scroll.html:14
-msgid "Automatically load next page when scrolling to bottom of current page"
+msgid ""
+"Automatically load the next page when scrolling to the bottom of the "
+"current page"
 msgstr ""
-"Volgende pagina automatisch laden bij bereiken van onderkant huidige "
-"pagina"
+"Automatisch de volgende pagina laden als u naar de onderkant van de "
+"huidige pagina bladert"
 
 #: searx/templates/simple/preferences/language.html:24
 msgid "What language do you prefer for search?"
@@ -1368,12 +1573,12 @@ msgstr ""
 "deze titel mogelijk opslaan"
 
 #: searx/templates/simple/preferences/results_on_new_tab.html:2
-msgid "Results on new tabs"
-msgstr "Open resultaten op nieuw tabblad"
+msgid "Results in new tabs"
+msgstr "Resultaten in nieuwe tabbladen"
 
 #: searx/templates/simple/preferences/results_on_new_tab.html:14
-msgid "Open result links on new browser tabs"
-msgstr "Open koppelingen in nieuwe tabbladen"
+msgid "Open result links in new browser tabs"
+msgstr "Open link zoekresultaat in nieuw tabblad"
 
 #: searx/templates/simple/preferences/safesearch.html:20
 msgid "Filter content"
@@ -1385,19 +1590,19 @@ msgstr "Zoeken bij selecteren van categorie"
 
 #: searx/templates/simple/preferences/search_on_category_select.html:14
 msgid ""
-"Perform search immediately if a category selected. Disable to select "
-"multiple categories"
+"Perform a search immediately if a category is selected. Disable to select"
+" multiple categories"
 msgstr ""
-"Voer zoekopdracht direct uit wanneer categorie wordt geselecteerd. "
-"Schakel functie uit om meerdere categorieën te selecteren"
+"Voer onmiddellijk een zoekopdracht uit als een categorie is geselecteerd."
+" Uitschakelen om meerdere categorieën te selecteren"
 
 #: searx/templates/simple/preferences/theme.html:2
 msgid "Theme"
 msgstr "Thema"
 
 #: searx/templates/simple/preferences/theme.html:14
-msgid "Change SearXNG layout"
-msgstr "Verander lay-out van SearXNG"
+msgid "Change the layout of SearXNG"
+msgstr "De opmaak van SearXNG wijzigen"
 
 #: searx/templates/simple/preferences/theme.html:19
 msgid "Theme style"
@@ -1461,7 +1666,7 @@ msgstr "verberg media"
 #: searx/templates/simple/result_templates/default.html:14
 #: searx/templates/simple/result_templates/videos.html:14
 msgid "This site did not provide any description."
-msgstr "Deze site is niet voorzien van een beschrijving."
+msgstr "Deze site heeft geen beschrijving gegeven."
 
 #: searx/templates/simple/result_templates/files.html:38
 #: searx/templates/simple/result_templates/images.html:22
@@ -1476,7 +1681,7 @@ msgstr "Datum"
 #: searx/templates/simple/result_templates/files.html:42
 #: searx/templates/simple/result_templates/paper.html:24
 msgid "Type"
-msgstr "type"
+msgstr "Type"
 
 #: searx/templates/simple/result_templates/images.html:20
 msgid "Resolution"
@@ -1496,7 +1701,7 @@ msgstr "Bekijk bron"
 
 #: searx/templates/simple/result_templates/map.html:12
 msgid "address"
-msgstr "Adres"
+msgstr "adres"
 
 #: searx/templates/simple/result_templates/map.html:43
 msgid "show map"
@@ -1521,7 +1726,7 @@ msgstr "Bijgewerkt op"
 #: searx/templates/simple/result_templates/packages.html:30
 #: searx/templates/simple/result_templates/paper.html:25
 msgid "Tags"
-msgstr "labels"
+msgstr "Labels"
 
 #: searx/templates/simple/result_templates/packages.html:36
 msgid "Popularity"
@@ -1541,11 +1746,11 @@ msgstr "Projectpagina"
 
 #: searx/templates/simple/result_templates/paper.html:5
 msgid "Published date"
-msgstr "publicatie datum"
+msgstr "Publicatie datum"
 
 #: searx/templates/simple/result_templates/paper.html:9
 msgid "Journal"
-msgstr "dagboek"
+msgstr "Dagboek"
 
 #: searx/templates/simple/result_templates/paper.html:22
 msgid "Editor"
@@ -1845,7 +2050,7 @@ msgstr "verberg video"
 #~ msgstr ""
 
 #~ msgid "Displays results in the center of the page (Oscar layout)."
-#~ msgstr ""
+#~ msgstr "Laat de resultaten gecentreerd op de pagina zien (Oscar layout)."
 
 #~ msgid "preferences"
 #~ msgstr "voorkeuren"
@@ -2129,3 +2334,80 @@ msgstr "verberg video"
 #~ "URL kunnen worden gebruikt om "
 #~ "instellingen te synchroniseren op "
 #~ "verschillende apparaten."
+
+#~ msgid "proxied"
+#~ msgstr "geproxyt"
+
+#~ msgid ""
+#~ "This tab does not exists in the"
+#~ " user interface, but you can search"
+#~ " in these engines by its !bangs."
+#~ msgstr ""
+#~ "Deze tab bestaat niet in de "
+#~ "gebruikers interface, maar u kunt in "
+#~ "deze machines zoeken via hun !bang."
+
+#~ msgid "Results on new tabs"
+#~ msgstr "Open resultaten op nieuw tabblad"
+
+#~ msgid "Open result links on new browser tabs"
+#~ msgstr "Open koppelingen in nieuwe tabbladen"
+
+#~ msgid "Find stuff as you type"
+#~ msgstr "Zoeken tijdens het typen"
+
+#~ msgid "Converts strings to different hash digests."
+#~ msgstr ""
+#~ "Zet tekstwaarden om naar verschillende "
+#~ "soorten validatiewaarden (hashes)."
+
+#~ msgid ""
+#~ "Rewrite hostnames, remove results or "
+#~ "prioritize them based on the hostname"
+#~ msgstr ""
+#~ "Hernoem hostnamen, verwijder resultaten of "
+#~ "geef prioriteit aan op basis van "
+#~ "de hostnaam"
+
+#~ msgid "With that list, you can assess SearXNG transparency."
+#~ msgstr "Met die lijst kan je de transparantie van SearXNG beoordelen."
+
+#~ msgid ""
+#~ "These settings are stored in your "
+#~ "cookies, this allows us not to "
+#~ "store this data about you."
+#~ msgstr ""
+#~ "Deze instellingen worden bewaard in je"
+#~ " cookies. Hierdoor hoeven wij niets "
+#~ "over jou te bewaren."
+
+#~ msgid ""
+#~ "These cookies serve your sole "
+#~ "convenience, we don't use these cookies"
+#~ " to track you."
+#~ msgstr ""
+#~ "Deze cookies zijn alleen voor je "
+#~ "eigen gemak, we gebruiken deze cookies"
+#~ " niet om je te volgen."
+
+#~ msgid "Proxying image results through SearXNG"
+#~ msgstr "Gebruik SearXNG als Afbeeldingsresultaten proxy"
+
+#~ msgid "Automatically load next page when scrolling to bottom of current page"
+#~ msgstr ""
+#~ "Volgende pagina automatisch laden bij "
+#~ "bereiken van onderkant huidige pagina"
+
+#~ msgid ""
+#~ "Perform search immediately if a category"
+#~ " selected. Disable to select multiple "
+#~ "categories"
+#~ msgstr ""
+#~ "Voer zoekopdracht direct uit wanneer "
+#~ "categorie wordt geselecteerd. Schakel functie"
+#~ " uit om meerdere categorieën te "
+#~ "selecteren"
+
+#~ msgid "Change SearXNG layout"
+#~ msgstr "Verander lay-out van SearXNG"
+

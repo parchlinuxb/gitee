@@ -1,0 +1,25 @@
+contents:
+  repositories:
+    - https://mirrors.edge.kernel.org/alpine/edge/main
+    - https://mirrors.edge.kernel.org/alpine/edge/community
+  packages:
+    - alpine-base
+    - build-base
+    - python3-dev
+    - py3-pip
+    - brotli
+
+entrypoint:
+  command: /bin/sh -l
+
+work-dir: /usr/local/searxng/
+
+environment:
+  PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+  SSL_CERT_FILE: /etc/ssl/certs/ca-certificates.crt
+  HISTFILE: /dev/null
+
+archs:
+  - x86_64
+  - aarch64
+  - armv7

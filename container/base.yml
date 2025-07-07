@@ -1,0 +1,58 @@
+contents:
+  repositories:
+    - https://mirrors.edge.kernel.org/alpine/edge/main
+  packages:
+    - alpine-baselayout
+    - ca-certificates-bundle
+    - busybox
+    - python3
+    # healthcheck
+    - wget
+
+entrypoint:
+  command: /bin/sh -l
+
+work-dir: /usr/local/searxng/
+
+accounts:
+  groups:
+    - groupname: searxng
+      gid: 977
+  users:
+    - username: searxng
+      uid: 977
+      shell: /bin/ash
+
+environment:
+  PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+  SSL_CERT_FILE: /etc/ssl/certs/ca-certificates.crt
+  HISTFILE: /dev/null
+  CONFIG_PATH: /etc/searxng
+  DATA_PATH: /var/cache/searxng
+
+paths:
+  # Workdir
+  - path: /usr/local/searxng/
+    type: directory
+    uid: 977
+    gid: 977
+    permissions: 0o555
+
+  # Config volume
+  - path: /etc/searxng/
+    type: directory
+    uid: 977
+    gid: 977
+    permissions: 0o755
+
+  # Data volume
+  - path: /var/cache/searxng/
+    type: directory
+    uid: 977
+    gid: 977
+    permissions: 0o755
+
+archs:
+  - x86_64
+  - aarch64
+  - armv7

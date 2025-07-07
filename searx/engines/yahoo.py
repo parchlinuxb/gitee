@@ -6,6 +6,7 @@ found in :py:obj:`lang2domain` URL ``<lang>.search.yahoo.com`` is used.
 
 """
 
+from typing import TYPE_CHECKING
 from urllib.parse import (
     unquote,
     urlencode,
@@ -21,6 +22,11 @@ from searx.utils import (
 from searx.enginelib.traits import EngineTraits
 
 traits: EngineTraits
+
+if TYPE_CHECKING:
+    import logging
+
+    logger: logging.Logger
 
 # about
 about = {
@@ -38,11 +44,31 @@ paging = True
 time_range_support = True
 # send_accept_language_header = True
 
-time_range_dict = {
-    'day': ('1d', 'd'),
-    'week': ('1w', 'w'),
-    'month': ('1m', 'm'),
+time_range_dict = {'day': 'd', 'week': 'w', 'month': 'm'}
+safesearch_dict = {0: 'p', 1: 'i', 2: 'r'}
+
+region2domain = {
+    "CO": "co.search.yahoo.com",  # Colombia
+    "TH": "th.search.yahoo.com",  # Thailand
+    "VE": "ve.search.yahoo.com",  # Venezuela
+    "CL": "cl.search.yahoo.com",  # Chile
+    "HK": "hk.search.yahoo.com",  # Hong Kong
+    "PE": "pe.search.yahoo.com",  # Peru
+    "CA": "ca.search.yahoo.com",  # Canada
+    "DE": "de.search.yahoo.com",  # Germany
+    "FR": "fr.search.yahoo.com",  # France
+    "TW": "tw.search.yahoo.com",  # Taiwan
+    "GB": "uk.search.yahoo.com",  # United Kingdom
+    "UK": "uk.search.yahoo.com",
+    "BR": "br.search.yahoo.com",  # Brazil
+    "IN": "in.search.yahoo.com",  # India
+    "ES": "espanol.search.yahoo.com",  # Espanol
+    "PH": "ph.search.yahoo.com",  # Philippines
+    "AR": "ar.search.yahoo.com",  # Argentina
+    "MX": "mx.search.yahoo.com",  # Mexico
+    "SG": "sg.search.yahoo.com",  # Singapore
 }
+"""Map regions to domain"""
 
 lang2domain = {
     'zh_chs': 'hk.search.yahoo.com',
@@ -63,42 +89,118 @@ lang2domain = {
 }
 """Map language to domain"""
 
-locale_aliases = {
-    'zh': 'zh_Hans',
-    'zh-HK': 'zh_Hans',
-    'zh-CN': 'zh_Hans',  # dead since 2015 / routed to hk.search.yahoo.com
-    'zh-TW': 'zh_Hant',
+yahoo_languages = {
+    "all": "any",
+    "ar": "ar",  # Arabic
+    "bg": "bg",  # Bulgarian
+    "cs": "cs",  # Czech
+    "da": "da",  # Danish
+    "de": "de",  # German
+    "el": "el",  # Greek
+    "en": "en",  # English
+    "es": "es",  # Spanish
+    "et": "et",  # Estonian
+    "fi": "fi",  # Finnish
+    "fr": "fr",  # French
+    "he": "he",  # Hebrew
+    "hr": "hr",  # Croatian
+    "hu": "hu",  # Hungarian
+    "it": "it",  # Italian
+    "ja": "ja",  # Japanese
+    "ko": "ko",  # Korean
+    "lt": "lt",  # Lithuanian
+    "lv": "lv",  # Latvian
+    "nl": "nl",  # Dutch
+    "no": "no",  # Norwegian
+    "pl": "pl",  # Polish
+    "pt": "pt",  # Portuguese
+    "ro": "ro",  # Romanian
+    "ru": "ru",  # Russian
+    "sk": "sk",  # Slovak
+    "sl": "sl",  # Slovenian
+    "sv": "sv",  # Swedish
+    "th": "th",  # Thai
+    "tr": "tr",  # Turkish
+    "zh": "zh_chs",  # Chinese (Simplified)
+    "zh_Hans": "zh_chs",
+    'zh-CN': "zh_chs",
+    "zh_Hant": "zh_cht",  # Chinese (Traditional)
+    "zh-HK": "zh_cht",
+    'zh-TW': "zh_cht",
 }
 
 
+def build_sb_cookie(cookie_params):
+    """Build sB cookie parameter from provided parameters.
+
+    :param cookie_params: Dictionary of cookie parameters
+    :type cookie_params: dict
+    :returns: Formatted cookie string
+    :rtype: str
+
+    Example:
+        >>> cookie_params = {'v': '1', 'vm': 'p', 'fl': '1', 'vl': 'lang_fr'}
+        >>> build_sb_cookie(cookie_params)
+        'v=1&vm=p&fl=1&vl=lang_fr'
+    """
+
+    cookie_parts = []
+    for key, value in cookie_params.items():
+        cookie_parts.append(f"{key}={value}")
+
+    return "&".join(cookie_parts)
+
+
 def request(query, params):
-    """build request"""
+    """Build Yahoo search request."""
 
-    lang = locale_aliases.get(params['language'], None)
-    if not lang:
-        lang = params['language'].split('-')[0]
-    lang = traits.get_language(lang, traits.all_locale)
+    lang, region = (params["language"].split("-") + [None])[:2]
+    lang = yahoo_languages.get(lang, "any")
 
-    offset = (params['pageno'] - 1) * 7 + 1
-    age, btf = time_range_dict.get(params['time_range'], ('', ''))
+    # Build URL parameters
+    # - p (str): Search query string
+    # - btf (str): Time filter, maps to values like 'd' (day), 'w' (week), 'm' (month)
+    # - iscqry (str): Empty string, necessary for results to appear properly on first page
+    # - b (int): Search offset for pagination
+    # - pz (str): Amount of results expected for the page
+    url_params = {'p': query}
 
-    args = urlencode(
-        {
-            'p': query,
-            'ei': 'UTF-8',
-            'fl': 1,
-            'vl': 'lang_' + lang,
-            'btf': btf,
-            'fr2': 'time',
-            'age': age,
-            'b': offset,
-            'xargs': 0,
-        }
-    )
+    btf = time_range_dict.get(params['time_range'])
+    if btf:
+        url_params['btf'] = btf
 
-    domain = lang2domain.get(lang, '%s.search.yahoo.com' % lang)
-    params['url'] = 'https://%s/search?%s' % (domain, args)
-    return params
+    if params['pageno'] == 1:
+        url_params['iscqry'] = ''
+    elif params['pageno'] >= 2:
+        url_params['b'] = params['pageno'] * 7 + 1  #  8, 15, 21, etc.
+        url_params['pz'] = 7
+        url_params['bct'] = 0
+        url_params['xargs'] = 0
+
+    # Build sB cookie (for filters)
+    # - vm (str): SafeSearch filter, maps to values like 'p' (None), 'i' (Moderate), 'r' (Strict)
+    # - fl (bool): Indicates if a search language is used or not
+    # - vl (str): The search language to use (e.g. lang_fr)
+    sbcookie_params = {
+        'v': 1,
+        'vm': safesearch_dict[params['safesearch']],
+        'fl': 1,
+        'vl': f'lang_{lang}',
+        'pn': 10,
+        'rw': 'new',
+        'userset': 1,
+    }
+    params['cookies']['sB'] = build_sb_cookie(sbcookie_params)
+
+    # Search region/language
+    domain = region2domain.get(region)
+    if not domain:
+        domain = lang2domain.get(lang, f'{lang}.search.yahoo.com')
+    logger.debug(f'domain selected: {domain}')
+    logger.debug(f'cookies: {params["cookies"]}')
+
+    params['url'] = f'https://{domain}/search?{urlencode(url_params)}'
+    params['domain'] = domain
 
 
 def parse_url(url_string):
@@ -126,14 +228,22 @@ def response(resp):
     results = []
     dom = html.fromstring(resp.text)
 
+    url_xpath = './/div[contains(@class,"compTitle")]/h3/a/@href'
+    title_xpath = './/h3//a/@aria-label'
+
+    domain = resp.search_params['domain']
+    if domain == "search.yahoo.com":
+        url_xpath = './/div[contains(@class,"compTitle")]/a/@href'
+        title_xpath = './/div[contains(@class,"compTitle")]/a/h3/span'
+
     # parse results
     for result in eval_xpath_list(dom, '//div[contains(@class,"algo-sr")]'):
-        url = eval_xpath_getindex(result, './/h3/a/@href', 0, default=None)
+        url = eval_xpath_getindex(result, url_xpath, 0, default=None)
         if url is None:
             continue
         url = parse_url(url)
 
-        title = eval_xpath_getindex(result, './/h3//a/@aria-label', 0, default='')
+        title = eval_xpath_getindex(result, title_xpath, 0, default='')
         title: str = extract_text(title)
         content = eval_xpath_getindex(result, './/div[contains(@class, "compText")]', 0, default='')
         content: str = extract_text(content, allow_none=True)
@@ -154,39 +264,3 @@ def response(resp):
         results.append({'suggestion': extract_text(suggestion)})
 
     return results
-
-
-def fetch_traits(engine_traits: EngineTraits):
-    """Fetch languages from yahoo"""
-
-    # pylint: disable=import-outside-toplevel
-    import babel
-    from searx import network
-    from searx.locales import language_tag
-
-    engine_traits.all_locale = 'any'
-
-    resp = network.get('https://search.yahoo.com/preferences/languages')
-    if not resp.ok:
-        print("ERROR: response from yahoo is not OK.")
-
-    dom = html.fromstring(resp.text)
-    offset = len('lang_')
-
-    eng2sxng = {'zh_chs': 'zh_Hans', 'zh_cht': 'zh_Hant'}
-
-    for val in eval_xpath_list(dom, '//div[contains(@class, "lang-item")]/input/@value'):
-        eng_tag = val[offset:]
-
-        try:
-            sxng_tag = language_tag(babel.Locale.parse(eng2sxng.get(eng_tag, eng_tag)))
-        except babel.UnknownLocaleError:
-            print('ERROR: unknown language --> %s' % eng_tag)
-            continue
-
-        conflict = engine_traits.languages.get(sxng_tag)
-        if conflict:
-            if conflict != eng_tag:
-                print("CONFLICT: babel %s --> %s, %s" % (sxng_tag, conflict, eng_tag))
-            continue
-        engine_traits.languages[sxng_tag] = eng_tag

@@ -20,7 +20,7 @@ from searx.engines import (
 )
 from searx.network import get as http_get, post as http_post
 from searx.exceptions import SearxEngineResponseException
-from searx.utils import extr
+from searx.utils import extr, gen_useragent
 
 
 def update_kwargs(**kwargs):
@@ -149,6 +149,21 @@ def mwmbl(query, _lang):
     return [result for result in results if not result.startswith("go: ") and not result.startswith("search: ")]
 
 
+def naver(query, _lang):
+    # Naver search autocompleter
+    url = f"https://ac.search.naver.com/nx/ac?{urlencode({'q': query, 'r_format': 'json', 'st': 0})}"
+    response = get(url)
+
+    results = []
+
+    if response.ok:
+        data = response.json()
+        if data.get('items'):
+            for item in data['items'][0]:
+                results.append(item[0])
+    return results
+
+
 def qihu360search(query, _lang):
     # 360Search search autocompleter
     url = f"https://sug.so.360.cn/suggest?{urlencode({'format': 'json', 'word': query})}"
@@ -214,6 +229,52 @@ def sogou(query, _lang):
             return data[1]
         except json.JSONDecodeError:
             return []
+
+    return []
+
+
+def startpage(query, sxng_locale):
+    """Autocomplete from Startpage's Firefox extension.
+    Supports the languages specified in lang_map.
+    """
+
+    lang_map = {
+        'da': 'dansk',
+        'de': 'deutsch',
+        'en': 'english',
+        'es': 'espanol',
+        'fr': 'francais',
+        'nb': 'norsk',
+        'nl': 'nederlands',
+        'pl': 'polski',
+        'pt': 'portugues',
+        'sv': 'svenska',
+    }
+
+    base_lang = sxng_locale.split('-')[0]
+    lui = lang_map.get(base_lang, 'english')
+
+    url_params = {
+        'q': query,
+        'format': 'opensearch',
+        'segment': 'startpage.defaultffx',
+        'lui': lui,
+    }
+    url = f'https://www.startpage.com/suggestions?{urlencode(url_params)}'
+
+    # Needs user agent, returns a 204 otherwise
+    h = {'User-Agent': gen_useragent()}
+
+    resp = get(url, headers=h)
+
+    if resp.ok:
+        try:
+            data = resp.json()
+
+            if len(data) >= 2 and isinstance(data[1], list):
+                return data[1]
+        except json.JSONDecodeError:
+            pass
 
     return []
 
@@ -300,10 +361,12 @@ backends = {
     'duckduckgo': duckduckgo,
     'google': google_complete,
     'mwmbl': mwmbl,
+    'naver': naver,
     'quark': quark,
     'qwant': qwant,
     'seznam': seznam,
     'sogou': sogou,
+    'startpage': startpage,
     'stract': stract,
     'swisscows': swisscows,
     'wikipedia': wikipedia,

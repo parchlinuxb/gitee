@@ -161,9 +161,11 @@ def html_to_text(html_str: str) -> str:
     s = _HTMLTextExtractor()
     try:
         s.feed(html_str)
+        s.close()
     except AssertionError:
         s = _HTMLTextExtractor()
         s.feed(escape(html_str, quote=True))
+        s.close()
     except _HTMLTextExtractorException:
         logger.debug("HTMLTextExtractor: invalid HTML\n%s", html_str)
     return s.get_text()
@@ -830,6 +832,11 @@ def js_variable_to_python(js_variable):
     s = _JS_DECIMAL_RE.sub(":0.", s)
     # replace the surogate character by colon
     s = s.replace(chr(1), ':')
+    # replace single-quote followed by comma with double-quote and comma
+    # {"a": "\"12\"',"b": "13"}
+    # becomes
+    # {"a": "\"12\"","b": "13"}
+    s = s.replace("',", "\",")
     # load the JSON and return the result
     return json.loads(s)
 
