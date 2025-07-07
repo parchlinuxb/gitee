@@ -8,300 +8,283 @@ reliabilities.get(engine_name, {}).get('errors', []) -%} {%- if r != None -%}
 label = 'success' -%} {%- endif -%} {% else %} {%- set r = '' -%} {%- endif -%}
 {%- if checker_result or errors -%}
 <div class="{{ label }} numbric">
-    <a href="{{ url_for('stats', engine=engine_name|e) }}">
-        <span tooltip="{{ ', '.join(errors) }}"> Error</span>
-    </a>
+  <a href="{{ url_for('stats', engine=engine_name|e) }}">
+    <span tooltip="{{ ', '.join(errors) }}"> Error</span>
+  </a>
 </div>
 {%- else -%}
 <div class="{{ label }} numbric">
-    {% if r %}<span>{{ r }}</span>
-    {%- endif -%}
+  {% if r %}<span>{{ r }}</span>
+  {%- endif -%}
 </div>
 {%- endif -%} {%- endmacro -%} {% extends "smart/base.html" %} {% block body %}
 {% include 'smart/madules/search_as_header.html' %}
 <div class="links">
-    {%- if donation_url -%}
-    <a href="{{ donation_url }}" class="link">{{icon_small('donate')}}</a>
-    {%- endif -%}
-    <a href="{{ url_for('info', pagename='about') }}" class="link"
-        >{{icon_small('information')}}</a
-    >
+  {%- if donation_url -%}
+  <a href="{{ donation_url }}" class="link">{{icon_small('donate')}}</a>
+  {%- endif -%}
+  <a href="{{ url_for('info', pagename='about') }}" class="link"
+    >{{icon_small('information')}}</a
+  >
 </div>
 <form
-    id="preferences_form"
-    method="post"
-    action="{{ url_for('preferences') }}"
-    autocomplete="off"
+  id="preferences_form"
+  method="post"
+  action="{{ url_for('preferences') }}"
+  autocomplete="off"
 >
-    <div class="madules-container">
-        <h1>{{ _('Preferences') }}</h1>
-        <div class="tabs">
-            <a href="#general_tab" class="btn default-btn"
-                >{{ _('General') }}</a
-            >
-            <a href="#engines-tab" class="btn">{{ _('Engines') }}</a>
+  <div class="madules-container">
+    <h1>{{ _('Preferences') }}</h1>
+    <div class="tabs">
+      <a href="#general_tab" class="btn default-btn">{{ _('General') }}</a>
+      <a href="#engines-tab" class="btn">{{ _('Engines') }}</a>
+    </div>
+    <span class="tab-id" id="general_tab"></span>
+    <div class="default">
+      {% if 'language' not in locked_preferences %} {%- include
+      'smart/madules/settings/language.html' -%}{% endif %} {% if 'theme' not in
+      locked_preferences %} {%- include 'smart/madules/settings/theme.html'
+      -%}{% endif %} {% if 'autocomplete' not in locked_preferences %} {%-
+      include 'smart/madules/settings/autocomplete.html' -%} {% endif %} {% if
+      'safesearch' not in locked_preferences %} {%- include
+      'smart/madules/settings/safe_search.html' -%} {% endif %} {% if
+      'ui_locale' not in locked_preferences %} {%- include
+      'smart/madules/settings/interface_lang.html' -%} {% endif %} {% if
+      'results_on_new_tab' not in locked_preferences %} {%- include
+      'smart/madules/settings/results_on_new_tab.html' -%} {% endif %} {% if
+      'infinite_scroll' not in locked_preferences %} {%- include
+      'smart/madules/settings/infinite_scroll.html' -%} {% endif %} {% if
+      'method' not in locked_preferences %} {%- include
+      'smart/madules/settings/http_method.html' -%} {% endif %} {% if
+      'image_proxy' not in locked_preferences %} {%- include
+      'smart/madules/settings/image_proxy.html' -%} {% endif %} {% if
+      'query_in_title' not in locked_preferences %} {%- include
+      'smart/madules/settings/title_query.html' -%} {% endif %} {# TODO: after
+      hotkeys implemented, add it back {% if 'hotkeys' not in locked_preferences
+      %} {%- include 'smart/madules/settings/hotkeys.html' -%} {% endif %} #} {%
+      include 'smart/madules/settings/ai_chat.html' %} {% if 'urlformatting' not
+      in locked_preferences %} {%- include
+      'smart/madules/settings/url_formatting.html' -%} {% endif %}
+    </div>
+    <span class="tab-id" id="engines-tab"></span>
+    <div class="engines-tab">
+      {%- for categ in categories_as_tabs + [DEFAULT_CATEGORY] -%} <input
+      type="radio" name="catergory" class="category-radio" id="{{categ}}"
+      value="{{categ}}" {%- if categ == "general" -%} checked {%- endif -%} />
+      <label for="{{categ}}" class="category-btn">{{- _(categ) -}}</label>
+      <div class="category-tab">
+        {%- if categ == DEFAULT_CATEGORY -%}
+        <p class="note">
+          {{- _('This tab does not exists in the user interface, but you can
+          search in these engines by its !bangs.') -}} {{- ' ' -}}<a
+            href="{{ url_for('info', pagename='search-syntax') }}"
+            >&#9432;</a
+          >
+        </p>
+        {%- endif -%}
+        <h3>{{- _("Allow") -}}</h3>
+        <h3>{{- _("Engine name") -}}</h3>
+        <h3 class="detail">{{ _("!bang") -}}</h3>
+        <h3 class="detail">{{- _("Supports selected language") -}}</h3>
+        <h3 class="detail">{{- _("SafeSearch") -}}</h3>
+        <h3 class="detail">{{- _("Time range") -}}</h3>
+        <h3 class="detail">{{- _("Weight") }}</h3>
+        {%- if enable_metrics -%}
+        <h3 class="detail">{{- _("Response time") -}}</h3>
+        {%- endif -%}
+        <h3 class="detail">{{- _("Max time") -}}</h3>
+        {%- if enable_metrics -%}
+        <h3 class="detail">{{- _("Reliability") }}</h3>
+        {%- endif -%} {%- for group, group_bang, engines in
+        engines_by_category[categ] | group_engines_in_tab -%} {%- if loop.length
+        > 1 -%}
+        <div class="group-header">
+          <h2
+            class="group-name {{ 'more' if group == 'without further subgrouping' else '' }}"
+          >
+            {{- _(group) -}}
+          </h2>
+          <code class="bang">
+            {%- if group_bang -%} {{- group_bang -}} {%- endif -%}
+          </code>
         </div>
-        <span class="tab-id" id="general_tab"></span>
-        <div class="default">
-            {% if 'language' not in locked_preferences %} {%- include
-            'smart/madules/settings/language.html' -%}{% endif %} {% if 'theme'
-            not in locked_preferences %} {%- include
-            'smart/madules/settings/theme.html' -%}{% endif %} {% if
-            'autocomplete' not in locked_preferences %} {%- include
-            'smart/madules/settings/autocomplete.html' -%} {% endif %} {% if
-            'safesearch' not in locked_preferences %} {%- include
-            'smart/madules/settings/safe_search.html' -%} {% endif %} {% if
-            'ui_locale' not in locked_preferences %} {%- include
-            'smart/madules/settings/interface_lang.html' -%} {% endif %} {% if
-            'results_on_new_tab' not in locked_preferences %} {%- include
-            'smart/madules/settings/results_on_new_tab.html' -%} {% endif %} {%
-            if 'infinite_scroll' not in locked_preferences %} {%- include
-            'smart/madules/settings/infinite_scroll.html' -%} {% endif %} {% if
-            'method' not in locked_preferences %} {%- include
-            'smart/madules/settings/http_method.html' -%} {% endif %} {% if
-            'image_proxy' not in locked_preferences %} {%- include
-            'smart/madules/settings/image_proxy.html' -%} {% endif %} {% if
-            'query_in_title' not in locked_preferences %} {%- include
-            'smart/madules/settings/title_query.html' -%} {% endif %} {# TODO:
-            after hotkeys implemented, add it back {% if 'hotkeys' not in
-            locked_preferences %} {%- include
-            'smart/madules/settings/hotkeys.html' -%} {% endif %} #} {% include
-            'smart/madules/settings/ai_chat.html' %} {% if 'urlformatting' not
-            in locked_preferences %} {%- include
-            'smart/madules/settings/url_formatting.html' -%} {% endif %}
-        </div>
-        <span class="tab-id" id="engines-tab"></span>
-        <div class="engines-tab">
-            {%- for categ in categories_as_tabs + [DEFAULT_CATEGORY] -%} <input
-            type="radio" name="catergory" class="category-radio" id="{{categ}}"
-            value="{{categ}}" {%- if categ == "general" -%} checked {%- endif
-            -%} />
-            <label for="{{categ}}" class="category-btn">{{- _(categ) -}}</label>
-            <div class="category-tab">
-                {%- if categ == DEFAULT_CATEGORY -%}
-                <p class="note">
-                    {{- _('This tab does not exists in the user interface, but
-                    you can search in these engines by its !bangs.') -}} {{- ' '
-                    -}}<a href="{{ url_for('info', pagename='search-syntax') }}"
-                        >&#9432;</a
-                    >
-                </p>
-                {%- endif -%}
-                <h3>{{- _("Allow") -}}</h3>
-                <h3>{{- _("Engine name") -}}</h3>
-                <h3 class="detail">{{ _("!bang") -}}</h3>
-                <h3 class="detail">{{- _("Supports selected language") -}}</h3>
-                <h3 class="detail">{{- _("SafeSearch") -}}</h3>
-                <h3 class="detail">{{- _("Time range") -}}</h3>
-                <h3 class="detail">{{- _("Weight") }}</h3>
-                {%- if enable_metrics -%}
-                <h3 class="detail">{{- _("Response time") -}}</h3>
-                {%- endif -%}
-                <h3 class="detail">{{- _("Max time") -}}</h3>
-                {%- if enable_metrics -%}
-                <h3 class="detail">{{- _("Reliability") }}</h3>
-                {%- endif -%} {%- for group, group_bang, engines in
-                engines_by_category[categ] | group_engines_in_tab -%} {%- if
-                loop.length > 1 -%}
-                <div class="group-header">
-                    <h2
-                        class="group-name {{ 'more' if group == 'without further subgrouping' else '' }}"
-                    >
-                        {{- _(group) -}}
-                    </h2>
-                    <code class="bang">
-                        {%- if group_bang -%} {{- group_bang -}} {%- endif -%}
-                    </code>
-                </div>
-                {%- endif -%} {%- for search_engine in engines -%} {%- if not
-                search_engine.private -%} {%- set engine_id = 'engine_' +
-                search_engine.name|replace(' ', '_') + '__' + categ|replace(' ',
-                '_') -%}
+        {%- endif -%} {%- for search_engine in engines -%} {%- if not
+        search_engine.private -%} {%- set engine_id = 'engine_' +
+        search_engine.name|replace(' ', '_') + '__' + categ|replace(' ', '_')
+        -%}
 
-                <div>
-                    <input
-                        type="checkbox"
-                        name="{{ engine_id }}"
-                        id="{{ engine_id }}"
-                        {%
-                        if
-                        (search_engine.name,
-                        categ)
-                        not
-                        in
-                        disabled_engines
-                        %}
-                        checked
-                        {%
-                        endif
-                        %}
-                        class="switch"
-                    />
-                </div>
-
-                <label for="{{ engine_id }}">
-                    <h4>
-                        {{- search_engine.name -}} {%- if search_engine.about
-                        and search_engine.about.language -%} {{- " " -}}
-                        ({{search_engine.about.language | upper}}) {%- endif -%}
-                    </h4>
-                </label>
-
-                <div>
-                    <span class="bang"
-                        >{{ '!' + shortcuts[search_engine.name] }}</span
-                    >
-                </div>
-
-                <div>
-                    {% if
-                    supports[search_engine.name]['supports_selected_language']%}
-                    {{ icon_small('check') }} {% endif %}
-                </div>
-
-                <div>
-                    {% if supports[search_engine.name]['safesearch']%} {{
-                    icon_small('check') }} {% endif %}
-                </div>
-                <div>
-                    {% if supports[search_engine.name]['time_range_support']%}
-                    {{ icon_small('check') }} {% endif %}
-                </div>
-                <div>{{- search_engine.weight or '1.0' -}}</div>
-                {%- if enable_metrics -%}
-
-                <div
-                    class="{{ label }}"
-                    tooltip="{{ _('Median') }}: {{ stats[search_engine.name].time}} | {{ _('P80') }}: {{ stats[search_engine.name].rate80}} | {{ _('P95') }}: {{ stats[search_engine.name].rate95}}"
-                >
-                    {%- if stats[search_engine.name].time != None -%}
-                    <span class="stacked-bar-chart-value"
-                        >{{- stats[search_engine.name].time -}}</span
-                    >
-                    <div class="bar-chart">
-                        {%- if max_rate95 is not none and max_rate95 > 0 -%}
-                        <div
-                            class="bar l1"
-                            style="width: {{ (100 * (stats[search_engine.name].time / max_rate95))|round }}%;"
-                        ></div>
-
-                        <div
-                            class="bar l2"
-                            style="width: {{ (100 * ((stats[search_engine.name].rate80 - stats[search_engine.name].time) / max_rate95))|round }}%;"
-                        ></div>
-                        <div
-                            class="bar l3"
-                            style="width: {{ (100 * ((stats[search_engine.name].rate80 - stats[search_engine.name].time) / max_rate95))|round }}%;"
-                        ></div>
-                        {%- endif -%}
-                    </div>
-                    {%- endif -%}
-                </div>
-                {%- endif -%}
-                <div
-                    class="{{ 'danger' if stats[search_engine.name]['warn_timeout'] else '' }} numbric"
-                >
-                    {{- search_engine.timeout -}}
-                </div>
-                {%- if enable_metrics -%} {{-
-                engine_reliability(search_engine.name) -}} {%- endif -%} {%-
-                endif -%} {%- endfor -%} {%- endfor -%}
-            </div>
-            {%- endfor -%}
+        <div>
+          <input
+            type="checkbox"
+            name="{{ engine_id }}"
+            id="{{ engine_id }}"
+            {%
+            if
+            (search_engine.name,
+            categ)
+            not
+            in
+            disabled_engines
+            %}
+            checked
+            {%
+            endif
+            %}
+            class="switch"
+          />
         </div>
 
-        <button class="btn primary save-btn" type="submit">
-            {{- _('Save') -}}
-        </button>
+        <label for="{{ engine_id }}">
+          <h4>
+            {{- search_engine.name -}} {%- if search_engine.about and
+            search_engine.about.language -%} {{- " " -}}
+            ({{search_engine.about.language | upper}}) {%- endif -%}
+          </h4>
+        </label>
+
+        <div>
+          <span class="bang">{{ '!' + shortcuts[search_engine.name] }}</span>
+        </div>
+
+        <div>
+          {% if supports[search_engine.name]['supports_selected_language']%} {{
+          icon_small('check') }} {% endif %}
+        </div>
+
+        <div>
+          {% if supports[search_engine.name]['safesearch']%} {{
+          icon_small('check') }} {% endif %}
+        </div>
+        <div>
+          {% if supports[search_engine.name]['time_range_support']%} {{
+          icon_small('check') }} {% endif %}
+        </div>
+        <div>{{- search_engine.weight or '1.0' -}}</div>
+        {%- if enable_metrics -%}
+
+        <div
+          class="{{ label }}"
+          tooltip="{{ _('Median') }}: {{ stats[search_engine.name].time}} | {{ _('P80') }}: {{ stats[search_engine.name].rate80}} | {{ _('P95') }}: {{ stats[search_engine.name].rate95}}"
+        >
+          {%- if stats[search_engine.name].time != None -%}
+          <span class="stacked-bar-chart-value"
+            >{{- stats[search_engine.name].time -}}</span
+          >
+          <div class="bar-chart">
+            {%- if max_rate95 is not none and max_rate95 > 0 -%}
+            <div
+              class="bar l1"
+              style="width: {{ (100 * (stats[search_engine.name].time / max_rate95))|round }}%;"
+            ></div>
+
+            <div
+              class="bar l2"
+              style="width: {{ (100 * ((stats[search_engine.name].rate80 - stats[search_engine.name].time) / max_rate95))|round }}%;"
+            ></div>
+            <div
+              class="bar l3"
+              style="width: {{ (100 * ((stats[search_engine.name].rate80 - stats[search_engine.name].time) / max_rate95))|round }}%;"
+            ></div>
+            {%- endif -%}
+          </div>
+          {%- endif -%}
+        </div>
+        {%- endif -%}
+        <div
+          class="{{ 'danger' if stats[search_engine.name]['warn_timeout'] else '' }} numbric"
+        >
+          {{- search_engine.timeout -}}
+        </div>
+        {%- if enable_metrics -%} {{- engine_reliability(search_engine.name) -}}
+        {%- endif -%} {%- endif -%} {%- endfor -%} {%- endfor -%}
+      </div>
+      {%- endfor -%}
     </div>
 
-    <div class="backup-container">
-        <div class="backup-box">
-            <div class="title">
-                {{ icon_big('database') }}<span>{{ _('Your Data')}}</span>
-            </div>
-            <p class="description">
-                {{- _('This is the list of cookies and their values SearXNG is
-                storing on your computer.') }}
-                <br />{{- _('With that list, you can assess SearXNG
-                transparency.') -}}
-            </p>
-            <label class="btn" for="save-cookies">Save to Restore</label>
-            <label class="btn primary" for="restore-cookies">Restore</label>
-            <div class="data-box">
-                <input type="radio" id="save-cookies" name="cookies" hidden />
-                <div class="data-page">
-                    <div class="section">
-                        <h4>
-                            {{- _('URL to restore your preferences in another
-                            browser') -}}:
-                        </h4>
-                        <input
-                            type="text"
-                            readonly
-                            value="{{- url_for('preferences', _external=True)
+    <button class="btn primary save-btn" type="submit">
+      {{- _('Save') -}}
+    </button>
+  </div>
+
+  <div class="backup-container">
+    <div class="backup-box">
+      <div class="title">
+        {{ icon_big('database') }}<span>{{ _('Your Data')}}</span>
+      </div>
+      <p class="description">
+        {{- _('This is the list of cookies and their values SearXNG is storing
+        on your computer.') }}
+        <br />{{- _('With that list, you can assess SearXNG transparency.') -}}
+      </p>
+      <label class="btn" for="save-cookies">Save to Restore</label>
+      <label class="btn primary" for="restore-cookies">Restore</label>
+      <div class="data-box">
+        <input type="radio" id="save-cookies" name="cookies" hidden />
+        <div class="data-page">
+          <div class="section">
+            <h4>
+              {{- _('URL to restore your preferences in another browser') -}}:
+            </h4>
+            <input
+              type="text"
+              readonly
+              value="{{- url_for('preferences', _external=True)
                         -}}?preferences={{- preferences_url_params|e -}}"
-                        />
-                        <p>
-                            {{- _('Specifying custom settings in the preferences
-                            URL can be used to sync preferences across
-                            devices.') -}}
-                        </p>
-                    </div>
+            />
+            <p>
+              {{- _('Specifying custom settings in the preferences URL can be
+              used to sync preferences across devices.') -}}
+            </p>
+          </div>
 
-                    <div class="section">
-                        <h4>{{- _('Copy preferences hash') -}}:</h4>
-                        <div class="sidebyside">
-                            <input
-                                type="text"
-                                id="preferences-hash"
-                                readonly
-                                value="{{- preferences_url_params|e }}"
-                            />
-                            <button
-                                id="copy-preferences-hash"
-                                class="btn primary"
-                                type="button"
-                                data-hash="{{- preferences_url_params|e -}}"
-                                data-copied-text="{{- _('Copied') -}}!"
-                                data-copy-text="{{- _('Copy') -}}"
-                            >
-                                {{- _('Copy') -}}
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <input
-                    type="radio"
-                    id="restore-cookies"
-                    name="cookies"
-                    hidden
-                />
-                <div class="data-page">
-                    <h4>
-                        {{- _('Insert copied preferences hash (without URL) to
-                        restore') -}}:
-                    </h4>
-                    <div class="sidebyside">
-                        <input
-                            type="text"
-                            id="paste-preferences-hash-input"
-                            name="preferences"
-                            placeholder="{{- _('Preferences hash') -}}"
-                        />
-                        <button
-                            id="paste-preferences-hash"
-                            class="btn secondary"
-                            type="button"
-                        >
-                            {{- _('Paste') -}}
-                        </button>
-                    </div>
-                </div>
-                <input type="radio" name="cookies" hidden checked />
+          <div class="section">
+            <h4>{{- _('Copy preferences hash') -}}:</h4>
+            <div class="sidebyside">
+              <input
+                type="text"
+                id="preferences-hash"
+                readonly
+                value="{{- preferences_url_params|e }}"
+              />
+              <button
+                id="copy-preferences-hash"
+                class="btn primary"
+                type="button"
+                data-hash="{{- preferences_url_params|e -}}"
+                data-copied-text="{{- _('Copied') -}}!"
+                data-copy-text="{{- _('Copy') -}}"
+              >
+                {{- _('Copy') -}}
+              </button>
             </div>
+          </div>
         </div>
+        <input type="radio" id="restore-cookies" name="cookies" hidden />
+        <div class="data-page">
+          <h4>
+            {{- _('Insert copied preferences hash (without URL) to restore')
+            -}}:
+          </h4>
+          <div class="sidebyside">
+            <input
+              type="text"
+              id="paste-preferences-hash-input"
+              name="preferences"
+              placeholder="{{- _('Preferences hash') -}}"
+            />
+            <button
+              id="paste-preferences-hash"
+              class="btn secondary"
+              type="button"
+            >
+              {{- _('Paste') -}}
+            </button>
+          </div>
+        </div>
+        <input type="radio" name="cookies" hidden checked />
+      </div>
     </div>
+  </div>
 </form>
 
 {% include 'smart/footer.html' %} {% endblock %}

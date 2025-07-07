@@ -798,6 +798,24 @@ input[type="checkbox"].switch {
             @include mixin.left(calc(100% - 17.5px));
         }
     }
+
+    &.reverse {
+        background-color: var(--primary-color);
+
+        &::after {
+            background-color: var(--filled-text-color);
+            @include mixin.left(calc(100% - 17.5px));
+        }
+
+        &:checked {
+            background-color: var(--border-color);
+
+            &::after {
+                @include mixin.left(2.5px);
+                background-color: var(--filled-text-color);
+            }
+        }
+    }
 }
 
 @media (scripting: none) {
