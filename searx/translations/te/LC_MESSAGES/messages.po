@@ -11,14 +11,15 @@
 # return42 <return42@users.noreply.translate.codeberg.org>, 2024, 2025.
 # Anonymous <anonymous@users.noreply.translate.codeberg.org>, 2025.
 # Harshith-10 <harshith-10@users.noreply.translate.codeberg.org>, 2025.
+# Kranthi294 <kranthi294@noreply.codeberg.org>, 2025.
+# return42 <return42@noreply.codeberg.org>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version:  searx\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-03-29 09:21+0000\n"
-"PO-Revision-Date: 2025-01-09 07:08+0000\n"
-"Last-Translator: Harshith-10 "
-"<harshith-10@users.noreply.translate.codeberg.org>\n"
+"POT-Creation-Date: 2025-07-03 14:46+0000\n"
+"PO-Revision-Date: 2025-06-22 17:06+0000\n"
+"Last-Translator: return42 <return42@noreply.codeberg.org>\n"
 "Language: te\n"
 "Language-Team: Telugu "
 "<https://translate.codeberg.org/projects/searxng/searxng/te/>\n"
@@ -69,7 +70,7 @@ msgid "videos"
 msgstr "వీడియోలు"
 
 #. CATEGORY_NAMES['RADIO']
-#: searx/engines/radio_browser.py:103 searx/searxng.msg
+#: searx/engines/radio_browser.py:151 searx/searxng.msg
 msgid "radio"
 msgstr "రేడియో"
 
@@ -179,116 +180,312 @@ msgid "About"
 msgstr "గురించి"
 
 #. WEATHER_TERMS['AVERAGE TEMP.']
-#: searx/engines/wttr.py:32 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Average temp."
 msgstr "సగటు ఉష్ణోగ్రత"
 
 #. WEATHER_TERMS['CLOUD COVER']
-#: searx/engines/open_meteo.py:91 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Cloud cover"
 msgstr "మేఘం కమ్మటం"
 
 #. WEATHER_TERMS['CONDITION']
-#: searx/engines/duckduckgo_weather.py:45 searx/engines/wttr.py:51
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:45 searx/searxng.msg
 msgid "Condition"
 msgstr "పరిస్థితి"
 
 #. WEATHER_TERMS['CURRENT CONDITION']
-#: searx/engines/duckduckgo_weather.py:118 searx/engines/wttr.py:104
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:118 searx/searxng.msg
 msgid "Current condition"
 msgstr "ప్రస్తుత పరిస్థితి"
 
 #. WEATHER_TERMS['EVENING']
-#: searx/engines/wttr.py:100 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Evening"
 msgstr "సాయంత్రం"
 
 #. WEATHER_TERMS['FEELS LIKE']
-#: searx/engines/duckduckgo_weather.py:53 searx/engines/open_meteo.py:81
-#: searx/engines/wttr.py:59 searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:53 searx/searxng.msg
 msgid "Feels like"
 msgstr "అనిపిస్తుంది"
 
 #. WEATHER_TERMS['HUMIDITY']
-#: searx/engines/duckduckgo_weather.py:64 searx/engines/open_meteo.py:93
-#: searx/engines/wttr.py:68 searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:64 searx/searxng.msg
+#: searx/templates/simple/answer/weather.html:29
 msgid "Humidity"
 msgstr "తేమ"
 
 #. WEATHER_TERMS['MAX TEMP.']
-#: searx/engines/duckduckgo_weather.py:77 searx/engines/wttr.py:34
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:77 searx/searxng.msg
 msgid "Max temp."
 msgstr "గరిష్ట ఉష్ణోగ్రత."
 
 #. WEATHER_TERMS['MIN TEMP.']
-#: searx/engines/duckduckgo_weather.py:73 searx/engines/wttr.py:33
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:73 searx/searxng.msg
 msgid "Min temp."
 msgstr "కనిష్ట ఉష్ణోగ్రత."
 
 #. WEATHER_TERMS['MORNING']
-#: searx/engines/wttr.py:100 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Morning"
 msgstr "ఉదయం"
 
 #. WEATHER_TERMS['NIGHT']
-#: searx/engines/wttr.py:100 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Night"
 msgstr "రాత్రి"
 
 #. WEATHER_TERMS['NOON']
-#: searx/engines/wttr.py:100 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Noon"
 msgstr "మధ్యాహ్నం"
 
 #. WEATHER_TERMS['PRESSURE']
-#: searx/engines/open_meteo.py:95 searx/searxng.msg
+#: searx/searxng.msg searx/templates/simple/answer/weather.html:25
 msgid "Pressure"
 msgstr "వాతావరణ పీడనం"
 
 #. WEATHER_TERMS['SUNRISE']
-#: searx/engines/duckduckgo_weather.py:81 searx/engines/wttr.py:36
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:81 searx/searxng.msg
 msgid "Sunrise"
 msgstr "సూర్యోదయం"
 
 #. WEATHER_TERMS['SUNSET']
-#: searx/engines/duckduckgo_weather.py:82 searx/engines/wttr.py:37
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:82 searx/searxng.msg
 msgid "Sunset"
 msgstr "సూర్యాస్తమయం"
 
 #. WEATHER_TERMS['TEMPERATURE']
-#: searx/engines/duckduckgo_weather.py:48 searx/engines/open_meteo.py:76
-#: searx/engines/wttr.py:55 searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:48 searx/searxng.msg
+#: searx/templates/simple/answer/weather.html:17
 msgid "Temperature"
 msgstr "ఉష్ణోగ్రత"
 
 #. WEATHER_TERMS['UV INDEX']
-#: searx/engines/duckduckgo_weather.py:80 searx/engines/wttr.py:35
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:80 searx/searxng.msg
 msgid "UV index"
 msgstr "UV సూచిక"
 
 #. WEATHER_TERMS['VISIBILITY']
-#: searx/engines/duckduckgo_weather.py:62 searx/engines/wttr.py:66
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:62 searx/searxng.msg
 msgid "Visibility"
 msgstr "విసిబిలిటీ"
 
 #. WEATHER_TERMS['WIND']
-#: searx/engines/duckduckgo_weather.py:58 searx/engines/open_meteo.py:86
-#: searx/engines/wttr.py:62 searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:58 searx/searxng.msg
+#: searx/templates/simple/answer/weather.html:23
 msgid "Wind"
 msgstr "గాలి"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Clear sky"
+msgstr "స్వచ్ఛమైన ఆకాశం"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Partly cloudy"
+msgstr "కొద్దిగా మేఘావృతమై"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Cloudy"
+msgstr "మేఘావృతమైన"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Fair"
+msgstr "స్వచ్ఛమైన"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Fog"
+msgstr "పొగ మంచు"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light rain and thunder"
+msgstr "తేలికపాటి వర్షం మరియు ఉరుములు"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light rain showers and thunder"
+msgstr "తేలికపాటి వర్షపుజల్లు మరియు ఉరుములు"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light rain showers"
+msgstr "తేలికపాటి వర్షపుజల్లు"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light rain"
+msgstr "తేలికపాటి వర్షం"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Rain and thunder"
+msgstr "వర్షం మరియు ఉరుములు"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Rain showers and thunder"
+msgstr "వర్షపుజల్లు మరియు ఉరుములు"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Rain showers"
+msgstr "వర్షపుజల్లు"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Rain"
+msgstr "వర్షం"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy rain and thunder"
+msgstr "తీవ్రమైన వర్షం మరియు ఉరుములు"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy rain showers and thunder"
+msgstr "తీవ్రమైన వర్షపుజల్లు మరియు ఉరుములు"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy rain showers"
+msgstr "తీవ్రమైన వర్షపుజల్లు"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy rain"
+msgstr "తీవ్రమైన వర్షం"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light sleet and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light sleet showers and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light sleet showers"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light sleet"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Sleet and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Sleet showers and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Sleet showers"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Sleet"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy sleet and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy sleet showers and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy sleet showers"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy sleet"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light snow and thunder"
+msgstr "తేలికపాటి మంచు మరియు ఉరుములు"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light snow showers and thunder"
+msgstr "తేలికపాటి మంచుజల్లు మరియు ఉరుములు"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light snow showers"
+msgstr "తేలికపాటి మంచుజల్లు"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light snow"
+msgstr "తేలికపాటి మంచు"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Snow and thunder"
+msgstr "మంచు మరియు ఉరుములు"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Snow showers and thunder"
+msgstr "మంచుజల్లు మరియు ఉరుములు"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Snow showers"
+msgstr "మంచుజల్లు"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Snow"
+msgstr "మంచు"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy snow and thunder"
+msgstr "తీవ్రమైన మంచు మరియు ఉరుములు"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy snow showers and thunder"
+msgstr "తీవ్రమైన మంచుజల్లు మరియు ఉరుములు"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy snow showers"
+msgstr "తీవ్రమైన మంచుజల్లు"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy snow"
+msgstr "తీవ్రమైన మంచు"
 
 #. SOCIAL_MEDIA_TERMS['SUBSCRIBERS']
 #: searx/engines/lemmy.py:85 searx/searxng.msg
 msgid "subscribers"
-msgstr "సుబ్స్చ్రిబెర్ లు"
+msgstr "చందాదారులు"
 
 #. SOCIAL_MEDIA_TERMS['POSTS']
 #: searx/engines/lemmy.py:86 searx/searxng.msg
@@ -346,93 +543,93 @@ msgstr "క్లోస్డ్"
 msgid "answered"
 msgstr "సమాధానమిచ్చారు"
 
-#: searx/webapp.py:312
+#: searx/webapp.py:292
 msgid "No item found"
 msgstr "ఏమీ దొరకలేదు"
 
 #: searx/engines/qwant.py:291
-#: searx/templates/simple/result_templates/images.html:23 searx/webapp.py:314
+#: searx/templates/simple/result_templates/images.html:23 searx/webapp.py:294
 msgid "Source"
 msgstr "మూలం"
 
-#: searx/webapp.py:316
+#: searx/webapp.py:296
 msgid "Error loading the next page"
 msgstr "తదుపరి పేజీని లోడ్ చేయడంలో లోపం"
 
-#: searx/webapp.py:469 searx/webapp.py:875
+#: searx/webapp.py:447 searx/webapp.py:845
 msgid "Invalid settings, please edit your preferences"
 msgstr "చెల్లని సెట్టింగ్‌లు, దయచేసి మీ ప్రాధాన్యతలను సవరించండి"
 
-#: searx/webapp.py:485
+#: searx/webapp.py:463
 msgid "Invalid settings"
 msgstr "చెల్లని అమరికలు"
 
-#: searx/webapp.py:562 searx/webapp.py:652
+#: searx/webapp.py:540 searx/webapp.py:630
 msgid "search error"
 msgstr "శోధనలో లోపము"
 
-#: searx/webutils.py:36
+#: searx/webutils.py:35
 msgid "timeout"
 msgstr "సమయం ముగిసినది"
 
-#: searx/webutils.py:37
+#: searx/webutils.py:36
 msgid "parsing error"
 msgstr "పార్సింగ్ లోపం"
 
-#: searx/webutils.py:38
+#: searx/webutils.py:37
 msgid "HTTP protocol error"
 msgstr "HTTP నియమాలలో లోపం"
 
-#: searx/webutils.py:39
+#: searx/webutils.py:38
 msgid "network error"
 msgstr "నెట్వర్క్ లోపం"
 
-#: searx/webutils.py:40
+#: searx/webutils.py:39
 msgid "SSL error: certificate validation has failed"
 msgstr "SSL లోపం: సర్టిఫికేట్ ధ్రువీకరణ విఫలమైంది"
 
-#: searx/webutils.py:42
+#: searx/webutils.py:41
 msgid "unexpected crash"
 msgstr "ఊహించని లోపం"
 
-#: searx/webutils.py:49
+#: searx/webutils.py:48
 msgid "HTTP error"
 msgstr "HTTP లోపం"
 
-#: searx/webutils.py:50
+#: searx/webutils.py:49
 msgid "HTTP connection error"
 msgstr "HTTP కనెక్షన్ లోపం"
 
-#: searx/webutils.py:56
+#: searx/webutils.py:55
 msgid "proxy error"
 msgstr "ప్రాక్సీ లోపం"
 
-#: searx/webutils.py:57
+#: searx/webutils.py:56
 msgid "CAPTCHA"
 msgstr "క్యాప్చా"
 
-#: searx/webutils.py:58
+#: searx/webutils.py:57
 msgid "too many requests"
 msgstr "చాలా అభ్యర్థనలు"
 
-#: searx/webutils.py:59
+#: searx/webutils.py:58
 msgid "access denied"
 msgstr "అనుమతి లేదు"
 
-#: searx/webutils.py:60
+#: searx/webutils.py:59
 msgid "server API error"
 msgstr "సర్వర్ API లోపం"
 
-#: searx/webutils.py:79
+#: searx/webutils.py:78
 msgid "Suspended"
 msgstr "రద్ధు చెయ్యబడింది"
 
-#: searx/webutils.py:314
+#: searx/webutils.py:313
 #, python-brace-format
 msgid "{minutes} minute(s) ago"
 msgstr "{minutes} నిమిషము(ల) క్రిందట"
 
-#: searx/webutils.py:315
+#: searx/webutils.py:314
 #, python-brace-format
 msgid "{hours} hour(s), {minutes} minute(s) ago"
 msgstr "{hours} గంట(లు), {minutes} నిమిషం(లు) క్రితం"
@@ -463,15 +660,15 @@ msgstr "దీని ద్వారా ఈ ఎంట్రీ భర్తీ �
 msgid "Channel"
 msgstr "ఛానెల్"
 
-#: searx/engines/radio_browser.py:105
+#: searx/engines/radio_browser.py:153
 msgid "bitrate"
 msgstr "బిట్రేట్"
 
-#: searx/engines/radio_browser.py:106
+#: searx/engines/radio_browser.py:154
 msgid "votes"
 msgstr "ఓట్లు"
 
-#: searx/engines/radio_browser.py:107
+#: searx/engines/radio_browser.py:155
 msgid "clicks"
 msgstr "క్లిక్‌లు"
 
@@ -480,7 +677,7 @@ msgstr "క్లిక్‌లు"
 msgid "Language"
 msgstr "భాష"
 
-#: searx/engines/semantic_scholar.py:79
+#: searx/engines/semantic_scholar.py:101
 #, python-brace-format
 msgid ""
 "{numCitations} citations from the year {firstCitationVelocityYear} to "
@@ -539,11 +736,13 @@ msgstr "సెర్చ్ బార్ ద్వారా గణిత సమ�
 msgid "Hash plugin"
 msgstr ""
 
-#: searx/plugins/hash_plugin.py:35
-msgid "Converts strings to different hash digests."
-msgstr "స్ట్రింగ్‌లను విభిన్న హాష్ డైజెస్ట్‌లుగా మారుస్తుంది."
+#: searx/plugins/hash_plugin.py:36
+msgid ""
+"Converts strings to different hash digests. Available functions: md5, "
+"sha1, sha224, sha256, sha384, sha512."
+msgstr ""
 
-#: searx/plugins/hash_plugin.py:62
+#: searx/plugins/hash_plugin.py:64
 msgid "hash digest"
 msgstr "హాష్ డైజెస్ట్"
 
@@ -552,10 +751,8 @@ msgid "Hostnames plugin"
 msgstr "హోస్ట్ పేర్ల ప్లగిన్"
 
 #: searx/plugins/hostnames.py:124
-msgid "Rewrite hostnames, remove results or prioritize them based on the hostname"
+msgid "Rewrite hostnames and remove or prioritize results based on the hostname"
 msgstr ""
-"హోస్ట్ పేర్లను తిరిగి వ్రాయండి, ఫలితాలను తొలగించండి లేదా హోస్ట్ పేరు "
-"ఆధారంగా వాటికి ప్రాధాన్యత ఇవ్వండి"
 
 #: searx/plugins/oa_doi_rewrite.py:55
 msgid "Open Access DOI rewrite"
@@ -612,11 +809,11 @@ msgstr ""
 msgid "You are not using Tor and you have the external IP address"
 msgstr ""
 
-#: searx/plugins/tracker_url_remover.py:37
+#: searx/plugins/tracker_url_remover.py:35
 msgid "Tracker URL remover"
 msgstr "ట్రాకర్ URL రిమూవర్"
 
-#: searx/plugins/tracker_url_remover.py:38
+#: searx/plugins/tracker_url_remover.py:36
 msgid "Remove trackers arguments from the returned URL"
 msgstr "తిరిగి వచ్చిన URL నుండి ట్రాకర్స్ ఆర్గ్యుమెంట్‌లను తీసివేయండి"
 
@@ -627,6 +824,11 @@ msgstr ""
 #: searx/plugins/unit_converter.py:50
 msgid "Convert between units"
 msgstr "యూనిట్లను మార్చండి"
+
+#: searx/result_types/answer.py:224
+#, python-brace-format
+msgid "{location}: {temperature}, {condition}"
+msgstr "{location}: {temperature}, {condition}"
 
 #: searx/templates/simple/404.html:4
 msgid "Page not found"
@@ -705,10 +907,6 @@ msgstr "రచయిత"
 #: searx/templates/simple/macros.html:50
 msgid "cached"
 msgstr "కాష్ చేయబడింది"
-
-#: searx/templates/simple/macros.html:50
-msgid "proxied"
-msgstr "ప్రాక్సీడ్"
 
 #: searx/templates/simple/new_issue.html:64
 msgid "Start submitting a new issue on GitHub"
@@ -944,6 +1142,10 @@ msgstr ""
 msgid "Synonyms"
 msgstr "పర్యాయపదాలు"
 
+#: searx/templates/simple/answer/weather.html:19
+msgid "Feels Like"
+msgstr ""
+
 #: searx/templates/simple/elements/answers.html:2
 msgid "Answers"
 msgstr "జవాబులు"
@@ -1121,16 +1323,16 @@ msgid "Autocomplete"
 msgstr "ఆటోకంప్లేటే"
 
 #: searx/templates/simple/preferences/autocomplete.html:15
-msgid "Find stuff as you type"
-msgstr "టైపు చేస్తూ శోధించు"
+msgid "Show possible queries as you type"
+msgstr ""
 
 #: searx/templates/simple/preferences/center_alignment.html:2
 msgid "Center Alignment"
 msgstr "మధ్య అమరిక"
 
 #: searx/templates/simple/preferences/center_alignment.html:14
-msgid "Displays results in the center of the page (Oscar layout)."
-msgstr "పేజీ మధ్యలో ఫలితాలను ప్రదర్శిస్తుంది (ఆస్కార్ లేఅవుట్)."
+msgid "Display results in the center of the page (Oscar layout)."
+msgstr ""
 
 #: searx/templates/simple/preferences/cookies.html:2
 msgid ""
@@ -1141,8 +1343,8 @@ msgstr ""
 "విలువలు."
 
 #: searx/templates/simple/preferences/cookies.html:3
-msgid "With that list, you can assess SearXNG transparency."
-msgstr "ఆ జాబితాతో, మీరు SearXNG పారదర్శకతను అంచనా వేయవచ్చు."
+msgid "With this list, you can assess the transparency of SearXNG."
+msgstr ""
 
 #: searx/templates/simple/preferences/cookies.html:9
 msgid "Cookie name"
@@ -1202,11 +1404,9 @@ msgstr "DOI తిరిగి వ్రాయడానికి ఉపయోగ
 
 #: searx/templates/simple/preferences/engines.html:9
 msgid ""
-"This tab does not exists in the user interface, but you can search in "
-"these engines by its !bangs."
+"This tab does not exist in the user interface, but you can search with "
+"these engines via !bangs."
 msgstr ""
-"ఈ ట్యాబ్ యూజర్ ఇంటర్‌ఫేస్‌లో లేదు, కానీ మీరు ఈ ఇంజిన్‌లలో దీని ద్వారా "
-"శోధించవచ్చు: !bangs"
 
 #: searx/templates/simple/preferences/engines.html:15
 msgid "Enable all"
@@ -1242,19 +1442,13 @@ msgstr "శోధన ఫలితాల దగ్గర ఫేవికాన్
 
 #: searx/templates/simple/preferences/footer.html:2
 msgid ""
-"These settings are stored in your cookies, this allows us not to store "
+"These settings are stored in your cookies. This allows us not to store "
 "this data about you."
 msgstr ""
-"ఈ సెట్టింగ్‌లు మీ కుక్కీలలో నిల్వ చేయబడ్డాయి, ఇది మీ గురించిన ఈ డేటాను "
-"నిల్వ చేయకుండా ఉండటానికి మాకు అనుమతిస్తుంది."
 
 #: searx/templates/simple/preferences/footer.html:3
-msgid ""
-"These cookies serve your sole convenience, we don't use these cookies to "
-"track you."
+msgid "These cookies serve your sole convenience; we don't use them to track you."
 msgstr ""
-"ఈ కుక్కీలు మీ సౌకర్యార్థం, మిమ్మల్ని ట్రాక్ చేయడానికి మేము ఈ కుక్కీలను "
-"ఉపయోగించము."
 
 #: searx/templates/simple/preferences/footer.html:6
 msgid "Save"
@@ -1289,18 +1483,18 @@ msgid "Image proxy"
 msgstr "చిత్రం ప్రాక్సీ"
 
 #: searx/templates/simple/preferences/image_proxy.html:14
-msgid "Proxying image results through SearXNG"
-msgstr "SearXNG ద్వారా ఇమేజ్ ఫలితాలను ప్రాక్సీ చేస్తోంది"
+msgid "Proxy image results through SearXNG"
+msgstr ""
 
 #: searx/templates/simple/preferences/infinite_scroll.html:2
 msgid "Infinite scroll"
 msgstr "అనంతమైన స్క్రోల్"
 
 #: searx/templates/simple/preferences/infinite_scroll.html:14
-msgid "Automatically load next page when scrolling to bottom of current page"
+msgid ""
+"Automatically load the next page when scrolling to the bottom of the "
+"current page"
 msgstr ""
-"ప్రస్తుత పేజీ దిగువకు స్క్రోల్ చేస్తున్నప్పుడు తదుపరి పేజీని స్వయంచాలకంగా"
-" లోడ్ చేయండి"
 
 #: searx/templates/simple/preferences/language.html:24
 msgid "What language do you prefer for search?"
@@ -1333,12 +1527,12 @@ msgstr ""
 "మీ బ్రౌజర్ ఈ శీర్షికను రికార్డ్ చేయగలదు"
 
 #: searx/templates/simple/preferences/results_on_new_tab.html:2
-msgid "Results on new tabs"
-msgstr "కొత్త ట్యాబ్‌లలో ఫలితాలు"
+msgid "Results in new tabs"
+msgstr ""
 
 #: searx/templates/simple/preferences/results_on_new_tab.html:14
-msgid "Open result links on new browser tabs"
-msgstr "కొత్త బ్రౌజర్ ట్యాబ్‌లలో ఫలితాల లింక్‌లను తెరవండి"
+msgid "Open result links in new browser tabs"
+msgstr ""
 
 #: searx/templates/simple/preferences/safesearch.html:20
 msgid "Filter content"
@@ -1350,19 +1544,17 @@ msgstr "వర్గం ఎంపికపై శోధించండి"
 
 #: searx/templates/simple/preferences/search_on_category_select.html:14
 msgid ""
-"Perform search immediately if a category selected. Disable to select "
-"multiple categories"
+"Perform a search immediately if a category is selected. Disable to select"
+" multiple categories"
 msgstr ""
-"ఒక వర్గం ఎంచుకోబడితే వెంటనే శోధనను నిర్వహించండి. బహుళ వర్గాలను ఎంచుకోవడం "
-"కోసం నిలిపివేయండి"
 
 #: searx/templates/simple/preferences/theme.html:2
 msgid "Theme"
 msgstr "థీమ్"
 
 #: searx/templates/simple/preferences/theme.html:14
-msgid "Change SearXNG layout"
-msgstr "SearXNG లేఅవుట్‌ని మార్చండి"
+msgid "Change the layout of SearXNG"
+msgstr ""
 
 #: searx/templates/simple/preferences/theme.html:19
 msgid "Theme style"
@@ -1802,7 +1994,7 @@ msgstr "వీడియోను దాచిపెట్టు"
 #~ msgstr ""
 
 #~ msgid "Displays results in the center of the page (Oscar layout)."
-#~ msgstr ""
+#~ msgstr "పేజీ మధ్యలో ఫలితాలను ప్రదర్శిస్తుంది (ఆస్కార్ లేఅవుట్)."
 
 #~ msgid "preferences"
 #~ msgstr "అభిరుచులు"
@@ -2063,4 +2255,77 @@ msgstr "వీడియోను దాచిపెట్టు"
 #~ "ప్రాధాన్యతల URLలో అనుకూల సెట్టింగ్‌లను "
 #~ "పేర్కొనడం ద్వారా పరికరాల్లో ప్రాధాన్యతలను "
 #~ "సమకాలీకరించడానికి ఉపయోగించవచ్చు."
+
+#~ msgid "proxied"
+#~ msgstr "ప్రాక్సీడ్"
+
+#~ msgid ""
+#~ "This tab does not exists in the"
+#~ " user interface, but you can search"
+#~ " in these engines by its !bangs."
+#~ msgstr ""
+#~ "ఈ ట్యాబ్ యూజర్ ఇంటర్‌ఫేస్‌లో లేదు, కానీ"
+#~ " మీరు ఈ ఇంజిన్‌లలో దీని ద్వారా "
+#~ "శోధించవచ్చు: !bangs"
+
+#~ msgid "Results on new tabs"
+#~ msgstr "కొత్త ట్యాబ్‌లలో ఫలితాలు"
+
+#~ msgid "Open result links on new browser tabs"
+#~ msgstr "కొత్త బ్రౌజర్ ట్యాబ్‌లలో ఫలితాల లింక్‌లను తెరవండి"
+
+#~ msgid "Find stuff as you type"
+#~ msgstr "టైపు చేస్తూ శోధించు"
+
+#~ msgid "Converts strings to different hash digests."
+#~ msgstr "స్ట్రింగ్‌లను విభిన్న హాష్ డైజెస్ట్‌లుగా మారుస్తుంది."
+
+#~ msgid ""
+#~ "Rewrite hostnames, remove results or "
+#~ "prioritize them based on the hostname"
+#~ msgstr ""
+#~ "హోస్ట్ పేర్లను తిరిగి వ్రాయండి, ఫలితాలను "
+#~ "తొలగించండి లేదా హోస్ట్ పేరు ఆధారంగా "
+#~ "వాటికి ప్రాధాన్యత ఇవ్వండి"
+
+#~ msgid "With that list, you can assess SearXNG transparency."
+#~ msgstr "ఆ జాబితాతో, మీరు SearXNG పారదర్శకతను అంచనా వేయవచ్చు."
+
+#~ msgid ""
+#~ "These settings are stored in your "
+#~ "cookies, this allows us not to "
+#~ "store this data about you."
+#~ msgstr ""
+#~ "ఈ సెట్టింగ్‌లు మీ కుక్కీలలో నిల్వ "
+#~ "చేయబడ్డాయి, ఇది మీ గురించిన ఈ డేటాను "
+#~ "నిల్వ చేయకుండా ఉండటానికి మాకు అనుమతిస్తుంది."
+
+#~ msgid ""
+#~ "These cookies serve your sole "
+#~ "convenience, we don't use these cookies"
+#~ " to track you."
+#~ msgstr ""
+#~ "ఈ కుక్కీలు మీ సౌకర్యార్థం, మిమ్మల్ని "
+#~ "ట్రాక్ చేయడానికి మేము ఈ కుక్కీలను "
+#~ "ఉపయోగించము."
+
+#~ msgid "Proxying image results through SearXNG"
+#~ msgstr "SearXNG ద్వారా ఇమేజ్ ఫలితాలను ప్రాక్సీ చేస్తోంది"
+
+#~ msgid "Automatically load next page when scrolling to bottom of current page"
+#~ msgstr ""
+#~ "ప్రస్తుత పేజీ దిగువకు స్క్రోల్ చేస్తున్నప్పుడు"
+#~ " తదుపరి పేజీని స్వయంచాలకంగా లోడ్ చేయండి"
+
+#~ msgid ""
+#~ "Perform search immediately if a category"
+#~ " selected. Disable to select multiple "
+#~ "categories"
+#~ msgstr ""
+#~ "ఒక వర్గం ఎంచుకోబడితే వెంటనే శోధనను "
+#~ "నిర్వహించండి. బహుళ వర్గాలను ఎంచుకోవడం కోసం "
+#~ "నిలిపివేయండి"
+
+#~ msgid "Change SearXNG layout"
+#~ msgstr "SearXNG లేఅవుట్‌ని మార్చండి"
 

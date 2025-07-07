@@ -234,11 +234,6 @@ SCHEMA = {
         'extra_proxy_timeout': SettingsValue(int, 0),
         'networks': {},
     },
-    'result_proxy': {
-        'url': SettingsValue((None, str), None),
-        'key': SettingsBytesValue((None, bytes), None),
-        'proxify_results': SettingsValue(bool, False),
-    },
     'plugins': SettingsValue(dict, {}),
     'checker': {
         'off_when_debug': SettingsValue(bool, True, None),

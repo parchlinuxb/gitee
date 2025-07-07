@@ -22,19 +22,18 @@
 # sakistzimas <sakistzimas@noreply.codeberg.org>, 2025.
 msgid ""
 msgstr ""
-"Project-Id-Version: searx\n"
+"Project-Id-Version:  searx\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-03-29 09:21+0000\n"
-"PO-Revision-Date: 2025-04-03 21:59+0000\n"
-"Last-Translator: sakistzimas <sakistzimas@noreply.codeberg.org>\n"
-"Language-Team: Greek <https://translate.codeberg.org/projects/searxng/"
-"searxng/el/>\n"
+"POT-Creation-Date: 2025-07-03 14:46+0000\n"
+"PO-Revision-Date: 2025-06-22 17:06+0000\n"
+"Last-Translator: return42 <return42@noreply.codeberg.org>\n"
 "Language: el_GR\n"
+"Language-Team: Greek "
+"<https://translate.codeberg.org/projects/searxng/searxng/el/>\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.2\n"
 "Generated-By: Babel 2.17.0\n"
 
 #. CONSTANT_NAMES['NO_SUBGROUPING']
@@ -78,7 +77,7 @@ msgid "videos"
 msgstr "Βίντεο"
 
 #. CATEGORY_NAMES['RADIO']
-#: searx/engines/radio_browser.py:103 searx/searxng.msg
+#: searx/engines/radio_browser.py:151 searx/searxng.msg
 msgid "radio"
 msgstr "ράδιο"
 
@@ -188,111 +187,307 @@ msgid "About"
 msgstr "Σχετικά με το SearXNG"
 
 #. WEATHER_TERMS['AVERAGE TEMP.']
-#: searx/engines/wttr.py:32 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Average temp."
 msgstr "Μέση θερμοκρασία."
 
 #. WEATHER_TERMS['CLOUD COVER']
-#: searx/engines/open_meteo.py:91 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Cloud cover"
 msgstr "Νεφοκάλυψη"
 
 #. WEATHER_TERMS['CONDITION']
-#: searx/engines/duckduckgo_weather.py:45 searx/engines/wttr.py:51
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:45 searx/searxng.msg
 msgid "Condition"
 msgstr "Κατάσταση"
 
 #. WEATHER_TERMS['CURRENT CONDITION']
-#: searx/engines/duckduckgo_weather.py:118 searx/engines/wttr.py:104
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:118 searx/searxng.msg
 msgid "Current condition"
 msgstr "Τωρινή κατάσταση"
 
 #. WEATHER_TERMS['EVENING']
-#: searx/engines/wttr.py:100 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Evening"
 msgstr "Βράδυ"
 
 #. WEATHER_TERMS['FEELS LIKE']
-#: searx/engines/duckduckgo_weather.py:53 searx/engines/open_meteo.py:81
-#: searx/engines/wttr.py:59 searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:53 searx/searxng.msg
 msgid "Feels like"
 msgstr "Αίσθηση"
 
 #. WEATHER_TERMS['HUMIDITY']
-#: searx/engines/duckduckgo_weather.py:64 searx/engines/open_meteo.py:93
-#: searx/engines/wttr.py:68 searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:64 searx/searxng.msg
+#: searx/templates/simple/answer/weather.html:29
 msgid "Humidity"
 msgstr "Υγρασία"
 
 #. WEATHER_TERMS['MAX TEMP.']
-#: searx/engines/duckduckgo_weather.py:77 searx/engines/wttr.py:34
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:77 searx/searxng.msg
 msgid "Max temp."
 msgstr "Μέγιστη θερμοκρασία."
 
 #. WEATHER_TERMS['MIN TEMP.']
-#: searx/engines/duckduckgo_weather.py:73 searx/engines/wttr.py:33
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:73 searx/searxng.msg
 msgid "Min temp."
 msgstr "Ελάχιστη Θερμοκρασία"
 
 #. WEATHER_TERMS['MORNING']
-#: searx/engines/wttr.py:100 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Morning"
 msgstr "Πρωί"
 
 #. WEATHER_TERMS['NIGHT']
-#: searx/engines/wttr.py:100 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Night"
 msgstr "Βράδι"
 
 #. WEATHER_TERMS['NOON']
-#: searx/engines/wttr.py:100 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Noon"
 msgstr "Μεσημέρι"
 
 #. WEATHER_TERMS['PRESSURE']
-#: searx/engines/open_meteo.py:95 searx/searxng.msg
+#: searx/searxng.msg searx/templates/simple/answer/weather.html:25
 msgid "Pressure"
 msgstr "Πίεση"
 
 #. WEATHER_TERMS['SUNRISE']
-#: searx/engines/duckduckgo_weather.py:81 searx/engines/wttr.py:36
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:81 searx/searxng.msg
 msgid "Sunrise"
 msgstr "Ανατολή ηλίου"
 
 #. WEATHER_TERMS['SUNSET']
-#: searx/engines/duckduckgo_weather.py:82 searx/engines/wttr.py:37
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:82 searx/searxng.msg
 msgid "Sunset"
 msgstr "Η δυση του ηλιου"
 
 #. WEATHER_TERMS['TEMPERATURE']
-#: searx/engines/duckduckgo_weather.py:48 searx/engines/open_meteo.py:76
-#: searx/engines/wttr.py:55 searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:48 searx/searxng.msg
+#: searx/templates/simple/answer/weather.html:17
 msgid "Temperature"
 msgstr "Θερμοκρασία"
 
 #. WEATHER_TERMS['UV INDEX']
-#: searx/engines/duckduckgo_weather.py:80 searx/engines/wttr.py:35
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:80 searx/searxng.msg
 msgid "UV index"
 msgstr "Δείκτης UV"
 
 #. WEATHER_TERMS['VISIBILITY']
-#: searx/engines/duckduckgo_weather.py:62 searx/engines/wttr.py:66
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:62 searx/searxng.msg
 msgid "Visibility"
 msgstr "Ορατότητα"
 
 #. WEATHER_TERMS['WIND']
-#: searx/engines/duckduckgo_weather.py:58 searx/engines/open_meteo.py:86
-#: searx/engines/wttr.py:62 searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:58 searx/searxng.msg
+#: searx/templates/simple/answer/weather.html:23
 msgid "Wind"
 msgstr "Ανεμος"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Clear sky"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Partly cloudy"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Cloudy"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Fair"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Fog"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light rain and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light rain showers and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light rain showers"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light rain"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Rain and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Rain showers and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Rain showers"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Rain"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy rain and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy rain showers and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy rain showers"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy rain"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light sleet and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light sleet showers and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light sleet showers"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light sleet"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Sleet and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Sleet showers and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Sleet showers"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Sleet"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy sleet and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy sleet showers and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy sleet showers"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy sleet"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light snow and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light snow showers and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light snow showers"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light snow"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Snow and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Snow showers and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Snow showers"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Snow"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy snow and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy snow showers and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy snow showers"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy snow"
+msgstr ""
 
 #. SOCIAL_MEDIA_TERMS['SUBSCRIBERS']
 #: searx/engines/lemmy.py:85 searx/searxng.msg
@@ -355,93 +550,93 @@ msgstr "κλειστό"
 msgid "answered"
 msgstr "απάντησε"
 
-#: searx/webapp.py:312
+#: searx/webapp.py:292
 msgid "No item found"
 msgstr "Δεν βρέθηκαν αντικείμενα"
 
 #: searx/engines/qwant.py:291
-#: searx/templates/simple/result_templates/images.html:23 searx/webapp.py:314
+#: searx/templates/simple/result_templates/images.html:23 searx/webapp.py:294
 msgid "Source"
 msgstr "Πηγή"
 
-#: searx/webapp.py:316
+#: searx/webapp.py:296
 msgid "Error loading the next page"
 msgstr "Σφάλμα φόρτωσης της επόμενης σελίδας"
 
-#: searx/webapp.py:469 searx/webapp.py:875
+#: searx/webapp.py:447 searx/webapp.py:845
 msgid "Invalid settings, please edit your preferences"
 msgstr "Μη έγκυρες ρυθμίσεις, παρακαλούμε ελέγξτε τις προτιμήσεις σας"
 
-#: searx/webapp.py:485
+#: searx/webapp.py:463
 msgid "Invalid settings"
 msgstr "Μη έγκυρες ρυθμίσεις"
 
-#: searx/webapp.py:562 searx/webapp.py:652
+#: searx/webapp.py:540 searx/webapp.py:630
 msgid "search error"
 msgstr "σφάλμα αναζήτησης"
 
-#: searx/webutils.py:36
+#: searx/webutils.py:35
 msgid "timeout"
 msgstr "Λήξη χρόνου"
 
-#: searx/webutils.py:37
+#: searx/webutils.py:36
 msgid "parsing error"
 msgstr "σφάλμα ανάλυσης"
 
-#: searx/webutils.py:38
+#: searx/webutils.py:37
 msgid "HTTP protocol error"
 msgstr "Σφάλμα πρωτοκόλλου HTTP"
 
-#: searx/webutils.py:39
+#: searx/webutils.py:38
 msgid "network error"
 msgstr "Σφάλμα δικτύου"
 
-#: searx/webutils.py:40
+#: searx/webutils.py:39
 msgid "SSL error: certificate validation has failed"
 msgstr "Σφάλμα SSL: η επικύρωση του πιστοποιητικού απέτυχε"
 
-#: searx/webutils.py:42
+#: searx/webutils.py:41
 msgid "unexpected crash"
 msgstr "Απροσδόκητο σφάλμα"
 
-#: searx/webutils.py:49
+#: searx/webutils.py:48
 msgid "HTTP error"
 msgstr "Σφάλμα HTTP"
 
-#: searx/webutils.py:50
+#: searx/webutils.py:49
 msgid "HTTP connection error"
 msgstr "Σφάλμα σύνδεσης HTTP"
 
-#: searx/webutils.py:56
+#: searx/webutils.py:55
 msgid "proxy error"
 msgstr "Σφάλμα διακομιστή μεσολάβησης"
 
-#: searx/webutils.py:57
+#: searx/webutils.py:56
 msgid "CAPTCHA"
 msgstr "CAPTCHA"
 
-#: searx/webutils.py:58
+#: searx/webutils.py:57
 msgid "too many requests"
 msgstr "υπέρβαση ορίου αιτημάτων"
 
-#: searx/webutils.py:59
+#: searx/webutils.py:58
 msgid "access denied"
 msgstr "Άρνηση πρόσβασης"
 
-#: searx/webutils.py:60
+#: searx/webutils.py:59
 msgid "server API error"
 msgstr "Σφάλμα API διακομιστή"
 
-#: searx/webutils.py:79
+#: searx/webutils.py:78
 msgid "Suspended"
 msgstr "Σε αναστολή"
 
-#: searx/webutils.py:314
+#: searx/webutils.py:313
 #, python-brace-format
 msgid "{minutes} minute(s) ago"
 msgstr "{minutes} λεπτά πριν"
 
-#: searx/webutils.py:315
+#: searx/webutils.py:314
 #, python-brace-format
 msgid "{hours} hour(s), {minutes} minute(s) ago"
 msgstr "{hours} ώρα(-ες), {minutes} λεπτό(-ά) πριν"
@@ -472,15 +667,15 @@ msgstr "Αυτή η καταχώριση έχει αντικατασταθεί �
 msgid "Channel"
 msgstr "Κανάλι"
 
-#: searx/engines/radio_browser.py:105
+#: searx/engines/radio_browser.py:153
 msgid "bitrate"
 msgstr "ρυθμός μετάδοσης"
 
-#: searx/engines/radio_browser.py:106
+#: searx/engines/radio_browser.py:154
 msgid "votes"
 msgstr "ψήφους"
 
-#: searx/engines/radio_browser.py:107
+#: searx/engines/radio_browser.py:155
 msgid "clicks"
 msgstr "κλικ"
 
@@ -489,7 +684,7 @@ msgstr "κλικ"
 msgid "Language"
 msgstr "Γλώσσα"
 
-#: searx/engines/semantic_scholar.py:79
+#: searx/engines/semantic_scholar.py:101
 #, python-brace-format
 msgid ""
 "{numCitations} citations from the year {firstCitationVelocityYear} to "
@@ -551,11 +746,13 @@ msgstr "Υπολογίστε μαθηματικές εκφράσεις μέσω 
 msgid "Hash plugin"
 msgstr "Hash plugin"
 
-#: searx/plugins/hash_plugin.py:35
-msgid "Converts strings to different hash digests."
-msgstr "Μετατρέπει κείμενο σε διαφορετικές συναρτήσεις κατατεμαχισμού."
+#: searx/plugins/hash_plugin.py:36
+msgid ""
+"Converts strings to different hash digests. Available functions: md5, "
+"sha1, sha224, sha256, sha384, sha512."
+msgstr ""
 
-#: searx/plugins/hash_plugin.py:62
+#: searx/plugins/hash_plugin.py:64
 msgid "hash digest"
 msgstr "συνάρτηση κατατεμαχισμού"
 
@@ -564,10 +761,8 @@ msgid "Hostnames plugin"
 msgstr "Προσθήκη ονομάτων κεντρικού υπολογιστή"
 
 #: searx/plugins/hostnames.py:124
-msgid "Rewrite hostnames, remove results or prioritize them based on the hostname"
+msgid "Rewrite hostnames and remove or prioritize results based on the hostname"
 msgstr ""
-"Ξαναγράψτε ονόματα κεντρικών υπολογιστών, αφαιρέστε τα αποτελέσματα ή "
-"δώστε προτεραιότητα σε αυτά με βάση το όνομα κεντρικού υπολογιστή"
 
 #: searx/plugins/oa_doi_rewrite.py:55
 msgid "Open Access DOI rewrite"
@@ -626,11 +821,11 @@ msgstr "Χρησιμοποιείτε Tor και φαίνεται ότι έχετ
 msgid "You are not using Tor and you have the external IP address"
 msgstr "Δεν χρησιμοποιείτε Tor και έχετε την εξωτερική διεύθυνση IP"
 
-#: searx/plugins/tracker_url_remover.py:37
+#: searx/plugins/tracker_url_remover.py:35
 msgid "Tracker URL remover"
 msgstr "Αφαίρεση ιχνηλατών από συνδέσμους"
 
-#: searx/plugins/tracker_url_remover.py:38
+#: searx/plugins/tracker_url_remover.py:36
 msgid "Remove trackers arguments from the returned URL"
 msgstr "Αφαίρεση ιχνηλατών από τους επιστρεφόμενους συνδέσμους"
 
@@ -641,6 +836,11 @@ msgstr "Πρόσθετο μετατροπέας μονάδων"
 #: searx/plugins/unit_converter.py:50
 msgid "Convert between units"
 msgstr "Μετατροπή μεταξύ μονάδων"
+
+#: searx/result_types/answer.py:224
+#, python-brace-format
+msgid "{location}: {temperature}, {condition}"
+msgstr "{location}: {temperature}, {condition}"
 
 #: searx/templates/simple/404.html:4
 msgid "Page not found"
@@ -719,10 +919,6 @@ msgstr "Συγγραφέας"
 #: searx/templates/simple/macros.html:50
 msgid "cached"
 msgstr "προσωρινά αποθηκευμένο"
-
-#: searx/templates/simple/macros.html:50
-msgid "proxied"
-msgstr "Διαμεσολαβημένα"
 
 #: searx/templates/simple/new_issue.html:64
 msgid "Start submitting a new issue on GitHub"
@@ -964,6 +1160,10 @@ msgstr "Ορισμοί"
 msgid "Synonyms"
 msgstr "Συνώνυμα"
 
+#: searx/templates/simple/answer/weather.html:19
+msgid "Feels Like"
+msgstr ""
+
 #: searx/templates/simple/elements/answers.html:2
 msgid "Answers"
 msgstr "Απαντήσεις"
@@ -1143,16 +1343,16 @@ msgid "Autocomplete"
 msgstr "Αυτόματη συμπλήρωση"
 
 #: searx/templates/simple/preferences/autocomplete.html:15
-msgid "Find stuff as you type"
-msgstr "Εύρεση όρων κατά την πληκτρολόγηση"
+msgid "Show possible queries as you type"
+msgstr ""
 
 #: searx/templates/simple/preferences/center_alignment.html:2
 msgid "Center Alignment"
 msgstr "Κεντρική ευθυγράμμιση"
 
 #: searx/templates/simple/preferences/center_alignment.html:14
-msgid "Displays results in the center of the page (Oscar layout)."
-msgstr "Εμφάνιση αποτελεσμάτων στο κέντρο της σελίδας (διάταξη Oscar)."
+msgid "Display results in the center of the page (Oscar layout)."
+msgstr ""
 
 #: searx/templates/simple/preferences/cookies.html:2
 msgid ""
@@ -1163,8 +1363,8 @@ msgstr ""
 "SearXNG στον υπολογιστή σας."
 
 #: searx/templates/simple/preferences/cookies.html:3
-msgid "With that list, you can assess SearXNG transparency."
-msgstr "Με αυτόν τον κατάλογο, μπορείτε να αξιολογήσετε τη διαφάνεια του SearXNG."
+msgid "With this list, you can assess the transparency of SearXNG."
+msgstr ""
 
 #: searx/templates/simple/preferences/cookies.html:9
 msgid "Cookie name"
@@ -1197,7 +1397,8 @@ msgid ""
 "settings on a different device."
 msgstr ""
 "Ένα URL που περιέχει τις προτιμήσεις σας. Αυτό το URL μπορεί να "
-"χρησιμοποιηθεί για να επαναφέρει τις ρυθμίσεις σας σε διαφορετική συσκευή."
+"χρησιμοποιηθεί για να επαναφέρει τις ρυθμίσεις σας σε διαφορετική "
+"συσκευή."
 
 #: searx/templates/simple/preferences/cookies.html:46
 msgid "Copy preferences hash"
@@ -1227,11 +1428,9 @@ msgstr "Επιλέξτε την υπηρεσία που θα χρησιμοπο�
 
 #: searx/templates/simple/preferences/engines.html:9
 msgid ""
-"This tab does not exists in the user interface, but you can search in "
-"these engines by its !bangs."
+"This tab does not exist in the user interface, but you can search with "
+"these engines via !bangs."
 msgstr ""
-"Αυτή η καρτέλα δεν υπάρχει για την ιστοσελίδα, αλλά μπορείτε να "
-"αναζητήσετε απ' τις !bangs της."
 
 #: searx/templates/simple/preferences/engines.html:15
 msgid "Enable all"
@@ -1267,19 +1466,13 @@ msgstr "Εμφάνιση εικονιδίων σελιδών δίπλα από �
 
 #: searx/templates/simple/preferences/footer.html:2
 msgid ""
-"These settings are stored in your cookies, this allows us not to store "
+"These settings are stored in your cookies. This allows us not to store "
 "this data about you."
 msgstr ""
-"Αυτές οι ρυθμίσεις αποθηκεύονται στα cookies σας, με αυτόν τον τρόπο δεν "
-"χρειάζεται να αποθηκέυονται στους δικούς μας διακομιστές."
 
 #: searx/templates/simple/preferences/footer.html:3
-msgid ""
-"These cookies serve your sole convenience, we don't use these cookies to "
-"track you."
+msgid "These cookies serve your sole convenience; we don't use them to track you."
 msgstr ""
-"Αυτά τα cookies υπάρχουν αποκλειστικά για την εξυπηρέτησή σας, δεν τα "
-"χρησιμοποιούμε για να σας παρακολουθούμε."
 
 #: searx/templates/simple/preferences/footer.html:6
 msgid "Save"
@@ -1315,18 +1508,18 @@ msgid "Image proxy"
 msgstr "Διακομιστής μεσολάβησης εικόνων"
 
 #: searx/templates/simple/preferences/image_proxy.html:14
-msgid "Proxying image results through SearXNG"
-msgstr "Διαμεσολάβιση φόρτωσης αποτελεσμάτων εικόνων μέσω του SearXNG"
+msgid "Proxy image results through SearXNG"
+msgstr ""
 
 #: searx/templates/simple/preferences/infinite_scroll.html:2
 msgid "Infinite scroll"
 msgstr "Άπειρη κύλιση"
 
 #: searx/templates/simple/preferences/infinite_scroll.html:14
-msgid "Automatically load next page when scrolling to bottom of current page"
+msgid ""
+"Automatically load the next page when scrolling to the bottom of the "
+"current page"
 msgstr ""
-"Αυτόματη φόρτωση της επόμενης σελίδας κατά την κύλιση στο κάτω μέρος της "
-"τρέχουσας σελίδας"
 
 #: searx/templates/simple/preferences/language.html:24
 msgid "What language do you prefer for search?"
@@ -1359,12 +1552,12 @@ msgstr ""
 "Το πρόγραμμα περιήγησής σας μπορεί να καταγράψει αυτόν τον τίτλο"
 
 #: searx/templates/simple/preferences/results_on_new_tab.html:2
-msgid "Results on new tabs"
-msgstr "Αποτελέσματα σε νέες καρτέλες"
+msgid "Results in new tabs"
+msgstr ""
 
 #: searx/templates/simple/preferences/results_on_new_tab.html:14
-msgid "Open result links on new browser tabs"
-msgstr "Άνοιξε τους συνδέσμους των αποτελεσμάτων σε νέα καρτέλα περιηγητή"
+msgid "Open result links in new browser tabs"
+msgstr ""
 
 #: searx/templates/simple/preferences/safesearch.html:20
 msgid "Filter content"
@@ -1376,19 +1569,17 @@ msgstr "Αναζήτηση κατά την επιλογή κατηγορίας"
 
 #: searx/templates/simple/preferences/search_on_category_select.html:14
 msgid ""
-"Perform search immediately if a category selected. Disable to select "
-"multiple categories"
+"Perform a search immediately if a category is selected. Disable to select"
+" multiple categories"
 msgstr ""
-"Άμεση αναζήτηση κατά την επιλογή κατηγορίας. Απενεργοποιήστε για να "
-"διαλέξετε πολλαπλές κατηγορίες"
 
 #: searx/templates/simple/preferences/theme.html:2
 msgid "Theme"
 msgstr "Θέμα"
 
 #: searx/templates/simple/preferences/theme.html:14
-msgid "Change SearXNG layout"
-msgstr "Τροποποίηση διάταξης του SearXNG"
+msgid "Change the layout of SearXNG"
+msgstr ""
 
 #: searx/templates/simple/preferences/theme.html:19
 msgid "Theme style"
@@ -1830,7 +2021,7 @@ msgstr "απόκρυψη βίντεο"
 #~ msgstr ""
 
 #~ msgid "Displays results in the center of the page (Oscar layout)."
-#~ msgstr ""
+#~ msgstr "Εμφάνιση αποτελεσμάτων στο κέντρο της σελίδας (διάταξη Oscar)."
 
 #~ msgid "preferences"
 #~ msgstr "Προτιμήσεις"
@@ -2108,3 +2299,82 @@ msgstr "απόκρυψη βίντεο"
 #~ "σύνδεσμο προτιμήσεων μπορεί να χρησιμοποιηθεί"
 #~ " για το συγχρονισμό των προτιμήσεων "
 #~ "σας σε όλες τις συσκευές."
+
+#~ msgid "proxied"
+#~ msgstr "Διαμεσολαβημένα"
+
+#~ msgid ""
+#~ "This tab does not exists in the"
+#~ " user interface, but you can search"
+#~ " in these engines by its !bangs."
+#~ msgstr ""
+#~ "Αυτή η καρτέλα δεν υπάρχει για την"
+#~ " ιστοσελίδα, αλλά μπορείτε να αναζητήσετε"
+#~ " απ' τις !bangs της."
+
+#~ msgid "Results on new tabs"
+#~ msgstr "Αποτελέσματα σε νέες καρτέλες"
+
+#~ msgid "Open result links on new browser tabs"
+#~ msgstr "Άνοιξε τους συνδέσμους των αποτελεσμάτων σε νέα καρτέλα περιηγητή"
+
+#~ msgid "Find stuff as you type"
+#~ msgstr "Εύρεση όρων κατά την πληκτρολόγηση"
+
+#~ msgid "Converts strings to different hash digests."
+#~ msgstr "Μετατρέπει κείμενο σε διαφορετικές συναρτήσεις κατατεμαχισμού."
+
+#~ msgid ""
+#~ "Rewrite hostnames, remove results or "
+#~ "prioritize them based on the hostname"
+#~ msgstr ""
+#~ "Ξαναγράψτε ονόματα κεντρικών υπολογιστών, "
+#~ "αφαιρέστε τα αποτελέσματα ή δώστε "
+#~ "προτεραιότητα σε αυτά με βάση το "
+#~ "όνομα κεντρικού υπολογιστή"
+
+#~ msgid "With that list, you can assess SearXNG transparency."
+#~ msgstr ""
+#~ "Με αυτόν τον κατάλογο, μπορείτε να "
+#~ "αξιολογήσετε τη διαφάνεια του SearXNG."
+
+#~ msgid ""
+#~ "These settings are stored in your "
+#~ "cookies, this allows us not to "
+#~ "store this data about you."
+#~ msgstr ""
+#~ "Αυτές οι ρυθμίσεις αποθηκεύονται στα "
+#~ "cookies σας, με αυτόν τον τρόπο "
+#~ "δεν χρειάζεται να αποθηκέυονται στους "
+#~ "δικούς μας διακομιστές."
+
+#~ msgid ""
+#~ "These cookies serve your sole "
+#~ "convenience, we don't use these cookies"
+#~ " to track you."
+#~ msgstr ""
+#~ "Αυτά τα cookies υπάρχουν αποκλειστικά "
+#~ "για την εξυπηρέτησή σας, δεν τα "
+#~ "χρησιμοποιούμε για να σας παρακολουθούμε."
+
+#~ msgid "Proxying image results through SearXNG"
+#~ msgstr "Διαμεσολάβιση φόρτωσης αποτελεσμάτων εικόνων μέσω του SearXNG"
+
+#~ msgid "Automatically load next page when scrolling to bottom of current page"
+#~ msgstr ""
+#~ "Αυτόματη φόρτωση της επόμενης σελίδας "
+#~ "κατά την κύλιση στο κάτω μέρος της"
+#~ " τρέχουσας σελίδας"
+
+#~ msgid ""
+#~ "Perform search immediately if a category"
+#~ " selected. Disable to select multiple "
+#~ "categories"
+#~ msgstr ""
+#~ "Άμεση αναζήτηση κατά την επιλογή "
+#~ "κατηγορίας. Απενεργοποιήστε για να διαλέξετε"
+#~ " πολλαπλές κατηγορίες"
+
+#~ msgid "Change SearXNG layout"
+#~ msgstr "Τροποποίηση διάταξης του SearXNG"
+

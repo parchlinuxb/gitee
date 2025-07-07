@@ -5,8 +5,6 @@
 from __future__ import annotations
 
 import inspect
-import hashlib
-import hmac
 import json
 import os
 import sys
@@ -113,6 +111,7 @@ from searx.metrics import (
 from searx.flaskfix import patch_application
 
 from searx.locales import (
+    LOCALE_BEST_MATCH,
     LOCALE_NAMES,
     RTL_LOCALES,
     localeselector,
@@ -276,26 +275,6 @@ def custom_url_for(endpoint: str, **values):
     return url_for(endpoint, **values) + suffix
 
 
-def morty_proxify(url: str):
-    if not url:
-        return url
-
-    if url.startswith("//"):
-        url = "https:" + url
-
-    if not settings["result_proxy"]["url"]:
-        return url
-
-    url_params = dict(mortyurl=url)
-
-    if settings["result_proxy"]["key"]:
-        url_params["mortyhash"] = hmac.new(
-            settings["result_proxy"]["key"], url.encode(), hashlib.sha256
-        ).hexdigest()
-
-    return "{0}?{1}".format(settings["result_proxy"]["url"], urlencode(url_params))
-
-
 def image_proxify(url: str):
     if not url:
         return url
@@ -318,10 +297,7 @@ def image_proxify(url: str):
             return url
         return None
 
-    if settings["result_proxy"]["url"]:
-        return morty_proxify(url)
-
-    h = new_hmac(settings["server"]["secret_key"], url.encode())
+    h = new_hmac(settings['server']['secret_key'], url.encode())
 
     return "{0}?{1}".format(
         url_for("image_proxy"), urlencode(dict(url=url.encode(), h=h))
@@ -460,18 +436,14 @@ def render(template_name: str, **kwargs):
     kwargs["donation_url"] = donation_url
 
     # helpers to create links to other pages
-    kwargs["url_for"] = custom_url_for  # override url_for function in templates
-    kwargs["image_proxify"] = image_proxify
-    kwargs["favicon_url"] = favicons.favicon_url
-    kwargs["proxify"] = (
-        morty_proxify if settings["result_proxy"]["url"] is not None else None
-    )
-    kwargs["proxify_results"] = settings["result_proxy"]["proxify_results"]
-    kwargs["cache_url"] = settings["ui"]["cache_url"]
-    kwargs["get_result_template"] = get_result_template
-    kwargs["opensearch_url"] = (
-        url_for("opensearch")
-        + "?"
+    kwargs['url_for'] = custom_url_for  # override url_for function in templates
+    kwargs['image_proxify'] = image_proxify
+    kwargs['favicon_url'] = favicons.favicon_url
+    kwargs['cache_url'] = settings['ui']['cache_url']
+    kwargs['get_result_template'] = get_result_template
+    kwargs['opensearch_url'] = (
+        url_for('opensearch')
+        + '?'
         + urlencode(
             {
                 "method": sxng_request.preferences.get_value("method"),
@@ -1203,10 +1175,12 @@ def image_proxy():
 
 @app.route("/engine_descriptions.json", methods=["GET"])
 def engine_descriptions():
-    locale = get_locale().split("_")[0]
-    result = ENGINE_DESCRIPTIONS["en"].copy()
-    if locale != "en":
-        for engine, description in ENGINE_DESCRIPTIONS.get(locale, {}).items():
+    sxng_ui_lang_tag = get_locale().replace("_", "-")
+    sxng_ui_lang_tag = LOCALE_BEST_MATCH.get(sxng_ui_lang_tag, sxng_ui_lang_tag)
+
+    result = ENGINE_DESCRIPTIONS['en'].copy()
+    if sxng_ui_lang_tag != 'en':
+        for engine, description in ENGINE_DESCRIPTIONS.get(sxng_ui_lang_tag, {}).items():
             result[engine] = description
     for engine, description in result.items():
         if len(description) == 2 and description[1] == "ref":

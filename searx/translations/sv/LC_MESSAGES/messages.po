@@ -33,19 +33,18 @@
 # AndersNordh <andersnordh@noreply.codeberg.org>, 2025.
 msgid ""
 msgstr ""
-"Project-Id-Version: searx\n"
+"Project-Id-Version:  searx\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-03-29 09:21+0000\n"
-"PO-Revision-Date: 2025-03-31 14:03+0000\n"
+"POT-Creation-Date: 2025-07-03 14:46+0000\n"
+"PO-Revision-Date: 2025-06-24 13:04+0000\n"
 "Last-Translator: AndersNordh <andersnordh@noreply.codeberg.org>\n"
-"Language-Team: Swedish <https://translate.codeberg.org/projects/searxng/"
-"searxng/sv/>\n"
 "Language: sv\n"
+"Language-Team: Swedish "
+"<https://translate.codeberg.org/projects/searxng/searxng/sv/>\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.2\n"
 "Generated-By: Babel 2.17.0\n"
 
 #. CONSTANT_NAMES['NO_SUBGROUPING']
@@ -89,7 +88,7 @@ msgid "videos"
 msgstr "videor"
 
 #. CATEGORY_NAMES['RADIO']
-#: searx/engines/radio_browser.py:103 searx/searxng.msg
+#: searx/engines/radio_browser.py:151 searx/searxng.msg
 msgid "radio"
 msgstr "radio"
 
@@ -199,111 +198,307 @@ msgid "About"
 msgstr "Om"
 
 #. WEATHER_TERMS['AVERAGE TEMP.']
-#: searx/engines/wttr.py:32 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Average temp."
 msgstr "Medeltemperatur"
 
 #. WEATHER_TERMS['CLOUD COVER']
-#: searx/engines/open_meteo.py:91 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Cloud cover"
 msgstr "Molntäcke"
 
 #. WEATHER_TERMS['CONDITION']
-#: searx/engines/duckduckgo_weather.py:45 searx/engines/wttr.py:51
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:45 searx/searxng.msg
 msgid "Condition"
 msgstr "Skick"
 
 #. WEATHER_TERMS['CURRENT CONDITION']
-#: searx/engines/duckduckgo_weather.py:118 searx/engines/wttr.py:104
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:118 searx/searxng.msg
 msgid "Current condition"
 msgstr "Nuvarande tillstånd"
 
 #. WEATHER_TERMS['EVENING']
-#: searx/engines/wttr.py:100 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Evening"
 msgstr "Kväll"
 
 #. WEATHER_TERMS['FEELS LIKE']
-#: searx/engines/duckduckgo_weather.py:53 searx/engines/open_meteo.py:81
-#: searx/engines/wttr.py:59 searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:53 searx/searxng.msg
 msgid "Feels like"
 msgstr "Känns som"
 
 #. WEATHER_TERMS['HUMIDITY']
-#: searx/engines/duckduckgo_weather.py:64 searx/engines/open_meteo.py:93
-#: searx/engines/wttr.py:68 searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:64 searx/searxng.msg
+#: searx/templates/simple/answer/weather.html:29
 msgid "Humidity"
-msgstr "Fuktighet"
+msgstr "Luftfuktighet"
 
 #. WEATHER_TERMS['MAX TEMP.']
-#: searx/engines/duckduckgo_weather.py:77 searx/engines/wttr.py:34
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:77 searx/searxng.msg
 msgid "Max temp."
 msgstr "Högsta temperatur"
 
 #. WEATHER_TERMS['MIN TEMP.']
-#: searx/engines/duckduckgo_weather.py:73 searx/engines/wttr.py:33
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:73 searx/searxng.msg
 msgid "Min temp."
 msgstr "Lägsta temperatur"
 
 #. WEATHER_TERMS['MORNING']
-#: searx/engines/wttr.py:100 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Morning"
 msgstr "Morgon"
 
 #. WEATHER_TERMS['NIGHT']
-#: searx/engines/wttr.py:100 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Night"
 msgstr "Natt"
 
 #. WEATHER_TERMS['NOON']
-#: searx/engines/wttr.py:100 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Noon"
 msgstr "Middag"
 
 #. WEATHER_TERMS['PRESSURE']
-#: searx/engines/open_meteo.py:95 searx/searxng.msg
+#: searx/searxng.msg searx/templates/simple/answer/weather.html:25
 msgid "Pressure"
 msgstr "Lufttryck"
 
 #. WEATHER_TERMS['SUNRISE']
-#: searx/engines/duckduckgo_weather.py:81 searx/engines/wttr.py:36
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:81 searx/searxng.msg
 msgid "Sunrise"
 msgstr "Soluppgång"
 
 #. WEATHER_TERMS['SUNSET']
-#: searx/engines/duckduckgo_weather.py:82 searx/engines/wttr.py:37
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:82 searx/searxng.msg
 msgid "Sunset"
 msgstr "Solnedgång"
 
 #. WEATHER_TERMS['TEMPERATURE']
-#: searx/engines/duckduckgo_weather.py:48 searx/engines/open_meteo.py:76
-#: searx/engines/wttr.py:55 searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:48 searx/searxng.msg
+#: searx/templates/simple/answer/weather.html:17
 msgid "Temperature"
 msgstr "Temperatur"
 
 #. WEATHER_TERMS['UV INDEX']
-#: searx/engines/duckduckgo_weather.py:80 searx/engines/wttr.py:35
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:80 searx/searxng.msg
 msgid "UV index"
 msgstr "UV-index"
 
 #. WEATHER_TERMS['VISIBILITY']
-#: searx/engines/duckduckgo_weather.py:62 searx/engines/wttr.py:66
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:62 searx/searxng.msg
 msgid "Visibility"
-msgstr "Synlighet"
+msgstr "Sikt"
 
 #. WEATHER_TERMS['WIND']
-#: searx/engines/duckduckgo_weather.py:58 searx/engines/open_meteo.py:86
-#: searx/engines/wttr.py:62 searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:58 searx/searxng.msg
+#: searx/templates/simple/answer/weather.html:23
 msgid "Wind"
 msgstr "Vind"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Clear sky"
+msgstr "Klar himmel"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Partly cloudy"
+msgstr "Delvis molnigt"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Cloudy"
+msgstr "Molnigt"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Fair"
+msgstr "Bra"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Fog"
+msgstr "Dimma"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light rain and thunder"
+msgstr "Lätt regn och åska"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light rain showers and thunder"
+msgstr "Lätta regnskurar och åska"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light rain showers"
+msgstr "Lätta regnskurar"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light rain"
+msgstr "Lätt regn"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Rain and thunder"
+msgstr "Regn och åska"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Rain showers and thunder"
+msgstr "Regnskurar och åska"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Rain showers"
+msgstr "Regnskurar"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Rain"
+msgstr "Regn"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy rain and thunder"
+msgstr "Kraftigt regn och åska"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy rain showers and thunder"
+msgstr "Kraftiga regnskurar och åska"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy rain showers"
+msgstr "Kraftiga regnskurar"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy rain"
+msgstr "Kraftigt regn"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light sleet and thunder"
+msgstr "Lätt snöblandat regn samt åska"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light sleet showers and thunder"
+msgstr "Lätta skurar med snöblandat regn samt åska"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light sleet showers"
+msgstr "Lätta skurar med snöblandat regn"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light sleet"
+msgstr "Lätt snöblandat regn"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Sleet and thunder"
+msgstr "Snöblandat regn och åska"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Sleet showers and thunder"
+msgstr "Skurar med snöblandat regn och åska"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Sleet showers"
+msgstr "Skurar av snöblandat regn"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Sleet"
+msgstr "Snöblandat regn"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy sleet and thunder"
+msgstr "Kraftigt snöblandat regn och åska"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy sleet showers and thunder"
+msgstr "Kraftiga skurar av snöblandat regn och åska"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy sleet showers"
+msgstr "Kraftiga skurar av snöblandat regn"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy sleet"
+msgstr "Kraftigt snöblandat regn"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light snow and thunder"
+msgstr "Lätt snöfall och åska"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light snow showers and thunder"
+msgstr "Lätta snöskurar och åska"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light snow showers"
+msgstr "Lätta snöskurar"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light snow"
+msgstr "Lätt snöfall"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Snow and thunder"
+msgstr "Snö och åska"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Snow showers and thunder"
+msgstr "Skurar med snö och åska"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Snow showers"
+msgstr "Skurar med snö"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Snow"
+msgstr "Snö"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy snow and thunder"
+msgstr "Kraftigt snöfall och åska"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy snow showers and thunder"
+msgstr "Kraftiga skurar med snö samt åska"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy snow showers"
+msgstr "Kraftiga skurar med snö"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy snow"
+msgstr "Kraftig snö"
 
 #. SOCIAL_MEDIA_TERMS['SUBSCRIBERS']
 #: searx/engines/lemmy.py:85 searx/searxng.msg
@@ -366,93 +561,93 @@ msgstr "stängd"
 msgid "answered"
 msgstr "svarad"
 
-#: searx/webapp.py:312
+#: searx/webapp.py:292
 msgid "No item found"
 msgstr "Inga artiklar hittade"
 
 #: searx/engines/qwant.py:291
-#: searx/templates/simple/result_templates/images.html:23 searx/webapp.py:314
+#: searx/templates/simple/result_templates/images.html:23 searx/webapp.py:294
 msgid "Source"
 msgstr "Källa"
 
-#: searx/webapp.py:316
+#: searx/webapp.py:296
 msgid "Error loading the next page"
 msgstr "Kunde inte ladda nästa sida"
 
-#: searx/webapp.py:469 searx/webapp.py:875
+#: searx/webapp.py:447 searx/webapp.py:845
 msgid "Invalid settings, please edit your preferences"
 msgstr "Ogiltiga inställningar, vänligen redigerar dina inställningar"
 
-#: searx/webapp.py:485
+#: searx/webapp.py:463
 msgid "Invalid settings"
 msgstr "Ogiltiga inställningar"
 
-#: searx/webapp.py:562 searx/webapp.py:652
+#: searx/webapp.py:540 searx/webapp.py:630
 msgid "search error"
 msgstr "sökfel"
 
-#: searx/webutils.py:36
+#: searx/webutils.py:35
 msgid "timeout"
 msgstr "avbrott"
 
-#: searx/webutils.py:37
+#: searx/webutils.py:36
 msgid "parsing error"
 msgstr "tolkningsfel"
 
-#: searx/webutils.py:38
+#: searx/webutils.py:37
 msgid "HTTP protocol error"
 msgstr "HTTP-protokollfel"
 
-#: searx/webutils.py:39
+#: searx/webutils.py:38
 msgid "network error"
 msgstr "nätverksfel"
 
-#: searx/webutils.py:40
+#: searx/webutils.py:39
 msgid "SSL error: certificate validation has failed"
 msgstr "SSL-fel: Valideringsfel av certifikatet"
 
-#: searx/webutils.py:42
+#: searx/webutils.py:41
 msgid "unexpected crash"
 msgstr "oförutsedd krasch"
 
-#: searx/webutils.py:49
+#: searx/webutils.py:48
 msgid "HTTP error"
 msgstr "HTTP-fel"
 
-#: searx/webutils.py:50
+#: searx/webutils.py:49
 msgid "HTTP connection error"
 msgstr "HTTP-uppkopplingsfel"
 
-#: searx/webutils.py:56
+#: searx/webutils.py:55
 msgid "proxy error"
 msgstr "proxyfel"
 
-#: searx/webutils.py:57
+#: searx/webutils.py:56
 msgid "CAPTCHA"
 msgstr "CAPTCHA"
 
-#: searx/webutils.py:58
+#: searx/webutils.py:57
 msgid "too many requests"
 msgstr "för många förfrågningar"
 
-#: searx/webutils.py:59
+#: searx/webutils.py:58
 msgid "access denied"
 msgstr "åtkomst nekad"
 
-#: searx/webutils.py:60
+#: searx/webutils.py:59
 msgid "server API error"
 msgstr "server API-fel"
 
-#: searx/webutils.py:79
+#: searx/webutils.py:78
 msgid "Suspended"
 msgstr "Avstängd"
 
-#: searx/webutils.py:314
+#: searx/webutils.py:313
 #, python-brace-format
 msgid "{minutes} minute(s) ago"
 msgstr "{minutes} minut(er) sedan"
 
-#: searx/webutils.py:315
+#: searx/webutils.py:314
 #, python-brace-format
 msgid "{hours} hour(s), {minutes} minute(s) ago"
 msgstr "{hours} timm(e/ar), {minutes} minut(er) sedan"
@@ -483,15 +678,15 @@ msgstr "Detta inlägg har ersatts av"
 msgid "Channel"
 msgstr "Kanal"
 
-#: searx/engines/radio_browser.py:105
+#: searx/engines/radio_browser.py:153
 msgid "bitrate"
 msgstr "bithastighet"
 
-#: searx/engines/radio_browser.py:106
+#: searx/engines/radio_browser.py:154
 msgid "votes"
 msgstr "röster"
 
-#: searx/engines/radio_browser.py:107
+#: searx/engines/radio_browser.py:155
 msgid "clicks"
 msgstr "klickar"
 
@@ -500,7 +695,7 @@ msgstr "klickar"
 msgid "Language"
 msgstr "Språk"
 
-#: searx/engines/semantic_scholar.py:79
+#: searx/engines/semantic_scholar.py:101
 #, python-brace-format
 msgid ""
 "{numCitations} citations from the year {firstCitationVelocityYear} to "
@@ -560,11 +755,15 @@ msgstr "Beräkna matematiska uttryck med sökfältet"
 msgid "Hash plugin"
 msgstr "Plugin för hash"
 
-#: searx/plugins/hash_plugin.py:35
-msgid "Converts strings to different hash digests."
-msgstr "Konverterar strängar till olika hashvärden."
+#: searx/plugins/hash_plugin.py:36
+msgid ""
+"Converts strings to different hash digests. Available functions: md5, "
+"sha1, sha224, sha256, sha384, sha512."
+msgstr ""
+"Konverterar strängar till olika hash-digester. Tillgängliga funktioner: "
+"md5, sha1, sha224, sha256, sha384, sha512."
 
-#: searx/plugins/hash_plugin.py:62
+#: searx/plugins/hash_plugin.py:64
 msgid "hash digest"
 msgstr "hashvärde"
 
@@ -573,9 +772,9 @@ msgid "Hostnames plugin"
 msgstr "Värdnamn plugin"
 
 #: searx/plugins/hostnames.py:124
-msgid "Rewrite hostnames, remove results or prioritize them based on the hostname"
+msgid "Rewrite hostnames and remove or prioritize results based on the hostname"
 msgstr ""
-"Skriva om värdnamn, ta bort resultat eller prioritera dem baserat på "
+"Skriv om värdnamn samt ta bort eller prioritera resultat baserat på "
 "värdnamnet"
 
 #: searx/plugins/oa_doi_rewrite.py:55
@@ -635,11 +834,11 @@ msgstr "Du använder Tor och det ser ut som du har den externa IP-adressen"
 msgid "You are not using Tor and you have the external IP address"
 msgstr "Du använder inte Tor och du har den externa IP-adressen"
 
-#: searx/plugins/tracker_url_remover.py:37
+#: searx/plugins/tracker_url_remover.py:35
 msgid "Tracker URL remover"
 msgstr "Ta bort URL för tracker"
 
-#: searx/plugins/tracker_url_remover.py:38
+#: searx/plugins/tracker_url_remover.py:36
 msgid "Remove trackers arguments from the returned URL"
 msgstr "Ta bort tracker-argument från den återgivna webbadressen"
 
@@ -650,6 +849,11 @@ msgstr "Plugin för enhetskonvertering"
 #: searx/plugins/unit_converter.py:50
 msgid "Convert between units"
 msgstr "Konvertera mellan enheter"
+
+#: searx/result_types/answer.py:224
+#, python-brace-format
+msgid "{location}: {temperature}, {condition}"
+msgstr "{location}: {temperature}, {condition}"
 
 #: searx/templates/simple/404.html:4
 msgid "Page not found"
@@ -728,10 +932,6 @@ msgstr "Upphovsman"
 #: searx/templates/simple/macros.html:50
 msgid "cached"
 msgstr "cachad"
-
-#: searx/templates/simple/macros.html:50
-msgid "proxied"
-msgstr "proxade"
 
 #: searx/templates/simple/new_issue.html:64
 msgid "Start submitting a new issue on GitHub"
@@ -969,6 +1169,10 @@ msgstr "Definitioner"
 msgid "Synonyms"
 msgstr "Synonymer"
 
+#: searx/templates/simple/answer/weather.html:19
+msgid "Feels Like"
+msgstr "Känns som"
+
 #: searx/templates/simple/elements/answers.html:2
 msgid "Answers"
 msgstr "Svar"
@@ -1146,16 +1350,16 @@ msgid "Autocomplete"
 msgstr "Slutför automatiskt"
 
 #: searx/templates/simple/preferences/autocomplete.html:15
-msgid "Find stuff as you type"
-msgstr "Hitta saker medan du skriver"
+msgid "Show possible queries as you type"
+msgstr "Visa sökförslag medan du skriver"
 
 #: searx/templates/simple/preferences/center_alignment.html:2
 msgid "Center Alignment"
 msgstr "Centrera"
 
 #: searx/templates/simple/preferences/center_alignment.html:14
-msgid "Displays results in the center of the page (Oscar layout)."
-msgstr "Centrera resultat på sidan (Oscar layout)."
+msgid "Display results in the center of the page (Oscar layout)."
+msgstr "Visa resultat centrerat på sidan (Oscar-layout)."
 
 #: searx/templates/simple/preferences/cookies.html:2
 msgid ""
@@ -1166,8 +1370,8 @@ msgstr ""
 "dator."
 
 #: searx/templates/simple/preferences/cookies.html:3
-msgid "With that list, you can assess SearXNG transparency."
-msgstr "Med den listan kan du bedöma SearXNG-transparens."
+msgid "With this list, you can assess the transparency of SearXNG."
+msgstr "Med denna lista kan du undersöka transparensen i SearXNG."
 
 #: searx/templates/simple/preferences/cookies.html:9
 msgid "Cookie name"
@@ -1227,11 +1431,11 @@ msgstr "Välj tjänst för DOI-omskrivning"
 
 #: searx/templates/simple/preferences/engines.html:9
 msgid ""
-"This tab does not exists in the user interface, but you can search in "
-"these engines by its !bangs."
+"This tab does not exist in the user interface, but you can search with "
+"these engines via !bangs."
 msgstr ""
-"Den här fliken finns inte i gränssnittet, men du kan söka i dessa "
-"sökmotorer med deras !bangs."
+"Denna flik existerar inte i användargränssnittet men du kan söka med "
+"dessa sökmotorer via !bangs."
 
 #: searx/templates/simple/preferences/engines.html:15
 msgid "Enable all"
@@ -1267,19 +1471,17 @@ msgstr "Visa faviconer intill sökresultat"
 
 #: searx/templates/simple/preferences/footer.html:2
 msgid ""
-"These settings are stored in your cookies, this allows us not to store "
+"These settings are stored in your cookies. This allows us not to store "
 "this data about you."
 msgstr ""
-"Dessa inställningar lagras i dina kakor, vilket gör att vi inte lagrar "
-"data om dig."
+"Dessa inställningar sparas i dina kakor, det förhindrar att vi sparar "
+"dessa data om dig."
 
 #: searx/templates/simple/preferences/footer.html:3
-msgid ""
-"These cookies serve your sole convenience, we don't use these cookies to "
-"track you."
+msgid "These cookies serve your sole convenience; we don't use them to track you."
 msgstr ""
-"Dessa kakor tjänar din egen bekvämlighet, vi använder inte dessa kakor "
-"för att spåra dig."
+"Dessa kakor är till för din bekvämlighet, vi använder dem inte för att "
+"spåra dig."
 
 #: searx/templates/simple/preferences/footer.html:6
 msgid "Save"
@@ -1314,16 +1516,20 @@ msgid "Image proxy"
 msgstr "Bildproxy"
 
 #: searx/templates/simple/preferences/image_proxy.html:14
-msgid "Proxying image results through SearXNG"
-msgstr "Använder proxy för bildresultat via SearXNG"
+msgid "Proxy image results through SearXNG"
+msgstr "Proxyavbildningsresultat genom SearXNG"
 
 #: searx/templates/simple/preferences/infinite_scroll.html:2
 msgid "Infinite scroll"
 msgstr "Oändlig bläddring"
 
 #: searx/templates/simple/preferences/infinite_scroll.html:14
-msgid "Automatically load next page when scrolling to bottom of current page"
-msgstr "Ladda automatiskt nästa sida när du bläddrar till botten av aktuell sida"
+msgid ""
+"Automatically load the next page when scrolling to the bottom of the "
+"current page"
+msgstr ""
+"Automatisk laddning av nästa sida vid bläddring till botten av nuvarande "
+"sida"
 
 #: searx/templates/simple/preferences/language.html:24
 msgid "What language do you prefer for search?"
@@ -1356,12 +1562,12 @@ msgstr ""
 "webbläsare kan spara denna titel"
 
 #: searx/templates/simple/preferences/results_on_new_tab.html:2
-msgid "Results on new tabs"
+msgid "Results in new tabs"
 msgstr "Resultat i nya flikar"
 
 #: searx/templates/simple/preferences/results_on_new_tab.html:14
-msgid "Open result links on new browser tabs"
-msgstr "Öppna resultat länkar i nya webbläsarflikar"
+msgid "Open result links in new browser tabs"
+msgstr "Öppna sökresultatslänkar i nya flikar"
 
 #: searx/templates/simple/preferences/safesearch.html:20
 msgid "Filter content"
@@ -1373,10 +1579,10 @@ msgstr "Sök vid val av kategori"
 
 #: searx/templates/simple/preferences/search_on_category_select.html:14
 msgid ""
-"Perform search immediately if a category selected. Disable to select "
-"multiple categories"
+"Perform a search immediately if a category is selected. Disable to select"
+" multiple categories"
 msgstr ""
-"Utför sökning omedelbart om en kategori väljs. Inaktivera för att välja "
+"Genomför sökning direkt om kategori är vald, inaktivera för att välja "
 "flera kategorier"
 
 #: searx/templates/simple/preferences/theme.html:2
@@ -1384,8 +1590,8 @@ msgid "Theme"
 msgstr "Tema"
 
 #: searx/templates/simple/preferences/theme.html:14
-msgid "Change SearXNG layout"
-msgstr "Ändra SearXNG-layout"
+msgid "Change the layout of SearXNG"
+msgstr "Ändra layout en för SearXNG"
 
 #: searx/templates/simple/preferences/theme.html:19
 msgid "Theme style"
@@ -1832,7 +2038,7 @@ msgstr "göm video"
 #~ msgstr ""
 
 #~ msgid "Displays results in the center of the page (Oscar layout)."
-#~ msgstr ""
+#~ msgstr "Centrera resultat på sidan (Oscar layout)."
 
 #~ msgid "preferences"
 #~ msgstr "inställningar"
@@ -2101,3 +2307,77 @@ msgstr "göm video"
 #~ "inställningarnas URL kan användas för "
 #~ "att synkronisera inställningar mellan olika"
 #~ " enheter."
+
+#~ msgid "proxied"
+#~ msgstr "proxade"
+
+#~ msgid ""
+#~ "This tab does not exists in the"
+#~ " user interface, but you can search"
+#~ " in these engines by its !bangs."
+#~ msgstr ""
+#~ "Den här fliken finns inte i "
+#~ "gränssnittet, men du kan söka i "
+#~ "dessa sökmotorer med deras !bangs."
+
+#~ msgid "Results on new tabs"
+#~ msgstr "Resultat i nya flikar"
+
+#~ msgid "Open result links on new browser tabs"
+#~ msgstr "Öppna resultat länkar i nya webbläsarflikar"
+
+#~ msgid "Find stuff as you type"
+#~ msgstr "Hitta saker medan du skriver"
+
+#~ msgid "Converts strings to different hash digests."
+#~ msgstr "Konverterar strängar till olika hashvärden."
+
+#~ msgid ""
+#~ "Rewrite hostnames, remove results or "
+#~ "prioritize them based on the hostname"
+#~ msgstr ""
+#~ "Skriva om värdnamn, ta bort resultat "
+#~ "eller prioritera dem baserat på "
+#~ "värdnamnet"
+
+#~ msgid "With that list, you can assess SearXNG transparency."
+#~ msgstr "Med den listan kan du bedöma SearXNG-transparens."
+
+#~ msgid ""
+#~ "These settings are stored in your "
+#~ "cookies, this allows us not to "
+#~ "store this data about you."
+#~ msgstr ""
+#~ "Dessa inställningar lagras i dina kakor,"
+#~ " vilket gör att vi inte lagrar "
+#~ "data om dig."
+
+#~ msgid ""
+#~ "These cookies serve your sole "
+#~ "convenience, we don't use these cookies"
+#~ " to track you."
+#~ msgstr ""
+#~ "Dessa kakor tjänar din egen "
+#~ "bekvämlighet, vi använder inte dessa "
+#~ "kakor för att spåra dig."
+
+#~ msgid "Proxying image results through SearXNG"
+#~ msgstr "Använder proxy för bildresultat via SearXNG"
+
+#~ msgid "Automatically load next page when scrolling to bottom of current page"
+#~ msgstr ""
+#~ "Ladda automatiskt nästa sida när du "
+#~ "bläddrar till botten av aktuell sida"
+
+#~ msgid ""
+#~ "Perform search immediately if a category"
+#~ " selected. Disable to select multiple "
+#~ "categories"
+#~ msgstr ""
+#~ "Utför sökning omedelbart om en kategori"
+#~ " väljs. Inaktivera för att välja "
+#~ "flera kategorier"
+
+#~ msgid "Change SearXNG layout"
+#~ msgstr "Ändra SearXNG-layout"
+

@@ -4,6 +4,7 @@
 
 STATIC_BUILD_COMMIT="[build] /static"
 STATIC_BUILT_PATHS=(
+    'searx/templates/simple/icons.html'
     'searx/static/themes/simple'
     'client/simple/package-lock.json'
 )
@@ -97,7 +98,8 @@ static.build.commit() {
 
     (   set -e
         # fix & build the themes
-	    themes.fix
+        themes.fix
+        themes.lint
         themes.all
 
         # add build files

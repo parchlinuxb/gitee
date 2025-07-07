@@ -18,19 +18,18 @@
 # Priit Jõerüüt <jrtcdbrg@noreply.codeberg.org>, 2025.
 msgid ""
 msgstr ""
-"Project-Id-Version: searx\n"
+"Project-Id-Version:  searx\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-03-29 09:21+0000\n"
-"PO-Revision-Date: 2025-03-30 01:58+0000\n"
+"POT-Creation-Date: 2025-07-03 14:46+0000\n"
+"PO-Revision-Date: 2025-06-26 02:46+0000\n"
 "Last-Translator: Priit Jõerüüt <jrtcdbrg@noreply.codeberg.org>\n"
-"Language-Team: Estonian <https://translate.codeberg.org/projects/searxng/"
-"searxng/et/>\n"
 "Language: et\n"
+"Language-Team: Estonian "
+"<https://translate.codeberg.org/projects/searxng/searxng/et/>\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.2\n"
 "Generated-By: Babel 2.17.0\n"
 
 #. CONSTANT_NAMES['NO_SUBGROUPING']
@@ -74,7 +73,7 @@ msgid "videos"
 msgstr "videod"
 
 #. CATEGORY_NAMES['RADIO']
-#: searx/engines/radio_browser.py:103 searx/searxng.msg
+#: searx/engines/radio_browser.py:151 searx/searxng.msg
 msgid "radio"
 msgstr "raadio"
 
@@ -184,111 +183,307 @@ msgid "About"
 msgstr "SearXNG teave"
 
 #. WEATHER_TERMS['AVERAGE TEMP.']
-#: searx/engines/wttr.py:32 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Average temp."
 msgstr "Keskmine temperatuur"
 
 #. WEATHER_TERMS['CLOUD COVER']
-#: searx/engines/open_meteo.py:91 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Cloud cover"
 msgstr "Pilvekate"
 
 #. WEATHER_TERMS['CONDITION']
-#: searx/engines/duckduckgo_weather.py:45 searx/engines/wttr.py:51
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:45 searx/searxng.msg
 msgid "Condition"
 msgstr "Olud"
 
 #. WEATHER_TERMS['CURRENT CONDITION']
-#: searx/engines/duckduckgo_weather.py:118 searx/engines/wttr.py:104
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:118 searx/searxng.msg
 msgid "Current condition"
 msgstr "Praegused olud"
 
 #. WEATHER_TERMS['EVENING']
-#: searx/engines/wttr.py:100 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Evening"
 msgstr "Õhtu"
 
 #. WEATHER_TERMS['FEELS LIKE']
-#: searx/engines/duckduckgo_weather.py:53 searx/engines/open_meteo.py:81
-#: searx/engines/wttr.py:59 searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:53 searx/searxng.msg
 msgid "Feels like"
 msgstr "Tundub nagu"
 
 #. WEATHER_TERMS['HUMIDITY']
-#: searx/engines/duckduckgo_weather.py:64 searx/engines/open_meteo.py:93
-#: searx/engines/wttr.py:68 searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:64 searx/searxng.msg
+#: searx/templates/simple/answer/weather.html:29
 msgid "Humidity"
 msgstr "Niiskus"
 
 #. WEATHER_TERMS['MAX TEMP.']
-#: searx/engines/duckduckgo_weather.py:77 searx/engines/wttr.py:34
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:77 searx/searxng.msg
 msgid "Max temp."
 msgstr "Maksimaalne temp."
 
 #. WEATHER_TERMS['MIN TEMP.']
-#: searx/engines/duckduckgo_weather.py:73 searx/engines/wttr.py:33
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:73 searx/searxng.msg
 msgid "Min temp."
 msgstr "Minimaalne temp."
 
 #. WEATHER_TERMS['MORNING']
-#: searx/engines/wttr.py:100 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Morning"
 msgstr "Hommik"
 
 #. WEATHER_TERMS['NIGHT']
-#: searx/engines/wttr.py:100 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Night"
 msgstr "Öö"
 
 #. WEATHER_TERMS['NOON']
-#: searx/engines/wttr.py:100 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Noon"
 msgstr "Keskpäev"
 
 #. WEATHER_TERMS['PRESSURE']
-#: searx/engines/open_meteo.py:95 searx/searxng.msg
+#: searx/searxng.msg searx/templates/simple/answer/weather.html:25
 msgid "Pressure"
 msgstr "Õhurõhk"
 
 #. WEATHER_TERMS['SUNRISE']
-#: searx/engines/duckduckgo_weather.py:81 searx/engines/wttr.py:36
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:81 searx/searxng.msg
 msgid "Sunrise"
 msgstr "Päikesetõus"
 
 #. WEATHER_TERMS['SUNSET']
-#: searx/engines/duckduckgo_weather.py:82 searx/engines/wttr.py:37
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:82 searx/searxng.msg
 msgid "Sunset"
 msgstr "Päikeseloojang"
 
 #. WEATHER_TERMS['TEMPERATURE']
-#: searx/engines/duckduckgo_weather.py:48 searx/engines/open_meteo.py:76
-#: searx/engines/wttr.py:55 searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:48 searx/searxng.msg
+#: searx/templates/simple/answer/weather.html:17
 msgid "Temperature"
 msgstr "Temperatuur"
 
 #. WEATHER_TERMS['UV INDEX']
-#: searx/engines/duckduckgo_weather.py:80 searx/engines/wttr.py:35
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:80 searx/searxng.msg
 msgid "UV index"
 msgstr "UV indeks"
 
 #. WEATHER_TERMS['VISIBILITY']
-#: searx/engines/duckduckgo_weather.py:62 searx/engines/wttr.py:66
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:62 searx/searxng.msg
 msgid "Visibility"
 msgstr "Nähtavus"
 
 #. WEATHER_TERMS['WIND']
-#: searx/engines/duckduckgo_weather.py:58 searx/engines/open_meteo.py:86
-#: searx/engines/wttr.py:62 searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:58 searx/searxng.msg
+#: searx/templates/simple/answer/weather.html:23
 msgid "Wind"
 msgstr "Tuul"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Clear sky"
+msgstr "Selge taevas"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Partly cloudy"
+msgstr "Osaline pilvisus"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Cloudy"
+msgstr "Pilvine"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Fair"
+msgstr "Ilus ilm"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Fog"
+msgstr "Udu"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light rain and thunder"
+msgstr "Kerge vihmasadu koos äiksega"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light rain showers and thunder"
+msgstr "Kerge hoogvihm koos äiksega"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light rain showers"
+msgstr "Kerge hoogvihm"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light rain"
+msgstr "Kerge vihm"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Rain and thunder"
+msgstr "Vihm koos äiksega"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Rain showers and thunder"
+msgstr "Hoogvihm koos äiksega"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Rain showers"
+msgstr "Hoogvihm"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Rain"
+msgstr "Vihmasadu"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy rain and thunder"
+msgstr "Tugev vihmasadu koos äiksega"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy rain showers and thunder"
+msgstr "Tugev hoogvihm koos äiksega"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy rain showers"
+msgstr "Tugev hoogvihm"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy rain"
+msgstr "Tugev vihm"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light sleet and thunder"
+msgstr "Kerge lörts koos äiksega"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light sleet showers and thunder"
+msgstr "Kerge lauslörts koos äiksega"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light sleet showers"
+msgstr "Kerge lauslörts"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light sleet"
+msgstr "Kerge lörts"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Sleet and thunder"
+msgstr "Lörts koos äiksega"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Sleet showers and thunder"
+msgstr "Hooglörts koos äiksega"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Sleet showers"
+msgstr "Hooglörts"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Sleet"
+msgstr "Lörts"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy sleet and thunder"
+msgstr "Tugev lauslörts koos äiksega"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy sleet showers and thunder"
+msgstr "Hoogne lauslörts koos äiksega"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy sleet showers"
+msgstr "Hoogne lörts"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy sleet"
+msgstr "Tugev lauslörts"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light snow and thunder"
+msgstr "Kerge lumesadu koos äiksega"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light snow showers and thunder"
+msgstr "Kerge hooglumi koos äiksega"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light snow showers"
+msgstr "Kerge hooglumi"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light snow"
+msgstr "Kerge lumesadu"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Snow and thunder"
+msgstr "Lumesadu koos äiksega"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Snow showers and thunder"
+msgstr "Hooglumi koos äiksega"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Snow showers"
+msgstr "Hooglumi"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Snow"
+msgstr "Lumesadu"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy snow and thunder"
+msgstr "Tugev lumesadu koos äiksega"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy snow showers and thunder"
+msgstr "Tugev hooglumi koos äiksega"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy snow showers"
+msgstr "Tugev hooglumi"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy snow"
+msgstr "Tugev lumesadu"
 
 #. SOCIAL_MEDIA_TERMS['SUBSCRIBERS']
 #: searx/engines/lemmy.py:85 searx/searxng.msg
@@ -351,93 +546,93 @@ msgstr "suletud"
 msgid "answered"
 msgstr "vastatud"
 
-#: searx/webapp.py:312
+#: searx/webapp.py:292
 msgid "No item found"
 msgstr "Üksust ei leitud"
 
 #: searx/engines/qwant.py:291
-#: searx/templates/simple/result_templates/images.html:23 searx/webapp.py:314
+#: searx/templates/simple/result_templates/images.html:23 searx/webapp.py:294
 msgid "Source"
 msgstr "Allikas"
 
-#: searx/webapp.py:316
+#: searx/webapp.py:296
 msgid "Error loading the next page"
 msgstr "Viga järgmise lehekülje laadimisel"
 
-#: searx/webapp.py:469 searx/webapp.py:875
+#: searx/webapp.py:447 searx/webapp.py:845
 msgid "Invalid settings, please edit your preferences"
 msgstr "Sobimatud seaded, palun muuda oma eelistusi"
 
-#: searx/webapp.py:485
+#: searx/webapp.py:463
 msgid "Invalid settings"
 msgstr "Sobimatud seaded"
 
-#: searx/webapp.py:562 searx/webapp.py:652
+#: searx/webapp.py:540 searx/webapp.py:630
 msgid "search error"
 msgstr "otsingu viga"
 
-#: searx/webutils.py:36
+#: searx/webutils.py:35
 msgid "timeout"
 msgstr "päring aegus"
 
-#: searx/webutils.py:37
+#: searx/webutils.py:36
 msgid "parsing error"
 msgstr "parsimise viga"
 
-#: searx/webutils.py:38
+#: searx/webutils.py:37
 msgid "HTTP protocol error"
 msgstr "HTTP-protokolli viga"
 
-#: searx/webutils.py:39
+#: searx/webutils.py:38
 msgid "network error"
 msgstr "võrguviga"
 
-#: searx/webutils.py:40
+#: searx/webutils.py:39
 msgid "SSL error: certificate validation has failed"
 msgstr "SSL viga: sertifikaadi valideerimine ei õnnestunud"
 
-#: searx/webutils.py:42
+#: searx/webutils.py:41
 msgid "unexpected crash"
 msgstr "ootamatu krahh"
 
-#: searx/webutils.py:49
+#: searx/webutils.py:48
 msgid "HTTP error"
 msgstr "HTTP-viga"
 
-#: searx/webutils.py:50
+#: searx/webutils.py:49
 msgid "HTTP connection error"
 msgstr "HTTP-ühenduse viga"
 
-#: searx/webutils.py:56
+#: searx/webutils.py:55
 msgid "proxy error"
 msgstr "proksiserveri viga"
 
-#: searx/webutils.py:57
+#: searx/webutils.py:56
 msgid "CAPTCHA"
 msgstr "ROBOTILÕKS"
 
-#: searx/webutils.py:58
+#: searx/webutils.py:57
 msgid "too many requests"
 msgstr "liiga palju päringuid"
 
-#: searx/webutils.py:59
+#: searx/webutils.py:58
 msgid "access denied"
 msgstr "ligipääs keelatud"
 
-#: searx/webutils.py:60
+#: searx/webutils.py:59
 msgid "server API error"
 msgstr "serveri API viga"
 
-#: searx/webutils.py:79
+#: searx/webutils.py:78
 msgid "Suspended"
 msgstr "Peatatud"
 
-#: searx/webutils.py:314
+#: searx/webutils.py:313
 #, python-brace-format
 msgid "{minutes} minute(s) ago"
 msgstr "{minutes} minut(it) tagasi"
 
-#: searx/webutils.py:315
+#: searx/webutils.py:314
 #, python-brace-format
 msgid "{hours} hour(s), {minutes} minute(s) ago"
 msgstr "{hours} tund(i), {minutes} minut(it) tagasi"
@@ -468,15 +663,15 @@ msgstr "See üksus on asendatud"
 msgid "Channel"
 msgstr "Kanal"
 
-#: searx/engines/radio_browser.py:105
+#: searx/engines/radio_browser.py:153
 msgid "bitrate"
 msgstr "bitikiirus"
 
-#: searx/engines/radio_browser.py:106
+#: searx/engines/radio_browser.py:154
 msgid "votes"
 msgstr "hääled"
 
-#: searx/engines/radio_browser.py:107
+#: searx/engines/radio_browser.py:155
 msgid "clicks"
 msgstr "klikid"
 
@@ -485,7 +680,7 @@ msgstr "klikid"
 msgid "Language"
 msgstr "Keel"
 
-#: searx/engines/semantic_scholar.py:79
+#: searx/engines/semantic_scholar.py:101
 #, python-brace-format
 msgid ""
 "{numCitations} citations from the year {firstCitationVelocityYear} to "
@@ -546,11 +741,15 @@ msgstr "Arvuta otsinguribal matemaatilisi avaldisi"
 msgid "Hash plugin"
 msgstr "Räsiarvutuse lisamoodul"
 
-#: searx/plugins/hash_plugin.py:35
-msgid "Converts strings to different hash digests."
-msgstr "Teisendab sõned erinevateks räsitud sõnumilühenditeks."
+#: searx/plugins/hash_plugin.py:36
+msgid ""
+"Converts strings to different hash digests. Available functions: md5, "
+"sha1, sha224, sha256, sha384, sha512."
+msgstr ""
+"Teisendab etteantud teksti räsideks. Kasutatavad räsifunktsioonid: md5, "
+"sha1, sha224, sha256, sha384, sha512."
 
-#: searx/plugins/hash_plugin.py:62
+#: searx/plugins/hash_plugin.py:64
 msgid "hash digest"
 msgstr "räsitud sõnumilühend"
 
@@ -559,10 +758,10 @@ msgid "Hostnames plugin"
 msgstr "Hostide lisamoodul"
 
 #: searx/plugins/hostnames.py:124
-msgid "Rewrite hostnames, remove results or prioritize them based on the hostname"
+msgid "Rewrite hostnames and remove or prioritize results based on the hostname"
 msgstr ""
-"Väärtusta hostide nimesid, eemalda tulemusi või muuda nende järjekorda "
-"hosti nime alusel"
+"Asenda hostide nimesid ning eemalda või muuda tulemuste järjestust "
+"hostinimede alusel"
 
 #: searx/plugins/oa_doi_rewrite.py:55
 msgid "Open Access DOI rewrite"
@@ -621,11 +820,11 @@ msgstr "Sa kasutad Tori võrku ja tundub, et olemas on väline ip-aadress"
 msgid "You are not using Tor and you have the external IP address"
 msgstr "Sa ei kasuta Tori võrku ja sinu arvutil/nutiseadmel on väline ip-aadress"
 
-#: searx/plugins/tracker_url_remover.py:37
+#: searx/plugins/tracker_url_remover.py:35
 msgid "Tracker URL remover"
 msgstr "Jälitajate eemaldus URList"
 
-#: searx/plugins/tracker_url_remover.py:38
+#: searx/plugins/tracker_url_remover.py:36
 msgid "Remove trackers arguments from the returned URL"
 msgstr "Eemaldab jälitavad argumendid tagastatud URList"
 
@@ -636,6 +835,11 @@ msgstr "Ühikute konverteerimise lisamoodul"
 #: searx/plugins/unit_converter.py:50
 msgid "Convert between units"
 msgstr "Konverteeri eri ühikute vahel"
+
+#: searx/result_types/answer.py:224
+#, python-brace-format
+msgid "{location}: {temperature}, {condition}"
+msgstr "{location}: {temperature}, {condition}"
 
 #: searx/templates/simple/404.html:4
 msgid "Page not found"
@@ -686,7 +890,7 @@ msgstr "Avalikud serverid"
 
 #: searx/templates/simple/base.html:75
 msgid "Privacy policy"
-msgstr "Privaatsuspoliitika"
+msgstr "Andmekaitsepõhimõtted"
 
 #: searx/templates/simple/base.html:78
 msgid "Contact instance maintainer"
@@ -714,10 +918,6 @@ msgstr "Autor"
 #: searx/templates/simple/macros.html:50
 msgid "cached"
 msgstr "vahemälus"
-
-#: searx/templates/simple/macros.html:50
-msgid "proxied"
-msgstr "proksiserveris"
 
 #: searx/templates/simple/new_issue.html:64
 msgid "Start submitting a new issue on GitHub"
@@ -755,7 +955,7 @@ msgstr "Vaata vealogisid ja esita veateade"
 
 #: searx/templates/simple/preferences.html:74
 msgid "!bang for this engine"
-msgstr "!bang selle mootori jaoks"
+msgstr "!bang selle otsingumootori jaoks"
 
 #: searx/templates/simple/preferences.html:80
 msgid "!bang for its categories"
@@ -957,6 +1157,10 @@ msgstr "Määratlused"
 msgid "Synonyms"
 msgstr "Sünonüümid"
 
+#: searx/templates/simple/answer/weather.html:19
+msgid "Feels Like"
+msgstr "Tundub nagu"
+
 #: searx/templates/simple/elements/answers.html:2
 msgid "Answers"
 msgstr "Vastused"
@@ -1134,16 +1338,16 @@ msgid "Autocomplete"
 msgstr "Automaattäide"
 
 #: searx/templates/simple/preferences/autocomplete.html:15
-msgid "Find stuff as you type"
-msgstr "Otsi asju kirjutamise ajal"
+msgid "Show possible queries as you type"
+msgstr "Sisestamise ajal näita võimalikke päringuid"
 
 #: searx/templates/simple/preferences/center_alignment.html:2
 msgid "Center Alignment"
 msgstr "Keskele joondamine"
 
 #: searx/templates/simple/preferences/center_alignment.html:14
-msgid "Displays results in the center of the page (Oscar layout)."
-msgstr "Kuvab tulemused lehekülje keskel (Oscari paigutus)."
+msgid "Display results in the center of the page (Oscar layout)."
+msgstr "Näita tulemusi lehe keskel (Oskari paigutus)."
 
 #: searx/templates/simple/preferences/cookies.html:2
 msgid ""
@@ -1154,8 +1358,8 @@ msgstr ""
 "arvutisse salvestab."
 
 #: searx/templates/simple/preferences/cookies.html:3
-msgid "With that list, you can assess SearXNG transparency."
-msgstr "Selle loetelu abil saad hinnata SearXNG läbipaistvust."
+msgid "With this list, you can assess the transparency of SearXNG."
+msgstr "Selle loendi alusel saad hinnata SearXNG läbipaistvust või korrektsust."
 
 #: searx/templates/simple/preferences/cookies.html:9
 msgid "Cookie name"
@@ -1215,11 +1419,11 @@ msgstr "Vali teenus mida kasutab DOI ümberkirjutamine"
 
 #: searx/templates/simple/preferences/engines.html:9
 msgid ""
-"This tab does not exists in the user interface, but you can search in "
-"these engines by its !bangs."
+"This tab does not exist in the user interface, but you can search with "
+"these engines via !bangs."
 msgstr ""
-"Seda vahekaarti ei ole kasutajaliideses olemas, kuid sa saad otsida neis "
-"mootorites selle !bang järgi."
+"Seda vahekaarti kasutajaliideses ei leidu, aga neid otsingumootoreid saad"
+" kasutada !bang käskudega."
 
 #: searx/templates/simple/preferences/engines.html:15
 msgid "Enable all"
@@ -1255,18 +1459,16 @@ msgstr "Kuva otsingutulemuste kõrval saidiikoone"
 
 #: searx/templates/simple/preferences/footer.html:2
 msgid ""
-"These settings are stored in your cookies, this allows us not to store "
+"These settings are stored in your cookies. This allows us not to store "
 "this data about you."
 msgstr ""
-"Need seaded salvestatame sinu brauseri küpsistes ja see annab meile "
-"võimaluse sinu kohta andmeid meie serveris mitte salvestada."
+"Need seadistused on salvestatud küpsistes. See tagab, et me ei pea sinu "
+"kohta andmeid koguma."
 
 #: searx/templates/simple/preferences/footer.html:3
-msgid ""
-"These cookies serve your sole convenience, we don't use these cookies to "
-"track you."
+msgid "These cookies serve your sole convenience; we don't use them to track you."
 msgstr ""
-"Need küpsised on vaid mugavuse tarbeks, me ei kasuta neid sinu "
+"Need küpsised on kasutusel mugavuse mõttes - me ei kasuta neid sinu "
 "jälitamiseks."
 
 #: searx/templates/simple/preferences/footer.html:6
@@ -1302,16 +1504,18 @@ msgid "Image proxy"
 msgstr "Pildiproksi"
 
 #: searx/templates/simple/preferences/image_proxy.html:14
-msgid "Proxying image results through SearXNG"
-msgstr "Pildiotsingu tulemuste edastamine SearXNG kaudu"
+msgid "Proxy image results through SearXNG"
+msgstr "SearXNG pildiotsingu tulemused läbi proksi"
 
 #: searx/templates/simple/preferences/infinite_scroll.html:2
 msgid "Infinite scroll"
-msgstr "Lõpmatu kerimine"
+msgstr "Lõputu kerimine"
 
 #: searx/templates/simple/preferences/infinite_scroll.html:14
-msgid "Automatically load next page when scrolling to bottom of current page"
-msgstr "Laadi lehe lõppu kerimisel järgmine leht automaatselt"
+msgid ""
+"Automatically load the next page when scrolling to the bottom of the "
+"current page"
+msgstr "Kerides senise lehe lõppu kuvatakse järgmine leht automaatselt"
 
 #: searx/templates/simple/preferences/language.html:24
 msgid "What language do you prefer for search?"
@@ -1342,12 +1546,12 @@ msgstr ""
 "brauser võib selle pealkirja salvestada"
 
 #: searx/templates/simple/preferences/results_on_new_tab.html:2
-msgid "Results on new tabs"
-msgstr "Tulemused uutel kaartidel"
+msgid "Results in new tabs"
+msgstr "Tulemused uutel vahekaartidel"
 
 #: searx/templates/simple/preferences/results_on_new_tab.html:14
-msgid "Open result links on new browser tabs"
-msgstr "Ava tulemuste lingid uutel brauserikaartidel"
+msgid "Open result links in new browser tabs"
+msgstr "Ava otsingutulemused brauseri uutel vahekaartidel"
 
 #: searx/templates/simple/preferences/safesearch.html:20
 msgid "Filter content"
@@ -1359,19 +1563,19 @@ msgstr "Otsi kategooria valimisel"
 
 #: searx/templates/simple/preferences/search_on_category_select.html:14
 msgid ""
-"Perform search immediately if a category selected. Disable to select "
-"multiple categories"
+"Perform a search immediately if a category is selected. Disable to select"
+" multiple categories"
 msgstr ""
-"Teosta otsing kohe kui kategooria on valitud. Mitme kategooria valimiseks"
-" keela see eelistus"
+"Kategooria valimisel käivitub otsing automaatselt. Kui soovid valida "
+"mitut kategooriat, siis lülita see valik välja"
 
 #: searx/templates/simple/preferences/theme.html:2
 msgid "Theme"
 msgstr "Teema"
 
 #: searx/templates/simple/preferences/theme.html:14
-msgid "Change SearXNG layout"
-msgstr "Muuda SearXNG paigutust"
+msgid "Change the layout of SearXNG"
+msgstr "Muuda SearXNG lehe paigutust"
 
 #: searx/templates/simple/preferences/theme.html:19
 msgid "Theme style"
@@ -1817,7 +2021,7 @@ msgstr "peida video"
 #~ msgstr ""
 
 #~ msgid "Displays results in the center of the page (Oscar layout)."
-#~ msgstr ""
+#~ msgstr "Kuvab tulemused lehekülje keskel (Oscari paigutus)."
 
 #~ msgid "preferences"
 #~ msgstr "eelistused"
@@ -2076,3 +2280,75 @@ msgstr "peida video"
 #~ "Kohandatud seadete määramine eelistuste URL-i"
 #~ " saad kasutada eelistuste sünkroniseerimiseks "
 #~ "eri seadmete vahel."
+
+#~ msgid "proxied"
+#~ msgstr "proksiserveris"
+
+#~ msgid ""
+#~ "This tab does not exists in the"
+#~ " user interface, but you can search"
+#~ " in these engines by its !bangs."
+#~ msgstr ""
+#~ "Seda vahekaarti ei ole kasutajaliideses "
+#~ "olemas, kuid sa saad otsida neis "
+#~ "mootorites selle !bang järgi."
+
+#~ msgid "Results on new tabs"
+#~ msgstr "Tulemused uutel kaartidel"
+
+#~ msgid "Open result links on new browser tabs"
+#~ msgstr "Ava tulemuste lingid uutel brauserikaartidel"
+
+#~ msgid "Find stuff as you type"
+#~ msgstr "Otsi asju kirjutamise ajal"
+
+#~ msgid "Converts strings to different hash digests."
+#~ msgstr "Teisendab sõned erinevateks räsitud sõnumilühenditeks."
+
+#~ msgid ""
+#~ "Rewrite hostnames, remove results or "
+#~ "prioritize them based on the hostname"
+#~ msgstr ""
+#~ "Väärtusta hostide nimesid, eemalda tulemusi"
+#~ " või muuda nende järjekorda hosti "
+#~ "nime alusel"
+
+#~ msgid "With that list, you can assess SearXNG transparency."
+#~ msgstr "Selle loetelu abil saad hinnata SearXNG läbipaistvust."
+
+#~ msgid ""
+#~ "These settings are stored in your "
+#~ "cookies, this allows us not to "
+#~ "store this data about you."
+#~ msgstr ""
+#~ "Need seaded salvestatame sinu brauseri "
+#~ "küpsistes ja see annab meile võimaluse"
+#~ " sinu kohta andmeid meie serveris "
+#~ "mitte salvestada."
+
+#~ msgid ""
+#~ "These cookies serve your sole "
+#~ "convenience, we don't use these cookies"
+#~ " to track you."
+#~ msgstr ""
+#~ "Need küpsised on vaid mugavuse tarbeks,"
+#~ " me ei kasuta neid sinu jälitamiseks."
+
+#~ msgid "Proxying image results through SearXNG"
+#~ msgstr "Pildiotsingu tulemuste edastamine SearXNG kaudu"
+
+#~ msgid "Automatically load next page when scrolling to bottom of current page"
+#~ msgstr "Laadi lehe lõppu kerimisel järgmine leht automaatselt"
+
+#~ msgid ""
+#~ "Perform search immediately if a category"
+#~ " selected. Disable to select multiple "
+#~ "categories"
+#~ msgstr ""
+#~ "Teosta otsing kohe kui kategooria on "
+#~ "valitud. Mitme kategooria valimiseks keela "
+#~ "see eelistus"
+
+#~ msgid "Change SearXNG layout"
+#~ msgstr "Muuda SearXNG paigutust"
+

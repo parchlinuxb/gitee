@@ -10,14 +10,15 @@
 # Obligate <Obligate@users.noreply.translate.codeberg.org>, 2024.
 # Anonymous <anonymous@users.noreply.translate.codeberg.org>, 2025.
 # Obligate <obligate@users.noreply.translate.codeberg.org>, 2025.
+# sandijs <sandijs@noreply.codeberg.org>, 2025.
+# return42 <return42@noreply.codeberg.org>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-03-29 09:21+0000\n"
-"PO-Revision-Date: 2025-01-06 15:53+0000\n"
-"Last-Translator: return42 <return42@users.noreply.translate.codeberg.org>"
-"\n"
+"POT-Creation-Date: 2025-07-03 14:46+0000\n"
+"PO-Revision-Date: 2025-06-22 17:06+0000\n"
+"Last-Translator: return42 <return42@noreply.codeberg.org>\n"
 "Language: lv\n"
 "Language-Team: Latvian "
 "<https://translate.codeberg.org/projects/searxng/searxng/lv/>\n"
@@ -69,7 +70,7 @@ msgid "videos"
 msgstr "video"
 
 #. CATEGORY_NAMES['RADIO']
-#: searx/engines/radio_browser.py:103 searx/searxng.msg
+#: searx/engines/radio_browser.py:151 searx/searxng.msg
 msgid "radio"
 msgstr "radio"
 
@@ -166,7 +167,7 @@ msgstr "tumšs"
 #. STYLE_NAMES['BLACK']
 #: searx/searxng.msg
 msgid "black"
-msgstr ""
+msgstr "melns"
 
 #. BRAND_CUSTOM_LINKS['UPTIME']
 #: searx/searxng.msg
@@ -179,111 +180,307 @@ msgid "About"
 msgstr "Par"
 
 #. WEATHER_TERMS['AVERAGE TEMP.']
-#: searx/engines/wttr.py:32 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Average temp."
 msgstr "Vidējā temp."
 
 #. WEATHER_TERMS['CLOUD COVER']
-#: searx/engines/open_meteo.py:91 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Cloud cover"
 msgstr "Mākoņu klājums"
 
 #. WEATHER_TERMS['CONDITION']
-#: searx/engines/duckduckgo_weather.py:45 searx/engines/wttr.py:51
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:45 searx/searxng.msg
 msgid "Condition"
 msgstr "Stāvoklis"
 
 #. WEATHER_TERMS['CURRENT CONDITION']
-#: searx/engines/duckduckgo_weather.py:118 searx/engines/wttr.py:104
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:118 searx/searxng.msg
 msgid "Current condition"
 msgstr "Pašreizējais stāvoklis"
 
 #. WEATHER_TERMS['EVENING']
-#: searx/engines/wttr.py:100 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Evening"
 msgstr "Vakara"
 
 #. WEATHER_TERMS['FEELS LIKE']
-#: searx/engines/duckduckgo_weather.py:53 searx/engines/open_meteo.py:81
-#: searx/engines/wttr.py:59 searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:53 searx/searxng.msg
 msgid "Feels like"
 msgstr "Pēc sajūtām"
 
 #. WEATHER_TERMS['HUMIDITY']
-#: searx/engines/duckduckgo_weather.py:64 searx/engines/open_meteo.py:93
-#: searx/engines/wttr.py:68 searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:64 searx/searxng.msg
+#: searx/templates/simple/answer/weather.html:29
 msgid "Humidity"
 msgstr "Mitrums"
 
 #. WEATHER_TERMS['MAX TEMP.']
-#: searx/engines/duckduckgo_weather.py:77 searx/engines/wttr.py:34
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:77 searx/searxng.msg
 msgid "Max temp."
 msgstr "Maksimālā temp."
 
 #. WEATHER_TERMS['MIN TEMP.']
-#: searx/engines/duckduckgo_weather.py:73 searx/engines/wttr.py:33
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:73 searx/searxng.msg
 msgid "Min temp."
 msgstr "Minimālā temp."
 
 #. WEATHER_TERMS['MORNING']
-#: searx/engines/wttr.py:100 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Morning"
 msgstr "Rīts"
 
 #. WEATHER_TERMS['NIGHT']
-#: searx/engines/wttr.py:100 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Night"
 msgstr "Nakts"
 
 #. WEATHER_TERMS['NOON']
-#: searx/engines/wttr.py:100 searx/searxng.msg
+#: searx/searxng.msg
 msgid "Noon"
 msgstr "Pusdiena"
 
 #. WEATHER_TERMS['PRESSURE']
-#: searx/engines/open_meteo.py:95 searx/searxng.msg
+#: searx/searxng.msg searx/templates/simple/answer/weather.html:25
 msgid "Pressure"
 msgstr "Spiediens"
 
 #. WEATHER_TERMS['SUNRISE']
-#: searx/engines/duckduckgo_weather.py:81 searx/engines/wttr.py:36
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:81 searx/searxng.msg
 msgid "Sunrise"
 msgstr "Saullēkts"
 
 #. WEATHER_TERMS['SUNSET']
-#: searx/engines/duckduckgo_weather.py:82 searx/engines/wttr.py:37
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:82 searx/searxng.msg
 msgid "Sunset"
 msgstr "Saulriets"
 
 #. WEATHER_TERMS['TEMPERATURE']
-#: searx/engines/duckduckgo_weather.py:48 searx/engines/open_meteo.py:76
-#: searx/engines/wttr.py:55 searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:48 searx/searxng.msg
+#: searx/templates/simple/answer/weather.html:17
 msgid "Temperature"
 msgstr "Temperatūra"
 
 #. WEATHER_TERMS['UV INDEX']
-#: searx/engines/duckduckgo_weather.py:80 searx/engines/wttr.py:35
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:80 searx/searxng.msg
 msgid "UV index"
 msgstr "UV indekss"
 
 #. WEATHER_TERMS['VISIBILITY']
-#: searx/engines/duckduckgo_weather.py:62 searx/engines/wttr.py:66
-#: searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:62 searx/searxng.msg
 msgid "Visibility"
 msgstr "Redzamība"
 
 #. WEATHER_TERMS['WIND']
-#: searx/engines/duckduckgo_weather.py:58 searx/engines/open_meteo.py:86
-#: searx/engines/wttr.py:62 searx/searxng.msg
+#: searx/engines/duckduckgo_weather.py:58 searx/searxng.msg
+#: searx/templates/simple/answer/weather.html:23
 msgid "Wind"
 msgstr "Vējš"
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Clear sky"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Partly cloudy"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Cloudy"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Fair"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Fog"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light rain and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light rain showers and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light rain showers"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light rain"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Rain and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Rain showers and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Rain showers"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Rain"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy rain and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy rain showers and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy rain showers"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy rain"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light sleet and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light sleet showers and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light sleet showers"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light sleet"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Sleet and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Sleet showers and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Sleet showers"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Sleet"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy sleet and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy sleet showers and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy sleet showers"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy sleet"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light snow and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light snow showers and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light snow showers"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Light snow"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Snow and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Snow showers and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Snow showers"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Snow"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy snow and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy snow showers and thunder"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy snow showers"
+msgstr ""
+
+#. WEATHER_CONDITIONS
+#: searx/searxng.msg
+msgid "Heavy snow"
+msgstr ""
 
 #. SOCIAL_MEDIA_TERMS['SUBSCRIBERS']
 #: searx/engines/lemmy.py:85 searx/searxng.msg
@@ -293,7 +490,7 @@ msgstr "abonenti"
 #. SOCIAL_MEDIA_TERMS['POSTS']
 #: searx/engines/lemmy.py:86 searx/searxng.msg
 msgid "posts"
-msgstr ""
+msgstr "ziņojumi"
 
 #. SOCIAL_MEDIA_TERMS['ACTIVE USERS']
 #: searx/engines/lemmy.py:87 searx/searxng.msg
@@ -334,105 +531,105 @@ msgstr "autors"
 #. SOCIAL_MEDIA_TERMS['THREAD OPEN']
 #: searx/engines/discourse.py:149 searx/searxng.msg
 msgid "open"
-msgstr ""
+msgstr "atvērts"
 
 #. SOCIAL_MEDIA_TERMS['THREAD CLOSED']
 #: searx/engines/discourse.py:149 searx/searxng.msg
 msgid "closed"
-msgstr ""
+msgstr "aizvērts"
 
 #. SOCIAL_MEDIA_TERMS['THREAD ANSWERED']
 #: searx/engines/discourse.py:160 searx/searxng.msg
 msgid "answered"
-msgstr ""
+msgstr "atbildēja"
 
-#: searx/webapp.py:312
+#: searx/webapp.py:292
 msgid "No item found"
 msgstr "Nav atrasts neviens vienums"
 
 #: searx/engines/qwant.py:291
-#: searx/templates/simple/result_templates/images.html:23 searx/webapp.py:314
+#: searx/templates/simple/result_templates/images.html:23 searx/webapp.py:294
 msgid "Source"
 msgstr "Avots"
 
-#: searx/webapp.py:316
+#: searx/webapp.py:296
 msgid "Error loading the next page"
 msgstr "Kļūda lādējot nākošo lapu"
 
-#: searx/webapp.py:469 searx/webapp.py:875
+#: searx/webapp.py:447 searx/webapp.py:845
 msgid "Invalid settings, please edit your preferences"
 msgstr "Nepareizi iestatījumi, lūdzu rediģējiet savas preferences"
 
-#: searx/webapp.py:485
+#: searx/webapp.py:463
 msgid "Invalid settings"
 msgstr "Nederīgi iestatījumi"
 
-#: searx/webapp.py:562 searx/webapp.py:652
+#: searx/webapp.py:540 searx/webapp.py:630
 msgid "search error"
 msgstr "meklēšanas kļūda"
 
-#: searx/webutils.py:36
+#: searx/webutils.py:35
 msgid "timeout"
 msgstr "noildze"
 
-#: searx/webutils.py:37
+#: searx/webutils.py:36
 msgid "parsing error"
 msgstr "parsēšanas kļūda"
 
-#: searx/webutils.py:38
+#: searx/webutils.py:37
 msgid "HTTP protocol error"
 msgstr "HTTP protokola kļūda"
 
-#: searx/webutils.py:39
+#: searx/webutils.py:38
 msgid "network error"
 msgstr "tīkla kļūda"
 
-#: searx/webutils.py:40
+#: searx/webutils.py:39
 msgid "SSL error: certificate validation has failed"
 msgstr "SSL kļūda: certifikāta validācija neizdevās"
 
-#: searx/webutils.py:42
+#: searx/webutils.py:41
 msgid "unexpected crash"
 msgstr "negaidīta avārija"
 
-#: searx/webutils.py:49
+#: searx/webutils.py:48
 msgid "HTTP error"
 msgstr "HTTP kļūda"
 
-#: searx/webutils.py:50
+#: searx/webutils.py:49
 msgid "HTTP connection error"
 msgstr "HTTP savienojuma kļūda"
 
-#: searx/webutils.py:56
+#: searx/webutils.py:55
 msgid "proxy error"
 msgstr "starpniekservera kļūda"
 
-#: searx/webutils.py:57
+#: searx/webutils.py:56
 msgid "CAPTCHA"
 msgstr "CAPTCHA"
 
-#: searx/webutils.py:58
+#: searx/webutils.py:57
 msgid "too many requests"
 msgstr "pārāk daudz pieprasījumu"
 
-#: searx/webutils.py:59
+#: searx/webutils.py:58
 msgid "access denied"
 msgstr "piekļuve aizliegta"
 
-#: searx/webutils.py:60
+#: searx/webutils.py:59
 msgid "server API error"
 msgstr "servera API kļūda"
 
-#: searx/webutils.py:79
+#: searx/webutils.py:78
 msgid "Suspended"
 msgstr "Apturēts"
 
-#: searx/webutils.py:314
+#: searx/webutils.py:313
 #, python-brace-format
 msgid "{minutes} minute(s) ago"
 msgstr "pirms {minutes} minūtes(-ēm)"
 
-#: searx/webutils.py:315
+#: searx/webutils.py:314
 #, python-brace-format
 msgid "{hours} hour(s), {minutes} minute(s) ago"
 msgstr "pirms {hours} stundas(-ām) un {minutes} minūtēm(-es)"
@@ -448,7 +645,7 @@ msgstr ""
 
 #: searx/engines/openstreetmap.py:158
 msgid "Show route in map .."
-msgstr ""
+msgstr "Rādīt maršrutu kartē .."
 
 #: searx/engines/pdbe.py:96
 #, python-brace-format
@@ -463,15 +660,15 @@ msgstr "Šis ieraksts ir ticis aizstāts ar"
 msgid "Channel"
 msgstr "Kanāls"
 
-#: searx/engines/radio_browser.py:105
+#: searx/engines/radio_browser.py:153
 msgid "bitrate"
 msgstr "bitu pārraide"
 
-#: searx/engines/radio_browser.py:106
+#: searx/engines/radio_browser.py:154
 msgid "votes"
 msgstr "balsis"
 
-#: searx/engines/radio_browser.py:107
+#: searx/engines/radio_browser.py:155
 msgid "clicks"
 msgstr "klikšķi"
 
@@ -480,7 +677,7 @@ msgstr "klikšķi"
 msgid "Language"
 msgstr "Valoda"
 
-#: searx/engines/semantic_scholar.py:79
+#: searx/engines/semantic_scholar.py:101
 #, python-brace-format
 msgid ""
 "{numCitations} citations from the year {firstCitationVelocityYear} to "
@@ -521,38 +718,40 @@ msgstr "Failu kvalitāte"
 
 #: searx/plugins/ahmia_filter.py:32
 msgid "Ahmia blacklist"
-msgstr ""
+msgstr "Ahmia melnais saraksts"
 
 #: searx/plugins/ahmia_filter.py:33
 msgid "Filter out onion results that appear in Ahmia's blacklist."
-msgstr ""
+msgstr "Izfiltrēt \"sīpolu\" rezultātus, kas parādās Ahmia melnajā sarakstā."
 
 #: searx/plugins/calculator.py:38
 msgid "Basic Calculator"
-msgstr ""
+msgstr "Parasts kalkulators"
 
 #: searx/plugins/calculator.py:39
 msgid "Calculate mathematical expressions via the search bar"
-msgstr ""
+msgstr "Izrēķināt matemātiskas izteiksmes, izmantojot meklētāju"
 
 #: searx/plugins/hash_plugin.py:34
 msgid "Hash plugin"
+msgstr "Jaucējvērtības spraudnis"
+
+#: searx/plugins/hash_plugin.py:36
+msgid ""
+"Converts strings to different hash digests. Available functions: md5, "
+"sha1, sha224, sha256, sha384, sha512."
 msgstr ""
 
-#: searx/plugins/hash_plugin.py:35
-msgid "Converts strings to different hash digests."
-msgstr "Pārvērš virknes (strings) par dažādiem jaucējkoda īssavilkumiem."
-
-#: searx/plugins/hash_plugin.py:62
+#: searx/plugins/hash_plugin.py:64
 msgid "hash digest"
 msgstr "jaucējkoda sašķelšana"
 
 #: searx/plugins/hostnames.py:123
 msgid "Hostnames plugin"
-msgstr ""
+msgstr "Saimniekvārdu spraudnis"
 
 #: searx/plugins/hostnames.py:124
-msgid "Rewrite hostnames, remove results or prioritize them based on the hostname"
+msgid "Rewrite hostnames and remove or prioritize results based on the hostname"
 msgstr ""
 
 #: searx/plugins/oa_doi_rewrite.py:55
@@ -576,14 +775,16 @@ msgid ""
 "Displays your IP if the query is \"ip\" and your user agent if the query "
 "is \"user-agent\"."
 msgstr ""
+"Tiek izvadīta Jūsu IP, ja pieprasījumā norādīts “ip”, un Jūsu "
+"lietotājaģents, ja pieprasījumā norādīts “user-agent”."
 
 #: searx/plugins/self_info.py:52
 msgid "Your IP is: "
-msgstr ""
+msgstr "Jūsu IP ir: "
 
 #: searx/plugins/self_info.py:55
 msgid "Your user-agent is: "
-msgstr ""
+msgstr "Jūsu lietotājaģents ir: "
 
 #: searx/plugins/tor_check.py:42
 msgid "Tor check plugin"
@@ -594,34 +795,42 @@ msgid ""
 "This plugin checks if the address of the request is a Tor exit-node, and "
 "informs the user if it is; like check.torproject.org, but from SearXNG."
 msgstr ""
+"Šis spraudnis pārbauda vai pieprasītā adrese ir Tor izejas mezgls un "
+"informē lietotāju, ja tas tā ir; piemēram, check.torproject.org, bet no "
+"SearXNG."
 
 #: searx/plugins/tor_check.py:65
 msgid "Could not download the list of Tor exit-nodes from"
-msgstr ""
+msgstr "Nevarēja lejupielādēt Tor izejas mezglu sarakstu no"
 
 #: searx/plugins/tor_check.py:72
 msgid "You are using Tor and it looks like you have the external IP address"
-msgstr ""
+msgstr "Jūs lietojat Tor un izskatās, ka Jums ir ārējā IP adrese"
 
 #: searx/plugins/tor_check.py:76
 msgid "You are not using Tor and you have the external IP address"
-msgstr ""
+msgstr "Jūs nelietojat Tor un Jums ir ārējā IP adrese"
 
-#: searx/plugins/tracker_url_remover.py:37
+#: searx/plugins/tracker_url_remover.py:35
 msgid "Tracker URL remover"
 msgstr "Izsekošanas URL noņemšanas līdzeklis"
 
-#: searx/plugins/tracker_url_remover.py:38
+#: searx/plugins/tracker_url_remover.py:36
 msgid "Remove trackers arguments from the returned URL"
-msgstr ""
+msgstr "Noņemt izsekotāju argumentus no atgrieztā URL"
 
 #: searx/plugins/unit_converter.py:49
 msgid "Unit converter plugin"
-msgstr ""
+msgstr "Vienību pārveidotāja spraudnis"
 
 #: searx/plugins/unit_converter.py:50
 msgid "Convert between units"
-msgstr ""
+msgstr "Konvertēt starp vienībām"
+
+#: searx/result_types/answer.py:224
+#, python-brace-format
+msgid "{location}: {temperature}, {condition}"
+msgstr "{location}: {temperature}, {condition}"
 
 #: searx/templates/simple/404.html:4
 msgid "Page not found"
@@ -634,7 +843,7 @@ msgstr "Doties uz %(search_page)s."
 
 #: searx/templates/simple/404.html:6
 msgid "search page"
-msgstr ""
+msgstr "meklēšanas lapa"
 
 #: searx/templates/simple/base.html:53
 msgid "Donate"
@@ -647,11 +856,11 @@ msgstr "Opcijas"
 
 #: searx/templates/simple/base.html:67
 msgid "Powered by"
-msgstr ""
+msgstr "Darbojas ar"
 
 #: searx/templates/simple/base.html:67
 msgid "a privacy-respecting, open metasearch engine"
-msgstr ""
+msgstr "privātumu respektējoša, atvērta meta-meklētājprogramma"
 
 #: searx/templates/simple/base.html:68
 #: searx/templates/simple/result_templates/packages.html:59
@@ -660,15 +869,15 @@ msgstr "Pirmkods"
 
 #: searx/templates/simple/base.html:69
 msgid "Issue tracker"
-msgstr ""
+msgstr "Problēmu izsekotājs"
 
 #: searx/templates/simple/base.html:70 searx/templates/simple/stats.html:18
 msgid "Engine stats"
-msgstr ""
+msgstr "Dzinēja statistika"
 
 #: searx/templates/simple/base.html:72
 msgid "Public instances"
-msgstr ""
+msgstr "Publiskās instances"
 
 #: searx/templates/simple/base.html:75
 msgid "Privacy policy"
@@ -699,10 +908,6 @@ msgstr "Autors"
 
 #: searx/templates/simple/macros.html:50
 msgid "cached"
-msgstr ""
-
-#: searx/templates/simple/macros.html:50
-msgid "proxied"
 msgstr ""
 
 #: searx/templates/simple/new_issue.html:64
@@ -941,6 +1146,10 @@ msgstr ""
 msgid "Synonyms"
 msgstr ""
 
+#: searx/templates/simple/answer/weather.html:19
+msgid "Feels Like"
+msgstr ""
+
 #: searx/templates/simple/elements/answers.html:2
 msgid "Answers"
 msgstr "Atbildes"
@@ -1118,16 +1327,16 @@ msgid "Autocomplete"
 msgstr "Automātiskā pabeigšana"
 
 #: searx/templates/simple/preferences/autocomplete.html:15
-msgid "Find stuff as you type"
-msgstr "Atrast lietas rakstīšanas laikā"
+msgid "Show possible queries as you type"
+msgstr ""
 
 #: searx/templates/simple/preferences/center_alignment.html:2
 msgid "Center Alignment"
 msgstr "Centra līdzinājums"
 
 #: searx/templates/simple/preferences/center_alignment.html:14
-msgid "Displays results in the center of the page (Oscar layout)."
-msgstr "Parāda rezultātus lapas centrā (Oskara izkārtojums)."
+msgid "Display results in the center of the page (Oscar layout)."
+msgstr ""
 
 #: searx/templates/simple/preferences/cookies.html:2
 msgid ""
@@ -1136,8 +1345,8 @@ msgid ""
 msgstr ""
 
 #: searx/templates/simple/preferences/cookies.html:3
-msgid "With that list, you can assess SearXNG transparency."
-msgstr "Izmantojot šo sarakstu, var novērtēt SearXNG pārredzamību."
+msgid "With this list, you can assess the transparency of SearXNG."
+msgstr ""
 
 #: searx/templates/simple/preferences/cookies.html:9
 msgid "Cookie name"
@@ -1196,8 +1405,8 @@ msgstr ""
 
 #: searx/templates/simple/preferences/engines.html:9
 msgid ""
-"This tab does not exists in the user interface, but you can search in "
-"these engines by its !bangs."
+"This tab does not exist in the user interface, but you can search with "
+"these engines via !bangs."
 msgstr ""
 
 #: searx/templates/simple/preferences/engines.html:15
@@ -1234,14 +1443,12 @@ msgstr ""
 
 #: searx/templates/simple/preferences/footer.html:2
 msgid ""
-"These settings are stored in your cookies, this allows us not to store "
+"These settings are stored in your cookies. This allows us not to store "
 "this data about you."
 msgstr ""
 
 #: searx/templates/simple/preferences/footer.html:3
-msgid ""
-"These cookies serve your sole convenience, we don't use these cookies to "
-"track you."
+msgid "These cookies serve your sole convenience; we don't use them to track you."
 msgstr ""
 
 #: searx/templates/simple/preferences/footer.html:6
@@ -1275,16 +1482,18 @@ msgid "Image proxy"
 msgstr "Attēla starpniekserveris"
 
 #: searx/templates/simple/preferences/image_proxy.html:14
-msgid "Proxying image results through SearXNG"
-msgstr "Attēlu rezultātu starpniekservera izmantošana, caur SearXNG"
+msgid "Proxy image results through SearXNG"
+msgstr ""
 
 #: searx/templates/simple/preferences/infinite_scroll.html:2
 msgid "Infinite scroll"
 msgstr "Bezgalīgā ritināšana"
 
 #: searx/templates/simple/preferences/infinite_scroll.html:14
-msgid "Automatically load next page when scrolling to bottom of current page"
-msgstr "Automātiski ielādēt nākamo lappusi, ritinot uz pašreizējās lappuses beigām"
+msgid ""
+"Automatically load the next page when scrolling to the bottom of the "
+"current page"
+msgstr ""
 
 #: searx/templates/simple/preferences/language.html:24
 msgid "What language do you prefer for search?"
@@ -1313,12 +1522,12 @@ msgid ""
 msgstr ""
 
 #: searx/templates/simple/preferences/results_on_new_tab.html:2
-msgid "Results on new tabs"
-msgstr "Rezultāti jaunās cilnēs"
+msgid "Results in new tabs"
+msgstr ""
 
 #: searx/templates/simple/preferences/results_on_new_tab.html:14
-msgid "Open result links on new browser tabs"
-msgstr "Atvērt rezultātu saites jaunās pārlūka cilnēs"
+msgid "Open result links in new browser tabs"
+msgstr ""
 
 #: searx/templates/simple/preferences/safesearch.html:20
 msgid "Filter content"
@@ -1330,8 +1539,8 @@ msgstr ""
 
 #: searx/templates/simple/preferences/search_on_category_select.html:14
 msgid ""
-"Perform search immediately if a category selected. Disable to select "
-"multiple categories"
+"Perform a search immediately if a category is selected. Disable to select"
+" multiple categories"
 msgstr ""
 
 #: searx/templates/simple/preferences/theme.html:2
@@ -1339,8 +1548,8 @@ msgid "Theme"
 msgstr "Tēma"
 
 #: searx/templates/simple/preferences/theme.html:14
-msgid "Change SearXNG layout"
-msgstr "Mainīt SearXNG izkārtojumu"
+msgid "Change the layout of SearXNG"
+msgstr ""
 
 #: searx/templates/simple/preferences/theme.html:19
 msgid "Theme style"
@@ -1551,7 +1760,7 @@ msgstr "slēpt video"
 #~ msgstr ""
 
 #~ msgid "Displays results in the center of the page (Oscar layout)."
-#~ msgstr ""
+#~ msgstr "Parāda rezultātus lapas centrā (Oskara izkārtojums)."
 
 #~ msgid "preferences"
 #~ msgstr ""
@@ -1785,4 +1994,65 @@ msgstr "slēpt video"
 #~ "preferences URL can be used to "
 #~ "sync preferences across devices."
 #~ msgstr ""
+
+#~ msgid "proxied"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "This tab does not exists in the"
+#~ " user interface, but you can search"
+#~ " in these engines by its !bangs."
+#~ msgstr ""
+
+#~ msgid "Results on new tabs"
+#~ msgstr "Rezultāti jaunās cilnēs"
+
+#~ msgid "Open result links on new browser tabs"
+#~ msgstr "Atvērt rezultātu saites jaunās pārlūka cilnēs"
+
+#~ msgid "Find stuff as you type"
+#~ msgstr "Atrast lietas rakstīšanas laikā"
+
+#~ msgid "Converts strings to different hash digests."
+#~ msgstr "Pārvērš virknes (strings) par dažādiem jaucējkoda īssavilkumiem."
+
+#~ msgid ""
+#~ "Rewrite hostnames, remove results or "
+#~ "prioritize them based on the hostname"
+#~ msgstr ""
+#~ "Pārrakstīt saimniekvārdus, noņemt rezultātus "
+#~ "vai prioritizēt tos, pamatojoties uz "
+#~ "saimniekvārdu"
+
+#~ msgid "With that list, you can assess SearXNG transparency."
+#~ msgstr "Izmantojot šo sarakstu, var novērtēt SearXNG pārredzamību."
+
+#~ msgid ""
+#~ "These settings are stored in your "
+#~ "cookies, this allows us not to "
+#~ "store this data about you."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "These cookies serve your sole "
+#~ "convenience, we don't use these cookies"
+#~ " to track you."
+#~ msgstr ""
+
+#~ msgid "Proxying image results through SearXNG"
+#~ msgstr "Attēlu rezultātu starpniekservera izmantošana, caur SearXNG"
+
+#~ msgid "Automatically load next page when scrolling to bottom of current page"
+#~ msgstr ""
+#~ "Automātiski ielādēt nākamo lappusi, ritinot"
+#~ " uz pašreizējās lappuses beigām"
+
+#~ msgid ""
+#~ "Perform search immediately if a category"
+#~ " selected. Disable to select multiple "
+#~ "categories"
+#~ msgstr ""
+
+#~ msgid "Change SearXNG layout"
+#~ msgstr "Mainīt SearXNG izkārtojumu"
 
