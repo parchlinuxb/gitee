@@ -105,6 +105,7 @@ body {
     height: 100svh;
     overflow: hidden;
     transition: height 100ms ease-in-out;
+    container-name: body;
 
     footer {
         grid-area: footer;

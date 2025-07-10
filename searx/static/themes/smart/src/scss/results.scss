@@ -20,7 +20,7 @@
     overflow-y: auto;
     transition: grid-template-columns 300ms ease-in-out;
 
-    @include mixin.screens($screen-md) {
+    @include mixin.screens($screen-xl) {
         grid-template-columns: 2fr 1fr;
         grid-template-rows: 5rem min-content 1fr auto;
         grid-template-areas:
@@ -28,10 +28,11 @@
             "search amount"
             "results sidebox"
             "footer footer";
+        padding: 0 4rem;
     }
 
-    @include mixin.screens($screen-xl) {
-        padding: 0 4rem;
+    @include mixin.screens($screen-lg) {
+        padding: 0 2rem;
     }
 
     .result-count {
