@@ -819,6 +819,27 @@ input[type="checkbox"].switch {
     }
 }
 
+.error-container {
+    z-index: 100;
+    position: fixed;
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-50%) scale(1);
+    background: rgba(200, 0, 0, .2);
+    width: 50rem;
+    max-width: calc(100vw - 4rem);
+    border: rgba(200, 0, 0, .5) 1px solid;
+
+    animation: move-up 2s 1s forwards;
+    @include mixin.rounded(sm);
+    padding: 1rem;
+
+    ul {
+        list-style: circle;
+        @include mixin.margin-left(1rem);
+    }
+}
+
 @media (scripting: none) {
     .js-only {
         display: none !important;
@@ -846,6 +867,14 @@ input[type="checkbox"].switch {
 
     100% {
         transform: rotate(360deg);
+    }
+}
+
+@keyframes move-up {
+    to {
+        top: -50%;
+        opacity: 0;
+        transform: translateX(-50%) scale(.8);
     }
 }
 

@@ -13,7 +13,6 @@
         "sidebox"
         "results"
         "footer";
-    gap: 1rem;
     padding: 0 1rem;
     max-width: 1800px;
     overflow-x: hidden;
@@ -29,6 +28,7 @@
             "results sidebox"
             "footer footer";
         padding: 0 4rem;
+        gap: 1rem;
     }
 
     @include mixin.screens($screen-lg) {
