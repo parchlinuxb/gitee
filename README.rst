@@ -15,7 +15,7 @@ Gitee (a.k.a ParchSearch) is the libre way of search, A fork of SearXNG
 
 |AGPL License|
 |Issues|
-|commits| 
+|commits|
 
 .. |AGPL License|  image:: https://img.shields.io/badge/license-AGPL-blue.svg
    :target: https://github.com/searxng/searxng/blob/master/LICENSE
@@ -29,6 +29,25 @@ Gitee (a.k.a ParchSearch) is the libre way of search, A fork of SearXNG
 .. |commits| image:: https://img.shields.io/github/commit-activity/y/parchlinuxb/gitee?color=yellow&label=commits
    :target: https://github.com/parchlinuxb/gitee/commits/master
 
+
+.. figure:: https://raw.githubusercontent.com/parchlinuxb/gitee/refs/heads/master/brand/Screenshot-01.png
+   :target: https://search.parchlinux.com/
+   :alt: Gitee
+   :width: 100%
+   :align: center
+
+.. figure:: https://raw.githubusercontent.com/parchlinuxb/gitee/refs/heads/master/brand/Screenshot-02.png
+   :target: https://search.parchlinux.com/
+   :alt: Gitee
+   :width: 100%
+   :align: center
+
+.. figure:: https://raw.githubusercontent.com/parchlinuxb/gitee/refs/heads/master/brand/Screenshot-03.png
+   :target: https://search.parchlinux.com/
+   :alt: Gitee
+   :width: 100%
+   :align: center
+
 Setup
 =====
 
@@ -40,6 +59,6 @@ Setup
 .. _Step by step: https://docs.searxng.org/admin/installation-searxng.html
 .. _Docker image: https://github.com/parchlinuxb/gitee/pkgs/container/gitee
 
- 
+
 
     Developed width :heart: and :tea: in the middle of IRAN
