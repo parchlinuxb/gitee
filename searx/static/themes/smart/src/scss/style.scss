@@ -255,6 +255,10 @@ body:has(.sidebar_btn input:checked) {
         .body-container {
             flex: 0;
         }
+
+        #results {
+            padding: 0;
+        }
     }
 
     header .links .link.config {
