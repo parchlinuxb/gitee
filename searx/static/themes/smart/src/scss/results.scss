@@ -31,6 +31,14 @@
         gap: 1rem;
     }
 
+    @include mixin.max-screens($screen-xl) {
+        .links {
+            position: relative;
+            top: 2.75rem;
+            height: 0;
+        }
+    }
+
     @include mixin.screens($screen-lg) {
         padding: 0 2rem;
     }
@@ -91,6 +99,7 @@
                 justify-content: space-between;
                 align-items: center;
                 gap: 2rem;
+                flex-wrap: wrap;
 
                 select {
                     @include mixin.rounded(full);
@@ -183,6 +192,7 @@
                         flex: 1;
                         background-color: transparent;
                         border: none;
+                        width: inherit;
                         color: var(--text-color);
                         @include mixin.rounded(full);
                         padding: .5rem;
