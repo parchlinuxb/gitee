@@ -4,7 +4,6 @@
 # pylint: disable=use-dict-literal
 from __future__ import annotations
 
-import inspect
 import json
 import os
 import sys
@@ -26,7 +25,8 @@ from pygments import highlight
 from pygments.lexers import get_lexer_by_name
 from pygments.formatters import HtmlFormatter  # pylint: disable=no-name-in-module
 
-from werkzeug.serving import is_running_from_reloader
+from whitenoise import WhiteNoise
+from whitenoise.base import Headers
 
 import flask
 
@@ -74,7 +74,6 @@ from searx.engines import (
 from searx import webutils
 from searx.webutils import (
     highlight_content,
-    get_static_files,
     get_result_templates,
     get_themes,
     exception_classname_to_text,
@@ -123,7 +122,7 @@ from searx.locales import (
 from searx.autocomplete import search_autocomplete, backends as autocomplete_backends
 from searx import favicons
 
-from searx.redisdb import initialize as redis_initialize
+from searx.valkeydb import initialize as valkey_initialize
 from searx.sxng_locales import sxng_locales
 import searx.search
 from searx.network import stream as http_stream, set_context_network_name
@@ -136,7 +135,6 @@ warnings.simplefilter("always")
 
 # about static
 logger.debug("static directory is %s", settings["ui"]["static_path"])
-static_files = get_static_files(settings["ui"]["static_path"])
 
 # about templates
 logger.debug("templates directory is %s", settings["ui"]["templates_path"])
@@ -154,11 +152,7 @@ STATS_SORT_PARAMETERS = {
 }
 
 # Flask app
-app = Flask(
-    __name__,
-    static_folder=settings["ui"]["static_path"],
-    template_folder=templates_path,
-)
+app = Flask(__name__, static_folder=None, template_folder=templates_path)
 
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
@@ -254,25 +248,47 @@ def get_result_template(theme_name: str, template_name: str):
     return "result_templates/" + template_name
 
 
+_STATIC_FILES: list[str] = []
+
+
 def custom_url_for(endpoint: str, **values):
-    suffix = ""
+    global _STATIC_FILES  # pylint: disable=global-statement
+    if not _STATIC_FILES:
+        _STATIC_FILES = webutils.get_static_file_list()
+
+    # handled by WhiteNoise
     if endpoint == "static" and values.get("filename"):
-        file_hash = static_files.get(values["filename"])
-        if not file_hash:
+
+        # We need to verify the "filename" argument: in the jinja templates
+        # there could be call like:
+        #     url_for('static', filename='img/favicon.png')
+        # which should map to:
+        #     static/themes/<theme_name>/img/favicon.png
+
+        arg_filename = values["filename"]
+        if arg_filename not in _STATIC_FILES:
             # try file in the current theme
             theme_name = sxng_request.preferences.get_value("theme")
-            filename_with_theme = "themes/{}/{}".format(theme_name, values["filename"])
-            file_hash = static_files.get(filename_with_theme)
-            if file_hash:
-                values["filename"] = filename_with_theme
-        if get_setting("ui.static_use_hash") and file_hash:
-            suffix = "?" + file_hash
+            theme_filename = f"themes/{theme_name}/{arg_filename}"
+            if theme_filename in _STATIC_FILES:
+                values["filename"] = theme_filename
+
+        return f"static/{values['filename']}"
+
     if endpoint == "info" and "locale" not in values:
+
+        # We need to verify the "locale" argument: in the jinja templates there
+        # could be call like:
+        #     url_for('info', pagename='about')
+        # which should map to:
+        #     info/<locale>/about
+
         locale = sxng_request.preferences.get_value("locale")
         if infopage.INFO_PAGES.get_page(values["pagename"], locale) is None:
             locale = infopage.INFO_PAGES.locale_default
         values["locale"] = locale
-    return url_for(endpoint, **values) + suffix
+
+    return url_for(endpoint, **values)
 
 
 def image_proxify(url: str):
@@ -297,7 +313,7 @@ def image_proxify(url: str):
             return url
         return None
 
-    h = new_hmac(settings['server']['secret_key'], url.encode())
+    h = new_hmac(settings["server"]["secret_key"], url.encode())
 
     return "{0}?{1}".format(
         url_for("image_proxy"), urlencode(dict(url=url.encode(), h=h))
@@ -436,14 +452,14 @@ def render(template_name: str, **kwargs):
     kwargs["donation_url"] = donation_url
 
     # helpers to create links to other pages
-    kwargs['url_for'] = custom_url_for  # override url_for function in templates
-    kwargs['image_proxify'] = image_proxify
-    kwargs['favicon_url'] = favicons.favicon_url
-    kwargs['cache_url'] = settings['ui']['cache_url']
-    kwargs['get_result_template'] = get_result_template
-    kwargs['opensearch_url'] = (
-        url_for('opensearch')
-        + '?'
+    kwargs["url_for"] = custom_url_for  # override url_for function in templates
+    kwargs["image_proxify"] = image_proxify
+    kwargs["favicon_url"] = favicons.favicon_url
+    kwargs["cache_url"] = settings["ui"]["cache_url"]
+    kwargs["get_result_template"] = get_result_template
+    kwargs["opensearch_url"] = (
+        url_for("opensearch")
+        + "?"
         + urlencode(
             {
                 "method": sxng_request.preferences.get_value("method"),
@@ -1178,9 +1194,11 @@ def engine_descriptions():
     sxng_ui_lang_tag = get_locale().replace("_", "-")
     sxng_ui_lang_tag = LOCALE_BEST_MATCH.get(sxng_ui_lang_tag, sxng_ui_lang_tag)
 
-    result = ENGINE_DESCRIPTIONS['en'].copy()
-    if sxng_ui_lang_tag != 'en':
-        for engine, description in ENGINE_DESCRIPTIONS.get(sxng_ui_lang_tag, {}).items():
+    result = ENGINE_DESCRIPTIONS["en"].copy()
+    if sxng_ui_lang_tag != "en":
+        for engine, description in ENGINE_DESCRIPTIONS.get(
+            sxng_ui_lang_tag, {}
+        ).items():
             result[engine] = description
     for engine, description in result.items():
         if len(description) == 2 and description[1] == "ref":
@@ -1483,38 +1501,6 @@ def run():
         app.run(port=port, host=host, threaded=True)
 
 
-def is_werkzeug_reload_active() -> bool:
-    """Returns ``True`` if server is is launched by :ref:`werkzeug.serving` and
-    the ``use_reload`` argument was set to ``True``.  If this is the case, it
-    should be avoided that the server is initialized twice (:py:obj:`init`,
-    :py:obj:`run`).
-
-    .. _werkzeug.serving:
-       https://werkzeug.palletsprojects.com/en/stable/serving/#werkzeug.serving.run_simple
-    """
-
-    if "uwsgi" in sys.argv:
-        # server was launched by uWSGI
-        return False
-
-    # https://github.com/searxng/searxng/pull/1656#issuecomment-1214198941
-    # https://github.com/searxng/searxng/pull/1616#issuecomment-1206137468
-
-    frames = inspect.stack()
-
-    if len(frames) > 1 and frames[-2].filename.endswith("flask/cli.py"):
-        # server was launched by "flask run", is argument "--reload" set?
-        if "--reload" in sys.argv or "--debug" in sys.argv:
-            return True
-
-    elif frames[0].filename.endswith("searx/webapp.py"):
-        # server was launched by "python -m searx.webapp" / see run()
-        if searx.sxng_debug:
-            return True
-
-    return False
-
-
 def init():
 
     if searx.sxng_debug or app.debug:
@@ -1529,19 +1515,8 @@ def init():
         )
         sys.exit(1)
 
-    # When automatic reloading is activated stop Flask from initialising twice.
-    # - https://github.com/pallets/flask/issues/5307#issuecomment-1774646119
-    # - https://stackoverflow.com/a/25504196
-
-    reloader_active = is_werkzeug_reload_active()
-    werkzeug_run_main = is_running_from_reloader()
-
-    if reloader_active and not werkzeug_run_main:
-        logger.info("in reloading mode and not in main loop, cancel the initialization")
-        return
-
     locales_initialize()
-    redis_initialize()
+    valkey_initialize()
     searx.plugins.initialize(app)
 
     metrics: bool = get_setting("general.enable_metrics")  # type: ignore
@@ -1553,8 +1528,27 @@ def init():
     favicons.init()
 
 
-application = app
+def static_headers(headers: Headers, _path: str, _url: str) -> None:
+    headers["Cache-Control"] = "public, max-age=30, stale-while-revalidate=60"
+
+    for header, value in settings["server"]["default_http_headers"].items():
+        headers[header] = value
+
+
+app.wsgi_app = WhiteNoise(
+    app.wsgi_app,
+    root=settings["ui"]["static_path"],
+    prefix="static",
+    max_age=None,
+    allow_all_origins=False,
+    add_headers_function=static_headers,
+)
+
 patch_application(app)
+
+# remove when we drop support for uwsgi
+application = app
+
 init()
 
 if __name__ == "__main__":

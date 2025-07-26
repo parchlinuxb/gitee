@@ -4,7 +4,7 @@ cov-core==1.15.0
 black==24.3.0
 pylint==3.3.7
 splinter==0.21.0
-selenium==4.34.0
+selenium==4.34.2
 Pallets-Sphinx-Themes==2.3.0
 Sphinx==7.4.7
 sphinx-issues==5.0.1
@@ -21,3 +21,4 @@ wlc==1.15
 coloredlogs==15.0.1
 docutils>=0.21.2
 parameterized==0.9.0
+granian[reload]==2.4.2

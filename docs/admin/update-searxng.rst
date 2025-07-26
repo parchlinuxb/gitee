@@ -56,11 +56,7 @@ SearXNG is growing rapidly, the services and opportunities are change every now
 and then, to name just a few:
 
 - Bot protection has been switched from filtron to SearXNG's :ref:`limiter
-  <limiter>`, this requires a :ref:`Redis <settings redis>` database.
-
-- To save bandwidth :ref:`cache busting <static_use_hash>` has been implemented.
-  To get in use, the ``static-expires`` needs to be set in the :ref:`uwsgi
-  setup`.
+  <limiter>`, this requires a :ref:`Valkey <settings valkey>` database.
 
 To stay tuned and get in use of the new features, instance maintainers have to
 update the SearXNG code regularly (see :ref:`update searxng`).  As the above
@@ -89,5 +85,5 @@ to see if there are some left overs.  In this example there exists a *old*
    --------------
    ERROR: settings.yml in /etc/searx/ is deprecated, move file to folder /etc/searxng/
    ...
-   INFO    searx.redisdb                 : connecting to Redis db=0 path='/usr/local/searxng-redis/run/redis.sock'
-   INFO    searx.redisdb                 : connected to Redis
+   INFO    searx.valkeydb                 : connecting to Valkey db=0 path='/usr/local/searxng-valkey/run/valkey.sock'
+   INFO    searx.valkeydb                 : connected to Valkey

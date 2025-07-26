@@ -151,7 +151,7 @@ SCHEMA = {
         'new_issue_url': SettingsValue(str, 'https://github.com/searxng/searxng/issues/new'),
         'docs_url': SettingsValue(str, 'https://docs.searxng.org'),
         'public_instances': SettingsValue((False, str), 'https://searx.space'),
-        'wiki_url': SettingsValue(str, 'https://github.com/searxng/searxng/wiki'),
+        'wiki_url': SettingsValue((False, str), 'https://github.com/searxng/searxng/wiki'),
         'custom': SettingsValue(dict, {'links': {}}),
     },
     'search': {
@@ -186,12 +186,15 @@ SCHEMA = {
         'method': SettingsValue(('POST', 'GET'), 'POST', 'SEARXNG_METHOD'),
         'default_http_headers': SettingsValue(dict, {}),
     },
+    # redis is deprecated ..
     'redis': {
         'url': SettingsValue((None, False, str), False, 'SEARXNG_REDIS_URL'),
     },
+    'valkey': {
+        'url': SettingsValue((None, False, str), False, 'SEARXNG_VALKEY_URL'),
+    },
     'ui': {
         'static_path': SettingsDirectoryValue(str, os.path.join(searx_dir, 'static')),
-        'static_use_hash': SettingsValue(bool, False, 'SEARXNG_STATIC_USE_HASH'),
         'templates_path': SettingsDirectoryValue(str, os.path.join(searx_dir, 'templates')),
         'default_theme': SettingsValue(str, 'simple'),
         'default_locale': SettingsValue(str, ''),
