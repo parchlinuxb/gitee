@@ -256,13 +256,11 @@ function afterPageLoad() {
     // chat
     if (clientSettings.ai_chat && clientSettings.ai_chat !== "off") {
         setupChat({
-            chatModel: clientSettings.ai_chat_model ?? "jabir-400b-online",
+            chatModel: clientSettings.ai_chat_model ?? "jabir-400b",
             mode: clientSettings.ai_chat,
         });
         if ($("#chat-model"))
-            setupChatModelSelect(
-                clientSettings.ai_chat_model ?? "jabir-400b-online"
-            );
+            setupChatModelSelect(clientSettings.ai_chat_model ?? "jabir-400b");
     }
 
     // infinite scroll

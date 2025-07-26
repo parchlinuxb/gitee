@@ -332,3 +332,21 @@
         }
     }
 }
+
+#corrections {
+    display: flex;
+    padding: 0 1rem 1rem;
+    gap: .5rem;
+    align-items: center;
+
+    .correction {
+        font-size: .9rem;
+        font-weight: 600;
+        padding: 0;
+
+        &,
+        &>* {
+            cursor: pointer;
+        }
+    }
+}

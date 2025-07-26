@@ -2,95 +2,91 @@
 {% block title %}{% if query_in_title %} - {{ q|e }}{% endif %}{% endblock %} {%
 block body %} {% include 'smart/madules/search_header.html' %}
 <div class="links">
-    {%- if donation_url -%}
-    <a href="{{ donation_url }}" class="link">{{icon_small('donate')}}</a>
-    {%- endif -%}
-    <a href="{{ url_for('info', pagename='about') }}" class="link"
-        >{{icon_small('information')}}</a
-    >
-    {% include 'smart/madules/sidebar_btn.html' %}
+  {%- if donation_url -%}
+  <a href="{{ donation_url }}" class="link">{{icon_small('donate')}}</a>
+  {%- endif -%}
+  <a href="{{ url_for('info', pagename='about') }}" class="link"
+    >{{icon_small('information')}}</a
+  >
+  {% include 'smart/madules/sidebar_btn.html' %}
 </div>
 {% if 'images.html' in results|map(attribute='template')|unique|list%} {%
 include 'smart/madules/image_details.html' %}
 <script src="{{ url_for('static', filename='js/images.js') }}" async></script>
 {% endif %}
 <div
-    class="results-container {% if results and results|map(attribute='template')|unique|list|count and 'images.html' in results|map(attribute='template')|unique|list %} image-page {% if results|map(attribute='template')|unique|list|count > 1 %} multiple-results {% endif %} {% endif %}"
+  class="results-container {% if results and results|map(attribute='template')|unique|list|count and 'images.html' in results|map(attribute='template')|unique|list %} image-page {% if results|map(attribute='template')|unique|list|count > 1 %} multiple-results {% endif %} {% endif %}"
 >
-    {% if pageno <= 1 %} {% if preferences.get_value('ai_chat') %} {% if results
-    and 'general' in selected_categories %} {% include
-    'smart/madules/ai_chat.html' %} {% endif %} {% endif %} {% set
-    suggestions_placed = namespace(s=false) %} {% set suggestion_index =
-    range(1, 10) | random%} {% set is_image_page = results and
-    results|map(attribute='template')|unique|list|count == 1 and 'images.html'
-    in results|map(attribute='template')|unique|list %} {% if answers %}
-    <div class="message-container">
-        <div class="title">
-            {{ icon_small('plugin') }}
-            <h3>{{ _('Answers by Plugins and Engines') }}</h3>
-        </div>
-        {%- for answer in answers -%}
-        <div class="message-box">
-            {% if answer.template != "answer/legacy.html" %} {%- include
-            ("simple/" + (answer.template)) -%} {% else %}
-            <p class="message">{{ answer.answer }}</p>
-            {%- if answer.url -%}
-            <div class="reference">
-                {{ _('Based on') }}
-                <a
-                    href="{{ answer.url }}"
-                    {%-
-                    if
-                    results_on_new_tab
-                    %}target="_blank"
-                    rel="noopener noreferrer"
-                    {%-
-                    else
-                    -%}rel="noreferrer"
-                    {%-
-                    endif
-                    -%}
-                    >{{ urlparse(answer.url).hostname }}</a
-                >
-            </div>
-            {% endif %} {% endif %}
-        </div>
-        {%- endfor -%}
+  {% if corrections %} {% include 'smart/madules/corrections.html' %} {% endif
+  %} {% if pageno <= 1 %} {% if preferences.get_value('ai_chat') %} {% if
+  results and 'general' in selected_categories %} {% include
+  'smart/madules/ai_chat.html' %} {% endif %} {% endif %} {% set
+  suggestions_placed = namespace(s=false) %} {% set suggestion_index = range(1,
+  10) | random%} {% set is_image_page = results and
+  results|map(attribute='template')|unique|list|count == 1 and 'images.html' in
+  results|map(attribute='template')|unique|list %} {% if answers %}
+  <div class="message-container">
+    <div class="title">
+      {{ icon_small('plugin') }}
+      <h3>{{ _('Answers by Plugins and Engines') }}</h3>
     </div>
-    {% endif %} {% endif %} {% if results %}{% for result in results %} {% if
-    result.open_group %}
-    <div
-        class="{{ result['template']|replace('.html', '') }}_group result-group"
-    >
-        {% endif %} {% set template = get_result_template('smart',
-        result['template']) if 'smart' in get_result_template('smart',
-        result['template']) else get_result_template('smart', 'default.html') %}
-        {% include template %} {% if result.close_group or ( pageno == 1 and
-        loop.index >= suggestion_index and not suggestions_placed.s and
-        suggestions|length > 0 and not is_image_page) %}
+    {%- for answer in answers -%}
+    <div class="message-box">
+      {% if answer.template != "answer/legacy.html" %} {%- include ("simple/" +
+      (answer.template)) -%} {% else %}
+      <p class="message">{{ answer.answer }}</p>
+      {%- if answer.url -%}
+      <div class="reference">
+        {{ _('Based on') }}
+        <a
+          href="{{ answer.url }}"
+          {%-
+          if
+          results_on_new_tab
+          %}target="_blank"
+          rel="noopener noreferrer"
+          {%-
+          else
+          -%}rel="noreferrer"
+          {%-
+          endif
+          -%}
+          >{{ urlparse(answer.url).hostname }}</a
+        >
+      </div>
+      {% endif %} {% endif %}
     </div>
-    {% if pageno == 1 and not suggestions_placed.s %} {% set
-    suggestions_placed.s = true %} {% include 'smart/madules/suggestions.html'
-    %} {% endif %} {% if not result.close_group %}
-    <div
-        class="{{ result['template']|replace('.html', '') }}_group result-group"
-    >
-        {% endif %} {% endif %} {% endfor %} {% endif %} {% include
-        'smart/madules/pagination.html' %}
-    </div>
-    <div class="info-panel">
-        {% if infoboxes %} {% include 'smart/madules/infoboxs.html' %} {% endif
-        %}
-    </div>
-    {%- if number_of_results != '0' -%}
-    <div class="result-count">
-        <div class="result-count-container">
-            <small>{{ _('Number of results') }}: {{ number_of_results }}</small>
-            <button
-                id="share-url-btn"
-                class="share_btn center-tooltip"
-                role="button"
-                data-search-url="
+    {%- endfor -%}
+  </div>
+  {% endif %} {% endif %} {% if results %}{% for result in results %} {% if
+  result.open_group %}
+  <div class="{{ result['template']|replace('.html', '') }}_group result-group">
+    {% endif %} {% set template = get_result_template('smart',
+    result['template']) if 'smart' in get_result_template('smart',
+    result['template']) else get_result_template('smart', 'default.html') %} {%
+    include template %} {% if result.close_group or ( pageno == 1 and loop.index
+    >= suggestion_index and not suggestions_placed.s and suggestions|length > 0
+    and not is_image_page) %}
+  </div>
+  {% if pageno == 1 and not suggestions_placed.s %} {% set suggestions_placed.s
+  = true %} {% include 'smart/madules/suggestions.html' %} {% endif %} {% if not
+  result.close_group %}
+  <div class="{{ result['template']|replace('.html', '') }}_group result-group">
+    {% endif %} {% endif %} {% endfor %} {% endif %} {% include
+    'smart/madules/pagination.html' %}
+  </div>
+  <div class="info-panel">
+    {% if infoboxes %} {% include 'smart/madules/infoboxs.html' %} {% endif %}
+  </div>
+  {%- if number_of_results != '0' -%}
+  <div class="result-count">
+    <div class="result-count-container">
+      <small>{{ _('Number of results') }}: {{ number_of_results }}</small>
+      <button
+        id="share-url-btn"
+        class="share_btn center-tooltip"
+        role="button"
+        data-search-url="
         {{ url_for('search', _external=True) }}?q={{ q|urlencode }}&amp;language={{ current_language }}&amp;time_range={{ time_range }}&amp;safesearch={{ safesearch }}
             {%- if pageno > 1 -%}
               &amp;pageno={{ pageno }}
@@ -101,11 +97,11 @@ include 'smart/madules/image_details.html' %}
             {%- if timeout_limit -%}
               &amp;timeout_limit={{ timeout_limit|urlencode }}
             {%- endif -%}"
-                data-gitee-copied="{{ _('Copied') }}"
-            >
-                {{ icon_small('share') }}
-            </button>
-        </div>
+        data-gitee-copied="{{ _('Copied') }}"
+      >
+        {{ icon_small('share') }}
+      </button>
     </div>
-    {%- endif -%} {% include 'smart/footer.html' %} {% endblock %}
+  </div>
+  {%- endif -%} {% include 'smart/footer.html' %} {% endblock %}
 </div>
