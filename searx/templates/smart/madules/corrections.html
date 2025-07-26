@@ -1,7 +1,7 @@
 <div id="corrections" role="complementary" aria-labelledby="corrections-title">
-  {% if loop.index > 1 %} <span>,</span> {% endif %} {%- endfor -%}
   <span>{{ _ ('Try searching for:') }}</span>
-  {% for correction in corrections %}
+  {% for correction in corrections %} {% if loop.index > 1 %} <span>,</span> {%
+  endif %}
   <form
     method="{{ method or 'POST' }}"
     action="{{ url_for('search') }}"
@@ -20,4 +20,5 @@
     {%- endif -%}
     <input type="submit" role="link" value="{{ correction.title }}" />
   </form>
+  {%- endfor -%}
 </div>
