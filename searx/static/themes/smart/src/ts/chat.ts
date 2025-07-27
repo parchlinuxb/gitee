@@ -10,8 +10,11 @@ let messages: ChatCompletionMessageParam[] = [
     {
         role: "system",
         content:
-            "Answer in language that give you in first word or language you think message comes in it.\
-            You are a Search Engine Assistant. that Engine called Gitee and based on SearXNG",
+            "You are a Search Engine Assistant. that Engine called Gitee and based on SearXNG \n \
+            – Always detect and respond in the user’s locale and language.  \n \
+            – Keep replies concise, accurate, and on-point.  \n \
+            – If you don’t know something, say “I’m sorry, I don’t know.”  \n \
+            – Cite sources or URLs when you reference facts from external content.",
     },
 ];
 
@@ -55,8 +58,15 @@ export function setupChat({
         messages.push({
             role: "system",
             content:
-                "You will answer questions about the search query.\
-                dont answer like previous message. try to summarize the answer little bit",
+                "Mode: Chat  \n \
+                Task: Answer the user’s question directly in a conversational style.  \n \
+                - Do not invent facts.  \n \
+                - No additional JSON or lists—just a natural-language reply. \n \
+                - Then insert exactly one blank line, a line containing only the character “ɍ”, and another blank line. \n \
+                - On the next line, emit a valid JSON array of the any referenced objects. Each object must have: \n \
+                  • title: the page title or a concise descriptor \n \
+                  • url: the source URL \n \
+                Do not emit any other text before or after the JSON array. and dont use JSON code block",
         });
         sendMessage({ messageInput, stopButton, chatContainer, chatModel });
     }
@@ -65,8 +75,16 @@ export function setupChat({
         messages.push({
             role: "system",
             content:
-                "You recive results and summarize it to 5-10 line text.\
-                dont say anything more than that!",
+                "Mode: Summarize  \n \
+                Task: \n \
+                You will receive up to 5 search results (URL + snippet + etc). \n \
+                Identify the 3 most relevant results for the user’s query. \n \
+                Summarize those three results into a concise, informative paragraph in the user’s language. \n \
+                Then insert exactly one blank line, a line containing only the character “ɍ”, and another blank line. \n \
+                On the next line, emit a valid JSON array of the three referenced objects. Each object must have: \n \
+                    • title: the page title or a concise descriptor \n \
+                    • url: the source URL \n \
+                Do not emit any other text before or after the JSON array. and dont use JSON code block",
         });
         messageInput.parentElement?.setAttribute("hidden", "");
         sendMessage({
@@ -88,7 +106,7 @@ export function setupChat({
 function createMessage(
     chatContainer: HTMLDivElement,
     role: "user" | "ai",
-    refrence?: string
+    refrences?: { title: string; url: string }[]
 ) {
     const messageBox = document.createElement("div");
     messageBox.classList.add("message-box");
@@ -98,11 +116,19 @@ function createMessage(
     messageElement.classList.add("message");
     messageBox.appendChild(messageElement);
 
-    // TODO: improve this
-    if (refrence) {
+    if (refrences) {
         const referenceElement = document.createElement("div");
         referenceElement.classList.add("reference");
-        referenceElement.innerText = refrence;
+        referenceElement.textContent = chatContainer.getAttribute(
+            "data-gitee-based-on"
+        );
+        refrences.forEach((reference) => {
+            const element = document.createElement("a");
+            element.target = "_blank";
+            element.href = reference.url;
+            element.textContent = reference.title;
+            referenceElement.appendChild(element);
+        });
         messageBox.appendChild(referenceElement);
     }
 
@@ -177,10 +203,15 @@ async function sendMessage({
     chatContainer.classList.remove("loading");
 
     if (!stream?.choices[0].message.content) return;
-    const messageElement = createMessage(chatContainer, "ai");
+    const [content, references] = stream.choices[0].message.content.split("ɍ");
 
+    const messageElement = createMessage(
+        chatContainer,
+        "ai",
+        references ? JSON.parse(references) : undefined
+    );
     let messageText: string = "";
-    for (const chunk of stream.choices[0].message.content.split("\n")) {
+    for (const chunk of content.split("\n")) {
         const paragraph = document.createElement("p");
         messageElement.appendChild(paragraph);
 
