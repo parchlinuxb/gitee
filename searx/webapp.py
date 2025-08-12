@@ -57,7 +57,7 @@ from searx import (
 
 from searx import infopage
 from searx import limiter
-from searx.botdetection import link_token
+from searx.botdetection import link_token, ProxyFix
 
 from searx.data import ENGINE_DESCRIPTIONS
 from searx.result_types import Answer
@@ -1533,9 +1533,11 @@ def static_headers(headers: Headers, _path: str, _url: str) -> None:
     headers["Cache-Control"] = "public, max-age=30, stale-while-revalidate=60"
 
     for header, value in settings["server"]["default_http_headers"].items():
-        headers[header] = value
+        # cast value to string, as WhiteNoise requires header values to be strings
+        headers[header] = str(value)
 
 
+app.wsgi_app = ProxyFix(app.wsgi_app)
 app.wsgi_app = WhiteNoise(
     app.wsgi_app,
     root=settings["ui"]["static_path"],

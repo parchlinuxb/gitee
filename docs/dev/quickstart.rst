@@ -27,12 +27,26 @@ Here is how a minimal workflow looks like:
 
 1. *start* hacking
 2. *run* your code: :ref:`make run`
-3. *format & test* your code: :ref:`make format.python` and :ref:`make test`
+3. *format & test* your code: :ref:`make format` and :ref:`make test`
 
 If you think at some point something fails, go back to *start*.  Otherwise,
 choose a meaningful commit message and we are happy to receive your pull
 request. To not end in *wild west* we have some directives, please pay attention
 to our ":ref:`how to contribute`" guideline.
+
+.. _pdb: https://docs.python.org/3/library/pdb.html#module-pdb
+
+If you want to debug with the *good old Python Debugger* pdb_: Alternatively to
+``make run`` (2.) which starts a :ref:`searxng granian` server you can jump
+into the developer environment and start a python based HTTP server by::
+
+    $ ./manage dev.env
+    ...
+    (dev.env)$ SEARXNG_DEBUG=1 python -m searx.webapp
+
+Since this is a pure Python solution, you can set breakpoints in your code with
+``pdb.set_trace()`` and the debugger will wait for you in the terminal prompt.
+
 
 .. sidebar:: further read
 

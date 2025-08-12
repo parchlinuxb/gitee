@@ -37,16 +37,16 @@ setup_ownership() {
     local type="$2"
 
     case "$type" in
-    file | directory) ;;
-    *)
-        cat <<EOF
+        file | directory) ;;
+        *)
+            cat <<EOF
 !!!
 !!! ERROR
 !!! "$type" is not a valid type, exiting...
 !!!
 EOF
-        exit 1
-        ;;
+            exit 1
+            ;;
     esac
 
     target_ownership=$(stat -c %U:%G "$target")
@@ -127,4 +127,4 @@ volume_handler "$DATA_PATH"
 # Check for files
 config_handler "$SEARXNG_SETTINGS_PATH" "/usr/local/searxng/searx/settings.yml"
 
-exec /usr/local/searxng/venv/bin/granian searx.webapp:app
+exec /usr/local/searxng/.venv/bin/granian searx.webapp:app

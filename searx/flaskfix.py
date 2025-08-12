@@ -3,7 +3,6 @@
 
 from urllib.parse import urlparse
 
-from werkzeug.middleware.proxy_fix import ProxyFix
 from werkzeug.serving import WSGIRequestHandler
 
 from searx import settings
@@ -22,7 +21,7 @@ class ReverseProxyPathFix:
         proxy_pass http://127.0.0.1:8000;
         proxy_set_header Host $host;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Scheme $scheme;
+        proxy_set_header X-Forwarded-Proto $scheme;
         proxy_set_header X-Script-Name /myprefix;
         }
 
@@ -60,7 +59,7 @@ class ReverseProxyPathFix:
             if path_info.startswith(script_name):
                 environ['PATH_INFO'] = path_info[len(script_name) :]
 
-        scheme = self.scheme or environ.get('HTTP_X_SCHEME', '')
+        scheme = self.scheme or environ.get('HTTP_X_SCHEME') or environ.get('HTTP_X_FORWARDED_PROTO')
         if scheme:
             environ['wsgi.url_scheme'] = scheme
 
@@ -73,5 +72,5 @@ class ReverseProxyPathFix:
 def patch_application(app):
     # serve pages with HTTP/1.1
     WSGIRequestHandler.protocol_version = "HTTP/{}".format(settings['server']['http_protocol_version'])
-    # patch app to handle non root url-s behind proxy & wsgi
-    app.wsgi_app = ReverseProxyPathFix(ProxyFix(app.wsgi_app))
+    # patch app to handle non root url-s behind proxy
+    app.wsgi_app = ReverseProxyPathFix(app.wsgi_app)

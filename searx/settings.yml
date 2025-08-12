@@ -281,7 +281,7 @@ checker:
   # disable checker when in debug mode
   off_when_debug: true
 
-  # use "scheduling: false" to disable scheduling
+  # use "scheduling: {}" to disable scheduling
   # scheduling: interval or int
 
   # to activate the scheduler:
@@ -1289,6 +1289,15 @@ engines:
       use_official_api: false
       require_api_key: false
       results: HTML
+
+  - name: marginalia
+    engine: marginalia
+    shortcut: mar
+    # To get an API key, please follow the instructions at
+    # - https://about.marginalia-search.com/article/api/
+    # api_key: ...
+    disabled: true
+    inactive: true
 
   - name: mastodon users
     engine: mastodon
@@ -2606,11 +2615,6 @@ engines:
     engine: wttr
     shortcut: wttr
     timeout: 9.0
-
-  - name: yummly
-    engine: yummly
-    shortcut: yum
-    disabled: true
 
   - name: brave
     engine: brave
