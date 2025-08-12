@@ -1,7 +1,7 @@
 FROM ghcr.io/searxng/base:searxng AS dist
 
-ARG CONTAINER_IMAGE_ORGANIZATION="searxng"
-ARG CONTAINER_IMAGE_NAME="searxng"
+ARG CONTAINER_IMAGE_ORGANIZATION="parchlinuxb"
+ARG CONTAINER_IMAGE_NAME="gitee"
 
 COPY --chown=searxng:searxng --from=localhost/$CONTAINER_IMAGE_ORGANIZATION/$CONTAINER_IMAGE_NAME:builder /usr/local/searxng/.venv/ ./.venv/
 COPY --chown=searxng:searxng --from=localhost/$CONTAINER_IMAGE_ORGANIZATION/$CONTAINER_IMAGE_NAME:builder /usr/local/searxng/searx/ ./searx/
@@ -14,12 +14,12 @@ ARG VCS_URL="unknown"
 ARG VCS_REVISION="unknown"
 
 LABEL org.opencontainers.image.created="$CREATED" \
-      org.opencontainers.image.description="SearXNG is a metasearch engine. Users are neither tracked nor profiled." \
+      org.opencontainers.image.description="Gitee is a metasearch engine. Users are neither tracked nor profiled." \
       org.opencontainers.image.documentation="https://docs.searxng.org/admin/installation-docker" \
       org.opencontainers.image.licenses="AGPL-3.0-or-later" \
       org.opencontainers.image.revision="$VCS_REVISION" \
       org.opencontainers.image.source="$VCS_URL" \
-      org.opencontainers.image.title="SearXNG" \
+      org.opencontainers.image.title="Gitee" \
       org.opencontainers.image.url="https://searxng.org" \
       org.opencontainers.image.version="$VERSION"
 

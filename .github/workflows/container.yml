@@ -11,6 +11,9 @@ on:
       - completed
     branches:
       - master
+  release:
+    types:
+      - created
 
 concurrency:
   group: ${{ github.workflow }}
@@ -27,7 +30,7 @@ env:
 jobs:
   build-base:
     if: |
-      (github.repository_owner == 'searxng' && github.event.workflow_run.conclusion == 'success')
+      (github.repository_owner == 'parchlinuxb' && github.event.workflow_run.conclusion == 'success')
       || github.event_name == 'workflow_dispatch'
     name: Build base
     runs-on: ubuntu-24.04
@@ -36,51 +39,51 @@ jobs:
       packages: write
 
     steps:
-      - if: github.repository_owner == 'searxng'
+      - if: github.repository_owner == 'parchlinuxb'
         name: Checkout
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: "false"
 
-      - if: github.repository_owner == 'searxng'
+      - if: github.repository_owner == 'parchlinuxb'
         name: Get date
         id: date
         run: echo "date=$(date +'%Y%m%d')" >>$GITHUB_OUTPUT
 
-      - if: github.repository_owner == 'searxng'
+      - if: github.repository_owner == 'parchlinuxb'
         name: Check cache apko
         id: cache-apko
-        uses: actions/cache/restore@0400d5f644dc74513175e3cd8d07132dd4860809  # v4.2.4
+        uses: actions/cache/restore@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
         with:
           # yamllint disable-line rule:line-length
           key: "apko-${{ steps.date.outputs.date }}-${{ hashFiles('./container/base.yml', './container/base-builder.yml') }}"
           path: "/tmp/.apko/"
           lookup-only: true
 
-      - if: github.repository_owner == 'searxng' && steps.cache-apko.outputs.cache-hit != 'true'
+      - if: github.repository_owner == 'parchlinuxb' && steps.cache-apko.outputs.cache-hit != 'true'
         name: Setup cache apko
-        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809  # v4.2.4
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
         with:
           # yamllint disable-line rule:line-length
           key: "apko-${{ steps.date.outputs.date }}-${{ hashFiles('./container/base.yml', './container/base-builder.yml') }}"
           restore-keys: "apko-${{ steps.date.outputs.date }}-"
           path: "/tmp/.apko/"
 
-      - if: github.repository_owner == 'searxng' && steps.cache-apko.outputs.cache-hit != 'true'
+      - if: github.repository_owner == 'parchlinuxb' && steps.cache-apko.outputs.cache-hit != 'true'
         name: Setup apko
         run: |
           eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
           brew install apko
 
-      - if: github.repository_owner == 'searxng' && steps.cache-apko.outputs.cache-hit != 'true'
+      - if: github.repository_owner == 'parchlinuxb' && steps.cache-apko.outputs.cache-hit != 'true'
         name: Login to GHCR
-        uses: docker/login-action@184bdaa0721073962dff0199f1fb9940f07167d1  # v3.5.0
+        uses: docker/login-action@184bdaa0721073962dff0199f1fb9940f07167d1 # v3.5.0
         with:
           registry: "ghcr.io"
           username: "${{ github.repository_owner }}"
           password: "${{ secrets.GITHUB_TOKEN }}"
 
-      - if: github.repository_owner == 'searxng' && steps.cache-apko.outputs.cache-hit != 'true'
+      - if: github.repository_owner == 'parchlinuxb' && steps.cache-apko.outputs.cache-hit != 'true'
         name: Build
         run: |
           eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
@@ -98,7 +101,7 @@ jobs:
             --log-level=debug
 
   build:
-    if: github.repository_owner == 'searxng' || github.event_name == 'workflow_dispatch'
+    if: github.repository_owner == 'parchlinuxb' || github.event_name == 'workflow_dispatch'
     name: Build (${{ matrix.arch }})
     runs-on: ${{ matrix.os }}
     needs: build-base
@@ -130,17 +133,17 @@ jobs:
 
     steps:
       - name: Setup Python
-        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065  # v5.6.0
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version: "${{ env.PYTHON_VERSION }}"
 
       - name: Checkout
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: "false"
 
       - name: Setup cache Python
-        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809  # v4.2.4
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
         with:
           key: "python-${{ env.PYTHON_VERSION }}-${{ runner.arch }}-${{ hashFiles('./requirements*.txt') }}"
           restore-keys: "python-${{ env.PYTHON_VERSION }}-${{ runner.arch }}-"
@@ -148,7 +151,7 @@ jobs:
 
       - name: Restore cache container mounts
         id: cache-container-mounts
-        uses: actions/cache/restore@0400d5f644dc74513175e3cd8d07132dd4860809  # v4.2.4
+        uses: actions/cache/restore@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
         with:
           key: "container-mounts-${{ hashFiles('./container/*.dockerfile') }}"
           restore-keys: "container-mounts-"
@@ -166,10 +169,10 @@ jobs:
 
       - if: ${{ matrix.emulation }}
         name: Setup QEMU
-        uses: docker/setup-qemu-action@29109295f81e9208d7d86ff1c6c12d2833863392  # v3.6.0
+        uses: docker/setup-qemu-action@29109295f81e9208d7d86ff1c6c12d2833863392 # v3.6.0
 
       - name: Login to GHCR
-        uses: docker/login-action@184bdaa0721073962dff0199f1fb9940f07167d1  # v3.5.0
+        uses: docker/login-action@184bdaa0721073962dff0199f1fb9940f07167d1 # v3.5.0
         with:
           registry: "ghcr.io"
           username: "${{ github.repository_owner }}"
@@ -183,7 +186,7 @@ jobs:
 
       - if: always()
         name: Save cache container mounts
-        uses: actions/cache/save@0400d5f644dc74513175e3cd8d07132dd4860809  # v4.2.4
+        uses: actions/cache/save@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
         with:
           key: "container-mounts-${{ hashFiles('./container/*.dockerfile') }}"
           path: |
@@ -210,16 +213,16 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: "false"
 
       - if: ${{ matrix.emulation }}
         name: Setup QEMU
-        uses: docker/setup-qemu-action@29109295f81e9208d7d86ff1c6c12d2833863392  # v3.6.0
+        uses: docker/setup-qemu-action@29109295f81e9208d7d86ff1c6c12d2833863392 # v3.6.0
 
       - name: Login to GHCR
-        uses: docker/login-action@184bdaa0721073962dff0199f1fb9940f07167d1  # v3.5.0
+        uses: docker/login-action@184bdaa0721073962dff0199f1fb9940f07167d1 # v3.5.0
         with:
           registry: "ghcr.io"
           username: "${{ github.repository_owner }}"
@@ -232,7 +235,7 @@ jobs:
         run: make container.test
 
   release:
-    if: github.repository_owner == 'searxng' && github.ref_name == 'master'
+    if: github.ref_name == 'master'
     name: Release
     runs-on: ubuntu-24.04-arm
     needs:
@@ -245,26 +248,18 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: "false"
 
       - name: Login to GHCR
-        uses: docker/login-action@184bdaa0721073962dff0199f1fb9940f07167d1  # v3.5.0
+        uses: docker/login-action@184bdaa0721073962dff0199f1fb9940f07167d1 # v3.5.0
         with:
           registry: "ghcr.io"
           username: "${{ github.repository_owner }}"
           password: "${{ secrets.GITHUB_TOKEN }}"
 
-      - name: Login to Docker Hub
-        uses: docker/login-action@184bdaa0721073962dff0199f1fb9940f07167d1  # v3.5.0
-        with:
-          registry: "docker.io"
-          username: "${{ secrets.DOCKERHUB_USERNAME }}"
-          password: "${{ secrets.DOCKERHUB_TOKEN }}"
-
       - name: Release
         env:
           GIT_URL: "${{ needs.build.outputs.git_url }}"
-          DOCKER_TAG: "${{ needs.build.outputs.docker_tag }}"
         run: make container.push

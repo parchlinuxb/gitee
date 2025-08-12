@@ -30,7 +30,7 @@ container.build() {
         # If no explicit engine is passed, prioritize podman over docker
         if command -v podman &>/dev/null; then
             container_engine="podman"
-        elif command -v docker &>/dev/null; then
+            elif command -v docker &>/dev/null; then
             container_engine="docker"
         else
             die 42 "no compatible container engine is installed (podman or docker)"
@@ -44,21 +44,21 @@ container.build() {
             arch="amd64"
             variant=""
             platform="linux/$arch"
-            ;;
+        ;;
         "ARM64" | "aarch64" | "arm64")
             arch="arm64"
             variant=""
             platform="linux/$arch"
-            ;;
+        ;;
         "ARMV7" | "armhf" | "armv7l" | "armv7")
             arch="arm"
             variant="v7"
             platform="linux/$arch/$variant"
-            ;;
+        ;;
         *)
             err_msg "Unsupported architecture; $parch"
             exit 1
-            ;;
+        ;;
     esac
     info_msg "Selected platform: $platform"
 
@@ -102,22 +102,22 @@ container.build() {
 
         # shellcheck disable=SC2086
         "$container_engine" $params_build_builder \
-            --build-arg="TIMESTAMP_SETTINGS=$(git log -1 --format="%cd" --date=unix -- ./searx/settings.yml)" \
-            --tag="localhost/$CONTAINER_IMAGE_ORGANIZATION/$CONTAINER_IMAGE_NAME:builder" \
-            --file="./container/builder.dockerfile" \
-            .
+        --build-arg="TIMESTAMP_SETTINGS=$(git log -1 --format="%cd" --date=unix -- ./searx/settings.yml)" \
+        --tag="localhost/$CONTAINER_IMAGE_ORGANIZATION/$CONTAINER_IMAGE_NAME:builder" \
+        --file="./container/builder.dockerfile" \
+        .
         build_msg CONTAINER "Image \"builder\" built"
 
         # shellcheck disable=SC2086
         "$container_engine" $params_build \
-            --build-arg="CONTAINER_IMAGE_ORGANIZATION=$CONTAINER_IMAGE_ORGANIZATION" \
-            --build-arg="CONTAINER_IMAGE_NAME=$CONTAINER_IMAGE_NAME" \
-            --build-arg="CREATED=$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
-            --build-arg="VERSION=$DOCKER_TAG" \
-            --build-arg="VCS_URL=$GIT_URL" \
-            --build-arg="VCS_REVISION=$(git rev-parse HEAD)" \
-            --file="./container/dist.dockerfile" \
-            .
+        --build-arg="CONTAINER_IMAGE_ORGANIZATION=$CONTAINER_IMAGE_ORGANIZATION" \
+        --build-arg="CONTAINER_IMAGE_NAME=$CONTAINER_IMAGE_NAME" \
+        --build-arg="CREATED=$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+        --build-arg="VERSION=$DOCKER_TAG" \
+        --build-arg="VCS_URL=$GIT_URL" \
+        --build-arg="VCS_REVISION=$(git rev-parse HEAD)" \
+        --file="./container/dist.dockerfile" \
+        .
         build_msg CONTAINER "Image built"
 
         if [ "$GITHUB_ACTIONS" = "true" ]; then
@@ -151,21 +151,21 @@ container.test() {
             arch="amd64"
             variant=""
             platform="linux/$arch"
-            ;;
+        ;;
         "ARM64" | "aarch64" | "arm64")
             arch="arm64"
             variant=""
             platform="linux/$arch"
-            ;;
+        ;;
         "ARMV7" | "armhf" | "armv7l" | "armv7")
             arch="arm"
             variant="v7"
             platform="linux/$arch/$variant"
-            ;;
+        ;;
         *)
             err_msg "Unsupported architecture; $parch"
             exit 1
-            ;;
+        ;;
     esac
     build_msg CONTAINER "Selected platform: $platform"
 
@@ -177,7 +177,7 @@ container.test() {
         name="$CONTAINER_IMAGE_NAME-$(date +%N)"
 
         podman create --name="$name" --rm --timeout=60 --network="host" \
-            "ghcr.io/$CONTAINER_IMAGE_ORGANIZATION/cache:$CONTAINER_IMAGE_NAME-$arch$variant" >/dev/null
+        "ghcr.io/$CONTAINER_IMAGE_ORGANIZATION/cache:$CONTAINER_IMAGE_NAME-$arch$variant" >/dev/null
 
         podman start "$name" >/dev/null
         podman logs -f "$name" &
@@ -214,21 +214,21 @@ container.push() {
                 archs+=("amd64")
                 variants+=("")
                 platforms+=("linux/${archs[-1]}")
-                ;;
+            ;;
             "ARM64" | "aarch64" | "arm64")
                 archs+=("arm64")
                 variants+=("")
                 platforms+=("linux/${archs[-1]}")
-                ;;
+            ;;
             "ARMV7" | "armv7" | "armhf" | "arm")
                 archs+=("arm")
                 variants+=("v7")
                 platforms+=("linux/${archs[-1]}/${variants[-1]}")
-                ;;
+            ;;
             *)
                 err_msg "Unsupported architecture; $arch"
                 exit 1
-                ;;
+            ;;
         esac
     done
 
@@ -252,15 +252,15 @@ container.push() {
             # Add archs to manifest
             for i in "${!archs[@]}"; do
                 podman manifest add \
-                    "localhost/$CONTAINER_IMAGE_ORGANIZATION/$CONTAINER_IMAGE_NAME:$tag" \
-                    "containers-storage:ghcr.io/$CONTAINER_IMAGE_ORGANIZATION/cache:$CONTAINER_IMAGE_NAME-${archs[$i]}${variants[$i]}"
+                "localhost/$CONTAINER_IMAGE_ORGANIZATION/$CONTAINER_IMAGE_NAME:$tag" \
+                "containers-storage:ghcr.io/$CONTAINER_IMAGE_ORGANIZATION/cache:$CONTAINER_IMAGE_NAME-${archs[$i]}${variants[$i]}"
             done
         done
 
         podman image list
 
         # Remote registries
-        release_registries=("ghcr.io" "docker.io")
+        release_registries=("ghcr.io")
 
         # Push manifests
         for registry in "${release_registries[@]}"; do
@@ -268,8 +268,8 @@ container.push() {
                 build_msg CONTAINER "Pushing manifest $tag to $registry"
 
                 podman manifest push \
-                    "localhost/$CONTAINER_IMAGE_ORGANIZATION/$CONTAINER_IMAGE_NAME:$tag" \
-                    "docker://$registry/$CONTAINER_IMAGE_ORGANIZATION/$CONTAINER_IMAGE_NAME:$tag"
+                "localhost/$CONTAINER_IMAGE_ORGANIZATION/$CONTAINER_IMAGE_NAME:$tag" \
+                "docker://$registry/$CONTAINER_IMAGE_ORGANIZATION/$CONTAINER_IMAGE_NAME:$tag"
             done
         done
     )
