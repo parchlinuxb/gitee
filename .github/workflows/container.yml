@@ -88,13 +88,13 @@ jobs:
         run: |
           eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-          apko publish ./container/base.yml ghcr.io/${{ github.repository_owner }}/base:searxng \
+          apko publish ./container/base.yml ghcr.io/${{ github.repository_owner }}/base:gitee \
             --cache-dir=/tmp/.apko/ \
             --sbom=false \
             --vcs=false \
             --log-level=debug
 
-          apko publish ./container/base-builder.yml ghcr.io/${{ github.repository_owner }}/base:searxng-builder \
+          apko publish ./container/base-builder.yml ghcr.io/${{ github.repository_owner }}/base:gitee-builder \
             --cache-dir=/tmp/.apko/ \
             --sbom=false \
             --vcs=false \
