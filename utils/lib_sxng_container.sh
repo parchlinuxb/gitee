@@ -95,15 +95,11 @@ container.build() {
 
         if [ "$GITHUB_ACTIONS" = "true" ]; then
             params_build+=" --tag=ghcr.io/$CONTAINER_IMAGE_ORGANIZATION/cache:$CONTAINER_IMAGE_NAME-$arch$variant"
-        else
-            params_build+=" --tag=localhost/$CONTAINER_IMAGE_ORGANIZATION/$CONTAINER_IMAGE_NAME:latest"
-            params_build+=" --tag=localhost/$CONTAINER_IMAGE_ORGANIZATION/$CONTAINER_IMAGE_NAME:$DOCKER_TAG"
         fi
 
         # shellcheck disable=SC2086
         "$container_engine" $params_build_builder \
         --build-arg="TIMESTAMP_SETTINGS=$(git log -1 --format="%cd" --date=unix -- ./searx/settings.yml)" \
-        --tag="localhost/$CONTAINER_IMAGE_ORGANIZATION/$CONTAINER_IMAGE_NAME:builder" \
         --file="./container/builder.dockerfile" \
         .
         build_msg CONTAINER "Image \"builder\" built"
@@ -245,14 +241,9 @@ container.push() {
 
         # Create manifests
         for tag in "${release_tags[@]}"; do
-            if ! podman manifest exists "localhost/$CONTAINER_IMAGE_ORGANIZATION/$CONTAINER_IMAGE_NAME:$tag"; then
-                podman manifest create "localhost/$CONTAINER_IMAGE_ORGANIZATION/$CONTAINER_IMAGE_NAME:$tag"
-            fi
-
             # Add archs to manifest
             for i in "${!archs[@]}"; do
                 podman manifest add \
-                "localhost/$CONTAINER_IMAGE_ORGANIZATION/$CONTAINER_IMAGE_NAME:$tag" \
                 "containers-storage:ghcr.io/$CONTAINER_IMAGE_ORGANIZATION/cache:$CONTAINER_IMAGE_NAME-${archs[$i]}${variants[$i]}"
             done
         done
@@ -268,7 +259,6 @@ container.push() {
                 build_msg CONTAINER "Pushing manifest $tag to $registry"
 
                 podman manifest push \
-                "localhost/$CONTAINER_IMAGE_ORGANIZATION/$CONTAINER_IMAGE_NAME:$tag" \
                 "docker://$registry/$CONTAINER_IMAGE_ORGANIZATION/$CONTAINER_IMAGE_NAME:$tag"
             done
         done
