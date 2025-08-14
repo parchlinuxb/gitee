@@ -1,81 +1,108 @@
 {% from 'smart/icons.html' import icon_small %}
 
 <form
-    id="search"
-    method="{{ method or 'POST' }}"
-    action="{{ url_for('search') }}"
-    role="search"
-    class="header"
+  id="search"
+  method="{{ method or 'POST' }}"
+  action="{{ url_for('search') }}"
+  role="search"
+  class="header"
 >
-    <div class="header">
-        <a class="logo" href="/">
-            <img src="/static/img/logo.svg" alt="{{ instance_name }}" />
-        </a>
-        <div class="search_box">
-            <div class="icon">{{ icon_small('search') }}</div>
-            <input
-                id="q"
-                name="q"
-                type="text"
-                placeholder="{{ _('Search for...') }}"
-                tabindex="1"
-                autocomplete="off"
-                autocapitalize="none"
-                spellcheck="false"
-                autocorrect="off"
-                dir="auto"
-                value="{{ q or '' }}"
-            />
-            <button
-                id="clear_search"
-                type="reset"
-                aria-label="{{ _('clear') }}"
-                class="hide_if_nojs"
-            >
-                {{ icon_small('close') }}
-            </button>
-            <button
-                {%
-                for
-                category
-                in
-                selected_categories
-                %}
-                name="category_{{ category }}"
-                {%
-                endfor
-                %}
-                type="submit"
-                hidden
-                aria-hidden="true"
-            ></button>
-            <div class="suggestion-box" id="suggestion"></div>
-        </div>
+  <div class="header">
+    <a class="logo" href="/">
+      <img src="/static/img/logo.svg" alt="{{ instance_name }}" />
+    </a>
+    <div class="search_box">
+      <div class="icon">{{ icon_small('search') }}</div>
+      <input
+        id="q"
+        name="q"
+        type="text"
+        placeholder="{{ _('Search for...') }}"
+        tabindex="1"
+        autocomplete="off"
+        autocapitalize="none"
+        spellcheck="false"
+        autocorrect="off"
+        dir="auto"
+        value="{{ q or '' }}"
+      />
+      <button
+        id="clear_search"
+        type="reset"
+        aria-label="{{ _('clear') }}"
+        class="hide_if_nojs"
+      >
+        {{ icon_small('close') }}
+      </button>
+      <button
+        {%
+        for
+        category
+        in
+        selected_categories
+        %}
+        name="category_{{ category }}"
+        {%
+        endfor
+        %}
+        type="submit"
+        hidden
+        aria-hidden="true"
+      ></button>
+      <div class="suggestion-box" id="suggestion"></div>
     </div>
-    <div class="selections">
-        <div class="categories">
-            {% for category in categories_as_tabs %}
-            <button
-                type="submit"
-                name="category_{{ category }}"
-                class="category {% if category in selected_categories %} selected {% endif %}"
-            >
-                {{ _(category) }}
-            </button>
+  </div>
+  <div class="selections">
+    <div class="categories">
+      {% for category in categories_as_tabs %}{% if category in ["general",
+      "images", "videos", "news", "music"] %}
+      <button
+        type="submit"
+        name="category_{{ category }}"
+        class="category {% if category in selected_categories %} selected {% endif %}"
+        {%
+        if
+        category
+        in
+        selected_categories
+        %}
+        disabled
+        {%
+        endif
+        %}
+      >
+        {{ _(category) }}
+      </button>
+      {% endif %}{% endfor %}
 
-            {% endfor %}
+      <label for="more-categories-btn" class="more-categories category">
+        {{icon_small('more')}}
+        <input type="text" id="more-categories-btn" />
+        <div class="more-categories-list">
+          {% for category in categories_as_tabs %}{% if category not in
+          ["general", "images", "videos", "news", "music"] %}
+          <button
+            type="submit"
+            name="category_{{ category }}"
+            class="category {% if category in selected_categories %} selected {% endif %}"
+          >
+            {{ _(category) }}
+          </button>
+          {% endif %}{% endfor %}
         </div>
-        <label for="filter" class="filter-btn">
-            <input type="checkbox" id="filter" class="switch" />
-            <span> {{ _('Filters') }} </span>
-        </label>
+      </label>
     </div>
-    {% include 'smart/madules/filters.html' %}
+    <label for="filter" class="filter-btn">
+      <input type="checkbox" id="filter" class="switch" />
+      <span> {{ _('Filters') }} </span>
+    </label>
+  </div>
+  {% include 'smart/madules/filters.html' %}
 
-    <input type="hidden" name="theme" value="{{ theme }}" />
-    {% if timeout_limit %}<input
-        type="hidden"
-        name="timeout_limit"
-        value="{{ timeout_limit|e }}"
-    />{% endif %}
+  <input type="hidden" name="theme" value="{{ theme }}" />
+  {% if timeout_limit %}<input
+    type="hidden"
+    name="timeout_limit"
+    value="{{ timeout_limit|e }}"
+  />{% endif %}
 </form>

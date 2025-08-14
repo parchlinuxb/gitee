@@ -1,26 +1,27 @@
 <div id="search_categories">
-    <div class="categories js-only">
-        {% for category in categories_as_tabs %} {% if not loop.index > 4 %}
-        <label for="category_{{ category }}" class="category">
-            <input
-                type="checkbox"
-                name="category_{{ category }}"
-                {%
-                if
-                category
-                in
-                selected_categories
-                %}
-                checked
-                {%
-                endif
-                %}
-                id="category_{{ category }}"
-                hidden
-            />
-            <div class="category-icon">{{ icon_small(category )}}</div>
-            <span>{{ _(category) }}</span>
-        </label>
-        {% endif %}{% endfor %}
-    </div>
+  <div class="categories js-only">
+    {% for category in categories_as_tabs %} {% if not category in ["map",
+    "music", "it", "science", "files", "social media"] %}
+    <label for="category_{{ category }}" class="category">
+      <input
+        type="checkbox"
+        name="category_{{ category }}"
+        {%
+        if
+        category
+        in
+        selected_categories
+        %}
+        checked
+        {%
+        endif
+        %}
+        id="category_{{ category }}"
+        hidden
+      />
+      <div class="category-icon">{{ icon_small(category )}}</div>
+      <span>{{ _(category) }}</span>
+    </label>
+    {% endif %}{% endfor %}
+  </div>
 </div>

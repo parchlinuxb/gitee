@@ -145,6 +145,7 @@ ui:
     smart_variant: gitee
   # Perform search immediately if a category selected.
   # Disable to select multiple categories at once and start the search manually.
+  # Not available in smart theme
   search_on_category_select: true
   # Hotkeys: default or vim
   hotkeys: default
@@ -330,12 +331,12 @@ categories_as_tabs:
   images:
   videos:
   news:
-  # map:
+  map:
   music:
-  # it:
-  # science:
-  # files:
-  # social media:
+  it:
+  science:
+  files:
+  social media:
 
 engines:
   - name: 360search

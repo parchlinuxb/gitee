@@ -21,6 +21,7 @@ const svgList = {
   loader: "node_modules/remixicon/icons/System/loader-line.svg",
   information: "node_modules/remixicon/icons/System/information-fill.svg",
   check: "node_modules/remixicon/icons/System/check-line.svg",
+  more: "node_modules/remixicon/icons/System/more-2-fill.svg",
 };
 
 const ejs = require("ejs"),

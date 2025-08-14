@@ -593,6 +593,43 @@ footer {
                     color: var(--background-color);
                 }
             }
+
+            .more-categories {
+                position: relative;
+                height: 2rem;
+                padding: .5rem;
+
+                .more-categories-list {
+                    display: none;
+                    flex-direction: column;
+                    position: absolute;
+                    top: calc(100% + .5rem);
+                    left: 0;
+                    width: 10rem;
+                    z-index: 1;
+                    background-color: var(--background-color);
+                    @include mixin.rounded();
+                    padding: .5rem;
+                }
+
+                &:focus-within .more-categories-list {
+                    display: flex;
+                }
+
+                svg {
+                    width: 1rem;
+                }
+
+                input {
+                    width: 0;
+                    height: 0;
+
+                    &:focus-within {
+                        outline: none;
+                    }
+                }
+            }
+
         }
 
         .filter-btn {
