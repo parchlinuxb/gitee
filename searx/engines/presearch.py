@@ -89,6 +89,9 @@ time_range_support = True
 send_accept_language_header = True
 categories = ["general", "web"]  # general, images, videos, news
 
+# HTTP2 requests immediately get blocked by a CAPTCHA
+enable_http2 = False
+
 search_type = "search"
 """must be any of ``search``, ``images``, ``videos``, ``news``"""
 
@@ -137,7 +140,7 @@ def _get_request_id(query, params):
         if l.territory:
             headers['Accept-Language'] = f"{l.language}-{l.territory},{l.language};" "q=0.9,*;" "q=0.5"
 
-    resp = get(url, headers=headers)
+    resp = get(url, headers=headers, timeout=5)
 
     for line in resp.text.split("\n"):
         if "window.searchId = " in line:

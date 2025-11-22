@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 .ltr-left(@offset) {
   right: @offset;
 }
@@ -129,13 +131,7 @@
 }
 
 // select HTML element
-@supports (
-  (background-position-x: 100%) and
-    (
-      (appearance: none) or (-webkit-appearance: none) or
-        (-moz-appearance: none)
-    )
-) {
+@supports ((background-position-x: 100%) and ((appearance: none))) {
   select {
     border-width: 0 0 0 2rem;
     background-position-x: -2rem;

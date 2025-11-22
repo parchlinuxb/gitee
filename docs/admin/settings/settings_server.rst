@@ -55,11 +55,22 @@
 
 .. _method:
 
-``method`` : ``$SEARXNG_METHOD``
-  Whether to use ``GET`` or ``POST`` HTTP method when searching.
+``method`` : ``GET`` | ``POST``
+
+  HTTP method.  By defaults ``POST`` is used / The ``POST`` method has the
+  advantage with some WEB browsers that the history is not easy to read, but
+  there are also various disadvantages that sometimes **severely restrict the
+  ease of use for the end user** (e.g. back button to jump back to the previous
+  search page and drag & drop of search term to new tabs do not work as
+  expected .. and several more).  We had some discussions about the *pros
+  versus cons*:
+
+  - `[doc] adds the missing documentation of the server.method settings
+    <https://github.com/searxng/searxng/pull/3619>`__
+  - look out for `label:"http methods GET & POST"
+    <https://github.com/search?q=repo%3Asearxng%2Fsearxng+label%3A%22http+methods+GET+%26+POST%22>`__
 
 .. _HTTP headers: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers
 
 ``default_http_headers`` :
-  Set additional HTTP headers, see `#755 <https://github.com/searx/searx/issues/715>`__
-
+  Set additional `HTTP headers`_, see `#755 <https://github.com/searx/searx/issues/715>`__

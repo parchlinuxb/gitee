@@ -1,15 +1,10 @@
-/*
-* SearXNG, A privacy-respecting, hackable metasearch engine
-*
-* To convert "style.less" to "style.css" run: $make styles
-*/
+// SPDX-License-Identifier: AGPL-3.0-or-later
 
 // stylelint-disable no-descending-specificity
 
 @import (inline) "../../node_modules/normalize.css/normalize.css";
 @import "definitions.less";
 @import "mixins.less";
-@import "code.less";
 @import "toolkit.less";
 @import "autocomplete.less";
 @import "detail.less";
@@ -168,10 +163,20 @@ article[data-vim-selected].category-videos,
 article[data-vim-selected].category-news,
 article[data-vim-selected].category-map,
 article[data-vim-selected].category-music,
-article[data-vim-selected].category-files,
 article[data-vim-selected].category-social {
   border: 1px solid var(--color-result-vim-arrow);
   .rounded-corners;
+}
+
+.image-label-bottom-right() {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background: var(--color-image-resolution-background);
+  padding: 0.3rem 0.5rem;
+  font-size: 0.9rem;
+  color: var(--color-image-resolution-font);
+  border-top-left-radius: 0.3rem;
 }
 
 .result {
@@ -300,12 +305,22 @@ article[data-vim-selected].category-social {
     color: var(--color-result-description-highlight-font);
   }
 
-  img.thumbnail {
+  a.thumbnail_link {
+    position: relative;
+    margin-top: 0.6rem;
+    .ltr-margin-right(1rem);
     .ltr-float-left();
-    padding-top: 0.6rem;
-    .ltr-padding-right(1rem);
-    width: 7rem;
-    height: unset; // remove height value that was needed for lazy loading
+
+    img.thumbnail {
+      width: 7rem;
+      height: unset; // remove height value that was needed for lazy loading
+      display: block;
+    }
+
+    .thumbnail_length {
+      .image-label-bottom-right();
+      right: 6px;
+    }
   }
 
   .break {
@@ -313,11 +328,11 @@ article[data-vim-selected].category-social {
   }
 }
 
-.result-paper,
 .result-packages {
   .attributes {
     display: table;
     border-spacing: 0.125rem;
+    margin-top: 0.3rem;
 
     div {
       display: table-row;
@@ -357,12 +372,6 @@ article[data-vim-selected].category-social {
   }
 }
 
-.result-packages {
-  .attributes {
-    margin-top: 0.3rem;
-  }
-}
-
 .template_group_images {
   display: flex;
   flex-wrap: wrap;
@@ -377,7 +386,6 @@ article[data-vim-selected].category-social {
 .category-news,
 .category-map,
 .category-music,
-.category-files,
 .category-social {
   border: 1px solid var(--color-result-border);
   margin: 0 @results-tablet-offset 1rem @results-tablet-offset !important;
@@ -402,23 +410,19 @@ article[data-vim-selected].category-social {
 }
 
 .result-videos {
-  img.thumbnail {
-    .ltr-float-left();
-    padding-top: 0.6rem;
-    .ltr-padding-right(1rem);
+  a.thumbnail_link img.thumbnail {
     width: 20rem;
-    height: unset; // remove height value that was needed for lazy loading
   }
-}
 
-.result-videos .content {
-  overflow: hidden;
-}
+  .content {
+    overflow: hidden;
+  }
 
-.result-videos .embedded-video iframe {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  padding: 10px 0 0 0;
+  .embedded-video iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    padding: 10px 0 0 0;
+  }
 }
 
 @supports not (aspect-ratio: 1 / 1) {
@@ -483,14 +487,7 @@ article[data-vim-selected].category-social {
   }
 
   .image_resolution {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    background: var(--color-image-resolution-background);
-    padding: 0.3rem 0.5rem;
-    font-size: 0.9rem;
-    color: var(--color-image-resolution-font);
-    border-top-left-radius: 0.3rem;
+    .image-label-bottom-right();
   }
 
   span.title,
@@ -1122,7 +1119,6 @@ summary.title {
     display: none;
   }
 
-  .result-paper,
   .result-packages {
     .attributes {
       display: block;
@@ -1168,3 +1164,6 @@ pre code {
 
 // import layouts of the Result types
 @import "result_types/keyvalue.less";
+@import "result_types/code.less";
+@import "result_types/paper.less";
+@import "result_types/file.less";

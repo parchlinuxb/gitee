@@ -1,7 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-"""Deviantart (Images)
-
-"""
+"""Deviantart (Images)"""
 
 import urllib.parse
 from lxml import html
@@ -25,14 +23,14 @@ paging = True
 # search-url
 base_url = 'https://www.deviantart.com'
 
-results_xpath = '//div[@class="_2pZkk"]/div/div/a'
+results_xpath = '//div[@class="V_S0t_"]/div/div/a'
 url_xpath = './@href'
 thumbnail_src_xpath = './div/img/@src'
 img_src_xpath = './div/img/@srcset'
 title_xpath = './@aria-label'
 premium_xpath = '../div/div/div/text()'
 premium_keytext = 'Watch the artist to view this deviation'
-cursor_xpath = '(//a[@class="_1OGeq"]/@href)[last()]'
+cursor_xpath = '(//a[@class="vQ2brP"]/@href)[last()]'
 
 
 def request(query, params):

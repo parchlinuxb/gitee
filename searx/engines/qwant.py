@@ -53,6 +53,7 @@ from searx.exceptions import (
     SearxEngineAPIException,
     SearxEngineTooManyRequestsException,
     SearxEngineCaptchaException,
+    SearxEngineAccessDeniedException,
 )
 from searx.network import raise_for_httperror
 from searx.enginelib.traits import EngineTraits
@@ -63,8 +64,6 @@ from searx.utils import (
     extract_text,
     get_embeded_stream_url,
 )
-
-traits: EngineTraits
 
 # about
 about = {
@@ -82,6 +81,9 @@ paging = True
 max_page = 5
 """5 pages maximum (``&p=5``): Trying to do more just results in an improper
 redirect"""
+
+# Otherwise Qwant will return 403 if not set
+send_accept_language_header = True
 
 qwant_categ = None
 """One of ``web-lite`` (or ``web``), ``news``, ``images`` or ``videos``"""
@@ -132,17 +134,17 @@ def request(query, params):
 
     elif qwant_categ == 'images':
 
+        args['count'] = 50
         args['locale'] = q_locale
         args['safesearch'] = params['safesearch']
-        args['count'] = 50
         args['tgp'] = 3
         args['offset'] = (params['pageno'] - 1) * args['count']
 
     else:  # web, news, videos
 
+        args['count'] = 10
         args['locale'] = q_locale
         args['safesearch'] = params['safesearch']
-        args['count'] = 10
         args['llm'] = 'false'
         args['tgp'] = 3
         args['offset'] = (params['pageno'] - 1) * args['count']
@@ -186,8 +188,12 @@ def parse_web_api(resp):
 
     results = []
 
-    # load JSON result
-    search_results = loads(resp.text)
+    # Try to load JSON result
+    try:
+        search_results = loads(resp.text)
+    except ValueError:
+        search_results = {}
+
     data = search_results.get('data', {})
 
     # check for an API error
@@ -197,6 +203,8 @@ def parse_web_api(resp):
             raise SearxEngineTooManyRequestsException()
         if search_results.get("data", {}).get("error_data", {}).get("captchaUrl") is not None:
             raise SearxEngineCaptchaException()
+        if resp.status_code == 403:
+            raise SearxEngineAccessDeniedException()
         msg = ",".join(data.get('message', ['unknown']))
         raise SearxEngineAPIException(f"{msg} ({error_code})")
 

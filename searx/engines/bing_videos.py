@@ -1,25 +1,15 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 # pylint: disable=invalid-name
-"""Bing-Videos: description see :py:obj:`searx.engines.bing`.
-"""
+"""Bing-Videos: description see :py:obj:`searx.engines.bing`."""
 
-from typing import TYPE_CHECKING
 import json
 from urllib.parse import urlencode
 
 from lxml import html
 
-from searx.enginelib.traits import EngineTraits
 from searx.engines.bing import set_bing_cookies
 from searx.engines.bing import fetch_traits  # pylint: disable=unused-import
 from searx.engines.bing_images import time_map
-
-if TYPE_CHECKING:
-    import logging
-
-    logger: logging.Logger
-
-traits: EngineTraits
 
 
 about = {

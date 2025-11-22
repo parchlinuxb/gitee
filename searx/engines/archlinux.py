@@ -8,21 +8,13 @@ Arch Wiki blocks access to it.
 
 """
 
-from typing import TYPE_CHECKING
 from urllib.parse import urlencode, urljoin, urlparse
 import lxml
 import babel
 
-from searx.utils import extract_text, eval_xpath_list, eval_xpath_getindex
+from searx.utils import extract_text, eval_xpath_list, eval_xpath_getindex, searxng_useragent
 from searx.enginelib.traits import EngineTraits
 from searx.locales import language_tag
-
-if TYPE_CHECKING:
-    import logging
-
-    logger: logging.Logger
-
-traits: EngineTraits
 
 
 about = {
@@ -53,7 +45,7 @@ def request(query, params):
         query += ' (' + eng_lang + ')'
         # wiki.archlinux.org is protected by anubis
         # - https://github.com/searxng/searxng/issues/4646#issuecomment-2817848019
-        params['headers']['User-Agent'] = "SearXNG"
+        params['headers']['User-Agent'] = searxng_useragent()
     elif netloc == 'wiki.archlinuxcn.org':
         base_url = 'https://' + netloc + '/wzh/index.php?'
 
@@ -128,7 +120,7 @@ def fetch_traits(engine_traits: EngineTraits):
         'zh': 'Special:搜索',
     }
 
-    resp = get('https://wiki.archlinux.org/')
+    resp = get('https://wiki.archlinux.org/', timeout=3)
     if not resp.ok:  # type: ignore
         print("ERROR: response from wiki.archlinux.org is not OK.")
 

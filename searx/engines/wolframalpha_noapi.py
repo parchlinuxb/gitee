@@ -1,9 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 """
- Wolfram|Alpha (Science)
+Wolfram|Alpha (Science)
 """
 
-from __future__ import annotations
 
 from json import loads
 from urllib.parse import urlencode

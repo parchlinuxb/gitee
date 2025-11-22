@@ -19,6 +19,7 @@ Gitee (a.k.a ParchSearch) is the libre way of search, A fork of SearXNG
 
 .. |AGPL License|  image:: https://img.shields.io/badge/license-AGPL-blue.svg
    :target: https://github.com/searxng/searxng/blob/master/LICENSE
+   :alt: License
 
 .. |Issues| image:: https://img.shields.io/github/issues/parchlinuxb/gitee?color=yellow&label=issues
    :target: https://github.com/parchlinuxb/gitee/issues

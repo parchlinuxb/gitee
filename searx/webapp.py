@@ -2,7 +2,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 """WebApp"""
 # pylint: disable=use-dict-literal
-from __future__ import annotations
 
 import json
 import os
@@ -190,23 +189,37 @@ def _get_locale_rfc5646(locale):
 
 # code-highlighter
 @app.template_filter("code_highlighter")
-def code_highlighter(codelines, language=None):
+def code_highlighter(
+    codelines, language=None, hl_lines=None, strip_whitespace=True, strip_new_lines=True
+):
     if not language:
         language = "text"
 
     try:
-        # find lexer by programming language
-        lexer = get_lexer_by_name(language, stripall=True)
+        lexer = get_lexer_by_name(
+            language, stripall=strip_whitespace, stripnl=strip_new_lines
+        )
 
     except Exception as e:  # pylint: disable=broad-except
         logger.warning("pygments lexer: %s " % e)
         # if lexer is not found, using default one
-        lexer = get_lexer_by_name("text", stripall=True)
+        lexer = get_lexer_by_name(
+            "text", stripall=strip_whitespace, stripnl=strip_new_lines
+        )
 
     html_code = ""
     tmp_code = ""
     last_line = None
     line_code_start = None
+
+    def offset_hl_lines(hl_lines, start):
+        """
+        hl_lines in pygments are expected to be relative to the input
+        """
+        if hl_lines is None:
+            return None
+
+        return [line - start + 1 for line in hl_lines]
 
     # parse lines
     for line, code in codelines:
@@ -218,7 +231,10 @@ def code_highlighter(codelines, language=None):
 
             # highlight last codepart
             formatter = HtmlFormatter(
-                linenos="inline", linenostart=line_code_start, cssclass="code-highlight"
+                linenos="inline",
+                linenostart=line_code_start,
+                cssclass="code-highlight",
+                hl_lines=offset_hl_lines(hl_lines, line_code_start),
             )
             html_code = html_code + highlight(tmp_code, lexer, formatter)
 
@@ -234,7 +250,10 @@ def code_highlighter(codelines, language=None):
 
     # highlight last codepart
     formatter = HtmlFormatter(
-        linenos="inline", linenostart=line_code_start, cssclass="code-highlight"
+        linenos="inline",
+        linenostart=line_code_start,
+        cssclass="code-highlight",
+        hl_lines=offset_hl_lines(hl_lines, line_code_start),
     )
     html_code = html_code + highlight(tmp_code, lexer, formatter)
 
@@ -357,6 +376,14 @@ def get_pretty_url(parsed_url: urllib.parse.ParseResult):
     path = parsed_url.path
     path = path[:-1] if len(path) > 0 and path[-1] == "/" else path
     path = unquote(path.replace("/", " › "))
+
+    # Keep the query argument for URLs like:
+    # - 'http://example.org?/foo/bar' --> parsed_url.query is 'foo/bar'
+    query_args: list[tuple[str, str]] = list(urllib.parse.parse_qsl(parsed_url.query))
+    if not query_args and parsed_url.query:
+        path += (" › .." if len(parsed_url.query) > 24 else " › ") + parsed_url.query[
+            -24:
+        ]
     return [parsed_url.scheme + "://" + parsed_url.netloc, path]
 
 
@@ -388,15 +415,9 @@ def render(template_name: str, **kwargs):
     # values from the preferences
     # pylint: disable=too-many-statements
     client_settings = get_client_settings()
-    kwargs["client_settings"] = str(
-        base64.b64encode(
-            bytes(
-                json.dumps(client_settings),
-                encoding="utf-8",
-            )
-        ),
-        encoding="utf-8",
-    )
+    kwargs["client_settings"] = base64.b64encode(
+        json.dumps(client_settings).encode("utf-8")
+    ).decode("utf-8")
     kwargs["preferences"] = sxng_request.preferences
     kwargs.update(client_settings)
 
@@ -922,8 +943,11 @@ def preferences():
 
     # save preferences using the link the /preferences?preferences=...
     if sxng_request.args.get("preferences") or sxng_request.form.get("preferences"):
-        resp = make_response(redirect(url_for("index", _external=True)))
-        return sxng_request.preferences.save(resp)
+        # if preferences_preview_only is 'true', the prefs from the 'preferences' query are
+        # shown in the settings page, but they're not applied unless the user presses 'save'
+        if sxng_request.args.get("preferences_preview_only") != "true":
+            resp = make_response(redirect(url_for("index", _external=True)))
+            return sxng_request.preferences.save(resp)
 
     # save preferences
     if sxng_request.method == "POST":
@@ -1116,7 +1140,6 @@ def image_proxy():
         request_headers = {
             "User-Agent": gen_useragent(),
             "Accept": "image/webp,*/*",
-            "Accept-Encoding": "gzip, deflate",
             "Sec-GPC": "1",
             "DNT": "1",
         }

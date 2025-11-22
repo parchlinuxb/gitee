@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 # pylint: disable=missing-module-docstring,disable=missing-class-docstring,invalid-name
 
-from searx.search import SearchQuery, EngineRef
+from searx.search.models import EngineRef, SearchQuery
 from searx.search.processors import online
 from searx import engines
 
@@ -20,7 +20,7 @@ class TestOnlineProcessor(SearxTestCase):
 
     def test_get_params_default_params(self):
         engine = engines.engines[TEST_ENGINE_NAME]
-        online_processor = online.OnlineProcessor(engine, TEST_ENGINE_NAME)
+        online_processor = online.OnlineProcessor(engine)
         search_query = SearchQuery('test', [EngineRef(TEST_ENGINE_NAME, 'general')], 'all', 0, 1, None, None, None)
         params = self._get_params(online_processor, search_query, 'general')
         self.assertIn('method', params)
@@ -32,7 +32,7 @@ class TestOnlineProcessor(SearxTestCase):
 
     def test_get_params_useragent(self):
         engine = engines.engines[TEST_ENGINE_NAME]
-        online_processor = online.OnlineProcessor(engine, TEST_ENGINE_NAME)
+        online_processor = online.OnlineProcessor(engine)
         search_query = SearchQuery('test', [EngineRef(TEST_ENGINE_NAME, 'general')], 'all', 0, 1, None, None, None)
         params = self._get_params(online_processor, search_query, 'general')
         self.assertIn('User-Agent', params['headers'])

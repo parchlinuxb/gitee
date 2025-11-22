@@ -16,9 +16,13 @@ from searx import searx_dir
 LESS_FILE = Path(searx_dir).parent / 'client/simple/generated/pygments.less'
 
 HEADER = f"""\
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 /*
    this file is generated automatically by searxng_extra/update/update_pygments.py
-   using pygments version {pygments.__version__}
+   using pygments version {pygments.__version__}:
+
+       ./manage templates.simple.pygments
 */
 
 """
@@ -43,9 +47,6 @@ END_DARK_THEME = """
 
 
 class Formatter(HtmlFormatter):  # pylint: disable=missing-class-docstring
-    @property
-    def _pre_style(self):
-        return 'line-height: 100%;'
 
     def get_style_lines(self, arg=None):
         style_lines = []
@@ -69,4 +70,4 @@ def generat_css(light_style, dark_style) -> str:
 if __name__ == '__main__':
     print("update: %s" % LESS_FILE)
     with LESS_FILE.open('w', encoding='utf8') as f:
-        f.write(generat_css('default', 'lightbulb'))
+        f.write(generat_css('default', 'monokai'))

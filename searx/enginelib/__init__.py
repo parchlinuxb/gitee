@@ -22,21 +22,26 @@ an example in which the command line is called in the development environment::
 -----
 
 """
-from __future__ import annotations
 
 __all__ = ["EngineCache", "Engine", "ENGINES_CACHE"]
 
-from typing import List, Callable, TYPE_CHECKING, Any
+import typing as t
+import abc
+from collections.abc import Callable
+import logging
 import string
 import typer
 
-from ..cache import ExpireCache, ExpireCacheCfg
+from ..cache import ExpireCacheSQLite, ExpireCacheCfg
 
-if TYPE_CHECKING:
+if t.TYPE_CHECKING:
     from searx.enginelib import traits
+    from searx.enginelib.traits import EngineTraits
+    from searx.extended_types import SXNG_Response
+    from searx.result_types import EngineResults
+    from searx.search.processors import OfflineParamTypes, OnlineParamTypes
 
-
-ENGINES_CACHE = ExpireCache.build_cache(
+ENGINES_CACHE: ExpireCacheSQLite = ExpireCacheSQLite.build_cache(
     ExpireCacheCfg(
         name="ENGINES_CACHE",
         MAXHOLD_TIME=60 * 60 * 24 * 7,  # 7 days
@@ -62,7 +67,7 @@ def state():
     title = f"properties of {ENGINES_CACHE.cfg.name}"
     print(title)
     print("=" * len(title))
-    print(str(ENGINES_CACHE.properties))  # type: ignore
+    print(str(ENGINES_CACHE.properties))
 
 
 @app.command()
@@ -152,11 +157,11 @@ class EngineCache:
     """
 
     def __init__(self, engine_name: str, expire: int | None = None):
-        self.expire = expire or ENGINES_CACHE.cfg.MAXHOLD_TIME
+        self.expire: int = expire or ENGINES_CACHE.cfg.MAXHOLD_TIME
         _valid = "-_." + string.ascii_letters + string.digits
-        self.table_name = "".join([c if c in _valid else "_" for c in engine_name])
+        self.table_name: str = "".join([c if c in _valid else "_" for c in engine_name])
 
-    def set(self, key: str, value: Any, expire: int | None = None) -> bool:
+    def set(self, key: str, value: t.Any, expire: int | None = None) -> bool:
         return ENGINES_CACHE.set(
             key=key,
             value=value,
@@ -164,14 +169,14 @@ class EngineCache:
             ctx=self.table_name,
         )
 
-    def get(self, key: str, default=None) -> Any:
+    def get(self, key: str, default: t.Any = None) -> t.Any:
         return ENGINES_CACHE.get(key, default=default, ctx=self.table_name)
 
     def secret_hash(self, name: str | bytes) -> str:
         return ENGINES_CACHE.secret_hash(name=name)
 
 
-class Engine:  # pylint: disable=too-few-public-methods
+class Engine(abc.ABC):  # pylint: disable=too-few-public-methods
     """Class of engine instances build from YAML settings.
 
     Further documentation see :ref:`general engine configuration`.
@@ -181,6 +186,8 @@ class Engine:  # pylint: disable=too-few-public-methods
        This class is currently never initialized and only used for type hinting.
     """
 
+    logger: logging.Logger
+
     # Common options in the engine module
 
     engine_type: str
@@ -188,6 +195,10 @@ class Engine:  # pylint: disable=too-few-public-methods
 
     paging: bool
     """Engine supports multiple pages."""
+
+    max_page: int = 0
+    """If the engine supports paging, then this is the value for the last page
+    that is still supported. ``0`` means unlimited numbers of pages."""
 
     time_range_support: bool
     """Engine supports search time range."""
@@ -220,15 +231,15 @@ class Engine:  # pylint: disable=too-few-public-methods
         region: fr-BE
     """
 
-    fetch_traits: Callable
+    fetch_traits: "Callable[[EngineTraits, bool], None]"
     """Function to to fetch engine's traits from origin."""
 
-    traits: traits.EngineTraits
+    traits: "traits.EngineTraits"
     """Traits of the engine."""
 
     # settings.yml
 
-    categories: List[str]
+    categories: list[str]
     """Specifies to which :ref:`engine categories` the engine should be added."""
 
     name: str
@@ -252,7 +263,7 @@ class Engine:  # pylint: disable=too-few-public-methods
     display_error_messages: bool
     """Display error messages on the web UI."""
 
-    proxies: dict
+    proxies: dict[str, dict[str, str]]
     """Set proxies for a specific engine (YAML):
 
     .. code:: yaml
@@ -269,7 +280,7 @@ class Engine:  # pylint: disable=too-few-public-methods
     inactive: bool
     """Remove the engine from the settings (*disabled & removed*)."""
 
-    about: dict
+    about: dict[str, dict[str, str]]
     """Additional fields describing the engine.
 
     .. code:: yaml
@@ -291,9 +302,56 @@ class Engine:  # pylint: disable=too-few-public-methods
     the user is used to build and send a ``Accept-Language`` header in the
     request to the origin search engine."""
 
-    tokens: List[str]
+    tokens: list[str]
     """A list of secret tokens to make this engine *private*, more details see
     :ref:`private engines`."""
 
     weight: int
     """Weighting of the results of this engine (:ref:`weight <settings engines>`)."""
+
+    def setup(self, engine_settings: dict[str, t.Any]) -> bool:  # pylint: disable=unused-argument
+        """Dynamic setup of the engine settings.
+
+        With this method, the engine's setup is carried out.  For example, to
+        check or dynamically adapt the values handed over in the parameter
+        ``engine_settings``.  The return value (True/False) indicates whether
+        the setup was successful and the engine can be built or rejected.
+
+        The method is optional and is called synchronously as part of the
+        initialization of the service and is therefore only suitable for simple
+        (local) exams/changes at the engine setting.  The :py:obj:`Engine.init`
+        method must be used for longer tasks in which values of a remote must be
+        determined, for example.
+        """
+        return True
+
+    def init(self, engine_settings: dict[str, t.Any]) -> bool | None:  # pylint: disable=unused-argument
+        """Initialization of the engine.
+
+        The method is optional and asynchronous (in a thread).  It is suitable,
+        for example, for setting up a cache (for the engine) or for querying
+        values (required by the engine) from a remote.
+
+        Whether the initialization was successful can be indicated by the return
+        value ``True`` or even ``False``.
+
+        - If no return value is given from this init method (``None``), this is
+          equivalent to ``True``.
+
+        - If an exception is thrown as part of the initialization, this is
+          equivalent to ``False``.
+        """
+        return True
+
+    @abc.abstractmethod
+    def search(self, query: str, params: "OfflineParamTypes") -> "EngineResults":
+        """Search method of the ``offline`` engines"""
+
+    @abc.abstractmethod
+    def request(self, query: str, params: "OnlineParamTypes") -> None:
+        """Method to build the parameters for the request of an ``online``
+        engine."""
+
+    @abc.abstractmethod
+    def response(self, resp: "SXNG_Response") -> "EngineResults":
+        """Method to parse the response of an ``online`` engine."""

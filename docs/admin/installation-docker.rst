@@ -100,7 +100,7 @@ Basic container instancing example:
    $ cd ./searxng/
 
    # Run the container
-   $ docker run --name searxng --replace -d \
+   $ docker run --name searxng -d \
        -p 8888:8080 \
        -v "./config/:/etc/searxng/" \
        -v "./data/:/var/cache/searxng/" \
@@ -164,6 +164,17 @@ Container internal paths (don't modify unless you know what you're doing):
 - ``$CONFIG_PATH``: Path to the SearXNG configuration directory (default: ``/etc/searxng``)
 - ``$SEARXNG_SETTINGS_PATH``: Path to the SearXNG settings file (default: ``$CONFIG_PATH/settings.yml``)
 - ``$DATA_PATH``: Path to the SearXNG data directory (default: ``/var/cache/searxng``)
+
+.. _Container custom certificates:
+
+Custom certificates
+===================
+
+You can mount ``/usr/local/share/ca-certificates/`` folder to add/remove
+additional certificates as needed.
+
+They will be available on container (re)start or when running
+``update-ca-certificates`` in the container shell.
 
 .. _Container custom images:
 

@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 """Simple implementation to store TrackerPatterns data in a SQL database."""
+# pylint: disable=too-many-branches
 
-from __future__ import annotations
-import typing
+import typing as t
 
 __all__ = ["TrackerPatternsDB"]
 
@@ -15,9 +15,14 @@ from httpx import HTTPError
 from searx.data.core import get_cache, log
 from searx.network import get as http_get
 
+if t.TYPE_CHECKING:
+    from searx.cache import CacheRowType
+
+
 RuleType = tuple[str, list[str], list[str]]
 
 
+@t.final
 class TrackerPatternsDB:
     # pylint: disable=missing-class-docstring
 
@@ -32,9 +37,9 @@ class TrackerPatternsDB:
 
     class Fields:
         # pylint: disable=too-few-public-methods, invalid-name
-        url_regexp: typing.Final = 0  # URL (regular expression) match condition of the link
-        url_ignore: typing.Final = 1  # URL (regular expression) to ignore
-        del_args: typing.Final = 2  # list of URL arguments (regular expression) to delete
+        url_regexp: t.Final = 0  # URL (regular expression) match condition of the link
+        url_ignore: t.Final = 1  # URL (regular expression) to ignore
+        del_args: t.Final = 2  # list of URL arguments (regular expression) to delete
 
     def __init__(self):
         self.cache = get_cache()
@@ -50,19 +55,25 @@ class TrackerPatternsDB:
 
     def load(self):
         log.debug("init searx.data.TRACKER_PATTERNS")
-        for rule in self.iter_clear_list():
-            self.add(rule)
+        rows: "list[CacheRowType]" = []
 
-    def add(self, rule: RuleType):
-        self.cache.set(
-            key=rule[self.Fields.url_regexp],
-            value=(
+        for rule in self.iter_clear_list():
+            key = rule[self.Fields.url_regexp]
+            value = (
                 rule[self.Fields.url_ignore],
                 rule[self.Fields.del_args],
-            ),
-            ctx=self.ctx_name,
-            expire=None,
+            )
+            rows.append((key, value, None))
+
+        self.cache.setmany(rows, ctx=self.ctx_name)
+
+    def add(self, rule: RuleType):
+        key = rule[self.Fields.url_regexp]
+        value = (
+            rule[self.Fields.url_ignore],
+            rule[self.Fields.del_args],
         )
+        self.cache.set(key=key, value=value, ctx=self.ctx_name, expire=None)
 
     def rules(self) -> Iterator[RuleType]:
         self.init()
@@ -109,6 +120,12 @@ class TrackerPatternsDB:
 
         for rule in self.rules():
 
+            query_str: str = parsed_new_url.query
+            if not query_str:
+                # There are no more query arguments in the parsed_new_url on
+                # which rules can be applied, stop iterating over the rules.
+                break
+
             if not re.match(rule[self.Fields.url_regexp], new_url):
                 # no match / ignore pattern
                 continue
@@ -126,18 +143,32 @@ class TrackerPatternsDB:
                 #    overlapping urlPattern like ".*"
                 continue
 
-            # remove tracker arguments from the url-query part
             query_args: list[tuple[str, str]] = list(parse_qsl(parsed_new_url.query))
+            if query_args:
+                # remove tracker arguments from the url-query part
+                for name, val in query_args.copy():
+                    # remove URL arguments
+                    for pattern in rule[self.Fields.del_args]:
+                        if re.match(pattern, name):
+                            log.debug(
+                                "TRACKER_PATTERNS: %s remove tracker arg: %s='%s'", parsed_new_url.netloc, name, val
+                            )
+                            query_args.remove((name, val))
 
-            for name, val in query_args.copy():
-                # remove URL arguments
+                parsed_new_url = parsed_new_url._replace(query=urlencode(query_args))
+                new_url = urlunparse(parsed_new_url)
+
+            else:
+                # The query argument for URLs like:
+                # - 'http://example.org?q='       --> query_str is 'q=' and query_args is []
+                # - 'http://example.org?/foo/bar' --> query_str is 'foo/bar' and  query_args is []
+                # is a simple string and not a key/value dict.
                 for pattern in rule[self.Fields.del_args]:
-                    if re.match(pattern, name):
-                        log.debug("TRACKER_PATTERNS: %s remove tracker arg: %s='%s'", parsed_new_url.netloc, name, val)
-                        query_args.remove((name, val))
-
-            parsed_new_url = parsed_new_url._replace(query=urlencode(query_args))
-            new_url = urlunparse(parsed_new_url)
+                    if re.match(pattern, query_str):
+                        log.debug("TRACKER_PATTERNS: %s remove tracker arg: '%s'", parsed_new_url.netloc, query_str)
+                        parsed_new_url = parsed_new_url._replace(query="")
+                        new_url = urlunparse(parsed_new_url)
+                        break
 
         if new_url != url:
             return new_url

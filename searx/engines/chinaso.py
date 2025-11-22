@@ -54,7 +54,9 @@ Implementations
 
 """
 
-import typing
+import typing as t
+import base64
+import secrets
 
 from urllib.parse import urlencode
 from datetime import datetime
@@ -76,7 +78,7 @@ time_range_support = True
 results_per_page = 10
 categories = []
 
-ChinasoCategoryType = typing.Literal['news', 'videos', 'images']
+ChinasoCategoryType = t.Literal['news', 'videos', 'images']
 """ChinaSo supports news, videos, images search.
 
 - ``news``: search for news
@@ -89,7 +91,7 @@ In the category ``news`` you can additionally filter by option
 chinaso_category = 'news'
 """Configure ChinaSo category (:py:obj:`ChinasoCategoryType`)."""
 
-ChinasoNewsSourceType = typing.Literal['CENTRAL', 'LOCAL', 'BUSINESS', 'EPAPER', 'all']
+ChinasoNewsSourceType = t.Literal['CENTRAL', 'LOCAL', 'BUSINESS', 'EPAPER', 'all']
 """Filtering ChinaSo-News results by source:
 
 - ``CENTRAL``: central publication
@@ -109,7 +111,7 @@ base_url = "https://www.chinaso.com"
 def init(_):
     if chinaso_category not in ('news', 'videos', 'images'):
         raise ValueError(f"Unsupported category: {chinaso_category}")
-    if chinaso_category == 'news' and chinaso_news_source not in typing.get_args(ChinasoNewsSourceType):
+    if chinaso_category == 'news' and chinaso_news_source not in t.get_args(ChinasoNewsSourceType):
         raise ValueError(f"Unsupported news source: {chinaso_news_source}")
 
 
@@ -140,6 +142,10 @@ def request(query, params):
     query_params.update(category_config[chinaso_category]['params'])
 
     params["url"] = f"{base_url}{category_config[chinaso_category]['endpoint']}?{urlencode(query_params)}"
+    cookie = {
+        "uid": base64.b64encode(secrets.token_bytes(16)).decode("utf-8"),
+    }
+    params["cookies"] = cookie
 
     return params
 
@@ -189,7 +195,7 @@ def parse_images(data):
             {
                 'url': entry["web_url"],
                 'title': html_to_text(entry["title"]),
-                'content': html_to_text(entry["ImageInfo"]),
+                'content': html_to_text(entry.get("ImageInfo", "")),
                 'template': 'images.html',
                 'img_src': entry["url"].replace("http://", "https://"),
                 'thumbnail_src': entry["largeimage"].replace("http://", "https://"),

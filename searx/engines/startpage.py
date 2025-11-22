@@ -78,9 +78,9 @@ Startpage's category (for Web-search, News, Videos, ..) is set by
 
 """
 # pylint: disable=too-many-statements
-from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any
+import typing as t
+
 from collections import OrderedDict
 import re
 from unicodedata import normalize, combining
@@ -97,13 +97,6 @@ from searx.exceptions import SearxEngineCaptchaException
 from searx.locales import region_tag
 from searx.enginelib.traits import EngineTraits
 from searx.enginelib import EngineCache
-
-if TYPE_CHECKING:
-    import logging
-
-    logger: logging.Logger
-
-traits: EngineTraits
 
 # about
 about = {
@@ -135,7 +128,7 @@ time_range_support = True
 safesearch = True
 
 time_range_dict = {'day': 'd', 'week': 'w', 'month': 'm', 'year': 'y'}
-safesearch_dict = {0: '0', 1: '1', 2: '1'}
+safesearch_dict = {0: '1', 1: '0', 2: '0'}
 
 # search-url
 base_url = 'https://www.startpage.com'
@@ -377,7 +370,7 @@ def _get_news_result(result):
     }
 
 
-def _get_image_result(result) -> dict[str, Any] | None:
+def _get_image_result(result) -> dict[str, t.Any] | None:
     url = result.get('altClickUrl')
     if not url:
         return None
@@ -411,6 +404,10 @@ def _get_image_result(result) -> dict[str, Any] | None:
 def response(resp):
     categ = startpage_categ.capitalize()
     results_raw = '{' + extr(resp.text, f"React.createElement(UIStartpage.AppSerp{categ}, {{", '}})') + '}}'
+
+    if resp.headers.get('Location', '').startswith("https://www.startpage.com/sp/captcha"):
+        raise SearxEngineCaptchaException()
+
     results_json = loads(results_raw)
     results_obj = results_json.get('render', {}).get('presenter', {}).get('regions', {})
 

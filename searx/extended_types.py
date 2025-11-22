@@ -20,7 +20,6 @@
 
 """
 # pylint: disable=invalid-name
-from __future__ import annotations
 
 __all__ = ["SXNG_Request", "sxng_request", "SXNG_Response"]
 
@@ -31,6 +30,7 @@ import httpx
 if typing.TYPE_CHECKING:
     import searx.preferences
     import searx.results
+    from searx.search.processors import OnlineParamTypes
 
 
 class SXNG_Request(flask.Request):
@@ -62,6 +62,8 @@ class SXNG_Request(flask.Request):
     """A list of :py:obj:`searx.results.Timing` of the engines, calculatid in
     and hold by :py:obj:`searx.results.ResultContainer.timings`."""
 
+    remote_addr: str
+
 
 #: A replacement for :py:obj:`flask.request` with type cast :py:`SXNG_Request`.
 sxng_request = typing.cast(SXNG_Request, flask.request)
@@ -77,6 +79,8 @@ class SXNG_Response(httpx.Response):
        response = typing.cast(SXNG_Response, response)
        if response.ok:
           ...
+       query_was = search_params["query"]
     """
 
     ok: bool
+    search_params: "OnlineParamTypes"
