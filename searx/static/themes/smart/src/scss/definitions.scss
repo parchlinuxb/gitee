@@ -1,61 +1,116 @@
-//  --- Definitions ---
+//  --- Design Tokens ---
+// Apple-inspired minimalist system
+
+// - Spacing Scale (4px base) -
+$space-1: .25rem;   // 4px
+$space-2: .5rem;    // 8px
+$space-3: .75rem;   // 12px
+$space-4: 1rem;     // 16px
+$space-5: 1.5rem;   // 24px
+$space-6: 2rem;     // 32px
+$space-7: 2.5rem;   // 40px
+$space-8: 3rem;     // 48px
+$space-10: 4rem;    // 64px
+$space-12: 5rem;    // 80px
+
+// - Typography Scale -
+$font-size-xs: .75rem;    // 12px
+$font-size-sm: .8125rem;  // 13px
+$font-size-base: .875rem; // 14px
+$font-size-md: 1rem;      // 16px
+$font-size-lg: 1.125rem;  // 18px
+$font-size-xl: 1.25rem;   // 20px
+$font-size-2xl: 1.5rem;   // 24px
+$font-size-3xl: 2rem;     // 32px
+
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+
+$line-height-tight: 1.2;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.625;
 
 // - Colors -
 // Light theme
-$primary-color: #0290ee;
-$secondary-color: #f8b600;
-$background-color: #ffffff;
-$secondary-background-color: #f8f8f8;
-$text-color: #000000;
-$filled-text-color: #ffffff;
-$tooltip-background-color: rgba(0, 0, 0, .5);
+$primary-color: #007AFF;
+$secondary-color: #FF9500;
+$background-color: #FFFFFF;
+$secondary-background-color: #F2F2F7;
+$tertiary-background-color: #E5E5EA;
+$text-color: #1C1C1E;
+$secondary-text-color: #8E8E93;
+$tertiary-text-color: #AEAEB2;
+$filled-text-color: #FFFFFF;
+$tooltip-background-color: rgba(0, 0, 0, .75);
 
 // Dark theme
-$primary-color-dark: #0b9eff;
-$secondary-color-dark: #c48e18;
-$background-color-dark: #080808;
-$secondary-background-color-dark: #191919;
-$text-color-dark: #fff;
+$primary-color-dark: #0A84FF;
+$secondary-color-dark: #FF9F0A;
+$background-color-dark: #000000;
+$secondary-background-color-dark: #1C1C1E;
+$tertiary-background-color-dark: #2C2C2E;
+$text-color-dark: #FFFFFF;
+$secondary-text-color-dark: #98989D;
+$tertiary-text-color-dark: #636366;
 $filled-text-color-dark: $filled-text-color;
 $tooltip-background-color-dark: $tooltip-background-color;
 
 // Nord theme
-$nord-night-0: #2e3440;
-$nord-night-1: #3b4252;
-$nord-night-2: #434c5e;
-$nord-night-3: #4c566a;
-$nord-snow-0: #d8dee9;
-$nord-snow-1: #e5e9f0;
-$nord-snow-2: #eceff4;
-$nord-forest-0: #8fbcbb;
-$nord-forest-1: #88c0d0;
-$nord-forest-2: #81a1c1;
-$nord-forest-3: #5e81ac;
+$nord-night-0: #2E3440;
+$nord-night-1: #3B4252;
+$nord-night-2: #434C5E;
+$nord-night-3: #4C566A;
+$nord-snow-0: #D8DEE9;
+$nord-snow-1: #E5E9F0;
+$nord-snow-2: #ECEFF4;
+$nord-forest-0: #8FBCBB;
+$nord-forest-1: #88C0D0;
+$nord-forest-2: #81A1C1;
+$nord-forest-3: #5E81AC;
 
-// Deracula theme
-$dracula-backrgound: #282a36;
-$dracula-foreground: #f8f8f2;
-$dracula-selection: #44475a;
-$dracula-comment: #6272a4;
-$dracula-red: #ff5555;
-$dracula-orange: #ffb86c;
-$dracula-yellow: #f1fa8c;
-$dracula-green: #50fa7b;
-$dracula-purple: #bd93f9;
-$dracula-cyan: #8be9fd;
-$dracula-pink: #ff79c6;
-$dracula-blue: #8be9fd;
+// Dracula theme
+$dracula-background: #282A36;
+$dracula-foreground: #F8F8F2;
+$dracula-selection: #44475A;
+$dracula-comment: #6272A4;
+$dracula-red: #FF5555;
+$dracula-orange: #FFB86C;
+$dracula-yellow: #F1FA8C;
+$dracula-green: #50FA7B;
+$dracula-purple: #BD93F9;
+$dracula-cyan: #8BE9FD;
+$dracula-pink: #FF79C6;
+$dracula-blue: #8BE9FD;
+
+// - Shadows (layered, subtle) -
+$shadow-sm: 0 1px 2px rgba(0, 0, 0, .04);
+$shadow-md: 0 2px 8px rgba(0, 0, 0, .06), 0 1px 2px rgba(0, 0, 0, .04);
+$shadow-lg: 0 4px 16px rgba(0, 0, 0, .08), 0 2px 4px rgba(0, 0, 0, .04);
+$shadow-xl: 0 8px 32px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
+
+// Dark shadows
+$shadow-sm-dark: 0 1px 2px rgba(0, 0, 0, .2);
+$shadow-md-dark: 0 2px 8px rgba(0, 0, 0, .3), 0 1px 2px rgba(0, 0, 0, .2);
+$shadow-lg-dark: 0 4px 16px rgba(0, 0, 0, .4), 0 2px 4px rgba(0, 0, 0, .2);
+$shadow-xl-dark: 0 8px 32px rgba(0, 0, 0, .5), 0 4px 8px rgba(0, 0, 0, .3);
+
+// - Border Radius (Apple-style) -
+$border-radius-sm: .5rem;    // 8px
+$border-radius: .75rem;      // 12px
+$border-radius-md: 1rem;     // 16px
+$border-radius-lg: 1.25rem;  // 20px
+$border-radius-xl: 1.5rem;   // 24px
+$border-radius-full: 9999px;
+
+// - Transitions -
+$transition-fast: 150ms ease;
+$transition-normal: 200ms ease;
+$transition-smooth: 300ms cubic-bezier(.4, 0, .2, 1);
 
 // - Screens -
-
 $screen-xs: 25rem;
 $screen-sm: 35rem;
 $screen-md: 56rem;
 $screen-lg: 70rem;
 $screen-xl: 90rem;
-
-// - Rounded corners -
-
-$border-radius: 1rem;
-$border-radius-sm: .5rem;
-$border-radius-lg: 2rem;

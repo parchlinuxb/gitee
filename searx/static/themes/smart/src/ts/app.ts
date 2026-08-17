@@ -1,7 +1,5 @@
-import { setupChat } from "./chat";
 import { $, copyToClipboard, getFromClipboard } from "./utils";
 import debounce from "debounce";
-import axios from "axios";
 import { setupInfiniteScroll } from "./infinite_scroll";
 
 type Method = "GET" | "POST";
@@ -9,6 +7,7 @@ type Method = "GET" | "POST";
 interface ClientSettings {
     ai_chat?: "off" | "chat" | "summarize";
     ai_chat_model?: string;
+    ai_chat_api_url?: string;
     advanced_search?: boolean;
     autocomplete?: string;
     autocomplete_min?: number;
@@ -33,7 +32,6 @@ function setupShareBtn() {
 }
 
 function setupPreferencesPage() {
-    // check for preferences hash
     const hashInput = $("#preferences-hash") as HTMLInputElement;
     if (!hashInput) return;
     const copyBtn = $("#copy-preferences-hash") as HTMLButtonElement;
@@ -108,62 +106,71 @@ function setupSuggestion({
     }
 
     const getSuggestions = debounce(async function () {
-        onSuggestion = false;
         if (controler.signal.aborted) return;
         const query = queryInput.value;
         if (query.length < minChars) return;
-        const res = await axios<Array<string | string[]>>({
-            url: "/autocompleter",
-            method,
-            data: `q=${query}`,
-        });
-        suggestionsContainer.innerHTML = "";
 
-        let suggestions: string[] = [];
-        if (res.data[0].length < 1) return;
-        suggestions.push(res.data[0] as string);
-
-        if (res.data[1]) suggestions.push(...res.data[1]);
-
-        suggestions.forEach((item) => {
-            const itemElement = document.createElement(
-                "button"
-            ) as HTMLButtonElement;
-            itemElement.setAttribute("type", "button");
-            itemElement.innerText = item;
-            suggestionsContainer.appendChild(itemElement);
-            itemElement.addEventListener("click", function (e) {
-                setSuggestion((e.target as HTMLButtonElement).innerText);
-                controler.abort();
-                formElement.submit();
+        try {
+            const formData = new FormData();
+            formData.append("q", query);
+            const res = await fetch("/autocompleter", {
+                method: method,
+                body: method === "POST" ? formData : undefined,
+                signal: controler.signal,
             });
-            itemElement.addEventListener("keydown", function (e) {
-                if (e.key === "Enter" || e.key === " ") {
+            const data: any[] = await res.json();
+            suggestionsContainer.innerHTML = "";
+
+            let suggestions: string[] = [];
+            if (!data[0] || data[0].length < 1) return;
+            suggestions.push(data[0] as string);
+
+            if (data[1]) suggestions.push(...data[1]);
+
+            suggestions.forEach((item) => {
+                const itemElement = document.createElement(
+                    "button"
+                ) as HTMLButtonElement;
+                itemElement.setAttribute("type", "button");
+                itemElement.innerText = item;
+                suggestionsContainer.appendChild(itemElement);
+                itemElement.addEventListener("click", function (e) {
                     setSuggestion((e.target as HTMLButtonElement).innerText);
                     controler.abort();
                     formElement.submit();
-                } else if (e.key === "ArrowDown") {
-                    const currentButton = e.target as HTMLButtonElement;
-                    const nextButton =
-                        currentButton.nextSibling as HTMLButtonElement | null;
-                    if (!nextButton) return;
-                    setSuggestion(nextButton.innerText, false);
-                    nextButton.focus();
-                } else if (e.key === "ArrowUp") {
-                    const currentButton = e.target as HTMLButtonElement;
-                    const previousButton =
-                        currentButton.previousSibling as HTMLButtonElement | null;
-                    if (previousButton) {
-                        setSuggestion(previousButton.innerText, false);
-                        previousButton.focus();
+                });
+                itemElement.addEventListener("keydown", function (e) {
+                    if (e.key === "Enter" || e.key === " ") {
+                        setSuggestion(
+                            (e.target as HTMLButtonElement).innerText
+                        );
+                        controler.abort();
+                        formElement.submit();
+                    } else if (e.key === "ArrowDown") {
+                        const currentButton = e.target as HTMLButtonElement;
+                        const nextButton =
+                            currentButton.nextSibling as HTMLButtonElement | null;
+                        if (!nextButton) return;
+                        setSuggestion(nextButton.innerText, false);
+                        nextButton.focus();
+                    } else if (e.key === "ArrowUp") {
+                        const currentButton = e.target as HTMLButtonElement;
+                        const previousButton =
+                            currentButton.previousSibling as HTMLButtonElement | null;
+                        if (previousButton) {
+                            setSuggestion(previousButton.innerText, false);
+                            previousButton.focus();
+                        } else {
+                            queryInput.focus();
+                        }
                     } else {
                         queryInput.focus();
                     }
-                } else {
-                    queryInput.focus();
-                }
+                });
             });
-        });
+        } catch {
+            // fetch failed or aborted
+        }
     }, 400);
 
     queryInput.addEventListener("input", getSuggestions, {
@@ -173,7 +180,7 @@ function setupSuggestion({
         signal: controler.signal,
     });
 
-    let onSuggestion: Boolean = false;
+    let onSuggestion: boolean = false;
 
     queryInput.addEventListener("blur", function () {
         if (onSuggestion) return;
@@ -202,36 +209,33 @@ function setupSuggestion({
     });
 }
 
-function setupChatModelSelect(chatModel: string) {
+function setupChatModelSelect(chatModel: string, apiBaseUrl: string) {
     const modelSelect = $("#chat-model") as HTMLSelectElement;
-    if (!modelSelect) return;
-    axios
-        .get<{
-            data: {
-                id: string;
-                object: string;
-                owned_by: string;
-            }[];
-        }>("https://openai.jabirproject.org/v1/models")
-        .then((res) => {
-            modelSelect.innerHTML = "";
-            for (const model of res.data.data) {
-                const option = document.createElement("option");
+    if (!modelSelect || !apiBaseUrl) return;
 
+    fetch(`${apiBaseUrl}/models`)
+        .then((res) => res.json())
+        .then((data) => {
+            modelSelect.innerHTML = "";
+            for (const model of data.data || []) {
+                const option = document.createElement("option");
                 option.value = model.id;
                 option.innerText = model.id.replace("-", " ");
-
                 if (model.id === chatModel) option.selected = true;
-
                 modelSelect.appendChild(option);
             }
-        });
+        })
+        .catch(() => {});
 }
 
 function getClientSettings(): ClientSettings {
     const clientSettings = $("#client-settings") as HTMLScriptElement;
     if (!clientSettings || !clientSettings.hasAttribute("settings")) return {};
-    return JSON.parse(atob(clientSettings.getAttribute("settings") || ""));
+    try {
+        return JSON.parse(clientSettings.getAttribute("settings") || "{}");
+    } catch {
+        return {};
+    }
 }
 
 function afterPageLoad() {
@@ -253,14 +257,23 @@ function afterPageLoad() {
             method: clientSettings.method ?? "POST",
         });
 
-    // chat
+    // chat - lazy loaded
     if (clientSettings.ai_chat && clientSettings.ai_chat !== "off") {
-        setupChat({
-            chatModel: clientSettings.ai_chat_model ?? "jabir-400b",
-            mode: clientSettings.ai_chat,
-        });
-        if ($("#chat-model"))
-            setupChatModelSelect(clientSettings.ai_chat_model ?? "jabir-400b");
+        const apiBaseUrl = clientSettings.ai_chat_api_url;
+        if (apiBaseUrl) {
+            import("./chat").then(({ setupChat }) => {
+                setupChat({
+                    chatModel: clientSettings.ai_chat_model ?? "",
+                    mode: clientSettings.ai_chat,
+                    apiBaseUrl,
+                });
+                if ($("#chat-model"))
+                    setupChatModelSelect(
+                        clientSettings.ai_chat_model ?? "",
+                        apiBaseUrl
+                    );
+            });
+        }
     }
 
     // infinite scroll

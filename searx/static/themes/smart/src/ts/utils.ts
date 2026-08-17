@@ -8,25 +8,32 @@ export function $$(selector: string) {
 
 export function copyToClipboard(item: ClipboardItem | string) {
     if (navigator.clipboard && item instanceof ClipboardItem) {
-        navigator.permissions
-            // @ts-ignore
-            .query({ name: "clipboard-write" })
-            .then((result) => {
-                if (result.state === "granted" || result.state === "prompt") {
-                    navigator.clipboard.write([item]);
-                } else {
-                    alert("Clipboard unaccessible");
-                }
-            });
+        navigator.clipboard.write([item]).catch(() => {
+            alert("Clipboard access denied");
+        });
         return;
     }
 
     if (typeof item !== "string") return;
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(item).catch(() => {
+            alert("Clipboard access denied");
+        });
+        return;
+    }
+
+    // Fallback for older browsers
     const textarea = document.createElement("textarea");
     textarea.value = item;
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
     document.body.appendChild(textarea);
     textarea.select();
-    document.execCommand("copy");
+    try {
+        document.execCommand("copy");
+    } catch {
+        alert("Clipboard access denied");
+    }
     document.body.removeChild(textarea);
 }
 

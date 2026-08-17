@@ -499,6 +499,9 @@ class Preferences:
             'ai_chat_model': StringSetting(
                 settings['ui']['ai_chat_model']
             ),
+            'ai_chat_api_url': StringSetting(
+                settings['ui']['ai_chat_api_url']
+            ),
             'smart_variant': EnumStringSetting(
                 settings['ui']['theme_args']['smart_variant'],
                 locked=is_locked('smart_variant'),

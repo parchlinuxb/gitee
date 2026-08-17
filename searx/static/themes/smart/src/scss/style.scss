@@ -1,4 +1,4 @@
-// In fiist place, Reset all browser default styles
+// In first place, Reset all browser default styles
 @forward './reset.scss';
 
 // Then, import all the definitions
@@ -14,6 +14,9 @@ $dir: ltr !default;
 
 // Button
 @use 'button';
+
+// Toggle switch
+@use 'toggle';
 
 // Tooltip
 @use 'tooltip';
@@ -43,11 +46,26 @@ $dir: ltr !default;
 }
 
 %link-button {
-    display: inline-block;
-    padding: .5rem 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: $space-2;
+    padding: $space-2 $space-4;
     background-color: var(--primary-color);
     color: var(--filled-text-color);
-    @include mixin.rounded(full)
+    @include mixin.rounded(full);
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    @include mixin.transition;
+    @include mixin.focus-ring;
+
+    &:hover {
+        opacity: .9;
+    }
+
+    &:active {
+        transform: scale(.98);
+    }
 }
 
 br {
@@ -62,9 +80,9 @@ body {
     justify-content: center;
     gap: 0;
     overflow: hidden;
-    transition: gap 250ms ease-in-out,
-        padding 500ms ease-in-out,
-        background-color 300ms ease-in-out;
+    transition: gap $transition-smooth,
+        padding $transition-smooth,
+        background-color $transition-smooth;
 
     background-color: var(--secondary-background-color);
 
@@ -72,14 +90,15 @@ body {
         flex: 3;
         background-color: var(--secondary-background-color);
         color: var(--text-color);
-        @include mixin.rounded();
+        @include mixin.rounded(md);
     }
 }
 
 
 *:focus-visible {
-    outline: 3px solid var(--primary-color);
-    outline-offset: .1rem;
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+    border-radius: $border-radius-sm;
 }
 
 .icon-big {
@@ -118,21 +137,25 @@ body {
 
 .links {
     display: flex;
-    gap: .5rem;
+    gap: $space-2;
 
     .link {
-        display: inline-block;
-        padding: 0.5rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: $space-2;
         height: min-content;
         @include mixin.rounded(full);
-        transition: background-color 100ms ease-in-out;
+        @include mixin.transition;
+        @include mixin.focus-ring;
 
         &:is(:hover, :focus-within) {
-            background-color: var(--background-color);
+            background-color: var(--secondary-background-color);
         }
 
         svg {
-            width: 1.5rem;
+            width: 1.25rem;
+            height: 1.25rem;
         }
 
         &.config {
@@ -169,16 +192,17 @@ main:has(.not-found) {
     .background {
         font-size: 60vh;
         color: var(--primary-color);
-        opacity: .5;
+        opacity: .1;
         position: absolute;
         pointer-events: none;
     }
 
     h1 {
         z-index: 1;
-        font-size: 3rem;
+        font-size: $font-size-3xl;
         text-align: center;
-        margin: 1rem 0;
+        margin: $space-4 0;
+        font-weight: $font-weight-semibold;
     }
 
     .button {
@@ -194,10 +218,10 @@ main:has(.not-found) {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 2rem;
+        padding: $space-6;
 
         .logo {
-            font-size: 2rem;
+            font-size: $font-size-2xl;
             display: block;
             text-align: center;
             @include mixin.fix-color();
@@ -275,12 +299,12 @@ body:has(.sidebar_btn input:checked) {
     background: var(--secondary-background-color);
     border: var(--secondary-background-color) solid;
     border-width: 0;
-    transition: flex 300ms ease-in-out,
-        min-width 300ms ease-in-out;
+    transition: flex $transition-smooth,
+        min-width $transition-smooth;
     position: relative;
 
     @include mixin.screens($screen-md) {
-        @include mixin.rounded();
+        @include mixin.rounded(lg);
     }
 
     &>.container {
@@ -291,24 +315,25 @@ body:has(.sidebar_btn input:checked) {
         color: var(--text-color);
         position: absolute;
         min-width: $screen-xs - 2rem;
-        padding: 1rem;
+        padding: $space-4;
         @include mixin.margin-left(50rem);
         transition: margin-left 50ms ease-in-out;
 
         :is(button, .btn) {
-            margin-bottom: .5rem;
+            margin-bottom: $space-2;
         }
 
         h1 {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-            padding: .25rem 0;
+            margin-bottom: $space-4;
+            font-size: $font-size-xl;
+            padding: $space-1 0;
             text-align: center;
             color: var(--text-color);
             @include mixin.rounded(full);
+            font-weight: $font-weight-semibold;
 
             @include mixin.screens($screen-md) {
                 justify-content: center;
@@ -323,18 +348,21 @@ body:has(.sidebar_btn input:checked) {
             background-color: var(--background-color);
             overflow: hidden;
             @include mixin.rounded();
-            padding: 1rem;
+            padding: $space-4;
+            @include mixin.shadow(sm);
 
             p {
                 text-align: justify;
-                font-size: .8rem;
+                font-size: $font-size-sm;
+                line-height: $line-height-relaxed;
             }
 
             ul {
-                padding-left: 1rem;
+                padding-left: $space-4;
 
                 li {
-                    margin: .5rem 0;
+                    margin: $space-2 0;
+                    line-height: $line-height-relaxed;
                 }
             }
 
@@ -346,8 +374,8 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
-    gap: 1rem;
+    padding: $space-4;
+    gap: $space-4;
     flex-wrap: wrap;
 
     @include mixin.max-screens($screen-md) {
@@ -357,7 +385,7 @@ footer {
 
     .footer-links {
         display: flex;
-        gap: 1rem;
+        gap: $space-4;
         flex-wrap: wrap;
         justify-content: center;
 
@@ -369,13 +397,19 @@ footer {
 
 .search_box {
     background-color: var(--background-color);
-    padding: .25rem .5rem;
+    padding: $space-2 $space-4;
     width: clamp(400px, 50vw, 40rem);
     position: relative;
     @include mixin.rounded(full);
     display: flex;
     align-items: center;
-    gap: .5rem;
+    gap: $space-2;
+    @include mixin.shadow(md);
+    @include mixin.transition;
+
+    &:focus-within {
+        @include mixin.shadow(lg);
+    }
 
     @include mixin.max-screens($screen-sm) {
         width: calc(100% - 2rem);
@@ -384,14 +418,15 @@ footer {
 
         &+#suggestion {
             width: calc(100% - 2rem);
-            margin: 1rem 1rem 0;
+            margin: $space-4 1rem 0;
         }
     }
 
     .icon {
-        @include mixin.margin-left(.5rem);
+        @include mixin.margin-left($space-2);
         width: 1.5rem;
         height: 1.5rem;
+        color: var(--secondary-text-color);
     }
 
 
@@ -402,7 +437,8 @@ footer {
         border: none;
         color: var(--text-color);
         @include mixin.rounded(full);
-        padding: .5rem;
+        padding: $space-2;
+        font-size: $font-size-md;
 
 
         &:focus {
@@ -411,6 +447,7 @@ footer {
 
         &::placeholder {
             text-align: mixin.returnAlign(left);
+            color: var(--tertiary-text-color);
         }
     }
 
@@ -419,7 +456,8 @@ footer {
         border: none;
         color: var(--text-color);
         @include mixin.rounded(full);
-        padding: .5rem;
+        padding: $space-2;
+        @include mixin.focus-ring;
 
         &:focus {
             outline: none;
@@ -429,9 +467,10 @@ footer {
     #clear_search {
         background-color: transparent;
         border: none;
-        color: var(--border-color);
+        color: var(--tertiary-text-color);
         @include mixin.rounded(full);
-        padding: .5rem;
+        padding: $space-2;
+        @include mixin.focus-ring;
 
         &:focus {
             outline: none;
@@ -443,12 +482,18 @@ footer {
     }
 
     #send_search {
-        background-color: var(--secondary-color);
-        padding: .5rem 1.5rem;
+        background-color: var(--primary-color);
+        color: var(--filled-text-color);
+        padding: $space-2 $space-5;
         text-transform: capitalize;
+        font-weight: $font-weight-medium;
 
         @include mixin.max-screens($screen-md) {
             display: none;
+        }
+
+        &:hover {
+            opacity: .9;
         }
 
         &:focus {
@@ -563,11 +608,11 @@ footer {
 
 
     .selections {
-        margin-top: 1rem;
+        margin-top: $space-4;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 1rem;
+        gap: $space-4;
 
         @include mixin.max-screens($screen-md) {
             max-width: calc(100vw - 2rem);
@@ -578,19 +623,27 @@ footer {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: .5rem;
+            gap: $space-2;
 
             .category {
                 text-transform: capitalize;
                 display: inline-block;
-                background-color: var(--background-color);
-                padding: .5rem 1rem;
+                background-color: var(--secondary-background-color);
+                padding: $space-2 $space-4;
                 cursor: pointer;
                 @include mixin.rounded(full);
+                font-size: $font-size-sm;
+                font-weight: $font-weight-medium;
+                @include mixin.transition;
+                @include mixin.focus-ring;
+
+                &:hover {
+                    background-color: var(--tertiary-background-color);
+                }
 
                 &.selected {
-                    background-color: var(--text-color);
-                    color: var(--background-color);
+                    background-color: var(--primary-color);
+                    color: var(--filled-text-color);
                 }
             }
 
@@ -649,17 +702,18 @@ footer {
         display: flex;
         position: absolute;
         align-items: center;
-        gap: 1rem;
+        gap: $space-4;
         top: 100%;
         opacity: 0;
         height: 0;
-        transition: opacity 150ms ease-in-out, height 100ms ease-in-out;
+        transition: opacity $transition-normal, height $transition-normal;
 
         .filter {
             display: inline-block;
             background-color: var(--background-color);
-            padding: .25rem .5rem;
+            padding: $space-1 $space-2;
             @include mixin.rounded();
+            @include mixin.shadow(sm);
         }
     }
 
@@ -672,11 +726,12 @@ footer {
 .suggestion-box {
     display: flex;
     @include mixin.rounded();
-    margin-top: 1rem;
+    margin-top: $space-4;
     flex-direction: column;
-    gap: 1rem;
+    gap: $space-4;
     max-height: 50vh;
     overflow-y: auto;
+    @include mixin.shadow(lg);
 
     // no scrollbar
     &::-webkit-scrollbar {
@@ -687,16 +742,25 @@ footer {
     scrollbar-width: none;
 
     &:has(button) {
-        padding: 1rem;
+        padding: $space-4;
         background-color: var(--background-color);
     }
 
     button {
         background-color: transparent;
         border: none;
+        padding: $space-2 $space-4;
+        text-align: mixin.returnAlign(left);
+        @include mixin.rounded(sm);
+        @include mixin.transition;
+
+        &:hover {
+            background-color: var(--secondary-background-color);
+        }
 
         &:focus {
             background-color: var(--primary-color);
+            color: var(--filled-text-color);
         }
     }
 }
@@ -721,11 +785,20 @@ footer {
 
 :is(.message, .plain-text) {
     p {
-        margin-bottom: 1.25rem;
+        margin-bottom: $space-5;
+        line-height: $line-height-relaxed;
     }
 
     a {
         color: var(--primary-color);
+        text-decoration: underline;
+        text-decoration-color: rgba(0, 122, 255, .3);
+        text-underline-offset: 2px;
+        @include mixin.transition;
+
+        &:hover {
+            text-decoration-color: var(--primary-color);
+        }
     }
 
     img {
@@ -733,7 +806,8 @@ footer {
     }
 
     pre {
-        margin: .5rem;
+        margin: $space-2;
+        overflow-x: auto;
 
         code {
             display: block;
@@ -741,31 +815,34 @@ footer {
     }
 
     code {
-        font-family: monospace;
+        font-family: 'SF Mono', SFMono-Regular, ui-monospace, monospace;
         @include mixin.rounded(sm);
-        background-color: var(--secondary-text-color);
-        color: var(--secondary-background-color);
-        padding: .5rem .25rem;
+        background-color: var(--secondary-background-color);
+        color: var(--text-color);
+        padding: $space-2 $space-1;
+        font-size: $font-size-sm;
     }
 
     :is(h1, h2, h3, h4, h5, h6) {
-        margin-bottom: .75rem;
-        font-weight: 700;
-        font-size: 1.3rem;
+        margin-bottom: $space-3;
+        font-weight: $font-weight-semibold;
+        font-size: $font-size-xl;
+        line-height: $line-height-tight;
     }
 
     li {
-        margin-bottom: .5rem;
-        padding-inline-start: 1rem;
+        margin-bottom: $space-2;
+        padding-inline-start: $space-4;
+        line-height: $line-height-relaxed;
 
         &::marker {
-            color: var(--text-color);
+            color: var(--primary-color);
         }
     }
 
     :is(ol, ul) {
-        margin-bottom: 1rem;
-        margin-inline-start: 1.5rem;
+        margin-bottom: $space-4;
+        margin-inline-start: $space-5;
     }
 
     ol li {
@@ -785,8 +862,9 @@ footer {
     }
 
     hr {
-        margin: 1rem;
+        margin: $space-4;
         opacity: .2;
+        border-color: var(--border-color);
     }
 
     :last-child {
@@ -797,87 +875,32 @@ footer {
 #info .plain-text {
     grid-area: main;
     background-color: var(--background-color);
-    padding: 2rem;
-
+    padding: $space-6;
     @include mixin.rounded(lg);
-}
-
-input[type="checkbox"].switch {
-    appearance: none;
-    margin-right: .5rem;
-    background-color: var(--border-color);
-    color: var(--text-color);
-    @include mixin.rounded(full);
-    width: 40px;
-    height: 20px;
-    min-height: 20px;
-    display: inline-block;
-    position: relative;
-    border: 1px solid var(--border-color);
-    box-sizing: border-box;
-    transition: background-color 200ms ease-in-out;
-
-    &::after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        @include mixin.left(2.5px);
-        width: 15px;
-        height: 15px;
-        background-color: var(--filled-text-color);
-        @include mixin.rounded(sm);
-        transition: background-color 200ms ease-in-out,
-            left 200ms ease-in-out,
-            right 200ms ease-in-out;
-    }
-
-    &:checked {
-        background-color: var(--primary-color);
-
-        &::after {
-            background-color: var(--filled-text-color);
-            @include mixin.left(calc(100% - 17.5px));
-        }
-    }
-
-    &.reverse {
-        background-color: var(--primary-color);
-
-        &::after {
-            background-color: var(--filled-text-color);
-            @include mixin.left(calc(100% - 17.5px));
-        }
-
-        &:checked {
-            background-color: var(--border-color);
-
-            &::after {
-                @include mixin.left(2.5px);
-                background-color: var(--filled-text-color);
-            }
-        }
-    }
+    @include mixin.shadow(md);
 }
 
 .error-container {
     z-index: 100;
     position: fixed;
-    top: 2rem;
+    top: $space-5;
     left: 50%;
     transform: translateX(-50%) scale(1);
-    background: rgba(200, 0, 0, .2);
+    background: rgba(255, 59, 48, .1);
     width: 50rem;
-    max-width: calc(100vw - 4rem);
-    border: rgba(200, 0, 0, .5) 1px solid;
+    max-width: calc(100vw - 2rem);
+    border: 1px solid rgba(255, 59, 48, .3);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
 
     animation: move-up 2s 1s forwards;
-    @include mixin.rounded(sm);
-    padding: 1rem;
+    @include mixin.rounded();
+    padding: $space-4;
+    @include mixin.shadow(lg);
 
     ul {
         list-style: circle;
-        @include mixin.margin-left(1rem);
+        @include mixin.margin-left($space-4);
     }
 }
 

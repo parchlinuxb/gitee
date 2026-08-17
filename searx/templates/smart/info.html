@@ -1,10 +1,10 @@
 {% from 'smart/icons.html' import icon_small, icon_big %}{% extends
     "smart/base.html" %} {% block body %} {% include
-    'smart/madules/search_as_header.html' %}
+    'smart/modules/search_as_header.html' %}
     <div class="links">
         {%- if donation_url -%}
         <a href="{{ donation_url }}" class="link">{{icon_small('donate')}}</a>
-        {%- endif -%} {% include 'smart/madules/sidebar_btn.html' %}
+        {%- endif -%} {% include 'smart/modules/sidebar_btn.html' %}
     </div>
     <div class="plain-text">
         <ul class="tabs">

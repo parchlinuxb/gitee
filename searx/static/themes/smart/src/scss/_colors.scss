@@ -7,17 +7,24 @@ body {
     --secondary-color: #{$secondary-color};
     --background-color: #{$background-color};
     --secondary-background-color: #{$secondary-background-color};
+    --tertiary-background-color: #{$tertiary-background-color};
     --text-color: #{$text-color};
-    --secondary-text-color: #{color.mix($text-color, $background-color, 70%)};
+    --secondary-text-color: #{$secondary-text-color};
+    --tertiary-text-color: #{$tertiary-text-color};
     --filled-text-color: #{$filled-text-color};
     --secondary-filled-text-color: #{$text-color};
-    --border-color: #{color.mix($text-color, $background-color, 30%)};
-    --secondary-border-color: #{color.mix($text-color, $background-color, 15%)};
+    --border-color: #{$tertiary-background-color};
+    --secondary-border-color: #{$secondary-background-color};
     --tooltip-background-color: #{$tooltip-background-color};
+    --shadow-sm: #{$shadow-sm};
+    --shadow-md: #{$shadow-md};
+    --shadow-lg: #{$shadow-lg};
+    --shadow-xl: #{$shadow-xl};
 
     &.nord {
         --background-color: #{$nord-snow-2};
         --secondary-background-color: #{$nord-snow-1};
+        --tertiary-background-color: #{$nord-snow-0};
         --text-color: #{$nord-night-0};
         --secondary-text-color: #{$nord-night-1};
         --primary-color: #{$nord-forest-0};
@@ -34,17 +41,24 @@ body {
         --secondary-color: #{$secondary-color-dark};
         --background-color: #{$background-color-dark};
         --secondary-background-color: #{$secondary-background-color-dark};
+        --tertiary-background-color: #{$tertiary-background-color-dark};
         --text-color: #{$text-color-dark};
-        --secondary-text-color: #{color.mix($text-color-dark, $background-color-dark, 70%)};
+        --secondary-text-color: #{$secondary-text-color-dark};
+        --tertiary-text-color: #{$tertiary-text-color-dark};
         --filled-text-color: #{$filled-text-color-dark};
         --secondary-filled-text-color: #{$filled-text-color-dark};
-        --border-color: #{color.mix($text-color-dark, $background-color-dark, 30%)};
-        --secondary-border-color: #{color.mix($text-color-dark, $background-color-dark, 15%)};
+        --border-color: #{$tertiary-background-color-dark};
+        --secondary-border-color: #{$secondary-background-color-dark};
         --tooltip-background-color: #{$tooltip-background-color-dark};
+        --shadow-sm: #{$shadow-sm-dark};
+        --shadow-md: #{$shadow-md-dark};
+        --shadow-lg: #{$shadow-lg-dark};
+        --shadow-xl: #{$shadow-xl-dark};
 
         &.nord {
             --background-color: #{$nord-night-0};
             --secondary-background-color: #{$nord-night-2};
+            --tertiary-background-color: #{$nord-night-1};
             --text-color: #{$nord-snow-0};
             --secondary-text-color: #{$nord-snow-2};
             --primary-color: #{$nord-forest-1};
@@ -53,7 +67,7 @@ body {
         }
 
         &.dracula {
-            --background-color: #{$dracula-backrgound};
+            --background-color: #{$dracula-background};
             --text-color: #{$dracula-foreground};
             --secondary-text-color: #{$dracula-comment};
             --primary-color: #{$dracula-purple};

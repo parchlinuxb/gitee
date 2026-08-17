@@ -1,6 +1,6 @@
 {% from 'smart/icons.html' import icon_small %} {% extends "smart/base.html" %}
 {% block title %}{% if query_in_title %} - {{ q|e }}{% endif %}{% endblock %} {%
-block body %} {% include 'smart/madules/search_header.html' %}
+block body %} {% include 'smart/modules/search_header.html' %}
 <div class="links">
   {%- if donation_url -%}
   <a href="{{ donation_url }}" class="link">{{icon_small('donate')}}</a>
@@ -8,19 +8,19 @@ block body %} {% include 'smart/madules/search_header.html' %}
   <a href="{{ url_for('info', pagename='about') }}" class="link"
     >{{icon_small('information')}}</a
   >
-  {% include 'smart/madules/sidebar_btn.html' %}
+  {% include 'smart/modules/sidebar_btn.html' %}
 </div>
 {% if 'images.html' in results|map(attribute='template')|unique|list%} {%
-include 'smart/madules/image_details.html' %}
+include 'smart/modules/image_details.html' %}
 <script src="{{ url_for('static', filename='js/images.js') }}" async></script>
 {% endif %}
 <div
   class="results-container {% if results and results|map(attribute='template')|unique|list|count and 'images.html' in results|map(attribute='template')|unique|list %} image-page {% if results|map(attribute='template')|unique|list|count > 1 %} multiple-results {% endif %} {% endif %}"
 >
-  {% if corrections %} {% include 'smart/madules/corrections.html' %} {% endif
+  {% if corrections %} {% include 'smart/modules/corrections.html' %} {% endif
   %} {% if pageno <= 1 %} {% if preferences.get_value('ai_chat') %} {% if
   results and 'general' in selected_categories %} {% include
-  'smart/madules/ai_chat.html' %} {% endif %} {% endif %} {% set
+  'smart/modules/ai_chat.html' %} {% endif %} {% endif %} {% set
   suggestions_placed = namespace(s=false) %} {% set suggestion_index = range(1,
   10) | random%} {% set is_image_page = results and
   results|map(attribute='template')|unique|list|count == 1 and 'images.html' in
@@ -69,14 +69,14 @@ include 'smart/madules/image_details.html' %}
     and not is_image_page) %}
   </div>
   {% if pageno == 1 and not suggestions_placed.s %} {% set suggestions_placed.s
-  = true %} {% include 'smart/madules/suggestions.html' %} {% endif %} {% if not
+  = true %} {% include 'smart/modules/suggestions.html' %} {% endif %} {% if not
   result.close_group %}
   <div class="{{ result['template']|replace('.html', '') }}_group result-group">
     {% endif %} {% endif %} {% endfor %} {% endif %} {% include
-    'smart/madules/pagination.html' %}
+    'smart/modules/pagination.html' %}
   </div>
   <div class="info-panel">
-    {% if infoboxes %} {% include 'smart/madules/infoboxs.html' %} {% endif %}
+    {% if infoboxes %} {% include 'smart/modules/infoboxes.html' %} {% endif %}
   </div>
   {%- if number_of_results != '0' -%}
   <div class="result-count">

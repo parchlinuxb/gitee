@@ -14,7 +14,7 @@
     <a href="{{ url_for('info', pagename='about') }}" class="link"
         >{{icon_small('information')}}</a
     >
-    {% include 'smart/madules/sidebar_btn.html' %}
+    {% include 'smart/modules/sidebar_btn.html' %}
 </div>
 
 {% endblock %} {% block content %}
@@ -27,8 +27,8 @@
         role="search"
         class="screen"
     >
-        {% include 'smart/madules/categories_box.html' %} {% include
-        'smart/madules/search_box.html' %}
+        {% include 'smart/modules/categories_box.html' %} {% include
+        'smart/modules/search_box.html' %}
 
         <input type="hidden" name="language" value="{{ current_language }}" />
         <input type="hidden" name="time_range" value="{{ time_range }}" />

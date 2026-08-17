@@ -151,9 +151,10 @@ ui:
   hotkeys: default
   # URL formatting: pretty, full or host
   url_formatting: pretty
-  # Ai Answer
+  # Ai Answer (requires smart theme)
   # ai_chat: off # off, chat, summarize
-  # ai_chat_model: jabir-400b-online
+  # ai_chat_model: ""  # model name (empty = first available from API)
+  # ai_chat_api_url: ""  # OpenAI-compatible API URL (e.g. "https://your-api.com/v1")
 
 # Lock arbitrary settings on the preferences page.
 #

@@ -4,22 +4,43 @@
 $dir: ltr !default;
 
 // Corner radius mixin
-@mixin rounded($radius: "md") {
-    @if $radius =="sm" {
+@mixin rounded($radius: md) {
+    @if $radius == sm {
         border-radius: $border-radius-sm;
     }
-
-    @else if $radius =="lg" {
+    @else if $radius == lg {
         border-radius: $border-radius-lg;
     }
-
-    @else if $radius =="full" {
-        border-radius: 9999px;
+    @else if $radius == xl {
+        border-radius: $border-radius-xl;
     }
-
+    @else if $radius == full {
+        border-radius: $border-radius-full;
+    }
     @else {
         border-radius: $border-radius;
     }
+}
+
+// Shadow mixin
+@mixin shadow($level: md) {
+    @if $level == sm {
+        box-shadow: var(--shadow-sm);
+    }
+    @else if $level == lg {
+        box-shadow: var(--shadow-lg);
+    }
+    @else if $level == xl {
+        box-shadow: var(--shadow-xl);
+    }
+    @else {
+        box-shadow: var(--shadow-md);
+    }
+}
+
+// Transition mixin
+@mixin transition($property: all, $duration: 200ms, $easing: ease) {
+    transition: $property $duration $easing;
 }
 
 // Screens mixin
@@ -43,16 +64,14 @@ $dir: ltr !default;
 
 // Float mixin
 @mixin float($float) {
-    @if $dir =='ltr' {
+    @if $dir == ltr {
         float: $float;
     }
-
     @else {
-        @if $float =='left' {
+        @if $float == left {
             float: right;
         }
-
-        @else if $float =='right' {
+        @else if $float == right {
             float: left;
         }
     }
@@ -60,40 +79,36 @@ $dir: ltr !default;
 
 // Margin mixin
 @mixin margin-left($margin) {
-    @if $dir =='ltr' {
+    @if $dir == ltr {
         margin-left: $margin;
     }
-
     @else {
         margin-right: $margin;
     }
 }
 
 @mixin margin-right($margin) {
-    @if $dir =='ltr' {
+    @if $dir == ltr {
         margin-right: $margin;
     }
-
     @else {
         margin-left: $margin;
     }
 }
 
 @mixin left($amount) {
-    @if $dir =='ltr' {
+    @if $dir == ltr {
         left: $amount;
     }
-
     @else {
         right: $amount;
     }
 }
 
 @mixin right($amount) {
-    @if $dir =='ltr' {
+    @if $dir == ltr {
         right: $amount;
     }
-
     @else {
         left: $amount;
     }
@@ -101,10 +116,9 @@ $dir: ltr !default;
 
 // Fixed Direction
 @mixin direction() {
-    @if $dir =='ltr' {
+    @if $dir == ltr {
         direction: ltr;
     }
-
     @else {
         direction: rtl;
     }
@@ -125,35 +139,38 @@ $dir: ltr !default;
     }
 }
 
+// Focus ring (accessibility)
+@mixin focus-ring() {
+    &:focus-visible {
+        outline: 2px solid var(--primary-color);
+        outline-offset: 2px;
+    }
+}
+
 // Functions
 
 @function returnAlign($align) {
-    @if $dir =='rtl' {
-        @if $align =='left' {
+    @if $dir == rtl {
+        @if $align == left {
             @return right;
         }
-
-        @else if $align =='right' {
+        @else if $align == right {
             @return left;
         }
-
         @else {
             @return $align;
         }
     }
-
     @else {
         @return $align;
     }
 }
 
 // Value fix
-
 @function bidiValue($ltr, $rtl) {
-    @if $dir =='ltr' {
+    @if $dir == ltr {
         @return $ltr;
     }
-
     @else {
         @return $rtl;
     }

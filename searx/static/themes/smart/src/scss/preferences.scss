@@ -8,13 +8,13 @@
         "header links"
         "main main"
         "footer footer";
-    padding: 1rem;
-    gap: 1rem;
+    padding: $space-4;
+    gap: $space-4;
     max-width: 1800px;
     overflow-y: auto;
 
     @include mixin.screens($screen-xl) {
-        padding: 1rem 4rem;
+        padding: $space-4 4rem;
     }
 
     @include mixin.max-screens($screen-md) {
@@ -22,7 +22,7 @@
 
         .links {
             align-items: end !important;
-            padding-bottom: .25rem;
+            padding-bottom: $space-1;
         }
     }
 
@@ -40,7 +40,7 @@
     }
 
     #search.header {
-        padding-top: .5rem !important;
+        padding-top: $space-2 !important;
     }
 
     .links {
@@ -57,7 +57,7 @@
 #preferences_form {
     display: grid;
     grid-area: main;
-    gap: 1rem;
+    gap: $space-4;
     grid-template-areas: "main"
         "backup";
 
@@ -66,25 +66,25 @@
         grid-template-areas: "main backup";
     }
 
-    .madules-container {
+    .modules-container {
         grid-area: main;
-        padding: 1.5rem;
+        padding: $space-5;
 
         select {
             background-color: var(--secondary-background-color);
         }
 
         .save-btn {
-            margin-top: 1rem;
+            margin-top: $space-4;
             display: block;
             width: 100%;
             text-align: center;
         }
 
         h1 {
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-            font-weight: 700;
+            margin-bottom: $space-4;
+            font-size: $font-size-xl;
+            font-weight: $font-weight-semibold;
         }
 
         &:has(#general_tab:target) .btn[href="#general_tab"],
@@ -117,7 +117,7 @@
         }
 
         .engines-tab {
-            padding-top: 1rem;
+            padding-top: $space-4;
             flex-wrap: wrap;
 
             .category-tab {
@@ -125,9 +125,10 @@
             }
 
             .category-btn {
-                padding: .5rem 1rem;
+                padding: $space-2 $space-4;
                 order: 0;
                 text-transform: capitalize;
+                font-size: $font-size-sm;
             }
 
             .category-radio {
@@ -135,8 +136,8 @@
             }
 
             .category-radio:checked+.category-btn {
-                font-weight: 600;
-                text-decoration: wavy underline 1px var(--secondary-color);
+                font-weight: $font-weight-semibold;
+                text-decoration: wavy underline 1px var(--primary-color);
             }
 
             .category-radio:checked+.category-btn+.category-tab {
@@ -146,36 +147,37 @@
 
             .category-tab {
                 grid-template-columns: min-content repeat(2, minmax(10rem, 1fr)) repeat(7, min-content);
-                gap: .5rem;
+                gap: $space-2;
                 width: 100%;
-                padding: 1rem mixin.bidiValue(1rem, .5rem) 1rem mixin.bidiValue(.5rem, 1rem);
+                padding: $space-4 mixin.bidiValue($space-4, $space-2) $space-4 mixin.bidiValue($space-2, $space-4);
 
                 .note {
-                    font-size: .8rem;
+                    font-size: $font-size-sm;
                     text-align: justify;
-                    margin-bottom: 1rem;
+                    margin-bottom: $space-4;
                     color: var(--secondary-text-color);
                     grid-column: span 10;
+                    line-height: $line-height-relaxed;
                 }
 
                 .group-header {
                     background-color: var(--secondary-background-color);
-                    padding: .5rem 1rem;
+                    padding: $space-2 $space-4;
                     grid-column: span 10;
                     display: flex;
                     align-items: center;
-                    gap: 1rem;
-                    margin: 1rem 0 .5rem;
+                    gap: $space-4;
+                    margin: $space-4 0 $space-2;
                     @include mixin.rounded(sm);
 
                     .group-name {
-                        font-size: 1.1rem;
-                        font-weight: 700;
+                        font-size: $font-size-lg;
+                        font-weight: $font-weight-semibold;
                         text-transform: uppercase;
 
                         &.more {
-                            font-size: .8rem;
-                            font-weight: 400;
+                            font-size: $font-size-sm;
+                            font-weight: $font-weight-regular;
                             opacity: .5;
                             text-transform: capitalize;
 
@@ -192,48 +194,51 @@
 
                 h3 {
                     text-wrap: nowrap;
-                    font-weight: 600;
+                    font-weight: $font-weight-medium;
 
                     &:first-of-type {
-                        @include mixin.margin-left(.5rem);
+                        @include mixin.margin-left($space-2);
                     }
 
                     &.detail {
-                        font-size: .8rem;
+                        font-size: $font-size-sm;
                     }
                 }
 
                 h4 {
-                    font-weight: 500;
+                    font-weight: $font-weight-regular;
                     text-transform: capitalize
                 }
 
                 .switch {
-                    @include mixin.margin-left(.5rem);
+                    @include mixin.margin-left($space-2);
                 }
 
                 .bang {
-                    font-family: monospace;
+                    font-family: 'SF Mono', SFMono-Regular, ui-monospace, monospace;
 
-                    background-color: var(--border-color);
+                    background-color: var(--secondary-background-color);
                     @include mixin.rounded(sm);
-                    padding: .25rem .5rem;
+                    padding: $space-1 $space-2;
+                    font-size: $font-size-sm;
                 }
 
                 .numbric {
                     display: inline-block;
                     width: 100%;
                     text-align: center;
-                    padding: .25rem;
+                    padding: $space-1;
                     text-wrap: nowrap;
                     height: 1.75rem;
 
                     &:is(.danger, .error) {
-                        background-color: rgba(255, 0, 0, .2);
+                        background-color: rgba(255, 59, 48, .1);
+                        color: #FF3B30;
                     }
 
                     &.success {
-                        background-color: rgba(0, 255, 0, .2);
+                        background-color: rgba(52, 199, 89, .1);
+                        color: #34C759;
                     }
                 }
             }
@@ -245,29 +250,30 @@
         grid-area: backup;
 
         .backup-box {
-            padding: 2rem;
+            padding: $space-6;
             width: 100%;
 
             .title {
                 display: flex;
                 align-items: center;
-                gap: 1rem;
-                font-size: 2rem;
-                font-weight: 700;
+                gap: $space-4;
+                font-size: $font-size-2xl;
+                font-weight: $font-weight-semibold;
                 justify-content: center;
-                padding: 1rem;
-                margin-bottom: 2rem;
+                padding: $space-4;
+                margin-bottom: $space-6;
             }
 
             .description {
-                margin-bottom: 2rem;
+                margin-bottom: $space-6;
                 text-align: justify;
+                line-height: $line-height-relaxed;
             }
 
             &>.btn {
                 display: block;
                 text-align: center;
-                margin-top: 1rem;
+                margin-top: $space-4;
             }
 
             .data-box {
@@ -275,20 +281,20 @@
                 flex-direction: column;
 
                 input[type="radio"]:checked+.data-page {
-                    margin-top: 1rem;
+                    margin-top: $space-4;
                     display: block;
                 }
 
                 .data-page {
-                    padding: 1rem;
+                    padding: $space-4;
                     width: 100%;
                     display: none;
                     @include mixin.rounded();
                     background-color: var(--secondary-background-color);
 
                     .section {
-                        padding: .5rem 0;
-                        border-bottom: 1px solid var(--secondary-border-color);
+                        padding: $space-2 0;
+                        border-bottom: 1px solid var(--secondary-background-color);
                     }
 
                     :last-child {
@@ -296,28 +302,30 @@
                     }
 
                     h4 {
-                        margin-bottom: .5rem;
+                        margin-bottom: $space-2;
                     }
 
                     p {
-                        text-indent: 1rem;
-                        font-size: .9rem;
+                        text-indent: $space-4;
+                        font-size: $font-size-sm;
                         color: var(--secondary-text-color);
                         text-align: justify;
+                        line-height: $line-height-relaxed;
                     }
 
                     input {
                         background-color: var(--background-color);
                         color: var(--text-color);
                         @include mixin.rounded(sm);
-                        padding: .5rem 1rem;
+                        padding: $space-2 $space-4;
                         width: 100%;
-                        margin-bottom: .5rem;
+                        margin-bottom: $space-2;
+                        font-size: $font-size-sm;
                     }
 
                     .sidebyside {
                         display: flex;
-                        gap: .5rem;
+                        gap: $space-2;
 
                         input {
                             flex: 1;
@@ -329,29 +337,30 @@
         }
     }
 
-    :is(.madules-container, .backup-box) {
+    :is(.modules-container, .backup-box) {
         background-color: var(--background-color);
         @include mixin.rounded(lg);
+        @include mixin.shadow(md);
     }
 }
 
 
 fieldset {
-    margin-bottom: .5rem;
-    padding: .5rem 0;
+    margin-bottom: $space-2;
+    padding: $space-2 0;
 
     .container {
         display: flex;
-        padding: 0 .5rem;
+        padding: 0 $space-2;
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
-        gap: .5rem;
+        gap: $space-2;
 
 
         .name {
             display: flex;
-            gap: .5rem;
+            gap: $space-2;
             align-items: center;
 
             &:not(#pref_safesearch)[tooltip]::after {
@@ -359,15 +368,16 @@ fieldset {
             }
 
             svg {
-                height: 1.2rem;
-                width: 1.2rem;
+                height: 1.25rem;
+                width: 1.25rem;
+                color: var(--secondary-text-color);
             }
         }
 
         .color-container {
             display: flex;
             align-items: center;
-            gap: .5rem;
+            gap: $space-2;
 
 
             input.color {
@@ -377,7 +387,7 @@ fieldset {
                 @include mixin.rounded(sm);
 
                 &.gitee {
-                    background: linear-gradient(30deg, rgba(2, 144, 224, 1) 30%, rgba(255, 255, 255, 1) 30%, rgba(255, 255, 255, 1) 60%, rgba(248, 182, 0, 1) 60%);
+                    background: linear-gradient(30deg, rgba(0, 122, 255, 1) 30%, rgba(255, 255, 255, 1) 30%, rgba(255, 255, 255, 1) 60%, rgba(255, 149, 0, 1) 60%);
                 }
 
                 &.nord {
@@ -397,26 +407,33 @@ fieldset {
     }
 
     .description {
-        margin: 1rem 1rem 0;
+        margin: $space-4 $space-4 0;
         text-align: justify;
-        color: var(--text-color);
-        font-size: .8rem;
+        color: var(--secondary-text-color);
+        font-size: $font-size-sm;
+        line-height: $line-height-relaxed;
     }
 }
 
 select {
-    padding: .5rem 1rem;
-    background-color: var(--background-color);
+    padding: $space-2 $space-4;
+    background-color: var(--secondary-background-color);
     color: var(--text-color);
     @include mixin.rounded(sm);
     max-width: 250px;
     appearance: none;
     background-image: url("data:image/svg+xml;charset=UTF-8,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%0A%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22512%22%20height%3D%22512%22%20viewBox%3D%220%200%20512%20512%22%3E%0A%3Cg%3E%3Cpolygon%20points%3D%22128%2C192%20256%2C320%20384%2C192%22%2F%3E%3C%2Fg%3E%0A%3C%2Fsvg%3E");
     background-repeat: no-repeat;
-    background-size: 1.5rem;
+    background-size: 1.25rem;
     background-position: mixin.bidiValue(95%, 5%);
     padding-inline-end: 2rem;
     text-transform: capitalize;
+    font-size: $font-size-sm;
+    @include mixin.transition;
+
+    &:hover {
+        background-color: var(--tertiary-background-color);
+    }
 
     @media (prefers-color-scheme: dark) {
         background-image: url("data:image/svg+xml;charset=UTF-8,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%0A%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22512%22%20height%3D%22512%22%20viewBox%3D%220%200%20512%20512%22%3E%0A%3Cg%3E%3Cpolygon%20fill%3D%22%23ddd%22%20points%3D%22128%2C192%20256%2C320%20384%2C192%22%2F%3E%3C%2Fg%3E%0A%3C%2Fsvg%3E");

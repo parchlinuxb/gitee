@@ -18,7 +18,7 @@ label = 'success' -%} {%- endif -%} {% else %} {%- set r = '' -%} {%- endif -%}
   {%- endif -%}
 </div>
 {%- endif -%} {%- endmacro -%} {% extends "smart/base.html" %} {% block body %}
-{% include 'smart/madules/search_as_header.html' %}
+{% include 'smart/modules/search_as_header.html' %}
 <div class="links">
   {%- if donation_url -%}
   <a href="{{ donation_url }}" class="link">{{icon_small('donate')}}</a>
@@ -33,7 +33,7 @@ label = 'success' -%} {%- endif -%} {% else %} {%- set r = '' -%} {%- endif -%}
   action="{{ url_for('preferences') }}"
   autocomplete="off"
 >
-  <div class="madules-container">
+  <div class="modules-container">
     <h1>{{ _('Preferences') }}</h1>
     <div class="tabs">
       <a href="#general_tab" class="btn default-btn">{{ _('General') }}</a>
@@ -42,29 +42,29 @@ label = 'success' -%} {%- endif -%} {% else %} {%- set r = '' -%} {%- endif -%}
     <span class="tab-id" id="general_tab"></span>
     <div class="default">
       {% if 'language' not in locked_preferences %} {%- include
-      'smart/madules/settings/language.html' -%}{% endif %} {% if 'theme' not in
-      locked_preferences %} {%- include 'smart/madules/settings/theme.html'
+      'smart/modules/settings/language.html' -%}{% endif %} {% if 'theme' not in
+      locked_preferences %} {%- include 'smart/modules/settings/theme.html'
       -%}{% endif %} {% if 'autocomplete' not in locked_preferences %} {%-
-      include 'smart/madules/settings/autocomplete.html' -%} {% endif %} {% if
+      include 'smart/modules/settings/autocomplete.html' -%} {% endif %} {% if
       'safesearch' not in locked_preferences %} {%- include
-      'smart/madules/settings/safe_search.html' -%} {% endif %} {% if
+      'smart/modules/settings/safe_search.html' -%} {% endif %} {% if
       'ui_locale' not in locked_preferences %} {%- include
-      'smart/madules/settings/interface_lang.html' -%} {% endif %} {% if
+      'smart/modules/settings/interface_lang.html' -%} {% endif %} {% if
       'results_on_new_tab' not in locked_preferences %} {%- include
-      'smart/madules/settings/results_on_new_tab.html' -%} {% endif %} {% if
+      'smart/modules/settings/results_on_new_tab.html' -%} {% endif %} {% if
       'infinite_scroll' not in locked_preferences %} {%- include
-      'smart/madules/settings/infinite_scroll.html' -%} {% endif %} {% if
+      'smart/modules/settings/infinite_scroll.html' -%} {% endif %} {% if
       'method' not in locked_preferences %} {%- include
-      'smart/madules/settings/http_method.html' -%} {% endif %} {% if
+      'smart/modules/settings/http_method.html' -%} {% endif %} {% if
       'image_proxy' not in locked_preferences %} {%- include
-      'smart/madules/settings/image_proxy.html' -%} {% endif %} {% if
+      'smart/modules/settings/image_proxy.html' -%} {% endif %} {% if
       'query_in_title' not in locked_preferences %} {%- include
-      'smart/madules/settings/title_query.html' -%} {% endif %} {# TODO: after
+      'smart/modules/settings/title_query.html' -%} {% endif %} {# TODO: after
       hotkeys implemented, add it back {% if 'hotkeys' not in locked_preferences
-      %} {%- include 'smart/madules/settings/hotkeys.html' -%} {% endif %} #} {%
-      include 'smart/madules/settings/ai_chat.html' %} {% if 'urlformatting' not
+      %} {%- include 'smart/modules/settings/hotkeys.html' -%} {% endif %} #} {%
+      include 'smart/modules/settings/ai_chat.html' %} {% if 'urlformatting' not
       in locked_preferences %} {%- include
-      'smart/madules/settings/url_formatting.html' -%} {% endif %}
+      'smart/modules/settings/url_formatting.html' -%} {% endif %}
     </div>
     <span class="tab-id" id="engines-tab"></span>
     <div class="engines-tab">

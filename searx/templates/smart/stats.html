@@ -1,11 +1,11 @@
-{% from 'smart/madules/engine_stats.html' import load_engine_stats with context
+{% from 'smart/modules/engine_stats.html' import load_engine_stats with context
 %} {%- macro th_sort(column_order, column_name) -%} {% if selected_engine_name
 %} {{ column_name }} {% elif column_order==sort_order %} {{ column_name }} {{
 icon_big('arrow-dropdown') }} {% else %}
 <a href="{{ url_for('stats', sort=column_order) }}">{{ column_name }}</a>
 {% endif %} {%- endmacro -%} {% from 'smart/icons.html' import icon_small,
 icon_big %}{% extends "smart/base.html" %} {% block body %} {% include
-'smart/madules/search_as_header.html' %}
+'smart/modules/search_as_header.html' %}
 <div class="links">
     {%- if donation_url -%}
     <a href="{{ donation_url }}" class="link">{{icon_small('donate')}}</a>
@@ -13,7 +13,7 @@ icon_big %}{% extends "smart/base.html" %} {% block body %} {% include
     <a href="{{ url_for('info', pagename='about') }}" class="link"
         >{{icon_small('information')}}</a
     >
-    {% include 'smart/madules/sidebar_btn.html' %}
+    {% include 'smart/modules/sidebar_btn.html' %}
 </div>
 <div class="container">
     <h1>

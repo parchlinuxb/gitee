@@ -1,10 +1,10 @@
 @use './mixins.scss' as mixin;
 
-*[tooltip] {
+[tooltip] {
     position: relative;
 }
 
-*[tooltip]::after {
+[tooltip]::after {
     content: attr(tooltip);
     position: absolute;
     bottom: 100%;
@@ -18,9 +18,10 @@
     z-index: -1;
     opacity: 0;
     transition: opacity 250ms ease-in-out;
+    pointer-events: none;
 }
 
-*[tooltip]::before {
+[tooltip]::before {
     content: " ";
     position: absolute;
     bottom: 100%;
@@ -33,20 +34,21 @@
     border-width: 5px;
     border-style: solid;
     border-color: var(--tooltip-background-color) transparent transparent transparent;
+    pointer-events: none;
 }
 
-*[tooltip].center-tooltip::before {
+[tooltip].center-tooltip::before {
     transform: translate(-50%, 40%);
 }
 
 
-*[tooltip]:hover::after {
+[tooltip]:hover::after {
     z-index: 1;
     opacity: 1;
     transition: opacity 250ms ease-in-out 500ms;
 }
 
-*[tooltip]:hover::before {
+[tooltip]:hover::before {
     z-index: 1;
     opacity: 1;
     transition: opacity 250ms ease-in-out 500ms;

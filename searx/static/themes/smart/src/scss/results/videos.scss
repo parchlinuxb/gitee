@@ -1,14 +1,18 @@
-@use '../mixins.scss' as mixin;
 @use '../definitions.scss' as *;
+@use '../mixins.scss' as mixin;
 
 .videos_group .result {
-    padding: 1.25rem;
-    border-bottom: var(--secondary-background-color) solid 1px;
+    padding: $space-5;
+    border-bottom: 1px solid var(--secondary-background-color);
+
+    &:last-child {
+        border-bottom: none;
+    }
 
     .result-body {
         display: flex;
-        gap: 1rem;
-        margin-bottom: 0.75rem;
+        gap: $space-4;
+        margin-bottom: $space-3;
 
         @include mixin.max-screens($screen-md) {
             flex-direction: column;
@@ -17,23 +21,31 @@
         .result-header {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            margin-bottom: 0.75rem;
+            gap: $space-3;
+            margin-bottom: $space-3;
 
             .title {
                 flex: 1;
                 color: var(--primary-color);
-                font-size: 1.1rem;
+                font-size: $font-size-lg;
                 text-decoration: none;
-                line-height: 1.4;
+                line-height: $line-height-tight;
+                font-weight: $font-weight-medium;
+
+                &:hover {
+                    text-decoration: underline;
+                    text-decoration-color: rgba(0, 122, 255, .3);
+                    text-underline-offset: 2px;
+                }
             }
 
             .date {
                 color: var(--secondary-text-color);
-                font-size: 0.8rem;
+                font-size: $font-size-sm;
                 background-color: var(--secondary-background-color);
-                padding: 0.25rem 0.5rem;
+                padding: $space-1 $space-2;
                 @include mixin.rounded(sm);
+                white-space: nowrap;
             }
         }
 
@@ -43,6 +55,7 @@
             @include mixin.rounded();
             overflow: hidden;
             position: relative;
+            flex-shrink: 0;
 
             @include mixin.max-screens($screen-md) {
                 width: 100%;
@@ -56,13 +69,15 @@
 
             .video-length {
                 position: absolute;
-                right: 0.5rem;
-                bottom: 0.5rem;
-                background: rgba(0, 0, 0, 0.7);
+                right: $space-2;
+                bottom: $space-2;
+                background: rgba(0, 0, 0, .6);
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
                 color: white;
-                padding: 0.25rem 0.5rem;
-                border-radius: 0.25rem;
-                font-size: 0.8rem;
+                padding: $space-1 $space-2;
+                @include mixin.rounded(sm);
+                font-size: $font-size-xs;
             }
         }
 
@@ -70,37 +85,38 @@
             flex-basis: fit-content;
 
             .result-content {
-                color: var(--text-color);
+                color: var(--secondary-text-color);
                 overflow-wrap: anywhere;
-                font-size: 0.9rem;
-                line-height: 1.5;
+                font-size: $font-size-base;
+                line-height: $line-height-relaxed;
             }
 
             .details {
                 background-color: var(--secondary-background-color);
                 color: var(--secondary-text-color);
-                padding: 0.5rem 0.75rem;
+                padding: $space-2 $space-3;
                 @include mixin.rounded();
-                margin-top: 1rem;
+                margin-top: $space-4;
                 display: flex;
                 justify-content: space-between;
-                column-gap: 5rem;
-                row-gap: .5rem;
+                column-gap: $space-10;
+                row-gap: $space-2;
                 flex-wrap: wrap;
 
                 .detail {
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
-                    font-size: 0.8rem;
+                    font-size: $font-size-sm;
                     flex-wrap: wrap;
-                    gap: .5rem;
+                    gap: $space-2;
 
                     .detail-header {
                         display: flex;
                         align-items: center;
-                        gap: .5rem;
-                        font-size: 0.7rem;
+                        gap: $space-2;
+                        font-size: $font-size-xs;
+                        color: var(--tertiary-text-color);
 
                         .icon {
                             width: .8rem;
@@ -115,7 +131,7 @@
     .result-meta .result-url {
         display: flex;
         align-items: center;
-        gap: .5rem;
+        gap: $space-2;
 
         .favicon {
             width: .8rem;

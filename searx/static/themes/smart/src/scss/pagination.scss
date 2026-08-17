@@ -5,9 +5,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 1rem;
-    padding: 0 2rem;
-    margin-top: 1rem;
+    gap: $space-4;
+    padding: 0 $space-5;
+    margin-top: $space-4;
     overflow-x: auto;
     width: 100%;
 
@@ -17,21 +17,24 @@
 
     .page-numbers {
         display: flex;
-        gap: .5rem;
+        gap: $space-2;
         align-items: center;
 
         .page-number {
             background-color: var(--background-color);
+            @include mixin.shadow(sm);
 
             &.current {
                 background-color: var(--primary-color);
                 color: var(--filled-text-color);
                 cursor: initial;
+                @include mixin.shadow(md);
             }
         }
     }
 
     button {
         white-space: nowrap;
+        font-size: $font-size-sm;
     }
 }

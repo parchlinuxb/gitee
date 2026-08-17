@@ -371,3 +371,50 @@ video {
 [hidden]:where(:not([hidden="until-found"])) {
     display: none !important;
 }
+
+/* Apple-like defaults */
+html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+    color-scheme: light dark;
+}
+
+/* Selection styling */
+::selection {
+    background-color: var(--primary-color);
+    color: var(--filled-text-color);
+}
+
+/* Skip link for accessibility */
+.skip-link {
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--primary-color);
+    color: var(--filled-text-color);
+    padding: .5rem 1rem;
+    border-radius: .75rem;
+    z-index: 1000;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 200ms ease;
+
+    &:focus {
+        top: 1rem;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

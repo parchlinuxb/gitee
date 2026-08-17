@@ -49,43 +49,20 @@
     <link
       rel="icon"
       href="{{ url_for('static', filename='img/favicon.svg') }}"
-      sizes="any"
-    />
-
-    <link
-      rel="icon"
-      href="{{ url_for('static', filename='img/favicon.svg') }}"
       type="image/svg+xml"
-    />
-
-    <link
-      rel="apple-touch-icon"
-      href="{{ url_for('static', filename='img/favicon.svg') }}"
-    />
-
-    <link
-      rel="icon"
-      href="{{ url_for('static', filename='img/favicon-dark.svg') }}"
-      sizes="any"
-      media="(prefers-color-scheme: dark)"
     />
 
     <link
       rel="icon"
       href="{{ url_for('static', filename='img/favicon-dark.svg') }}"
       type="image/svg+xml"
-      media="(prefers-color-scheme: dark)"
-    />
-
-    <link
-      rel="apple-touch-icon"
-      href="{{ url_for('static', filename='img/favicon-dark.svg') }}"
       media="(prefers-color-scheme: dark)"
     />
 
     <script id="client-settings" settings="{{ client_settings }}"></script>
   </head>
   <body class="{{preferences.get_value('smart_variant') or 'gitee'}}">
+    <a href="#main-content" class="skip-link">{{ _('skip to content') }}</a>
     <div id="{{ endpoint }}" class="body-container">
       {% if errors %}
       <div class="error-container" role="alert">
@@ -97,11 +74,11 @@
       </div>
       {% endif %} {% block body %} {% include 'smart/footer.html' %}
       <header>{% block header %} {% endblock %}</header>
-      <main>{% block content %} {% endblock %}</main>
+      <main id="main-content">{% block content %} {% endblock %}</main>
       {% endblock body %}
     </div>
     {% if endpoint != 'preferences'and status != 404 %} {% include
-    'smart/madules/sidebar.html' %} {% endif %}
+    'smart/modules/sidebar.html' %} {% endif %}
     <script src="{{ url_for('static', filename='js/app.js') }}" async></script>
   </body>
 </html>

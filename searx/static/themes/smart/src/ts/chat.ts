@@ -1,31 +1,38 @@
-import { ChatCompletionMessageParam } from "openai/resources/index.mjs";
-import { OpenAI } from "openai";
-import markdownit from "markdown-it";
-import MarkdownIt from "markdown-it";
 import Cookies from "js-cookie";
 import { $ } from "./utils";
 
-let client: OpenAI;
-let messages: ChatCompletionMessageParam[] = [
+let apiUrl = "";
+let messages: { role: string; content: string }[] = [
     {
         role: "system",
-        content:
-            "You are a Search Engine Assistant. that Engine called Gitee and based on SearXNG \n \
-            – Always detect and respond in the user’s locale and language.  \n \
-            – Keep replies concise, accurate, and on-point.  \n \
-            – If you don’t know something, say “I’m sorry, I don’t know.”  \n \
-            – Cite sources or URLs when you reference facts from external content.",
+        content: `You are a Search Engine Assistant. The engine is called Gitee and is based on SearXNG.
+            - Always detect and respond in the user's locale and language.
+            - Keep replies concise, accurate, and on-point.
+            - If you don't know something, say "I'm sorry, I don't know."
+            - Cite sources or URLs when you reference facts from external content.`,
     },
 ];
 
-let md: MarkdownIt;
+function renderMarkdown(text: string): string {
+    // Simple markdown rendering without external dependency
+    return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+        .replace(/\*(.*?)\*/g, "<em>$1</em>")
+        .replace(/`(.*?)`/g, "<code>$1</code>")
+        .replace(/\n/g, "<br>");
+}
 
 export function setupChat({
     mode,
     chatModel,
+    apiBaseUrl,
 }: {
     mode: "chat" | "summarize";
     chatModel: string;
+    apiBaseUrl?: string;
 }) {
     const chatContainer = $("#ai-message-container") as HTMLDivElement;
     if (!chatContainer) return;
@@ -47,26 +54,22 @@ export function setupChat({
         });
     }
 
-    client = new OpenAI({
-        apiKey: "FAKE",
-        dangerouslyAllowBrowser: true,
-        baseURL: "https://openai.jabirproject.org/v1",
-    });
-    md = markdownit();
+    apiUrl = apiBaseUrl || "";
 
     if (mode === "chat") {
         messages.push({
             role: "system",
-            content:
-                "Mode: Chat  \n \
-                Task: Answer the user’s question directly in a conversational style.  \n \
-                - Do not invent facts.  \n \
-                - No additional JSON or lists—just a natural-language reply. \n \
-                - Then insert exactly one blank line, a line containing only the character “ɍ”, and another blank line. \n \
-                - On the next line, emit a valid JSON array of the any referenced objects. Each object must have: \n \
-                  • title: the page title or a concise descriptor \n \
-                  • url: the source URL \n \
-                Do not emit any other text before or after the JSON array. and dont use JSON code block",
+            content: [
+                "Mode: Chat",
+                "Task: Answer the user's question directly in a conversational style.",
+                "- Do not invent facts.",
+                "- No additional JSON or lists - just a natural-language reply.",
+                "- Then insert exactly one blank line, a line containing only the character '|', and another blank line.",
+                "- On the next line, emit a valid JSON array of the any referenced objects. Each object must have:",
+                "  * title: the page title or a concise descriptor",
+                "  * url: the source URL",
+                "Do not emit any other text before or after the JSON array. and dont use JSON code block",
+            ].join(" "),
         });
         sendMessage({ messageInput, stopButton, chatContainer, chatModel });
     }
@@ -74,17 +77,17 @@ export function setupChat({
     if (mode == "summarize") {
         messages.push({
             role: "system",
-            content:
-                "Mode: Summarize  \n \
-                Task: \n \
-                You will receive up to 5 search results (URL + snippet + etc). \n \
-                Identify the 3 most relevant results for the user’s query. \n \
-                Summarize those three results into a concise, informative paragraph in the user’s language. \n \
-                Then insert exactly one blank line, a line containing only the character “ɍ”, and another blank line. \n \
-                On the next line, emit a valid JSON array of the three referenced objects. Each object must have: \n \
-                    • title: the page title or a concise descriptor \n \
-                    • url: the source URL \n \
-                Do not emit any other text before or after the JSON array. and dont use JSON code block",
+            content: [
+                "Mode: Summarize",
+                "Task: You will receive up to 5 search results (URL + snippet + etc).",
+                "Identify the 3 most relevant results for the user's query.",
+                "Summarize those three results into a concise, informative paragraph in the user's language.",
+                "Then insert exactly one blank line, a line containing only the character '|', and another blank line.",
+                "On the next line, emit a valid JSON array of the three referenced objects. Each object must have:",
+                "    * title: the page title or a concise descriptor",
+                "    * url: the source URL",
+                "Do not emit any other text before or after the JSON array. and dont use JSON code block",
+            ].join(" "),
         });
         messageInput.parentElement?.setAttribute("hidden", "");
         sendMessage({
@@ -180,55 +183,90 @@ async function sendMessage({
 
     chatContainer.classList.add("answering");
     if (messageInput) messageInput.disabled = true;
-    const stream = await client.chat.completions
-        .create(
-            {
-                // @ts-ignore
+
+    if (!apiUrl) {
+        const messageElement = createMessage(chatContainer, "ai");
+        messageElement.innerText = "AI API URL is not configured.";
+        chatContainer.classList.remove("answering");
+        if (messageInput) messageInput.disabled = false;
+        return;
+    }
+
+    try {
+        const response = await fetch(`${apiUrl}/chat/completions`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
                 model: chatModel,
                 messages,
-            },
-            {
-                signal: controller.signal,
-            }
-        )
-        .catch((e) => {
-            const messageElement = createMessage(chatContainer, "ai");
-            messageElement.innerText = controller.signal.aborted
-                ? chatContainer.getAttribute("data-gitee-stop") ?? e.message
-                : e.message;
-            chatContainer.classList.remove("answering");
-            if (messageInput) messageInput.disabled = false;
+                stream: false,
+            }),
+            signal: controller.signal,
         });
 
-    chatContainer.classList.remove("loading");
+        chatContainer.classList.remove("loading");
 
-    if (!stream?.choices[0].message.content) return;
-    const [content, references] = stream.choices[0].message.content.split("ɍ");
-
-    const messageElement = createMessage(
-        chatContainer,
-        "ai",
-        references ? JSON.parse(references) : undefined
-    );
-    let messageText: string = "";
-    for (const chunk of content.split("\n")) {
-        const paragraph = document.createElement("p");
-        messageElement.appendChild(paragraph);
-
-        for (const token of chunk.split("")) {
-            await new Promise((resolve) => setTimeout(resolve, 10));
-            messageText += token;
-            paragraph.textContent += token;
+        if (!response.ok) {
+            throw new Error(`API error: ${response.status}`);
         }
-        messageText += "\n";
 
-        paragraph.remove();
-        messageElement.innerHTML = md.render(messageText);
+        const data = await response.json();
+        const content = data.choices?.[0]?.message?.content;
+        if (!content) return;
+
+        const [answer, references] = content.split("ɍ");
+
+        const messageElement = createMessage(
+            chatContainer,
+            "ai",
+            references
+                ? (() => {
+                      try {
+                          return JSON.parse(references);
+                      } catch {
+                          return undefined;
+                      }
+                  })()
+                : undefined
+        );
+
+        // Batched rendering - O(n) instead of O(n²)
+        const BATCH_SIZE = 5;
+        const chars = answer.split("");
+        let messageText = "";
+
+        for (let i = 0; i < chars.length; i += BATCH_SIZE) {
+            const batch = chars.slice(i, i + BATCH_SIZE).join("");
+            messageText += batch;
+            messageElement.innerHTML = renderMarkdown(messageText);
+            await new Promise((resolve) => requestAnimationFrame(resolve));
+        }
+
+        chatContainer.classList.remove("answering");
+        if (messageInput) messageInput.disabled = false;
+
+        if (messageElement.innerText.length <= 0) {
+            messageElement.parentElement?.remove();
+        }
+    } catch (e: any) {
+        const messageElement = createMessage(chatContainer, "ai");
+        messageElement.innerText = controller.signal.aborted
+            ? chatContainer.getAttribute("data-gitee-stop") ?? "Stopped"
+            : e.message;
+        chatContainer.classList.remove("answering");
+        if (messageInput) messageInput.disabled = false;
     }
-    chatContainer.classList.remove("answering");
-    if (messageInput) messageInput.disabled = false;
+}
 
-    if (messageElement.innerText.length <= 0) {
-        messageElement.parentElement?.remove();
+export async function fetchModels(apiBaseUrl: string): Promise<string[]> {
+    try {
+        const response = await fetch(`${apiBaseUrl}/models`);
+        if (!response.ok) return [];
+        const data = await response.json();
+        return data.data?.map((m: any) => m.id) || [];
+    } catch {
+        return [];
     }
 }

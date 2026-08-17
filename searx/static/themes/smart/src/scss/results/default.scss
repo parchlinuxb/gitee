@@ -1,54 +1,69 @@
+@use '../definitions.scss' as *;
 @use '../mixins.scss' as mixin;
 
 .default_group .result {
-    padding: 1.25rem;
-    border-bottom: var(--secondary-background-color) solid 1px;
+    padding: $space-5;
+    border-bottom: 1px solid var(--secondary-background-color);
+
+    &:last-child {
+        border-bottom: none;
+    }
 
     .result-header {
         display: flex;
         align-items: center;
-        gap: 1rem;
-        margin-bottom: 0.75rem;
+        gap: $space-3;
+        margin-bottom: $space-3;
 
         .favicon {
-            width: 1rem;
-            height: 1rem;
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: $border-radius-sm;
         }
 
         .title {
             flex: 1;
             color: var(--primary-color);
-            font-size: 1.1rem;
+            font-size: $font-size-lg;
             text-decoration: none;
-            line-height: 1.4;
+            line-height: $line-height-tight;
+            font-weight: $font-weight-medium;
+
+            &:hover {
+                text-decoration: underline;
+                text-decoration-color: rgba(0, 122, 255, .3);
+                text-underline-offset: 2px;
+            }
         }
 
         .date {
             color: var(--secondary-text-color);
-            font-size: 0.8rem;
+            font-size: $font-size-sm;
             background-color: var(--secondary-background-color);
-            padding: 0.25rem 0.5rem;
+            padding: $space-1 $space-2;
             @include mixin.rounded(sm);
+            white-space: nowrap;
         }
     }
 
     .result-body {
         display: flex;
-        gap: 1rem;
-        margin-bottom: 0.75rem;
+        gap: $space-4;
+        margin-bottom: $space-3;
 
         .thumbnail {
             max-width: 10rem;
             height: 5rem;
             object-fit: cover;
-            @include mixin.rounded();
+            @include mixin.rounded(sm);
+            flex-shrink: 0;
         }
 
         .result-content {
-            color: var(--text-color);
+            color: var(--secondary-text-color);
             overflow-wrap: anywhere;
-            font-size: 0.9rem;
-            line-height: 1.5;
+            font-size: $font-size-base;
+            line-height: $line-height-relaxed;
         }
     }
 
@@ -63,30 +78,37 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        font-size: 0.8rem;
+        font-size: $font-size-sm;
         flex-wrap: wrap;
-        gap: .5rem;
+        gap: $space-2;
 
         .result-url {
             background-color: var(--secondary-background-color);
             color: var(--secondary-text-color);
-            padding: 0.25rem 0.5rem;
+            padding: $space-1 $space-2;
             @include mixin.rounded(full);
             text-decoration: none;
-            font-size: 0.85rem;
+            font-size: $font-size-sm;
+            @include mixin.transition;
+
+            &:hover {
+                background-color: var(--tertiary-background-color);
+                color: var(--text-color);
+            }
         }
 
         .engines {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
+            gap: $space-2;
 
             .engine {
                 border: 1px solid var(--border-color);
-                padding: 0.25rem .75rem;
+                padding: $space-1 $space-3;
                 @include mixin.rounded(full);
-                font-size: 0.7rem;
+                font-size: $font-size-xs;
                 text-wrap: nowrap;
+                color: var(--secondary-text-color);
             }
         }
     }

@@ -381,6 +381,9 @@ def get_client_settings():
         'safesearch': req_pref.get_value('safesearch'),
         'theme': req_pref.get_value('theme'),
         'doi_resolver': get_doi_resolver(),
+        'ai_chat': req_pref.get_value('ai_chat'),
+        'ai_chat_model': req_pref.get_value('ai_chat_model'),
+        'ai_chat_api_url': req_pref.get_value('ai_chat_api_url'),
     }
 
 
@@ -388,7 +391,7 @@ def render(template_name: str, **kwargs):
     # values from the preferences
     # pylint: disable=too-many-statements
     client_settings = get_client_settings()
-    kwargs['client_settings'] = base64.b64encode(json.dumps(client_settings).encode('utf-8')).decode('utf-8')
+    kwargs['client_settings'] = json.dumps(client_settings)
     kwargs['preferences'] = sxng_request.preferences
     kwargs.update(client_settings)
 

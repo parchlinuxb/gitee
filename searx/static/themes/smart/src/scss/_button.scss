@@ -1,21 +1,48 @@
+@use './definitions.scss' as *;
 @use './mixins.scss' as mixin;
 
 :is(button, .btn) {
-    display: inline-block;
-    padding: .5rem 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: $space-2;
+    padding: $space-2 $space-4;
     background-color: var(--secondary-background-color);
     color: var(--text-color);
     @include mixin.rounded(sm);
+    font-size: $font-size-base;
+    font-weight: $font-weight-medium;
+    line-height: $line-height-tight;
     margin-trim: all;
+    @include mixin.transition;
+    @include mixin.focus-ring;
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+        background-color: var(--tertiary-background-color);
+    }
+
+    &:active {
+        transform: scale(.98);
+    }
 
     &.primary {
         background-color: var(--primary-color);
         color: var(--filled-text-color);
+
+        &:hover {
+            opacity: .9;
+        }
     }
 
     &.secondary {
         background-color: var(--secondary-color);
         color: var(--secondary-filled-text-color);
+
+        &:hover {
+            opacity: .9;
+        }
     }
 
     &.full-width {

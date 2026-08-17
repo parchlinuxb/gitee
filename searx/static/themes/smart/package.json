@@ -12,32 +12,34 @@
     "script:images:watch": "parcel ./src/ts/images.ts --no-source-maps --dist-dir ./js -p 10031",
     "script:images:build": "parcel build ./src/ts/images.ts --no-source-maps --dist-dir ./js",
     "icon:run": "node ./scripts/svg2jinja.js",
-    "icon:watch": "nodemon --watch ./scripts/svg2jinja.js --exec npm run icon:run",
+    "icon:watch": "node --watch ./scripts/svg2jinja.js --exec npm run icon:run",
     "icon:build": "node ./scripts/svg2jinja.js --build",
     "dev": "concurrently -k -n \"STYLE,SCRIPT,ICON,IMAGESSCRIPT\" -c \"bgRed.bold,bgBlue.bold,bgMagenta.bold,bgWhite.bold\" -p \" {name} \" \"npm:style:watch\" \"npm:script:watch\" \"npm:icon:watch\" \"npm:script:images:watch\"",
     "build": "concurrently -n \"STYLE,SCRIPT\" -c \"bgRed.dim,bgBlue.dim\" -p \" {name} \" \"npm:style:build\" \"npm:script:build\"; npm run icon:build; npm run script:images:build"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "2.13.0",
-    "@types/markdown-it": "^14.1.2",
-    "buffer": "^6.0.3",
     "concurrently": "^9.1.0",
+    "ejs": "^3.1.10",
     "parcel": "2.13.0",
-    "process": "^0.11.10"
+    "svgo": "^3.3.2"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.1.1",
-    "@fontsource/inter": "^5.1.1",
     "@types/js-cookie": "^3.0.6",
-    "axios": "^1.7.9",
     "debounce": "^2.2.0",
-    "ejs": "^3.1.10",
     "js-cookie": "^3.0.5",
-    "markdown-it": "^14.1.0",
-    "nodemon": "^3.1.9",
-    "openai": "^4.85.3",
     "remixicon": "^4.5.0",
-    "svgo": "^3.3.2",
     "vazirmatn": "^33.0.3"
-  }
+  },
+  "allowScripts": {
+    "@parcel/watcher@2.5.0": true,
+    "@swc/core@1.9.2": true,
+    "lmdb@2.8.5": true,
+    "msgpackr-extract@3.0.3": true
+  },
+  "trustedDependencies": [
+    "@parcel/watcher",
+    "@swc/core"
+  ]
 }

@@ -1,4 +1,3 @@
-import axios, { AxiosResponse } from "axios";
 import { $ } from "./utils";
 
 let isLoading: boolean = false;
@@ -34,8 +33,14 @@ function requestNextPage() {
     $("#pagination")?.setAttribute("hidden", "");
     $("#page-loading")?.removeAttribute("hidden");
 
-    axios
-        .postForm(form.action, formData)
+    fetch(form.action, {
+        method: "POST",
+        body: formData,
+    })
+        .then((response) => {
+            if (!response.ok) throw new Error(response.statusText);
+            return response.text();
+        })
         .then(loadNextPage)
         .catch((reason) => {
             console.log(`Unable to load next page, ${reason}`);
@@ -47,14 +52,10 @@ function requestNextPage() {
         });
 }
 
-function loadNextPage(reponse: AxiosResponse<string>) {
-    if (reponse.status !== 200) return;
-    const nextPageDoc = new DOMParser().parseFromString(
-        reponse.data,
-        "text/html"
-    );
+function loadNextPage(html: string) {
+    const nextPageDoc = new DOMParser().parseFromString(html, "text/html");
     const results =
-        nextPageDoc.getElementsByClassName("results-container")[0].children;
+        nextPageDoc.getElementsByClassName("results-container")[0]?.children;
     const paginationElement = nextPageDoc.getElementById("pagination");
     if (!results || !paginationElement) return;
 

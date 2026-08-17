@@ -3,7 +3,7 @@
 <fieldset>
     <div class="container">
         <legend id="pref_ai_chat" class="name">
-            <span>{{- _('Answer by Ai') -}}</span> {{- icon_small('ai') -}}
+            <span>{{- _('AI Assistant') -}}</span> {{- icon_small('ai') -}}
         </legend>
         <select name="ai_chat" aria-labelledby="pref_ai_chat" aria-describedby="desc_ai_chat">
             {%- for mode in ('off', 'chat', 'summarize') -%}
@@ -15,7 +15,7 @@
         </select>
     </div>
     <div class="description" id="desc_ai_chat">
-        {{- _('Get Ai\'s answer in results') }}
+        {{- _('Get AI answers in search results') }}
     </div>
 </fieldset>
 
@@ -23,14 +23,14 @@
 <fieldset>
     <div class="container">
         <legend id="pref_ai_chat_model" class="name">
-            {{- _('Ai Model') -}}
+            {{- _('AI Model') -}}
         </legend>
         <select name="ai_chat_model" aria-labelledby="pref_ai_chat_model" aria-describedby="desc_ai_chat_model" id="chat-model">
             <option>Loading...</option>
         </select>
     </div>
     <div class="description" id="desc_ai_chat_model">
-        {{- _('Select model that answer you') }}
+        {{- _('Select the AI model for responses') }}
     </div>
 </fieldset>
 {% endif %}

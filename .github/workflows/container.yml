@@ -132,7 +132,7 @@ jobs:
         run: make container.test
 
   release:
-    if: github.repository_owner == 'searxng' && github.ref_name == 'master'
+    if: github.repository_owner == 'parchlinuxb' && github.ref_name == 'master'
     name: Release
     runs-on: ubuntu-26.04-arm
     needs:

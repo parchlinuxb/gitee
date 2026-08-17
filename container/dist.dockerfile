@@ -21,7 +21,7 @@ LABEL org.opencontainers.image.created="$CREATED" \
       org.opencontainers.image.revision="$VCS_REVISION" \
       org.opencontainers.image.source="$VCS_URL" \
       org.opencontainers.image.title="Gitee" \
-      org.opencontainers.image.url="https://searxng.org" \
+      org.opencontainers.image.url="https://github.com/parchlinuxb/gitee" \
       org.opencontainers.image.version="$VERSION"
 
 ENV SEARXNG_VERSION="$VERSION" \

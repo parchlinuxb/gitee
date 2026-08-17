@@ -11,24 +11,24 @@
             autocomplete="off"
         >
             {%- if 'smart_variant' not in locked_preferences -%} {%- include
-            'smart/madules/sidebar/theme.html' -%} {%- endif -%} {%- if
+            'smart/modules/sidebar/theme.html' -%} {%- endif -%} {%- if
             'language' not in locked_preferences -%} {%- include
-            'smart/madules/sidebar/language.html' -%} {% endif %} {%- if
+            'smart/modules/sidebar/language.html' -%} {% endif %} {%- if
             'autocomplete' not in locked_preferences -%} {%- include
-            'smart/madules/sidebar/autocomplete.html' -%} {%- endif -%} {%- if
+            'smart/modules/sidebar/autocomplete.html' -%} {%- endif -%} {%- if
             'safesearch' not in locked_preferences -%} {%- include
-            'smart/madules/sidebar/safe_search.html' -%} {%- endif -%} {%- if
+            'smart/modules/sidebar/safe_search.html' -%} {%- endif -%} {%- if
             'ui_locale' not in locked_preferences -%} {%- include
-            'smart/madules/sidebar/interface_lang.html' -%} {%- endif -%} {%- if
+            'smart/modules/sidebar/interface_lang.html' -%} {%- endif -%} {%- if
             'results_on_new_tab' not in locked_preferences -%} {%- include
-            'smart/madules/sidebar/results_on_new_tab.html' -%} {%- endif -%}
+            'smart/modules/sidebar/results_on_new_tab.html' -%} {%- endif -%}
             {%- if 'infinite_scroll' not in locked_preferences -%} {%- include
-            'smart/madules/sidebar/infinite_scroll.html' -%} {%- endif -%} {%-
+            'smart/modules/sidebar/infinite_scroll.html' -%} {%- endif -%} {%-
             if 'method' not in locked_preferences -%} {%- include
-            'smart/madules/sidebar/http_method.html' -%} {%- endif -%} {%
-            include 'smart/madules/sidebar/ai_chat.html' %} {%- if 'image_proxy'
+            'smart/modules/sidebar/http_method.html' -%} {%- endif -%} {%
+            include 'smart/modules/sidebar/ai_chat.html' %} {%- if 'image_proxy'
             not in locked_preferences -%} {%- include
-            'smart/madules/sidebar/image_proxy.html' -%} {%- endif -%}
+            'smart/modules/sidebar/image_proxy.html' -%} {%- endif -%}
 
             <button type="submit" class="primary full-width">
                 {{- _('Save') -}}

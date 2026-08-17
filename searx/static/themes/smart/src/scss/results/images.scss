@@ -1,10 +1,10 @@
+@use "../definitions.scss" as *;
 @use "../mixins.scss" as mixin;
-@use '../definitions.scss' as *;
 
 .images_group {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: $space-4;
 
     .image {
         cursor: pointer;
@@ -12,6 +12,7 @@
         max-width: 10rem;
         @include mixin.rounded();
         flex-grow: 1;
+        @include mixin.transition;
 
         @include mixin.screens($screen-md) {
             max-width: 20rem;
@@ -31,18 +32,20 @@
                 height: 100%;
                 width: 100%;
                 object-fit: cover;
-                transition: transform 0.3s ease;
+                transition: transform $transition-smooth;
             }
 
             .resolution {
                 position: absolute;
-                right: 0.5rem;
-                bottom: .5rem;
-                background: rgba(0, 0, 0, 0.7);
+                right: $space-2;
+                bottom: $space-2;
+                background: rgba(0, 0, 0, .6);
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
                 color: white;
-                padding: 0.25rem 0.5rem;
-                border-radius: 0.25rem;
-                font-size: 0.8rem;
+                padding: $space-1 $space-2;
+                @include mixin.rounded(sm);
+                font-size: $font-size-xs;
             }
         }
 
@@ -56,21 +59,23 @@
 
 
         .image-info {
-            padding: 0.5rem;
+            padding: $space-2;
 
             .title {
                 display: block;
-                font-size: 0.9rem;
-                margin-bottom: 0.25rem;
+                font-size: $font-size-sm;
+                margin-bottom: $space-1;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
+                font-weight: $font-weight-medium;
             }
 
             .source {
                 display: flex;
-                gap: .5rem;
-                font-size: 0.7rem;
+                gap: $space-2;
+                font-size: $font-size-xs;
+                color: var(--secondary-text-color);
 
                 .favicon {
                     width: .8rem;
@@ -88,7 +93,7 @@
             top: -.75rem;
             @include mixin.rounded();
             background-color: var(--primary-color);
-            opacity: .5;
+            opacity: .3;
         }
     }
 }
@@ -100,11 +105,12 @@
     .image-details {
         background: var(--background-color);
         @include mixin.rounded(lg);
+        @include mixin.shadow(lg);
         position: relative;
         height: 80vh;
-        padding: 1.5rem;
-        transition: top 250ms ease-in-out,
-            height 250ms ease-out;
+        padding: $space-5;
+        transition: top $transition-smooth,
+            height $transition-smooth;
 
         @include mixin.screens($screen-xl) {
             min-width: $screen-xs;
@@ -113,7 +119,7 @@
         .image {
             height: 30%;
             @include mixin.rounded();
-            margin-bottom: 1.5rem;
+            margin-bottom: $space-5;
             overflow: hidden;
             position: relative;
 
@@ -134,15 +140,16 @@
 
 
         h3 {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
+            font-size: $font-size-xl;
+            margin-bottom: $space-4;
+            font-weight: $font-weight-semibold;
         }
 
         .description {
-            color: var(--text-color);
-            font-size: 0.9rem;
-            line-height: 1.5;
-            margin-bottom: 1.5rem;
+            color: var(--secondary-text-color);
+            font-size: $font-size-base;
+            line-height: $line-height-relaxed;
+            margin-bottom: $space-5;
             max-height: 20vh;
             overflow-y: auto;
         }
@@ -151,21 +158,22 @@
             display: flex;
             flex-direction: column;
             background-color: var(--secondary-background-color);
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            padding: 1rem;
+            gap: $space-4;
+            margin-bottom: $space-5;
+            padding: $space-4;
             @include mixin.rounded();
 
             .meta-item {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                font-size: $font-size-sm;
             }
 
             .source {
-                margin-top: .5rem;
+                margin-top: $space-2;
                 background-color: var(--background-color);
-                padding: .5rem 1rem;
+                padding: $space-2 $space-4;
                 @include mixin.rounded(full);
             }
 
@@ -173,31 +181,33 @@
 
         .engine {
             display: flex;
-            gap: 1rem;
+            gap: $space-4;
             align-items: center;
 
             .engine-name {
                 background-color: var(--secondary-background-color);
-                padding: .5rem;
+                padding: $space-2;
                 @include mixin.rounded(sm);
+                font-size: $font-size-sm;
             }
         }
 
         .actions {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
-            margin-bottom: 1rem;
+            gap: $space-4;
+            margin-bottom: $space-4;
 
             .btn {
                 flex: 1;
                 width: 100%;
-                padding: 0.75rem;
+                padding: $space-3;
                 text-align: center;
-                font-weight: 500;
+                font-weight: $font-weight-medium;
+                font-size: $font-size-sm;
 
                 &.copy:disabled {
-                    opacity: 0.5;
+                    opacity: .5;
                     cursor: not-allowed;
                 }
             }
@@ -205,13 +215,14 @@
 
         .close {
             position: absolute;
-            top: 1rem;
-            @include mixin.right(1rem);
+            top: $space-4;
+            @include mixin.right($space-4);
             color: var(--text-color);
             @include mixin.rounded(full);
             background-color: var(--secondary-background-color);
-            padding: 0.25rem;
+            padding: $space-1;
             cursor: pointer;
+            @include mixin.focus-ring;
         }
     }
 

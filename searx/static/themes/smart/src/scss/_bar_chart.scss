@@ -1,3 +1,4 @@
+@use './definitions.scss' as *;
 @use './mixins.scss' as mixin;
 
 .bar-chart {
@@ -5,14 +6,14 @@
     align-items: center;
     justify-content: start;
     @include mixin.rounded(full);
-    height: .5rem;
+    height: 4px;
     overflow: hidden;
-    background-color: var(--secondary-border-color);
+    background-color: var(--secondary-background-color);
 
     .bar {
         height: 100%;
-        background-color: var(--secondary-text-color);
-        transition: flex 100ms ease-in-out;
+        background-color: var(--tertiary-background-color);
+        transition: flex $transition-normal;
     }
 
     .bar.l1 {
@@ -20,6 +21,6 @@
     }
 
     .bar.l2 {
-        background-color: #c48b19;
+        background-color: var(--secondary-color);
     }
 }

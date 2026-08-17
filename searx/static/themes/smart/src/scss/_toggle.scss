@@ -1,0 +1,59 @@
+@use './definitions.scss' as *;
+@use './mixins.scss' as mixin;
+
+input[type="checkbox"].switch {
+    appearance: none;
+    margin-right: $space-2;
+    background-color: var(--tertiary-background-color);
+    color: var(--text-color);
+    @include mixin.rounded(full);
+    width: 51px;
+    height: 31px;
+    min-height: 31px;
+    display: inline-block;
+    position: relative;
+    border: none;
+    box-sizing: border-box;
+    @include mixin.transition(background-color);
+    cursor: pointer;
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 2px;
+        @include mixin.left(2px);
+        width: 27px;
+        height: 27px;
+        background-color: var(--filled-text-color);
+        @include mixin.rounded(full);
+        @include mixin.transition(transform);
+        @include mixin.shadow(sm);
+    }
+
+    &:checked {
+        background-color: var(--primary-color);
+
+        &::after {
+            background-color: var(--filled-text-color);
+            @include mixin.left(calc(100% - 29px));
+        }
+    }
+
+    &.reverse {
+        background-color: var(--primary-color);
+
+        &::after {
+            background-color: var(--filled-text-color);
+            @include mixin.left(calc(100% - 29px));
+        }
+
+        &:checked {
+            background-color: var(--tertiary-background-color);
+
+            &::after {
+                @include mixin.left(2px);
+                background-color: var(--filled-text-color);
+            }
+        }
+    }
+}

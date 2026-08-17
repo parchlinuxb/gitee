@@ -13,11 +13,11 @@
         "sidebox"
         "results"
         "footer";
-    padding: 0 1rem;
+    padding: 0 $space-4;
     max-width: 1800px;
     overflow-x: hidden;
     overflow-y: auto;
-    transition: grid-template-columns 300ms ease-in-out;
+    transition: grid-template-columns $transition-smooth;
 
     @include mixin.screens($screen-xl) {
         grid-template-columns: 2fr 1fr;
@@ -28,7 +28,7 @@
             "results sidebox"
             "footer footer";
         padding: 0 4rem;
-        gap: 1rem;
+        gap: $space-4;
     }
 
     @include mixin.max-screens($screen-md) {
@@ -45,15 +45,15 @@
 
     .result-count {
         grid-area: amount;
-        font-size: .8rem;
+        font-size: $font-size-sm;
         color: var(--secondary-text-color);
 
         &-container {
             display: flex;
             align-items: center;
-            gap: .5rem;
+            gap: $space-2;
             justify-content: end;
-            padding: 0 1rem;
+            padding: 0 $space-4;
         }
     }
 
@@ -62,7 +62,7 @@
     }
 
     &:has(#filter:checked) .results-container {
-        margin-top: 2rem;
+        margin-top: $space-5;
     }
 
     .info-panel {
@@ -72,22 +72,23 @@
     .results-container {
         grid-area: results;
         position: relative;
-        transition: margin-top 100ms ease-in-out;
+        transition: margin-top $transition-normal;
         width: 100%;
 
         .message-container {
-            margin-bottom: 1rem;
+            margin-bottom: $space-4;
             background-color: var(--background-color);
-            padding: 1.5rem;
+            padding: $space-5;
             position: relative;
             @include mixin.rounded(lg);
+            @include mixin.shadow(md);
 
             .title {
                 display: flex;
                 align-items: center;
-                font-weight: 700;
-                gap: .5rem;
-                font-size: 1.5rem;
+                font-weight: $font-weight-semibold;
+                gap: $space-2;
+                font-size: $font-size-2xl;
 
                 svg {
                     fill: var(--primary-color);
@@ -98,7 +99,7 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                gap: 2rem;
+                gap: $space-5;
                 flex-wrap: wrap;
 
                 select {
@@ -108,16 +109,17 @@
             }
 
             .message-box {
-                margin-top: 1rem;
+                margin-top: $space-4;
 
                 .message {
                     background-color: var(--secondary-background-color);
-                    padding: 1rem;
-                    border-radius: 1.5rem 1.5rem 1.5rem .5rem;
+                    padding: $space-4;
+                    @include mixin.rounded(xl);
                     overflow: hidden;
                     width: 80%;
                     max-width: 800px;
                     text-align: justify;
+                    line-height: $line-height-relaxed;
 
                     @include mixin.max-screens($screen-md) {
                         max-width: 90vw;
@@ -125,16 +127,16 @@
                 }
 
                 .reference {
-                    margin-top: 1rem;
-                    font-size: .8rem;
+                    margin-top: $space-4;
+                    font-size: $font-size-sm;
                     color: var(--text-color);
 
                     a {
                         display: inline-block;
                         background-color: var(--secondary-background-color);
-                        padding: 0 .5rem;
+                        padding: 0 $space-2;
 
-                        @include mixin.margin-left(.5rem);
+                        @include mixin.margin-left($space-2);
                     }
                 }
 
@@ -145,26 +147,26 @@
                     .message {
                         background-color: var(--primary-color);
                         color: var(--filled-text-color);
-                        border-radius: 1.5rem 1.5rem .5rem 1.5rem;
+                        @include mixin.rounded(xl);
                     }
                 }
             }
 
             .load-container {
                 display: none;
-                margin-top: 1rem;
+                margin-top: $space-4;
                 justify-content: space-between;
                 align-items: center;
-                gap: 1rem;
+                gap: $space-4;
 
                 .loading-indicators {
-                    border-radius: .5rem 1.5rem 1.5rem 1.5rem;
+                    @include mixin.rounded(lg);
                 }
 
                 .btn.stop {
                     display: flex;
                     @include mixin.rounded(full);
-                    gap: 1rem;
+                    gap: $space-4;
                     align-items: center;
                     background-color: var(--text-color);
                     color: var(--filled-text-color);
@@ -176,19 +178,20 @@
             }
 
             &.ai {
-                padding: 1.5rem 1.5rem 5rem;
+                padding: $space-5 $space-5 5rem;
 
                 .send-message {
                     display: flex;
                     border: 1px solid var(--border-color);
                     @include mixin.rounded(full);
-                    padding: 0 .5rem;
+                    padding: 0 $space-2;
                     position: absolute;
-                    bottom: 1.5rem;
-                    width: calc(100% - 3rem);
-                    gap: .5rem;
+                    bottom: $space-5;
+                    width: calc(100% - $space-5 * 2);
+                    gap: $space-2;
                     align-items: center;
-                    margin-top: 1rem;
+                    margin-top: $space-4;
+                    @include mixin.shadow(sm);
 
                     input {
                         flex: 1;
@@ -197,7 +200,8 @@
                         width: inherit;
                         color: var(--text-color);
                         @include mixin.rounded(full);
-                        padding: .5rem;
+                        padding: $space-2;
+                        font-size: $font-size-md;
 
 
                         &:focus {
@@ -212,6 +216,7 @@
                     button {
                         background-color: transparent;
                         border: none;
+                        @include mixin.focus-ring;
 
                         &:focus {
                             outline: none;
@@ -226,7 +231,7 @@
                 &.loading {
                     background-color: var(--primary-color);
                     color: var(--filled-text-color);
-                    padding: 1.5rem;
+                    padding: $space-5;
 
                     svg {
                         fill: var(--filled-text-color);
@@ -264,20 +269,21 @@
             }
 
             &:has(.send-message[hidden]) {
-                padding: 1.5rem;
+                padding: $space-5;
             }
 
 
         }
 
         .result-group {
-            margin-bottom: 1rem;
-            padding: 1rem;
+            margin-bottom: $space-4;
+            padding: $space-4;
             @include mixin.rounded(lg);
             background-color: var(--background-color);
+            @include mixin.shadow(sm);
 
             .result .highlight {
-                font-weight: 700;
+                font-weight: $font-weight-semibold;
             }
 
             .result .result-content .highlight {
@@ -303,7 +309,7 @@
             "results results image-detail"
             "footer footer footer";
         padding: 0;
-        padding-inline-start: 1rem;
+        padding-inline-start: $space-4;
 
         &:has(.multiple-results) {
             grid-template-areas:
@@ -332,10 +338,11 @@
         background-color: transparent;
         border: none;
         @include mixin.rounded(full);
-        padding: .25rem;
+        padding: $space-1;
+        @include mixin.focus-ring;
 
         &:hover {
-            background-color: var(--background-color);
+            background-color: var(--secondary-background-color);
         }
 
         svg {
@@ -347,13 +354,13 @@
 
 #corrections {
     display: flex;
-    padding: 0 1rem 1rem;
-    gap: .5rem;
+    padding: 0 $space-4 $space-4;
+    gap: $space-2;
     align-items: center;
 
     .correction {
-        font-size: .9rem;
-        font-weight: 600;
+        font-size: $font-size-base;
+        font-weight: $font-weight-semibold;
         padding: 0;
 
         &,

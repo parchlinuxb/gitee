@@ -14,11 +14,11 @@
         height: .6rem;
         @include mixin.rounded(full);
         border: 2px solid var(--text-color);
-        animation: loading-indecator 2s infinite;
+        animation: loading-indicator 2s infinite;
+        will-change: transform, opacity;
 
         @include mixin.dark-mode() {
             border-color: var(--background-color);
-            animation-name: loading-indecator-dark;
         }
     }
 
@@ -31,36 +31,19 @@
     }
 }
 
-@keyframes loading-indecator {
+@keyframes loading-indicator {
     0% {
         transform: scale(1);
-        background-color: transparent;
+        opacity: 0.3;
     }
 
     50% {
         transform: scale(1);
-        background-color: transparent;
+        opacity: 0.3;
     }
 
     75% {
         transform: scale(.9);
-        background-color: var(--text-color);
-    }
-}
-
-@keyframes loading-indecator-dark {
-    0% {
-        transform: scale(1);
-        background-color: transparent;
-    }
-
-    50% {
-        transform: scale(1);
-        background-color: transparent;
-    }
-
-    75% {
-        transform: scale(.9);
-        background-color: var(--background-color);
+        opacity: 1;
     }
 }

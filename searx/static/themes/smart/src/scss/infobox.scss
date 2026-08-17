@@ -1,31 +1,45 @@
+@use './definitions.scss' as *;
 @use './mixins.scss' as mixin;
 
 .info-box {
     background: var(--background-color);
-    margin-bottom: 1rem;
+    margin-bottom: $space-4;
     @include mixin.rounded(lg);
+    @include mixin.shadow(md);
+    overflow: hidden;
 
     .info-header {
-        padding: 2rem 1.5rem .5rem;
+        padding: $space-6 $space-5 $space-2;
 
         h2 {
-            font-size: 1.5rem;
-            font-weight: 600;
+            font-size: $font-size-2xl;
+            font-weight: $font-weight-semibold;
+            line-height: $line-height-tight;
         }
 
         .subtitle {
-            margin-top: 0.5rem;
-            color: var(--text-color);
-            font-size: 0.9rem;
+            margin-top: $space-2;
+            color: var(--secondary-text-color);
+            font-size: $font-size-sm;
+            line-height: $line-height-relaxed;
         }
     }
 
     .image-gallery {
         display: flex;
-        gap: 0.5rem;
-        padding: 0 1.5rem;
+        gap: $space-2;
+        padding: 0 $space-5;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
+
+        &::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: var(--tertiary-background-color);
+            @include mixin.rounded(full);
+        }
 
         img {
             height: 150px;
@@ -37,10 +51,10 @@
     }
 
     .info-content {
-        padding: 1rem 1.5rem;
+        padding: $space-4 $space-5;
         color: var(--text-color);
-        line-height: 1.5;
-        font-size: 0.95rem;
+        line-height: $line-height-relaxed;
+        font-size: $font-size-base;
     }
 
     &:has(#tab-info:checked) .info-attributes {
@@ -48,22 +62,24 @@
     }
 
     .info-attributes {
-        padding: 0 1.5rem;
-        margin-bottom: 1.5rem;
+        padding: 0 $space-5;
+        margin-bottom: $space-5;
         display: none;
 
         .attribute {
             display: flex;
             justify-content: space-between;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid var(--border-color);
+            padding: $space-2 0;
+            border-bottom: 1px solid var(--secondary-background-color);
 
             .label {
-                color: var(--text-color);
+                color: var(--secondary-text-color);
+                font-size: $font-size-sm;
             }
 
             .value {
                 color: var(--text-color);
+                font-weight: $font-weight-medium;
             }
         }
     }
@@ -74,43 +90,56 @@
 
     .info-urls {
         display: none;
-        padding: .5rem 1.5rem 2.5rem;
-        font-size: 0.9rem;
-        line-height: 1.5;
+        padding: $space-2 $space-5 5rem;
+        font-size: $font-size-sm;
+        line-height: $line-height-relaxed;
         color: var(--text-color);
-        gap: 1rem;
+        gap: $space-4;
         align-items: center;
         flex-wrap: wrap;
 
         .url {
             border-bottom: 2px solid var(--border-color);
-            padding: 0.25rem 0.5rem;
+            padding: $space-1 $space-2;
             text-decoration: none;
             display: inline-block;
+            @include mixin.transition;
+
+            &:hover {
+                border-color: var(--primary-color);
+                color: var(--primary-color);
+            }
         }
     }
 
     .info-tabs {
         display: flex;
-        border-bottom: 1px solid var(--secondary-border-color);
-        margin-bottom: 1rem;
+        border-bottom: 1px solid var(--secondary-background-color);
+        margin-bottom: $space-4;
 
         .tab {
-            padding: .5rem 1.25rem;
+            padding: $space-2 $space-5;
             cursor: pointer;
-            color: var(--text-color);
+            color: var(--secondary-text-color);
             text-decoration: none;
-            font-size: 0.9rem;
-            border-bottom: 3px solid transparent;
+            font-size: $font-size-sm;
+            font-weight: $font-weight-medium;
+            border-bottom: 2px solid transparent;
             transform: translateY(1px);
+            @include mixin.transition;
 
             &:first-child {
-                @include mixin.margin-left(1.5rem);
+                @include mixin.margin-left($space-5);
+            }
+
+            &:hover {
+                color: var(--text-color);
             }
 
             &:has(+ input:checked) {
-                font-weight: 600;
-                border-bottom-color: var(--secondary-color);
+                font-weight: $font-weight-semibold;
+                border-bottom-color: var(--primary-color);
+                color: var(--primary-color);
             }
         }
 
@@ -127,18 +156,19 @@
         display: none;
 
         .topic {
-            padding: 0 1.5rem 1rem;
+            padding: 0 $space-5 $space-4;
 
             h3 {
-                font-size: 1.2rem;
-                font-weight: 600;
-                margin-bottom: 0.5rem;
+                font-size: $font-size-xl;
+                font-weight: $font-weight-semibold;
+                margin-bottom: $space-2;
+                line-height: $line-height-tight;
             }
 
             .topics-list {
                 display: flex;
                 flex-wrap: wrap;
-                gap: .5rem;
+                gap: $space-2;
             }
         }
     }

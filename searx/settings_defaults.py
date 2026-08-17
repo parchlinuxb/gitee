@@ -262,8 +262,9 @@ SCHEMA: dict[str, t.Any] = {
         "search_on_category_select": SettingsValue(bool, True),
         "hotkeys": SettingsValue(("default", "vim"), "default"),
         "url_formatting": SettingsValue(("pretty", "full", "host"), "pretty"),
-        "ai_chat": SettingsValue(("off", "chat", "summarize"), "chat"),
-        "ai_chat_model": SettingsValue(str, "jabir-400b-online"),
+        "ai_chat": SettingsValue(("off", "chat", "summarize"), "off"),
+        "ai_chat_model": SettingsValue(str, ""),
+        "ai_chat_api_url": SettingsValue(str, ""),
     },
     "preferences": {
         "lock": SettingsValue(list, []),
