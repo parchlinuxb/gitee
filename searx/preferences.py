@@ -625,6 +625,7 @@ def is_locked(setting_name: str):
     """Checks if a given setting name is locked by settings.yml"""
     if 'preferences' not in settings:
         return False
-    if 'lock' not in settings['preferences']:
+    pref = settings['preferences']
+    if not hasattr(pref, 'lock') or not pref.lock:
         return False
-    return setting_name in settings['preferences']['lock']
+    return setting_name in pref.lock
