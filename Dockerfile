@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1.7
 FROM docker.io/searxng/base:searxng-builder AS builder
 
 COPY ./requirements.txt ./requirements-server.txt ./
