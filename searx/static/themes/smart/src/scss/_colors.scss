@@ -1,25 +1,44 @@
 @use 'sass:color';
 @use "definitions.scss" as *;
 
-// Light
+// Parch Linux brand colors
+$brand-gradient: linear-gradient(135deg, #{$parch-cyan} 0%, #{$parch-blue} 50%, #{$parch-green} 100%);
+$brand-gradient-dark: linear-gradient(135deg, #{$parch-cyan-dark} 0%, #{$parch-blue-dark} 50%, #{$parch-green-dark} 100%);
+
+// Light theme
 body {
-    --primary-color: #{$primary-color};
-    --secondary-color: #{$secondary-color};
+    --primary-color: #{$parch-cyan};
+    --primary-hover-color: #{$parch-cyan-light};
+    --secondary-color: #{$parch-blue};
+    --accent-green: #{$parch-green};
+    --accent-purple: #{$parch-purple};
+    --accent-violet: #{$parch-violet};
+    --brand-gradient: #{$brand-gradient};
+
     --background-color: #{$background-color};
     --secondary-background-color: #{$secondary-background-color};
     --tertiary-background-color: #{$tertiary-background-color};
+    --surface-color: #{$background-color};
+    --surface-raised: #{$secondary-background-color};
+
     --text-color: #{$text-color};
     --secondary-text-color: #{$secondary-text-color};
     --tertiary-text-color: #{$tertiary-text-color};
-    --filled-text-color: #{$filled-text-color};
+    --filled-text-color: #FFFFFF;
     --secondary-filled-text-color: #{$text-color};
-    --border-color: #{$tertiary-background-color};
+
+    --border-color: #{$border-color};
     --secondary-border-color: #{$secondary-background-color};
-    --tooltip-background-color: #{$tooltip-background-color};
+
+    --tooltip-background-color: rgba(15, 25, 35, .9);
+
     --shadow-sm: #{$shadow-sm};
     --shadow-md: #{$shadow-md};
     --shadow-lg: #{$shadow-lg};
     --shadow-xl: #{$shadow-xl};
+
+    --code-bg: #{$secondary-background-color};
+    --code-text: #{$text-color};
 
     &.nord {
         --background-color: #{$nord-snow-2};
@@ -29,31 +48,45 @@ body {
         --secondary-text-color: #{$nord-night-1};
         --primary-color: #{$nord-forest-0};
         --secondary-color: #{$nord-forest-3};
-        --secondary-filled-text-color: #{$filled-text-color};
+        --secondary-filled-text-color: #{#fff};
     }
 }
 
-
-// Dark
+// Dark theme
 @media (prefers-color-scheme: dark) {
     body {
-        --primary-color: #{$primary-color-dark};
-        --secondary-color: #{$secondary-color-dark};
+        --primary-color: #{$parch-cyan-dark};
+        --primary-hover-color: #{$parch-cyan-hover-dark};
+        --secondary-color: #{$parch-blue-dark};
+        --accent-green: #{$parch-green-dark};
+        --accent-purple: #{$parch-purple-dark};
+        --accent-violet: #{$parch-violet-dark};
+        --brand-gradient: #{$brand-gradient-dark};
+
         --background-color: #{$background-color-dark};
         --secondary-background-color: #{$secondary-background-color-dark};
         --tertiary-background-color: #{$tertiary-background-color-dark};
+        --surface-color: #{$secondary-background-color-dark};
+        --surface-raised: #{$tertiary-background-color-dark};
+
         --text-color: #{$text-color-dark};
         --secondary-text-color: #{$secondary-text-color-dark};
         --tertiary-text-color: #{$tertiary-text-color-dark};
-        --filled-text-color: #{$filled-text-color-dark};
-        --secondary-filled-text-color: #{$filled-text-color-dark};
+        --filled-text-color: #FFFFFF;
+        --secondary-filled-text-color: #{$text-color-dark};
+
         --border-color: #{$tertiary-background-color-dark};
         --secondary-border-color: #{$secondary-background-color-dark};
-        --tooltip-background-color: #{$tooltip-background-color-dark};
+
+        --tooltip-background-color: rgba(0, 0, 0, .85);
+
         --shadow-sm: #{$shadow-sm-dark};
         --shadow-md: #{$shadow-md-dark};
         --shadow-lg: #{$shadow-lg-dark};
         --shadow-xl: #{$shadow-xl-dark};
+
+        --code-bg: #0b0f16;
+        --code-text: #e8ecf1;
 
         &.nord {
             --background-color: #{$nord-night-0};

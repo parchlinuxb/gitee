@@ -372,7 +372,7 @@ video {
     display: none !important;
 }
 
-/* Apple-like defaults */
+/* System defaults */
 html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -393,7 +393,7 @@ html {
     top: -100%;
     left: 50%;
     transform: translateX(-50%);
-    background-color: var(--primary-color);
+    background: var(--brand-gradient);
     color: var(--filled-text-color);
     padding: .5rem 1rem;
     border-radius: .75rem;

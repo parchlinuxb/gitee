@@ -1,9 +1,30 @@
 @use './style.scss' with ($dir: 'rtl');
+@use './definitions.scss' as *;
 
 @import "../../node_modules/vazirmatn/misc/UI/Vazirmatn-UI-font-face.css";
+@import url("https://fonts.googleapis.com/css2?family=Estedad:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap");
+
+:root {
+    --font-family: "Vazirmatn UI", "Estedad", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --heading-font-family: "Estedad", "Vazirmatn UI", -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono-font-family: "JetBrains Mono", "SF Mono", SFMono-Regular, ui-monospace, monospace;
+}
 
 * {
-    font-family: 'Vazirmatn UI', sans-serif;
+    font-family: var(--font-family);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -.012em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--heading-font-family);
+    letter-spacing: -.025em;
+    font-weight: $font-weight-bold;
+}
+
+code, pre, .mono {
+    font-family: var(--mono-font-family);
 }
 
 .message-container .message-box {

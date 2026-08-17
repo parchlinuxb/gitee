@@ -1,4 +1,5 @@
 @use "./mixins.scss" as mixin;
+@use "./definitions.scss" as *;
 
 .loading-indicators {
     padding: 1rem;
@@ -7,26 +8,28 @@
     align-items: center;
     gap: .5rem;
     @include mixin.rounded(lg);
-    background-color: var(--filled-text-color);
+    background-color: var(--secondary-background-color);
 
     .indicator {
         width: .6rem;
         height: .6rem;
         @include mixin.rounded(full);
-        border: 2px solid var(--text-color);
+        border: 2px solid var(--primary-color);
         animation: loading-indicator 2s infinite;
         will-change: transform, opacity;
+    }
 
-        @include mixin.dark-mode() {
-            border-color: var(--background-color);
-        }
+    :nth-child(1) {
+        border-color: $parch-cyan-dark;
     }
 
     :nth-child(2) {
+        border-color: $parch-blue-dark;
         animation-delay: 1s;
     }
 
     :nth-child(3) {
+        border-color: $parch-green-dark;
         animation-delay: .5s;
     }
 }

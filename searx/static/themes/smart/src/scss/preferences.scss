@@ -215,7 +215,7 @@
                 }
 
                 .bang {
-                    font-family: 'SF Mono', SFMono-Regular, ui-monospace, monospace;
+                    font-family: var(--mono-font-family);
 
                     background-color: var(--secondary-background-color);
                     @include mixin.rounded(sm);
@@ -387,7 +387,7 @@ fieldset {
                 @include mixin.rounded(sm);
 
                 &.gitee {
-                    background: linear-gradient(30deg, rgba(0, 122, 255, 1) 30%, rgba(255, 255, 255, 1) 30%, rgba(255, 255, 255, 1) 60%, rgba(255, 149, 0, 1) 60%);
+                    background: linear-gradient(30deg, rgba(0, 234, 255, 1) 30%, rgba(0, 128, 255, 1) 60%, rgba(0, 255, 128, 1) 60%);
                 }
 
                 &.nord {

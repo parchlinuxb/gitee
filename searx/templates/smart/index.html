@@ -1,25 +1,12 @@
 {% from 'smart/icons.html' import icon_small %}{% extends "smart/base.html" %}
 {% block header %}
-
-<a href="/" class="logo">
-    {# - for times there's no logo, use the instance name
-    <span>{{ instance_name }}</span>
-    #}
-    <img src="/static/img/logo.svg" alt="{{ instance_name }}" />
-</a>
-<div class="links">
-    {%- if donation_url -%}
-    <a href="{{ donation_url }}" class="link">{{icon_small('donate')}}</a>
-    {%- endif -%}
-    <a href="{{ url_for('info', pagename='about') }}" class="link"
-        >{{icon_small('information')}}</a
-    >
-    {% include 'smart/modules/sidebar_btn.html' %}
-</div>
-
 {% endblock %} {% block content %}
 
-<div class="container">
+<div class="hero">
+    <a href="/" class="hero-logo">
+        <img src="/static/img/logo.svg" alt="{{ instance_name }}" />
+    </a>
+
     <form
         id="search"
         method="{{ method or 'POST' }}"
@@ -40,6 +27,14 @@
             value="{{ timeout_limit|e }}"
         />{% endif %}
     </form>
+
+    <div class="hero-links">
+        {%- if donation_url -%}
+        <a href="{{ donation_url }}" class="hero-link">{{_('donate')}}</a>
+        {%- endif -%}
+        <a href="{{ url_for('info', pagename='about') }}" class="hero-link">{{_('about page')}}</a>
+        {% include 'smart/modules/sidebar_btn.html' %}
+    </div>
 </div>
 
 {% endblock %}
