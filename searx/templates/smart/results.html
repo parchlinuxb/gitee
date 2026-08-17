@@ -18,7 +18,7 @@ include 'smart/modules/image_details.html' %}
   class="results-container {% if results and results|map(attribute='template')|unique|list|count and 'images.html' in results|map(attribute='template')|unique|list %} image-page {% if results|map(attribute='template')|unique|list|count > 1 %} multiple-results {% endif %} {% endif %}"
 >
   {% if corrections %} {% include 'smart/modules/corrections.html' %} {% endif
-  %} {% if pageno <= 1 %} {% if preferences.get_value('ai_chat') %} {% if
+  %} {% if pageno <= 1 %} {% if preferences.get_value('ai_chat') != 'off' %} {% if
   results and 'general' in selected_categories %} {% include
   'smart/modules/ai_chat.html' %} {% endif %} {% endif %} {% set
   suggestions_placed = namespace(s=false) %} {% set suggestion_index = range(1,
