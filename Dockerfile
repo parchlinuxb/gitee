@@ -18,17 +18,7 @@ RUN set -eux -o pipefail; \
 COPY ./searx/ ./searx/
 RUN set -eux -o pipefail; \
     cd /usr/local/searxng; \
-    cat > ./searx/version_frozen.py << 'PYEOF'
-# SPDX-License-Identifier: AGPL-3.0-or-later
-# pylint: disable=missing-module-docstring
-# this file is generated automatically by the Docker build
-
-VERSION_STRING = "unknown"
-VERSION_TAG = "unknown"
-DOCKER_TAG = "unknown"
-GIT_URL = "unknown"
-GIT_BRANCH = "unknown"
-PYEOF
+    printf '# SPDX-License-Identifier: AGPL-3.0-or-later\n# pylint: disable=missing-module-docstring\n# this file is generated automatically by the Docker build\n\nVERSION_STRING = "unknown"\nVERSION_TAG = "unknown"\nDOCKER_TAG = "unknown"\nGIT_URL = "unknown"\nGIT_BRANCH = "unknown"\n' > ./searx/version_frozen.py; \
     python -m compileall -q -f -j 0 --invalidation-mode=unchecked-hash ./searx/; \
     find ./searx/static/ -type f \
     \( -name "*.html" -o -name "*.css" -o -name "*.js" -o -name "*.svg" \) \
