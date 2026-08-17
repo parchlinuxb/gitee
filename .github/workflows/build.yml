@@ -29,7 +29,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ./container/Dockerfile
+          file: ./Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository }}:${{ github.event.release.tag_name }}
-          labels: latest
+          tags: ghcr.io/${{ github.repository }}:${{ github.event.release.tag_name }},ghcr.io/${{ github.repository }}:latest
