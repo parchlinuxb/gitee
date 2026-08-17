@@ -11,8 +11,8 @@
 .. _data URLs:
    https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs
 """
-
-from urllib.parse import urlencode, urlparse, parse_qs
+import re
+from urllib.parse import urlencode, urlparse, parse_qs, unquote
 from lxml import html
 
 from searx.utils import (
@@ -29,7 +29,6 @@ from searx.engines.google import (
     suggestion_xpath,
     detect_google_sorry,
     ui_async,
-    parse_data_images,
 )
 from searx.utils import get_embeded_stream_url
 
@@ -50,6 +49,23 @@ max_page = 50
 language_support = True
 time_range_support = True
 safesearch = True
+
+
+# =26;[3,"dimg_ZNMiZPCqE4apxc8P3a2tuAQ_137"]a87;data:image/jpeg;base64,/9j/4AAQSkZJRgABA
+# ...6T+9Nl4cnD+gr9OK8I56/tX3l86nWYw//2Q==26;
+RE_DATA_IMAGE = re.compile(r'"(dimg_[^"]*)"[^;]*;(data:image[^;]*;[^;]*);?')
+
+
+def parse_data_images(text: str):
+    data_image_map = {}
+
+    for img_id, data_image in RE_DATA_IMAGE.findall(text):
+        end_pos = data_image.rfind("=")
+        if end_pos > 0:
+            data_image = data_image[: end_pos + 1]
+        data_image_map[img_id] = data_image
+    logger.debug("data:image objects --> %s", list(data_image_map.keys()))
+    return data_image_map
 
 
 def request(query, params):
@@ -100,14 +116,23 @@ def response(resp):
     # parse results
     for result in result_divs:
         title = extract_text(
-            eval_xpath_getindex(result, './/h3[contains(@class, "LC20lb")]', 0, default=None), allow_none=True
+            eval_xpath_getindex(result, './/h3[contains(@class, "LC20lb")] | .//div[@role="heading"]', 0, default=None),
+            allow_none=True,
         )
-        url = eval_xpath_getindex(result, './/a[@jsname="UWckNb"]/@href', 0, default=None)
+        url = eval_xpath_getindex(
+            result, './/a[@jsname="UWckNb"]/@href | .//a[contains(@href, "/url?q=")]/@href', 0, default=None
+        )
+        if url and url.startswith('/url?q='):
+            url = unquote(url[7:].split('&sa=U')[0])
+
         content = extract_text(
             eval_xpath_getindex(result, './/div[contains(@class, "ITZIwc")]', 0, default=None), allow_none=True
         )
         pub_info = extract_text(
-            eval_xpath_getindex(result, './/div[contains(@class, "gqF9jc")]', 0, default=None), allow_none=True
+            eval_xpath_getindex(
+                result, './/div[contains(@class, "gqF9jc")] | .//div[contains(@class, "WRu9Cd")]', 0, default=None
+            ),
+            allow_none=True,
         )
         # Broader XPath to find any <img> element
         thumbnail = eval_xpath_getindex(result, './/img/@src', 0, default=None)

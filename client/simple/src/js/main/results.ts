@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 import "../../../node_modules/swiped-events/src/swiped-events.js";
-import { assertElement, listen, mutable, settings } from "../core/toolkit.ts";
+import { listen, mutable, settings } from "../toolkit.ts";
+import { assertElement } from "../util/assertElement.ts";
 
 let imgTimeoutID: number;
 
@@ -34,8 +35,9 @@ const imageLoader = (resultElement: HTMLElement): void => {
   }, 1000) as unknown as number;
 };
 
-const imageThumbnails: NodeListOf<HTMLImageElement> =
-  document.querySelectorAll<HTMLImageElement>("#urls img.image_thumbnail");
+const imageThumbnails: NodeListOf<HTMLImageElement> = document.querySelectorAll<HTMLImageElement>(
+  "#urls img.image_thumbnail, img.thumbnail"
+);
 for (const thumbnail of imageThumbnails) {
   if (thumbnail.complete && thumbnail.naturalWidth === 0) {
     thumbnail.src = `${settings.theme_static_path}/img/img_load_error.svg`;
@@ -134,9 +136,8 @@ listen("click", "#copy_url", async function (this: HTMLElement) {
     }
   }
 
-  const copiedText = this.dataset.copiedText;
-  if (copiedText) {
-    this.innerText = copiedText;
+  if (this.dataset.copiedText) {
+    this.innerText = this.dataset.copiedText;
   }
 });
 

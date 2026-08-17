@@ -16,13 +16,10 @@
    :members:
 """
 
-# Struct fields aren't discovered in Python 3.14
-# - https://github.com/searxng/searxng/issues/5284
-from __future__ import annotations
-
 __all__ = ["Result"]
 
 import typing as t
+import types
 
 import re
 import urllib.parse
@@ -33,10 +30,12 @@ from collections.abc import Callable
 
 import msgspec
 
-from searx import logger as log
+from searx import logger
+
+log = logger.getChild("result_types")
 
 WHITESPACE_REGEX = re.compile('( |\t|\n)+', re.M | re.U)
-UNKNOWN = object()
+UNSET = object()
 
 
 def _normalize_url_fields(result: "Result | LegacyResult"):
@@ -53,6 +52,12 @@ def _normalize_url_fields(result: "Result | LegacyResult"):
             result.parsed_url = urllib.parse.urlparse(result.url)
 
     if result.parsed_url:
+        # properly format special characters (e.g. "ä", "ö") in IDN domains
+        # e.g. "xn--strung-xxa.de" becomes "störung.de"
+        if result.parsed_url.netloc.startswith("xn--"):
+            netloc = result.parsed_url.netloc.encode().decode("idna")
+            result.parsed_url = result.parsed_url._replace(netloc=netloc)
+
         result.parsed_url = result.parsed_url._replace(
             # if the result has no scheme, use http as default
             scheme=result.parsed_url.scheme or "http",
@@ -129,8 +134,20 @@ def _filter_urls(
         if not url_src:
             continue
 
-        new_url = filter_func(result, field_name, url_src)
-        # log.debug("filter_urls: filter_func(result, %s) '%s' -> '%s'", field_name, field_value, new_url)
+        try:
+            new_url = filter_func(result, field_name, url_src)
+        except Exception as exc:  # pylint: disable=broad-exception-caught
+            # pylint: disable=no-member
+            _tb: types.TracebackType = exc.__traceback__.tb_next.tb_next  # type: ignore
+            log.error(
+                "filter_urls (field '%s'): ignore %s from callback %s:%s",
+                field_name,
+                repr(exc),
+                _tb.tb_frame.f_code.co_filename,
+                _tb.tb_lineno,
+            )
+            continue
+
         if isinstance(new_url, bool):
             if new_url:
                 # log.debug("filter_urls: unchanged field %s URL %s", field_name, field_value)
@@ -330,12 +347,13 @@ class Result(msgspec.Struct, kw_only=True):
 
     def defaults_from(self, other: "Result"):
         """Fields not set in *self* will be updated from the field values of the
-        *other*.
+        *other*.  If a field is set (exists) but contains an empty string
+        or the value ``None``, it is also considered *not set*.
         """
         for field_name in self.__struct_fields__:
-            self_val = getattr(self, field_name, False)
-            other_val = getattr(other, field_name, False)
-            if self_val:
+            self_val = getattr(self, field_name, UNSET)
+            other_val = getattr(other, field_name, UNSET)
+            if self_val is UNSET and other_val not in (UNSET, "", None):
                 setattr(self, field_name, other_val)
 
 
@@ -444,8 +462,6 @@ class LegacyResult(dict[str, t.Any]):
        Do not use this class in your own implementations!
     """
 
-    UNSET: object = object()
-
     # emulate field types from type class Result
     url: str | None
     template: str
@@ -516,7 +532,7 @@ class LegacyResult(dict[str, t.Any]):
             )
 
     def __getattr__(self, name: str, default: t.Any = UNSET) -> t.Any:
-        if default == self.UNSET and name not in self:
+        if default == UNSET and name not in self:
             raise AttributeError(f"LegacyResult object has no field named: {name}")
         return self[name]
 
@@ -534,7 +550,7 @@ class LegacyResult(dict[str, t.Any]):
             # the img_src are equal.
             return hash(f"{self.template}|{self.url}|{self.img_src}")
 
-        if not any(cls in self for cls in ["suggestion", "correction", "infobox", "number_of_results", "engine_data"]):
+        if not any(cls in self for cls in ["suggestion", "correction", "infobox", "engine_data"]):
             # Ordinary url-results are equal if their values for template,
             # parsed_url (without schema) and img_src` are equal.
 
@@ -567,9 +583,12 @@ class LegacyResult(dict[str, t.Any]):
             self.engines.add(self.engine)
 
     def defaults_from(self, other: "LegacyResult"):
-        for k, v in other.items():
-            if not self.get(k):
-                self[k] = v
+        # If a field is set (exists) but contains an empty string or the value
+        # ``None``, it is also considered *not set*.
+        for field_name, other_val in other.items():
+            self_val = self.get(field_name, UNSET)
+            if self_val is UNSET and other_val not in ("", UNSET):
+                self[field_name] = other_val
 
     def filter_urls(self, filter_func: "Callable[[Result | LegacyResult, str, str], str | bool]"):
         """See :py:obj:`Result.filter_urls`"""

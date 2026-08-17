@@ -75,7 +75,7 @@ about = {
 # engine dependent config
 categories = ['general']
 paging = True
-number_of_results = 10
+page_size = 10
 http_digest_auth_user = ""
 """HTTP digest user for the local YACY instance"""
 http_digest_auth_pass = ""
@@ -96,7 +96,7 @@ search_type = 'text'
 ``video`` are not yet implemented (Pull-Requests are welcome).
 """
 
-base_url: list[str] | str | None = None
+base_url: list[str] | str = []
 """The value is an URL or a list of URLs.  In the latter case instance will be
 selected randomly.
 """
@@ -125,11 +125,11 @@ def _base_url() -> str:
 
 def request(query, params):
 
-    offset = (params['pageno'] - 1) * number_of_results
+    offset = (params['pageno'] - 1) * page_size
     args = {
         'query': query,
         'startRecord': offset,
-        'maximumRecords': number_of_results,
+        'maximumRecords': page_size,
         'contentdom': search_type,
         'resource': search_mode,
     }

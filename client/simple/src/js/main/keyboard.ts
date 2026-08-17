@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-import { assertElement, listen, mutable, settings } from "../core/toolkit.ts";
+import { listen, mutable, settings } from "../toolkit.ts";
+import { assertElement } from "../util/assertElement.ts";
 
 export type KeyBindingLayout = "default" | "vim";
 
@@ -189,9 +190,7 @@ const highlightResult =
 
     let next: HTMLElement | undefined;
 
-    if (typeof effectiveWhich !== "string") {
-      next = effectiveWhich;
-    } else {
+    if (typeof effectiveWhich === "string") {
       switch (effectiveWhich) {
         case "visible": {
           const top = document.documentElement.scrollTop || document.body.scrollTop;
@@ -219,8 +218,10 @@ const highlightResult =
         // biome-ignore lint/complexity/noUselessSwitchCase: fallthrough is intended
         case "top":
         default:
-          next = results[0];
+          [next] = results;
       }
+    } else {
+      next = effectiveWhich;
     }
 
     if (next) {
@@ -342,7 +343,7 @@ const initHelpContent = (divElement: HTMLElement, keyBindings: typeof baseKeyBin
   const categories: Record<string, KeyBinding[]> = {};
 
   for (const binding of Object.values(keyBindings)) {
-    const cat = binding.cat;
+    const { cat } = binding;
     categories[cat] ??= [];
     categories[cat].push(binding);
   }
@@ -399,7 +400,7 @@ const toggleHelp = (keyBindings: typeof baseKeyBinding): void => {
       className: "dialog-modal"
     });
     initHelpContent(helpPanel, keyBindings);
-    const body = document.getElementsByTagName("body")[0];
+    const [body] = document.getElementsByTagName("body");
     if (body) {
       body.appendChild(helpPanel);
     }

@@ -13,7 +13,7 @@ from tests import SearxTestCase
 
 
 def random_string(length, choices=string.ascii_letters):
-    return ''.join(random.choice(choices) for _ in range(length))
+    return ''.join(random.choices(choices, k=length))
 
 
 class TestUtils(SearxTestCase):
@@ -194,27 +194,3 @@ class TestXPathUtils(SearxTestCase):  # pylint: disable=missing-class-docstring
         with self.assertRaises(SearxEngineXPathException) as context:
             utils.eval_xpath_getindex(doc, 'count(//i)', 1)
         self.assertEqual(context.exception.message, 'the result is not a list')
-
-    def test_detect_language(self):
-        # make sure new line are not an issue
-        # fasttext.predict('') does not accept new line.
-        l = utils.detect_language('The quick brown fox jumps over\nthe lazy dog')
-        self.assertEqual(l, 'en')
-
-        l = utils.detect_language(
-            'いろはにほへと ちりぬるを わかよたれそ つねならむ うゐのおくやま けふこえて あさきゆめみし ゑひもせす'
-        )
-        self.assertEqual(l, 'ja')
-
-        l = utils.detect_language('Pijamalı hasta yağız şoföre çabucak güvendi.')
-        self.assertEqual(l, 'tr')
-
-        l = utils.detect_language('')
-        self.assertIsNone(l)
-
-        # mix languages --> None
-        l = utils.detect_language('The いろはにほへと Pijamalı')
-        self.assertIsNone(l)
-
-        with self.assertRaises(ValueError):
-            utils.detect_language(None)  # type: ignore

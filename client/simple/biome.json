@@ -1,13 +1,13 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.3.7/schema.json",
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "files": {
     "ignoreUnknown": true,
-    "includes": ["**", "!node_modules"]
+    "includes": ["**", "!node_modules", "!src/brand", "!src/svg"]
   },
   "assist": {
     "enabled": true,
     "actions": {
-      "recommended": true,
+      "preset": "recommended",
       "source": {
         "useSortedAttributes": "on",
         "useSortedProperties": "on"
@@ -27,38 +27,29 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true,
+      "preset": "recommended",
       "complexity": {
         "noForEach": "error",
         "noImplicitCoercions": "error",
+        "noRedundantDefaultExport": "error",
+        "noUselessCatchBinding": "error",
+        "noUselessUndefined": "error",
+        "useArrayFind": "error",
         "useSimplifiedLogicExpression": "error"
       },
       "correctness": {
         "noGlobalDirnameFilename": "error",
-        "noUndeclaredVariables": {
-          "level": "error",
-          "options": {
-            "checkTypes": true
-          }
-        },
         "useImportExtensions": "error",
         "useJsonImportAttributes": "error",
         "useSingleJsDocAsterisk": "error"
       },
       "nursery": {
-        "noContinue": "warn",
-        "noDeprecatedImports": "warn",
         "noFloatingPromises": "warn",
-        "noForIn": "warn",
-        "noImportCycles": "warn",
-        "noIncrementDecrement": "warn",
         "noMisusedPromises": "warn",
-        "noParametersOnlyUsedInRecursion": "warn",
-        "noUselessCatchBinding": "warn",
-        "noUselessUndefined": "warn",
+        "useAwaitThenable": "off",
         "useExhaustiveSwitchCases": "warn",
-        "useExplicitType": "warn",
-        "useFind": "warn"
+        "useExplicitType": "off",
+        "useRegexpExec": "warn"
       },
       "performance": {
         "noAwaitInLoops": "error",
@@ -72,23 +63,15 @@
         "noCommonJs": "error",
         "noEnum": "error",
         "noImplicitBoolean": "error",
+        "noIncrementDecrement": "error",
         "noInferrableTypes": "error",
+        "noMultiAssign": "error",
+        "noMultilineString": "error",
         "noNamespace": "error",
         "noNegationElse": "error",
         "noNestedTernary": "error",
         "noParameterAssign": "error",
         "noParameterProperties": "error",
-        "noRestrictedTypes": {
-          "level": "error",
-          "options": {
-            "types": {
-              "Element": {
-                "message": "Element is too generic",
-                "use": "HTMLElement"
-              }
-            }
-          }
-        },
         "noSubstr": "error",
         "noUnusedTemplateLiteral": "error",
         "noUselessElse": "error",
@@ -104,6 +87,7 @@
           }
         },
         "useConsistentBuiltinInstantiation": "error",
+        "useConsistentEnumValueType": "error",
         "useConsistentMemberAccessibility": {
           "level": "error",
           "options": {
@@ -123,6 +107,7 @@
           }
         },
         "useDefaultSwitchClause": "error",
+        "useDestructuring": "error",
         "useExplicitLengthCheck": "error",
         "useForOf": "error",
         "useGroupedAccessorPairs": "error",
@@ -139,11 +124,17 @@
         "useUnifiedTypeSignatures": "error"
       },
       "suspicious": {
-        "noAlert": "error",
         "noBitwiseOperators": "error",
         "noConstantBinaryExpressions": "error",
+        "noDeprecatedImports": "error",
         "noEmptyBlockStatements": "error",
+        "noEqualsToNull": "error",
         "noEvolvingTypes": "error",
+        "noForIn": "error",
+        "noImportCycles": "error",
+        "noNestedPromises": "error",
+        "noParametersOnlyUsedInRecursion": "error",
+        "noReturnAssign": "error",
         "noUnassignedVariables": "error",
         "noVar": "error",
         "useNumberToFixedDigitsArgument": "error",
@@ -159,16 +150,6 @@
       "quoteStyle": "double",
       "semicolons": "always",
       "trailingCommas": "none"
-    }
-  },
-  "html": {
-    "experimentalFullSupportEnabled": true,
-    "formatter": {
-      "attributePosition": "auto",
-      "bracketSameLine": false,
-      "indentScriptAndStyle": true,
-      "selfCloseVoidElements": "always",
-      "whitespaceSensitivity": "ignore"
     }
   }
 }

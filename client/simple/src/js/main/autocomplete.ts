@@ -1,16 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-import { assertElement, http, listen, settings } from "../core/toolkit.ts";
+import { http, listen, settings } from "../toolkit.ts";
+import { assertElement } from "../util/assertElement.ts";
 
 const fetchResults = async (qInput: HTMLInputElement, query: string): Promise<void> => {
   try {
-    let res: Response;
-
-    if (settings.method === "GET") {
-      res = await http("GET", `./autocompleter?q=${query}`);
-    } else {
-      res = await http("POST", "./autocompleter", { body: new URLSearchParams({ q: query }) });
-    }
+    const res = await http("GET", `./autocompleter?q=${query}`);
 
     const results = await res.json();
 
@@ -43,8 +38,6 @@ const fetchResults = async (qInput: HTMLInputElement, query: string): Promise<vo
 
         const form = document.querySelector<HTMLFormElement>("#search");
         form?.submit();
-
-        autocomplete.classList.remove("open");
       });
 
       fragment.append(li);
@@ -79,6 +72,11 @@ listen("input", qInput, () => {
 const autocomplete: HTMLElement | null = document.querySelector<HTMLElement>(".autocomplete");
 const autocompleteList: HTMLUListElement | null = document.querySelector<HTMLUListElement>(".autocomplete ul");
 if (autocompleteList) {
+  listen("keydown", qInput, (event: KeyboardEvent) => {
+    if (event.key === "Escape") {
+      autocomplete?.classList.remove("open");
+    }
+  });
   listen("keyup", qInput, (event: KeyboardEvent) => {
     const listItems = [...autocompleteList.children] as HTMLElement[];
 
@@ -104,7 +102,6 @@ if (autocompleteList) {
         newCurrentIndex = (currentIndex + 1) % listItems.length;
         break;
       }
-      case "Tab":
       case "Enter":
         if (autocomplete) {
           autocomplete.classList.remove("open");
@@ -127,5 +124,13 @@ if (autocompleteList) {
         }
       }
     }
+  });
+
+  listen("blur", qInput, () => {
+    autocomplete?.classList.remove("open");
+  });
+
+  listen("focus", qInput, () => {
+    autocomplete?.classList.add("open");
   });
 }

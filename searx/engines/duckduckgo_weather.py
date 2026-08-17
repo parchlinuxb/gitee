@@ -26,8 +26,7 @@ about = {
     "require_api_key": False,
     "results": "JSON",
 }
-
-send_accept_language_header = True
+language_support = True
 
 # engine dependent config
 categories = ["weather"]

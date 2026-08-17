@@ -493,6 +493,8 @@ pip install -U setuptools
 pip install -U wheel
 pip install -U pyyaml
 pip install -U msgspec
+pip install -U typing-extensions
+pip install -U pybind11
 cd ${SEARXNG_SRC}
 pip install --use-pep517 --no-build-isolation -e .
 EOF
@@ -554,6 +556,8 @@ pip install -U setuptools
 pip install -U wheel
 pip install -U pyyaml
 pip install -U msgspec
+pip install -U typing-extensions
+pip install -U pybind11
 pip install -U --use-pep517 --no-build-isolation -e .
 EOF
     rst_para "update instance's settings.yml from ${SEARXNG_SETTINGS_PATH}"
@@ -657,7 +661,7 @@ searxng.instance.localtest() {
     tee_stderr 0.1 <<EOF | sudo -H -u "${SERVICE_USER}" -i 2>&1 | prefix_stdout "$_service_prefix"
 export SEARXNG_SETTINGS_PATH="${SEARXNG_SETTINGS_PATH}"
 cd ${SEARXNG_SRC}
-timeout 10 python searx/webapp.py &
+timeout 10 python -m searx/webapp &
 sleep 3
 curl --location --verbose --head --insecure ${SEARXNG_INTERNAL_HTTP}
 EOF

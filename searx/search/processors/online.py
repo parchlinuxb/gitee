@@ -141,22 +141,26 @@ class OnlineProcessor(EngineProcessor):
         params: OnlineParams = {**default_request_params(), **base_params}
 
         headers = params["headers"]
+        headers["Accept-Encoding"] = "gzip, deflate"
+        headers["Cache-Control"] = "no-cache"
+        headers["DNT"] = "1"
+        headers["Connection"] = "keep-alive"
 
         # add an user agent
         headers["User-Agent"] = gen_useragent()
 
         # add Accept-Language header
-        if self.engine.send_accept_language_header and search_query.locale:
-            ac_lang = search_query.locale.language
-            if search_query.locale.territory:
-                ac_lang = "%s-%s,%s;q=0.9,*;q=0.5" % (
-                    search_query.locale.language,
-                    search_query.locale.territory,
-                    search_query.locale.language,
-                )
-            headers["Accept-Language"] = ac_lang
+        # https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Accept-Language
 
+        if self.engine.send_accept_language_header:
+            if search_query.locale:
+                _l = search_query.locale.language
+                _t = search_query.locale.territory or _l
+                headers["Accept-Language"] = f"{_l},{_l}-{_t};q=0.7,en;q=0.3"
+            else:
+                headers["Accept-Language"] = "en-US,en;q=0.9"
         self.logger.debug("HTTP Accept-Language: %s", headers.get("Accept-Language", ""))
+
         return params
 
     def _send_http_request(self, params: OnlineParams):
@@ -251,11 +255,11 @@ class OnlineProcessor(EngineProcessor):
         except ssl.SSLError as e:
             # requests timeout (connect or read)
             self.handle_exception(result_container, e, suspend=True)
-            self.logger.error("SSLError {}, verify={}".format(e, searx.network.get_network(self.engine.name).verify))
+            self.logger.debug("SSLError {}, verify={}".format(e, searx.network.get_network(self.engine.name).verify))
         except (httpx.TimeoutException, asyncio.TimeoutError) as e:
             # requests timeout (connect or read)
             self.handle_exception(result_container, e, suspend=True)
-            self.logger.error(
+            self.logger.debug(
                 "HTTP requests timeout (search duration : {0} s, timeout: {1} s) : {2}".format(
                     default_timer() - start_time, timeout_limit, e.__class__.__name__
                 )
@@ -263,7 +267,7 @@ class OnlineProcessor(EngineProcessor):
         except (httpx.HTTPError, httpx.StreamError) as e:
             # other requests exception
             self.handle_exception(result_container, e, suspend=True)
-            self.logger.exception(
+            self.logger.debug(
                 "requests exception (search duration : {0} s, timeout: {1} s) : {2}".format(
                     default_timer() - start_time, timeout_limit, e
                 )
@@ -274,7 +278,7 @@ class OnlineProcessor(EngineProcessor):
             SearxEngineAccessDeniedException,
         ) as e:
             self.handle_exception(result_container, e, suspend=True)
-            self.logger.exception(e.message)
+            self.logger.debug(e.message)
         except Exception as e:  # pylint: disable=broad-except
             self.handle_exception(result_container, e)
-            self.logger.exception("exception : {0}".format(e))
+            self.logger.debug("exception : {0}".format(e))

@@ -25,8 +25,7 @@ weblate.translations.worktree() {
             git remote add weblate https://translate.codeberg.org/git/searxng/searxng/
         fi
         if [ -d "${TRANSLATIONS_WORKTREE}" ]; then
-            pushd .
-            cd "${TRANSLATIONS_WORKTREE}"
+            pushd "${TRANSLATIONS_WORKTREE}"
             git reset --hard HEAD
             git pull origin translations
             popd
@@ -87,10 +86,10 @@ weblate.translations.commit() {
 
         # get translations branch in git worktree (TRANSLATIONS_WORKTREE)
         weblate.translations.worktree
-        existing_commit_hash=$(
-            cd "${TRANSLATIONS_WORKTREE}"
-            git log -n1 --pretty=format:'%h'
-        )
+
+        pushd "${TRANSLATIONS_WORKTREE}"
+        existing_commit_hash=$(git log -n1 --pretty=format:'%h')
+        popd
 
         # pull weblate commits
         weblate.to.translations

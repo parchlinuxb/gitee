@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-import { assertElement, http, listen, settings } from "../core/toolkit.ts";
+import { http, listen, settings } from "../toolkit.ts";
+import { assertElement } from "../util/assertElement.ts";
 
 let engineDescriptions: Record<string, [string, string]> | undefined;
 
@@ -69,8 +70,7 @@ listen("click", "#copy-hash", async function (this: HTMLElement) {
     }
   }
 
-  const copiedText = this.dataset.copiedText;
-  if (copiedText) {
-    this.innerText = copiedText;
+  if (this.dataset.copiedText) {
+    this.innerText = this.dataset.copiedText;
   }
 });

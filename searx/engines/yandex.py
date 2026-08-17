@@ -28,6 +28,20 @@ search_type = ""
 base_url_web = 'https://yandex.com/search/site/'
 base_url_images = 'https://yandex.com/images/search'
 
+# Supported languages
+yandex_supported_langs = [
+    "ru",  # Russian
+    "en",  # English
+    "be",  # Belarusian
+    "fr",  # French
+    "de",  # German
+    "id",  # Indonesian
+    "kk",  # Kazakh
+    "tt",  # Tatar
+    "tr",  # Turkish
+    "uk",  # Ukrainian
+]
+
 results_xpath = '//li[contains(@class, "serp-item")]'
 url_xpath = './/a[@class="b-serp-item__title-link"]/@href'
 title_xpath = './/h3[@class="b-serp-item__title"]/a[@class="b-serp-item__title-link"]/span'
@@ -47,6 +61,10 @@ def request(query, params):
         "frame": "1",
         "searchid": "3131712",
     }
+
+    lang = params["language"].split("-")[0]
+    if lang in yandex_supported_langs:
+        query_params_web["lang"] = lang
 
     query_params_images = {
         "text": query,
@@ -69,7 +87,6 @@ def request(query, params):
 
 def response(resp):
     if search_type == 'web':
-
         catch_bad_response(resp)
 
         dom = html.fromstring(resp.text)
@@ -88,7 +105,6 @@ def response(resp):
         return results
 
     if search_type == 'images':
-
         catch_bad_response(resp)
 
         html_data = html.fromstring(resp.text)
@@ -109,22 +125,25 @@ def response(resp):
         for _, item_data in json_resp['initialState']['serpList']['items']['entities'].items():
             title = item_data['snippet']['title']
             source = item_data['snippet']['url']
-            thumb = item_data['image']
-            fullsize_image = item_data['viewerData']['dups'][0]['url']
-            height = item_data['viewerData']['dups'][0]['h']
-            width = item_data['viewerData']['dups'][0]['w']
-            filesize = item_data['viewerData']['dups'][0]['fileSizeInBytes']
-            humanized_filesize = humanize_bytes(filesize)
+
+            image_source = item_data["viewerData"]["thumb"]
+            for i in item_data['viewerData']['dups'] + item_data['viewerData']['preview']:
+                if i["h"] > image_source["h"]:
+                    image_source = i
+
+            humanized_filesize = None
+            if image_source.get("fileSizeInBytes"):
+                humanized_filesize = humanize_bytes(image_source["fileSizeInBytes"])
 
             results.append(
                 {
                     'title': title,
                     'url': source,
-                    'img_src': fullsize_image,
+                    'img_src': image_source["url"],
                     'filesize': humanized_filesize,
-                    'thumbnail_src': thumb,
+                    'thumbnail_src': item_data["image"],
                     'template': 'images.html',
-                    'resolution': f'{width} x {height}',
+                    'resolution': f'{image_source["w"]} x {image_source["h"]}',
                 }
             )
 

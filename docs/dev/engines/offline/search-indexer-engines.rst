@@ -7,11 +7,6 @@ Local Search APIs
    - `Comparison to alternatives
      <https://docs.meilisearch.com/learn/what_is_meilisearch/comparison_to_alternatives.html>`_
 
-.. contents::
-   :depth: 1
-   :local:
-   :backlinks: entry
-
 .. sidebar:: info
 
    Initial sponsored by `Search and Discovery Fund
@@ -37,8 +32,8 @@ in section :ref:`private engines`.
 
 .. _engine meilisearch:
 
-MeiliSearch
-===========
+MeiliSearch Engine
+==================
 
 .. automodule:: searx.engines.meilisearch
   :members:
@@ -46,17 +41,16 @@ MeiliSearch
 
 .. _engine elasticsearch:
 
-Elasticsearch
-=============
+Elasticsearch Engine
+====================
 
 .. automodule:: searx.engines.elasticsearch
   :members:
 
 .. _engine solr:
 
-Solr
-====
+Solr Engine
+===========
 
 .. automodule:: searx.engines.solr
   :members:
-

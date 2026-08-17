@@ -163,7 +163,6 @@ def get_json_response(sq: "SearchQuery", rc: "ResultContainer") -> str:
     """Returns the JSON string of the results to a query (``application/json``)"""
     data = {
         'query': sq.query,
-        'number_of_results': rc.number_of_results,
         'results': [_.as_dict() for _ in rc.get_ordered_results()],
         'answers': [_.as_dict() for _ in rc.answers],
         'corrections': list(rc.corrections),
@@ -324,7 +323,7 @@ def group_engines_in_tab(engines: "Iterable[Engine]") -> List[Tuple[str, "Iterab
         return (group[0] == NO_SUBGROUPING, group[0].lower())
 
     def engine_sort_key(engine):
-        return (engine.about.get('language', ''), engine.name)
+        return (engine.language, engine.name)
 
     tabs = list(get_setting('categories_as_tabs').keys())
     subgroups = itertools.groupby(sorted(engines, key=get_subgroup), get_subgroup)

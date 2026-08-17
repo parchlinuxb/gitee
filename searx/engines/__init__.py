@@ -12,41 +12,50 @@ import typing as t
 
 import sys
 import copy
+import os
 from os.path import realpath, dirname
+import warnings
 
 import types
 import inspect
+import msgspec
 
 from searx import logger, settings
 from searx.utils import load_module
-
-if t.TYPE_CHECKING:
-    from searx.enginelib import Engine
+from searx.data import ENGINE_TRAITS
+from searx.enginelib import Engine, EngineAbout
 
 logger = logger.getChild('engines')
 ENGINE_DIR = dirname(realpath(__file__))
 
 # Defaults for the namespace of an engine module, see load_engine()
-ENGINE_DEFAULT_ARGS: dict[str, int | str | list[t.Any] | dict[str, t.Any] | bool] = {
+ENGINE_DEFAULT_ARGS: dict[str, t.Any] = {
     # Common options in the engine module
     "engine_type": "online",
     "paging": False,
+    "max_page": 0,
     "time_range_support": False,
     "safesearch": False,
+    "language_support": False,
     # settings.yml
     "categories": ["general"],
+    "language": "",
+    "region": "",
     "enable_http": False,
     "shortcut": "-",
     "timeout": settings["outgoing"]["request_timeout"],
     "display_error_messages": True,
     "disabled": False,
     "inactive": False,
-    "about": {},
+    "about": EngineAbout(),
     "using_tor_proxy": False,
-    "send_accept_language_header": False,
+    "send_accept_language_header": True,
     "tokens": [],
-    "max_page": 0,
+    "weight": 1.0,
 }
+"""Default values that are set in an engine of type *module*, please compare
+with the class :py:obj:`searx.enginelib.Engine`."""
+
 # set automatically when an engine does not have any tab category
 DEFAULT_CATEGORY = 'other'
 
@@ -176,14 +185,41 @@ def set_loggers(engine: "Engine|types.ModuleType", engine_name: str):
 
 
 def update_engine_attributes(engine: "Engine | types.ModuleType", engine_data: dict[str, t.Any]):
+    # pylint: disable=too-many-branches
+
     # set engine attributes from engine_data
+    kvargs: dict[str, t.Any]
+    if isinstance(engine.about, EngineAbout):
+        kvargs = {**msgspec.to_builtins(engine.about), **engine_data.get("about", {})}
+    else:
+        kvargs = {**engine.about, **engine_data.get("about", {})}
+
+    try:
+        engine.about = EngineAbout(**kvargs)
+    except TypeError as exc:
+        raise TypeError(
+            f"engine '{engine_data['name']}' ({engine_data['engine']}) - in the about section --> {exc}"
+        ) from exc
+
+    # warn about deprecated engine settings
+
+    if engine.about.language:
+        if hasattr(engine, "language") and not engine.language:
+            engine.language = engine.about.language
+        warnings.warn(
+            f"engine '{engine_data['name']}' ({engine_data['engine']})"
+            f" - migrate engine.about.language to engine.language!",
+            DeprecationWarning,
+            2,
+        )
+
     for param_name, param_value in engine_data.items():
+        if param_name == "about":
+            continue
         if param_name == 'categories':
             if isinstance(param_value, str):
                 param_value = list(map(str.strip, param_value.split(',')))
             engine.categories = param_value  # type: ignore
-        elif hasattr(engine, 'about') and param_name == 'about':
-            engine.about = {**engine.about, **engine_data['about']}  # type: ignore
         else:
             setattr(engine, param_name, param_value)
 
@@ -191,6 +227,9 @@ def update_engine_attributes(engine: "Engine | types.ModuleType", engine_data: d
     for arg_name, arg_value in ENGINE_DEFAULT_ARGS.items():
         if not hasattr(engine, arg_name):
             setattr(engine, arg_name, copy.deepcopy(arg_value))
+
+    if ENGINE_TRAITS.get(engine.name, {}).get("languages") and not engine.language_support:
+        raise ValueError(f"engine '{engine.name}' ({engine_data['engine']}) language_support should be set to True")
 
 
 def update_attributes_for_tor(engine: "Engine | types.ModuleType"):
@@ -230,21 +269,27 @@ def is_engine_active(engine: "Engine | types.ModuleType"):
 
 
 def call_engine_setup(engine: "Engine | types.ModuleType", engine_data: dict[str, t.Any]) -> bool:
-    setup_ok = False
+
+    setup_ok: bool | None = False
     setup_func = getattr(engine, "setup", None)
 
     if setup_func is None:
         setup_ok = True
     elif not callable(setup_func):
-        logger.error("engine's setup method isn't a callable (is of type: %s)", type(setup_func))
+        logger.error(f"engine's setup method isn't a callable (is of type: {type(setup_func)})")
     else:
         try:
             setup_ok = engine.setup(engine_data)
         except Exception as e:  # pylint: disable=broad-except
-            logger.exception('exception : {0}'.format(e))
+            logger.exception(f"(PID {os.getpid()}) {engine.name}: engine SETUP failed, exception: {e}")
+            setup_ok = False
+
+    # The evaluation of the return value is analogous to Engine.init
+    if setup_ok is None:
+        setup_ok = True
 
     if not setup_ok:
-        logger.error("%s: Engine setup was not successful, engine is set to inactive.", engine.name)
+        logger.error(f"(PID {os.getpid()}) {engine.name}: engine setup was not successful")
     return setup_ok
 
 
@@ -270,7 +315,18 @@ def load_engines(engine_list: list[dict[str, t.Any]]):
     categories.clear()
     categories['general'] = []
     for engine_data in engine_list:
+        if engine_data.get("inactive") is True:
+            continue
+
         engine = load_engine(engine_data)
+
         if engine:
             register_engine(engine)
+        else:
+            # if an engine can't be loaded (if for example the engine is missing
+            # tor or some other requirements) its set to inactive!
+            logger.error(
+                f"(PID {os.getpid()}) {engine_data.get('name', '???')}: can't register engine (loading engine failed)"
+            )
+            engine_data["inactive"] = True
     return engines

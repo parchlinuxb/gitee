@@ -39,7 +39,7 @@ setup(
     ],
     project_urls={"Code": GIT_URL, "Issue tracker": get_setting('brand.issue_url')},
     entry_points={
-        'console_scripts': ['searxng-run = searx.webapp:run', 'searxng-checker = searx.search.checker.__main__:main']
+        'console_scripts': ['searxng-run = searx.webapp:run']
     },
     packages=find_packages(
         include=[
@@ -54,21 +54,14 @@ setup(
             'settings.yml',
             '*.toml',
             '*.msg',
-            'search/checker/scheduler.lua',
             'data/*.json',
             'data/*.txt',
             'data/*.ftz',
             'favicons/*.toml',
-            'infopage/*/*',
-            'static/themes/simple/css/*',
-            'static/themes/simple/css/*/*',
-            'static/themes/simple/img/*',
-            'static/themes/simple/js/*',
-            'templates/*/*',
-            'templates/*/*/*',
-            'translations/*',
-            'translations/*/*',
-            'translations/*/*/*',
+            'infopage/**',
+            'static/**',
+            'templates/**',
+            'translations/**',
         ],
     },
     install_requires=requirements,

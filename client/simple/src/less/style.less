@@ -7,11 +7,9 @@
 @import "mixins.less";
 @import "toolkit.less";
 @import "autocomplete.less";
-@import "detail.less";
 @import "animations.less";
 @import "embedded.less";
 @import "info.less";
-@import "new_issue.less";
 @import "stats.less";
 @import "result_templates.less";
 @import "weather.less";
@@ -188,7 +186,7 @@ article[data-vim-selected].category-social {
 
   h3 {
     font-size: 1.2rem;
-    word-wrap: break-word;
+    overflow-wrap: break-word;
     margin: 0.4rem 0 0.4rem 0;
     padding: 0;
 
@@ -222,7 +220,7 @@ article[data-vim-selected].category-social {
     margin: 0;
     padding: 0;
     max-width: 54em;
-    word-wrap: break-word;
+    overflow-wrap: break-word;
     line-height: 1.24;
 
     .highlight {
@@ -366,7 +364,7 @@ article[data-vim-selected].category-social {
     font-size: 0.9rem;
     margin: 0.25rem 0 0 0;
     padding: 0;
-    word-wrap: break-word;
+    overflow-wrap: break-word;
     line-height: 1.24;
     font-style: italic;
   }
@@ -571,13 +569,16 @@ article[data-vim-selected].category-social {
 
 #suggestions {
   .wrapper {
-    display: flex;
-    flex-flow: column;
-    justify-content: flex-end;
+    padding-left: 0;
+    margin: 0;
+    list-style-position: inside;
+
+    li::marker {
+      color: var(--color-result-link-font);
+    }
 
     form {
       display: inline-block;
-      flex: 1 1 50%;
     }
   }
 }
@@ -585,8 +586,8 @@ article[data-vim-selected].category-social {
 #suggestions,
 #infoboxes {
   input {
-    padding: 0;
-    margin: 3px;
+    padding: 3px;
+    margin: 0;
     font-size: 0.9em;
     display: inline-block;
     background: transparent;
@@ -688,7 +689,7 @@ summary.title {
 
 #sidebar {
   grid-area: sidebar;
-  word-wrap: break-word;
+  overflow-wrap: break-word;
   color: var(--color-sidebar-font);
 
   .infobox {
@@ -1029,10 +1030,6 @@ summary.title {
     / 100%;
   gap: 0;
 
-  #sidebar {
-    display: none;
-  }
-
   #urls {
     margin: 0;
     display: flex;
@@ -1167,3 +1164,4 @@ pre code {
 @import "result_types/code.less";
 @import "result_types/paper.less";
 @import "result_types/file.less";
+@import "result_types/image.less";

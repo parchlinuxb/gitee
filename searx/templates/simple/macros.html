@@ -41,7 +41,7 @@
   {%- if result.length and not result.thumbnail %}<div class="result_length">{{ _('Length') }}: {{ result.length }}</div>{% endif -%}
   {%- if result.views %}<div class="result_views">{{ _('Views') }}: {{ result.views }}</div>{% endif -%}
   {%- if result.author %}<div class="result_author">{{ _('Author') }}: {{ result.author }}</div>{% endif -%}
-  {%- if result.metadata %}<div class="highlight">{{ result.metadata|safe }}</div>{% endif -%}
+  {%- if result.metadata %}<div class="highlight">{{ result.metadata }}</div>{% endif -%}
 {%- endmacro -%}
 
 <!-- Draw result sub footer -->
@@ -66,4 +66,14 @@
          aria-labelledby="pref_{{ name }}"{{- ' ' -}}
          class="checkbox-onoff"{{- ' ' -}}
          {%- if checked -%} checked{%- endif -%}/>
+{%- endmacro -%}
+
+<!-- iframe that additionally sets some extra feature attrs for videos -->
+{%- macro iframe(iframe_src) -%}
+  <iframe data-src="{{iframe_src}}" frameborder="0" allowfullscreen
+    {% if result.parsed_url.hostname in ("www.youtube.com", ) -%}
+    allow="picture-in-picture" referrerpolicy="origin"
+    {%- endif -%}
+    >
+  </iframe>
 {%- endmacro -%}

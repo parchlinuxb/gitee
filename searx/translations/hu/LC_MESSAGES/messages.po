@@ -11,7 +11,7 @@
 # Markus Heiser <markus.heiser@darmarit.de>, 2022, 2023.
 # Lakatos Tamás <tomimost@gmail.com>, 2022.
 # return42 <markus.heiser@darmarit.de>, 2023.
-# kratos <makesocialfoss32@keemail.me>, 2024, 2025.
+# kratos <makesocialfoss32@keemail.me>, 2024, 2025, 2026.
 # return42 <return42@users.noreply.translate.codeberg.org>, 2024, 2025.
 # meskobalazs <meskobalazs@users.noreply.translate.codeberg.org>, 2024,
 # 2025.
@@ -23,20 +23,19 @@
 # return42 <return42@noreply.codeberg.org>, 2025.
 msgid ""
 msgstr ""
-"Project-Id-Version: searx\n"
+"Project-Id-Version:  searx\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-10-20 08:35+0000\n"
-"PO-Revision-Date: 2025-10-22 02:09+0000\n"
-"Last-Translator: return42 <return42@noreply.codeberg.org>\n"
-"Language-Team: Hungarian <https://translate.codeberg.org/projects/searxng/"
-"searxng/hu/>\n"
+"POT-Creation-Date: 2026-07-15 15:45+0000\n"
+"PO-Revision-Date: 2026-06-16 07:07+0000\n"
+"Last-Translator: kratos <makesocialfoss32@keemail.me>\n"
 "Language: hu\n"
+"Language-Team: Hungarian "
+"<https://translate.codeberg.org/projects/searxng/searxng/hu/>\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13.3\n"
-"Generated-By: Babel 2.17.0\n"
+"Generated-By: Babel 2.18.0\n"
 
 #. CONSTANT_NAMES['NO_SUBGROUPING']
 #: searx/searxng.msg
@@ -79,7 +78,7 @@ msgid "videos"
 msgstr "videók"
 
 #. CATEGORY_NAMES['RADIO']
-#: searx/engines/radio_browser.py:142 searx/searxng.msg
+#: searx/engines/radio_browser.py:160 searx/searxng.msg
 msgid "radio"
 msgstr "rádió"
 
@@ -184,7 +183,7 @@ msgid "Uptime"
 msgstr "Üzemidő"
 
 #. BRAND_CUSTOM_LINKS['ABOUT']
-#: searx/searxng.msg searx/templates/simple/base.html:46
+#: searx/searxng.msg searx/templates/simple/base.html:47
 msgid "About"
 msgstr "Névjegy"
 
@@ -504,7 +503,7 @@ msgid "active users"
 msgstr "aktív felhasználók"
 
 #. SOCIAL_MEDIA_TERMS['COMMENTS']
-#: searx/engines/discourse.py:157 searx/engines/hackernews.py:81
+#: searx/engines/discourse.py:157 searx/engines/hackernews.py:83
 #: searx/engines/lemmy.py:130 searx/searxng.msg
 msgid "comments"
 msgstr "kommentek"
@@ -520,7 +519,7 @@ msgid "community"
 msgstr "közösség"
 
 #. SOCIAL_MEDIA_TERMS['POINTS']
-#: searx/engines/hackernews.py:81 searx/searxng.msg
+#: searx/engines/hackernews.py:83 searx/searxng.msg
 msgid "points"
 msgstr "pontok"
 
@@ -530,7 +529,7 @@ msgid "title"
 msgstr "cím"
 
 #. SOCIAL_MEDIA_TERMS['AUTHOR']
-#: searx/engines/hackernews.py:84 searx/searxng.msg
+#: searx/engines/hackernews.py:86 searx/searxng.msg
 msgid "author"
 msgstr "szerző"
 
@@ -549,28 +548,28 @@ msgstr "Lezárt"
 msgid "answered"
 msgstr "megválaszolt"
 
-#: searx/webapp.py:328
+#: searx/webapp.py:326
 msgid "No item found"
 msgstr "Nincs találat"
 
-#: searx/engines/qwant.py:289
-#: searx/templates/simple/result_templates/images.html:23 searx/webapp.py:330
+#: searx/engines/qwant.py:286
+#: searx/templates/simple/result_templates/images.html:62 searx/webapp.py:328
 msgid "Source"
 msgstr "Forrás"
 
-#: searx/webapp.py:332
+#: searx/webapp.py:330
 msgid "Error loading the next page"
 msgstr "Hiba a következő oldal betöltése során"
 
-#: searx/webapp.py:475 searx/webapp.py:876
+#: searx/webapp.py:478 searx/webapp.py:876
 msgid "Invalid settings, please edit your preferences"
 msgstr "Érvénytelen beállítások, módosítsa őket"
 
-#: searx/webapp.py:491
+#: searx/webapp.py:494
 msgid "Invalid settings"
 msgstr "Érvénytelen beállítások"
 
-#: searx/webapp.py:568 searx/webapp.py:658
+#: searx/webapp.py:570 searx/webapp.py:660
 msgid "search error"
 msgstr "keresési hiba"
 
@@ -630,12 +629,12 @@ msgstr "kiszolgáló API hiba"
 msgid "Suspended"
 msgstr "Felfüggesztve"
 
-#: searx/webutils.py:308
+#: searx/webutils.py:307
 #, python-brace-format
 msgid "{minutes} minute(s) ago"
 msgstr "{minutes} perce"
 
-#: searx/webutils.py:309
+#: searx/webutils.py:308
 #, python-brace-format
 msgid "{hours} hour(s), {minutes} minute(s) ago"
 msgstr "{hours} óra, {minutes} perce"
@@ -649,7 +648,12 @@ msgstr "Különböző véletlen értékek előállítása"
 msgid "Compute {func} of the arguments"
 msgstr "A(z) {func} értékének kiszámítása az argumentumokból"
 
-#: searx/engines/openstreetmap.py:156
+#: searx/engines/boardreader.py:108
+#, python-brace-format
+msgid "Posted by {author}"
+msgstr "Közzétette: {author}"
+
+#: searx/engines/openstreetmap.py:155
 msgid "Show route in map .."
 msgstr "Útvonal megjelenítése a térképen .."
 
@@ -662,25 +666,21 @@ msgstr "{title} (elavult)"
 msgid "This entry has been superseded by"
 msgstr "Ezt a bejegyzést leváltotta:"
 
-#: searx/engines/qwant.py:291
+#: searx/engines/qwant.py:288
 msgid "Channel"
 msgstr "Csatorna"
 
-#: searx/engines/radio_browser.py:144
+#: searx/engines/radio_browser.py:162
 msgid "bitrate"
 msgstr "bitráta:"
 
-#: searx/engines/radio_browser.py:145
+#: searx/engines/radio_browser.py:163
 msgid "votes"
 msgstr "szavazatok:"
 
-#: searx/engines/radio_browser.py:146
+#: searx/engines/radio_browser.py:164
 msgid "clicks"
 msgstr "kattintások"
-
-#: searx/engines/seekr.py:193 searx/engines/zlibrary.py:78
-msgid "Language"
-msgstr "Nyelv"
 
 #: searx/engines/semantic_scholar.py:141
 #, python-brace-format
@@ -713,11 +713,15 @@ msgstr ""
 msgid "The image could not be downloaded."
 msgstr "A kép nem tölthető le."
 
-#: searx/engines/zlibrary.py:79
+#: searx/engines/zlibrary.py:80
+msgid "Language"
+msgstr "Nyelv"
+
+#: searx/engines/zlibrary.py:81
 msgid "Book rating"
 msgstr "Könyv értékelése"
 
-#: searx/engines/zlibrary.py:80
+#: searx/engines/zlibrary.py:82
 msgid "File quality"
 msgstr "Fájlminőség"
 
@@ -729,13 +733,13 @@ msgstr "Ahmia tiltólista"
 msgid "Filter out onion results that appear in Ahmia's blacklist."
 msgstr "Szűrje ki az Ahmia titlólistáján szereplő onion hivatkozásokat."
 
-#: searx/plugins/calculator.py:37
-msgid "Basic Calculator"
-msgstr "Alapvető számológép"
+#: searx/plugins/calculator.py:25
+msgid "Calculator"
+msgstr "Számoló"
 
-#: searx/plugins/calculator.py:38
-msgid "Calculate mathematical expressions via the search bar"
-msgstr "Végezzen el matematikai műveleteket a keresősávban"
+#: searx/plugins/calculator.py:26
+msgid "Parses and solves mathematical expressions."
+msgstr "Matematikai kifejezéseket elemez és megoldja azokat."
 
 #: searx/plugins/hash_plugin.py:33
 msgid "Hash plugin"
@@ -762,6 +766,18 @@ msgid "Rewrite hostnames and remove or prioritize results based on the hostname"
 msgstr ""
 "A kiszolgálónevek átírása és az eredmények eltávolítása vagy rangsorolása"
 " a kiszolgálónév alapján"
+
+#: searx/plugins/infinite_scroll.py:25
+msgid "Infinite scroll"
+msgstr "Végtelen görgetés"
+
+#: searx/plugins/infinite_scroll.py:26
+msgid ""
+"Automatically loads the next page when scrolling to bottom of the current"
+" page"
+msgstr ""
+"Az aktuális oldal aljára görgetéskor automatikusan betölti a következő "
+"oldalt"
 
 #: searx/plugins/oa_doi_rewrite.py:54
 msgid "Open Access DOI rewrite"
@@ -838,15 +854,15 @@ msgstr ""
 "Eltávolítja a felhasználók követéshez használt argumentumokat a találatok"
 " webcíméből"
 
-#: searx/plugins/unit_converter.py:48
+#: searx/plugins/unit_converter.py:42
 msgid "Unit converter plugin"
 msgstr "Egységváltó bővítmény"
 
-#: searx/plugins/unit_converter.py:49
+#: searx/plugins/unit_converter.py:43
 msgid "Convert between units"
 msgstr "Váltson mértékegységek között"
 
-#: searx/result_types/answer.py:226
+#: searx/result_types/answer.py:223
 #, python-brace-format
 msgid "{location}: {temperature}, {condition}"
 msgstr "{location}: {temperature}, {condition}"
@@ -864,45 +880,45 @@ msgstr "Ugrás a %(search_page)s."
 msgid "search page"
 msgstr "keresőoldalra"
 
-#: searx/templates/simple/base.html:50
+#: searx/templates/simple/base.html:51
 msgid "Donate"
-msgstr "Adományozás"
+msgstr "Adakozás"
 
-#: searx/templates/simple/base.html:55 searx/templates/simple/base.html:57
-#: searx/templates/simple/preferences.html:156
+#: searx/templates/simple/base.html:56 searx/templates/simple/base.html:58
+#: searx/templates/simple/preferences.html:152
 msgid "Preferences"
 msgstr "Beállítások"
 
-#: searx/templates/simple/base.html:68
+#: searx/templates/simple/base.html:69
 msgid "Powered by"
 msgstr "Az oldalt kiszolgálja:"
 
-#: searx/templates/simple/base.html:68
+#: searx/templates/simple/base.html:69
 msgid "a privacy-respecting, open metasearch engine"
 msgstr "egy adatvédelmet tiszteletben tartó, nyílt forráskódú metakereső"
 
-#: searx/templates/simple/base.html:69
+#: searx/templates/simple/base.html:70
 #: searx/templates/simple/result_templates/packages.html:59
 msgid "Source code"
 msgstr "Forráskód"
 
-#: searx/templates/simple/base.html:70
+#: searx/templates/simple/base.html:71
 msgid "Issue tracker"
 msgstr "Hibajegykövető"
 
-#: searx/templates/simple/base.html:71 searx/templates/simple/stats.html:18
+#: searx/templates/simple/base.html:72 searx/templates/simple/stats.html:17
 msgid "Engine stats"
 msgstr "Keresőstatisztikák"
 
-#: searx/templates/simple/base.html:73
+#: searx/templates/simple/base.html:74
 msgid "Public instances"
 msgstr "Publikus példányok"
 
-#: searx/templates/simple/base.html:76
+#: searx/templates/simple/base.html:77
 msgid "Privacy policy"
 msgstr "Adatvédelmi irányelvek"
 
-#: searx/templates/simple/base.html:79
+#: searx/templates/simple/base.html:80
 msgid "Contact instance maintainer"
 msgstr "Kapcsolatfelvétel a példány karbantartójával"
 
@@ -921,7 +937,7 @@ msgstr "Nézetek"
 
 #: searx/templates/simple/macros.html:43
 #: searx/templates/simple/result_templates/file.html:18
-#: searx/templates/simple/result_templates/images.html:19
+#: searx/templates/simple/result_templates/images.html:52
 #: searx/templates/simple/result_templates/paper.html:14
 msgid "Author"
 msgstr "Szerző"
@@ -929,28 +945,6 @@ msgstr "Szerző"
 #: searx/templates/simple/macros.html:51
 msgid "cached"
 msgstr "tárolt"
-
-#: searx/templates/simple/new_issue.html:64
-msgid "Start submitting a new issue on GitHub"
-msgstr "Probléma bejelentése a GitHubon"
-
-#: searx/templates/simple/new_issue.html:66
-msgid "Please check for existing bugs about this engine on GitHub"
-msgstr "Ellenőrizze a keresőszolgáltatás bejelentett hibáit a GitHubon"
-
-#: searx/templates/simple/new_issue.html:69
-msgid "I confirm there is no existing bug about the issue I encounter"
-msgstr "Megerősítem, hogy nincs meglévő bejelentés a problémámról"
-
-#: searx/templates/simple/new_issue.html:71
-msgid "If this is a public instance, please specify the URL in the bug report"
-msgstr "Ha ez egy nyilvános példány, adja meg a webcímét a hibajelentésben"
-
-#: searx/templates/simple/new_issue.html:72
-msgid "Submit a new issue on Github including the above information"
-msgstr ""
-"Jelentsen be egy új problémát a GitHubon, amely tartalmazza a fenti "
-"információkat"
 
 #: searx/templates/simple/preferences.html:65
 msgid "No HTTPS"
@@ -971,29 +965,25 @@ msgid "!bang for its categories"
 msgstr "!bang a kategóriáihoz"
 
 #: searx/templates/simple/preferences.html:102
-#: searx/templates/simple/stats.html:64
+#: searx/templates/simple/stats.html:63
 msgid "Median"
 msgstr "Medián"
 
 #: searx/templates/simple/preferences.html:103
-#: searx/templates/simple/stats.html:70
+#: searx/templates/simple/stats.html:69
 msgid "P80"
 msgstr "P80"
 
 #: searx/templates/simple/preferences.html:104
-#: searx/templates/simple/stats.html:76
+#: searx/templates/simple/stats.html:75
 msgid "P95"
 msgstr "P95"
 
-#: searx/templates/simple/preferences.html:136
-msgid "Failed checker test(s): "
-msgstr "Elbukott ellenőrzőtesztek: "
-
-#: searx/templates/simple/preferences.html:138
+#: searx/templates/simple/preferences.html:134
 msgid "Errors:"
 msgstr "Hibák:"
 
-#: searx/templates/simple/preferences.html:160
+#: searx/templates/simple/preferences.html:156
 msgid ""
 "This is a preview of the settings used by the 'Search URL' you used to "
 "get here."
@@ -1001,65 +991,62 @@ msgstr ""
 "Ez az Ön által idejutáshoz használt „Keresési webcíme” beállításainak "
 "előnézete."
 
-#: searx/templates/simple/preferences.html:162
+#: searx/templates/simple/preferences.html:158
 msgid "Press save to copy these preferences to your browser."
 msgstr ""
 "Nyomjon a mentés gombra, hogy ezeket a beállításokat átmásolja a "
 "böngészőjébe."
 
-#: searx/templates/simple/preferences.html:163
+#: searx/templates/simple/preferences.html:159
 msgid "Click here to view your browser preferences instead:"
 msgstr "Kattintson ide, hogy megtekintse a böngésző beállításait:"
 
-#: searx/templates/simple/preferences.html:173
+#: searx/templates/simple/preferences.html:169
 msgid "General"
 msgstr "Általános"
 
-#: searx/templates/simple/preferences.html:176
+#: searx/templates/simple/preferences.html:172
 msgid "Default categories"
 msgstr "Alapértelmezett kategóriák"
 
-#: searx/templates/simple/preferences.html:204
+#: searx/templates/simple/preferences.html:200
 msgid "User interface"
 msgstr "Felhasználói felület"
 
-#: searx/templates/simple/preferences.html:227
+#: searx/templates/simple/preferences.html:220
 msgid "Privacy"
 msgstr "Adatvédelem"
 
-#: searx/templates/simple/preferences.html:242
+#: searx/templates/simple/preferences.html:235
+#: searx/templates/simple/result_templates/images.html:63
 msgid "Engines"
 msgstr "Keresőmotorok"
 
-#: searx/templates/simple/preferences.html:244
+#: searx/templates/simple/preferences.html:237
 msgid "Currently used search engines"
 msgstr "Jelenleg használt keresőmotorok"
 
-#: searx/templates/simple/preferences.html:253
+#: searx/templates/simple/preferences.html:246
 msgid "Special Queries"
 msgstr "Speciális lekérdezések"
 
-#: searx/templates/simple/preferences.html:261
+#: searx/templates/simple/preferences.html:254
 msgid "Cookies"
 msgstr "Sütik"
 
-#: searx/templates/simple/results.html:30
-msgid "Number of results"
-msgstr "Találatok száma"
-
-#: searx/templates/simple/results.html:36
+#: searx/templates/simple/results.html:32
 msgid "Info"
 msgstr "Információ"
 
-#: searx/templates/simple/results.html:77
+#: searx/templates/simple/results.html:73
 msgid "Back to top"
 msgstr "Vissza a lap tetejére"
 
-#: searx/templates/simple/results.html:95
+#: searx/templates/simple/results.html:91
 msgid "Previous page"
 msgstr "Előző oldal"
 
-#: searx/templates/simple/results.html:113
+#: searx/templates/simple/results.html:109
 msgid "Next page"
 msgstr "Következő oldal"
 
@@ -1082,95 +1069,83 @@ msgstr "törlés"
 msgid "search"
 msgstr "keresés"
 
-#: searx/templates/simple/stats.html:21
+#: searx/templates/simple/stats.html:20
 msgid "There is currently no data available. "
 msgstr "Jelenleg nincs megjeleníthető adat. "
 
 #: searx/templates/simple/preferences/engines.html:24
-#: searx/templates/simple/stats.html:25
+#: searx/templates/simple/stats.html:24
 msgid "Engine name"
 msgstr "Keresőmotor neve"
 
-#: searx/templates/simple/stats.html:26
+#: searx/templates/simple/stats.html:25
 msgid "Scores"
 msgstr "Pontszámok"
 
-#: searx/templates/simple/stats.html:27
+#: searx/templates/simple/stats.html:26
 msgid "Result count"
 msgstr "Találatok száma"
 
 #: searx/templates/simple/elements/engines_msg.html:7
-#: searx/templates/simple/preferences/engines.html:31
-#: searx/templates/simple/stats.html:28
+#: searx/templates/simple/preferences/engines.html:30
+#: searx/templates/simple/stats.html:27
 msgid "Response time"
 msgstr "Válaszidő"
 
-#: searx/templates/simple/preferences/engines.html:35
-#: searx/templates/simple/stats.html:29
+#: searx/templates/simple/preferences/engines.html:34
+#: searx/templates/simple/stats.html:28
 msgid "Reliability"
 msgstr "Megbízhatóság"
 
-#: searx/templates/simple/stats.html:59
+#: searx/templates/simple/stats.html:58
 msgid "Total"
 msgstr "Összesen"
 
-#: searx/templates/simple/stats.html:60
+#: searx/templates/simple/stats.html:59
 msgid "HTTP"
 msgstr "HTTP"
 
-#: searx/templates/simple/stats.html:61
+#: searx/templates/simple/stats.html:60
 msgid "Processing"
 msgstr "Feldolgozás"
 
-#: searx/templates/simple/stats.html:99
+#: searx/templates/simple/stats.html:98
 msgid "Warnings"
 msgstr "Figyelmeztetések"
 
-#: searx/templates/simple/stats.html:99
+#: searx/templates/simple/stats.html:98
 msgid "Errors and exceptions"
 msgstr "Hibák és kivételek"
 
-#: searx/templates/simple/stats.html:105
+#: searx/templates/simple/stats.html:104
 msgid "Exception"
 msgstr "Kivétel"
 
-#: searx/templates/simple/stats.html:107
+#: searx/templates/simple/stats.html:106
 msgid "Message"
 msgstr "Üzenet"
 
-#: searx/templates/simple/stats.html:109
+#: searx/templates/simple/stats.html:108
 msgid "Percentage"
 msgstr "Százalék"
 
-#: searx/templates/simple/stats.html:111
+#: searx/templates/simple/stats.html:110
 msgid "Parameter"
 msgstr "Paraméter"
 
 #: searx/templates/simple/result_templates/code.html:29
 #: searx/templates/simple/result_templates/file.html:24
-#: searx/templates/simple/stats.html:119
+#: searx/templates/simple/stats.html:118
 msgid "Filename"
 msgstr "Fájlnév"
 
-#: searx/templates/simple/stats.html:120
+#: searx/templates/simple/stats.html:119
 msgid "Function"
 msgstr "Funkció"
 
-#: searx/templates/simple/stats.html:121
+#: searx/templates/simple/stats.html:120
 msgid "Code"
 msgstr "Kód"
-
-#: searx/templates/simple/stats.html:128
-msgid "Checker"
-msgstr "Ellenőrző"
-
-#: searx/templates/simple/stats.html:131
-msgid "Failed test"
-msgstr "Elbukott teszt"
-
-#: searx/templates/simple/stats.html:132
-msgid "Comment(s)"
-msgstr "Megjegyzések"
 
 #: searx/templates/simple/answer/translations.html:12
 #: searx/templates/simple/preferences/answerers.html:8
@@ -1246,7 +1221,7 @@ msgstr "Automatikus felismerés"
 #: searx/templates/simple/filters/safesearch.html:2
 #: searx/templates/simple/filters/safesearch.html:3
 #: searx/templates/simple/filters/safesearch.html:4
-#: searx/templates/simple/preferences/engines.html:27
+#: searx/templates/simple/preferences/engines.html:26
 #: searx/templates/simple/preferences/safesearch.html:2
 msgid "SafeSearch"
 msgstr "Felnőtt tartalom szűrése"
@@ -1267,7 +1242,7 @@ msgid "None"
 msgstr "Nincs"
 
 #: searx/templates/simple/filters/time_range.html:1
-#: searx/templates/simple/preferences/engines.html:28
+#: searx/templates/simple/preferences/engines.html:27
 msgid "Time range"
 msgstr "Időintervallum"
 
@@ -1466,15 +1441,11 @@ msgstr "Minden tiltása"
 msgid "!bang"
 msgstr "!bang"
 
-#: searx/templates/simple/preferences/engines.html:26
-msgid "Supports selected language"
-msgstr "Támogatja a kiválasztott nyelvet"
-
-#: searx/templates/simple/preferences/engines.html:29
+#: searx/templates/simple/preferences/engines.html:28
 msgid "Weight"
 msgstr "Súly"
 
-#: searx/templates/simple/preferences/engines.html:33
+#: searx/templates/simple/preferences/engines.html:32
 msgid "Max time"
 msgstr "Maximális idő"
 
@@ -1536,18 +1507,6 @@ msgstr "Kép proxy"
 #: searx/templates/simple/preferences/image_proxy.html:14
 msgid "Proxy image results through SearXNG"
 msgstr "Kép találatok proxyn keresztüli megjelenítése a SearXNG segítségével"
-
-#: searx/templates/simple/preferences/infinite_scroll.html:2
-msgid "Infinite scroll"
-msgstr "Végtelen görgetés"
-
-#: searx/templates/simple/preferences/infinite_scroll.html:14
-msgid ""
-"Automatically load the next page when scrolling to the bottom of the "
-"current page"
-msgstr ""
-"A következő oldal automatikus betöltése az aktuális oldal aljára "
-"görgetéskor"
 
 #: searx/templates/simple/preferences/language.html:24
 msgid "What language do you prefer for search?"
@@ -1676,7 +1635,7 @@ msgid "This site did not provide any description."
 msgstr "Ennek a weblapnak nincsen leírása."
 
 #: searx/templates/simple/result_templates/file.html:30
-#: searx/templates/simple/result_templates/images.html:22
+#: searx/templates/simple/result_templates/images.html:61
 #: searx/templates/simple/result_templates/torrent.html:18
 msgid "Filesize"
 msgstr "Fájlméret"
@@ -1694,19 +1653,19 @@ msgstr "Típus"
 msgid "Download"
 msgstr "Letöltés"
 
-#: searx/templates/simple/result_templates/images.html:20
+#: searx/templates/simple/result_templates/images.html:53
 msgid "Resolution"
 msgstr "Felbontás"
 
-#: searx/templates/simple/result_templates/images.html:21
-msgid "Format"
-msgstr "Formátum"
+#: searx/templates/simple/result_templates/images.html:55
+msgid "Image formats"
+msgstr "Képformátumok"
 
-#: searx/templates/simple/result_templates/images.html:24
-msgid "Engine"
-msgstr "Motor"
+#: searx/templates/simple/result_templates/images.html:56
+msgid "original format"
+msgstr "eredeti formátum"
 
-#: searx/templates/simple/result_templates/images.html:25
+#: searx/templates/simple/result_templates/images.html:64
 msgid "View source"
 msgstr "Forrás megtekintése"
 
@@ -2405,3 +2364,60 @@ msgstr "videó elrejtése"
 
 #~ msgid "repo"
 #~ msgstr "tároló"
+
+#~ msgid "Basic Calculator"
+#~ msgstr "Alapvető számológép"
+
+#~ msgid "Calculate mathematical expressions via the search bar"
+#~ msgstr "Végezzen el matematikai műveleteket a keresősávban"
+
+#~ msgid ""
+#~ "Automatically load the next page when"
+#~ " scrolling to the bottom of the "
+#~ "current page"
+#~ msgstr ""
+#~ "A következő oldal automatikus betöltése "
+#~ "az aktuális oldal aljára görgetéskor"
+
+#~ msgid "Failed checker test(s): "
+#~ msgstr "Elbukott ellenőrzőtesztek: "
+
+#~ msgid "Checker"
+#~ msgstr "Ellenőrző"
+
+#~ msgid "Failed test"
+#~ msgstr "Elbukott teszt"
+
+#~ msgid "Comment(s)"
+#~ msgstr "Megjegyzések"
+
+#~ msgid "Start submitting a new issue on GitHub"
+#~ msgstr "Probléma bejelentése a GitHubon"
+
+#~ msgid "Please check for existing bugs about this engine on GitHub"
+#~ msgstr "Ellenőrizze a keresőszolgáltatás bejelentett hibáit a GitHubon"
+
+#~ msgid "I confirm there is no existing bug about the issue I encounter"
+#~ msgstr "Megerősítem, hogy nincs meglévő bejelentés a problémámról"
+
+#~ msgid "If this is a public instance, please specify the URL in the bug report"
+#~ msgstr "Ha ez egy nyilvános példány, adja meg a webcímét a hibajelentésben"
+
+#~ msgid "Submit a new issue on Github including the above information"
+#~ msgstr ""
+#~ "Jelentsen be egy új problémát a "
+#~ "GitHubon, amely tartalmazza a fenti "
+#~ "információkat"
+
+#~ msgid "Supports selected language"
+#~ msgstr "Támogatja a kiválasztott nyelvet"
+
+#~ msgid "Number of results"
+#~ msgstr "Találatok száma"
+
+#~ msgid "Format"
+#~ msgstr "Formátum"
+
+#~ msgid "Engine"
+#~ msgstr "Motor"
+

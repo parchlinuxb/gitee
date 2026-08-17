@@ -34,7 +34,7 @@ const svg2svg_favicon_opts: Config = {
 };
 
 export default {
-  base: "/static/themes/simple/",
+  base: "./",
   publicDir: "static/",
 
   build: {
@@ -46,39 +46,37 @@ export default {
     sourcemap: true,
     rolldownOptions: {
       input: {
-        // build CSS files
-        "searxng-ltr.css": `${PATH.src}/less/style-ltr.less`,
-        "searxng-rtl.css": `${PATH.src}/less/style-rtl.less`,
-        "rss.css": `${PATH.src}/less/rss.less`,
+        // entrypoint
+        core: `${PATH.src}/js/index.ts`,
 
-        // build script files
-        "searxng.core": `${PATH.src}/js/core/index.ts`,
-
-        // ol pkg
-        ol: `${PATH.src}/js/pkg/ol.ts`,
-        "ol.css": `${PATH.modules}/ol/ol.css`
+        // stylesheets
+        ltr: `${PATH.src}/less/style-ltr.less`,
+        rtl: `${PATH.src}/less/style-rtl.less`,
+        rss: `${PATH.src}/less/rss.less`
       },
 
       // file naming conventions / pathnames are relative to outDir (PATH.dist)
       output: {
-        entryFileNames: "js/[name].min.js",
-        chunkFileNames: "js/[name].min.js",
+        entryFileNames: "sxng-[name].min.js",
+        chunkFileNames: "chunk/[hash].min.js",
         assetFileNames: ({ names }: PreRenderedAsset): string => {
           const [name] = names;
 
-          const extension = name?.split(".").pop();
-          switch (extension) {
+          switch (name?.split(".").pop()) {
             case "css":
-              return "css/[name].min[extname]";
-            case "js":
-              return "js/[name].min[extname]";
-            case "png":
-            case "svg":
-              return "img/[name][extname]";
+              return "sxng-[name].min[extname]";
             default:
-              console.warn("Unknown asset:", name);
-              return "[name][extname]";
+              return "sxng-[name][extname]";
           }
+        },
+        sanitizeFileName: (name: string): string => {
+          return name
+            .normalize("NFD")
+            .replace(/[^a-zA-Z0-9.-]/g, "_")
+            .toLowerCase();
+        },
+        comments: {
+          legal: true
         }
       }
     }
@@ -133,6 +131,28 @@ export default {
         dest: `${PATH.dist}/img/searxng.png`
       }
     ]),
+
+    // SearXNG PWA Icons (static)
+    plg_svg2png(
+      [
+        {
+          src: `${PATH.brand}/searxng-wordmark.svg`,
+          dest: `${PATH.dist}/img/512.png`
+        }
+      ],
+      512,
+      512
+    ),
+    plg_svg2png(
+      [
+        {
+          src: `${PATH.brand}/searxng-wordmark.svg`,
+          dest: `${PATH.dist}/img/192.png`
+        }
+      ],
+      192,
+      192
+    ),
 
     // -- svg
     plg_svg2svg(

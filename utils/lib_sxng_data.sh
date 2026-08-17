@@ -4,11 +4,11 @@
 data.help() {
     cat <<EOF
 data.:
-  all       : update searx/sxng_locales.py and searx/data/*
-  traits    : update searx/data/engine_traits.json & searx/sxng_locales.py
-  useragents: update searx/data/useragents.json with the most recent versions of Firefox
-  locales   : update searx/data/locales.json from babel
-  currencies: update searx/data/currencies.json from wikidata
+  all           : update searx/sxng_locales.py and searx/data/*
+  traits        : update searx/data/engine_traits.json & searx/sxng_locales.py
+  useragents    : update searx/data/useragents.json with the most recent versions of Firefox
+  locales       : update searx/data/locales.json from babel
+  currencies    : update searx/data/currencies.json from wikidata
 EOF
 }
 

@@ -13,13 +13,13 @@
 # Archfiend <archfiend@users.noreply.translate.codeberg.org>, 2025.
 # Mooo <mooo@users.noreply.translate.codeberg.org>, 2025.
 # naktinis <naktinis@users.noreply.translate.codeberg.org>, 2025.
-# return42 <return42@noreply.codeberg.org>, 2025.
+# return42 <return42@noreply.codeberg.org>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version:  searx\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-10-20 08:35+0000\n"
-"PO-Revision-Date: 2025-09-02 04:50+0000\n"
+"POT-Creation-Date: 2026-07-15 15:45+0000\n"
+"PO-Revision-Date: 2026-05-19 12:07+0000\n"
 "Last-Translator: return42 <return42@noreply.codeberg.org>\n"
 "Language: lt\n"
 "Language-Team: Lithuanian "
@@ -30,7 +30,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.17.0\n"
+"Generated-By: Babel 2.18.0\n"
 
 #. CONSTANT_NAMES['NO_SUBGROUPING']
 #: searx/searxng.msg
@@ -73,7 +73,7 @@ msgid "videos"
 msgstr "vaizdo įrašai"
 
 #. CATEGORY_NAMES['RADIO']
-#: searx/engines/radio_browser.py:142 searx/searxng.msg
+#: searx/engines/radio_browser.py:160 searx/searxng.msg
 msgid "radio"
 msgstr "radijas"
 
@@ -178,7 +178,7 @@ msgid "Uptime"
 msgstr "Veikimo laikas"
 
 #. BRAND_CUSTOM_LINKS['ABOUT']
-#: searx/searxng.msg searx/templates/simple/base.html:46
+#: searx/searxng.msg searx/templates/simple/base.html:47
 msgid "About"
 msgstr "Apie"
 
@@ -498,7 +498,7 @@ msgid "active users"
 msgstr "Aktyvus naudotojai"
 
 #. SOCIAL_MEDIA_TERMS['COMMENTS']
-#: searx/engines/discourse.py:157 searx/engines/hackernews.py:81
+#: searx/engines/discourse.py:157 searx/engines/hackernews.py:83
 #: searx/engines/lemmy.py:130 searx/searxng.msg
 msgid "comments"
 msgstr "Komentarai"
@@ -514,7 +514,7 @@ msgid "community"
 msgstr "Bendruomene"
 
 #. SOCIAL_MEDIA_TERMS['POINTS']
-#: searx/engines/hackernews.py:81 searx/searxng.msg
+#: searx/engines/hackernews.py:83 searx/searxng.msg
 msgid "points"
 msgstr "Taškai"
 
@@ -524,7 +524,7 @@ msgid "title"
 msgstr "Pavadinimas"
 
 #. SOCIAL_MEDIA_TERMS['AUTHOR']
-#: searx/engines/hackernews.py:84 searx/searxng.msg
+#: searx/engines/hackernews.py:86 searx/searxng.msg
 msgid "author"
 msgstr "Autorius"
 
@@ -543,28 +543,28 @@ msgstr "Uždaryta"
 msgid "answered"
 msgstr "atsakyta"
 
-#: searx/webapp.py:328
+#: searx/webapp.py:326
 msgid "No item found"
 msgstr "Elementų nerasta"
 
-#: searx/engines/qwant.py:289
-#: searx/templates/simple/result_templates/images.html:23 searx/webapp.py:330
+#: searx/engines/qwant.py:286
+#: searx/templates/simple/result_templates/images.html:62 searx/webapp.py:328
 msgid "Source"
 msgstr "Šaltinis"
 
-#: searx/webapp.py:332
+#: searx/webapp.py:330
 msgid "Error loading the next page"
 msgstr "Klaida keliant kitą puslapį"
 
-#: searx/webapp.py:475 searx/webapp.py:876
+#: searx/webapp.py:478 searx/webapp.py:876
 msgid "Invalid settings, please edit your preferences"
 msgstr "Neteisingi nustatymai, pakeiskite savo nuostatas"
 
-#: searx/webapp.py:491
+#: searx/webapp.py:494
 msgid "Invalid settings"
 msgstr "Neteisingi nustatymai"
 
-#: searx/webapp.py:568 searx/webapp.py:658
+#: searx/webapp.py:570 searx/webapp.py:660
 msgid "search error"
 msgstr "paieškos klaida"
 
@@ -624,12 +624,12 @@ msgstr "serverio API klaida"
 msgid "Suspended"
 msgstr "Sustabdytas"
 
-#: searx/webutils.py:308
+#: searx/webutils.py:307
 #, python-brace-format
 msgid "{minutes} minute(s) ago"
 msgstr "prieš {minutes} min"
 
-#: searx/webutils.py:309
+#: searx/webutils.py:308
 #, python-brace-format
 msgid "{hours} hour(s), {minutes} minute(s) ago"
 msgstr "prieš {hours} val., {minutes} min"
@@ -643,7 +643,12 @@ msgstr "Generuoja įvairias atsitiktinius skaičius"
 msgid "Compute {func} of the arguments"
 msgstr "Apskaičiuoti {func} iš argumentų"
 
-#: searx/engines/openstreetmap.py:156
+#: searx/engines/boardreader.py:108
+#, python-brace-format
+msgid "Posted by {author}"
+msgstr ""
+
+#: searx/engines/openstreetmap.py:155
 msgid "Show route in map .."
 msgstr "Rodyti maršrutą žemėlapyje"
 
@@ -656,25 +661,21 @@ msgstr "{title} (PASENĘS)"
 msgid "This entry has been superseded by"
 msgstr "Šį įrašą pakeitė"
 
-#: searx/engines/qwant.py:291
+#: searx/engines/qwant.py:288
 msgid "Channel"
 msgstr "Kanalas"
 
-#: searx/engines/radio_browser.py:144
+#: searx/engines/radio_browser.py:162
 msgid "bitrate"
 msgstr "pralaidumas"
 
-#: searx/engines/radio_browser.py:145
+#: searx/engines/radio_browser.py:163
 msgid "votes"
 msgstr "balsai"
 
-#: searx/engines/radio_browser.py:146
+#: searx/engines/radio_browser.py:164
 msgid "clicks"
 msgstr "paspaudimai"
-
-#: searx/engines/seekr.py:193 searx/engines/zlibrary.py:78
-msgid "Language"
-msgstr "Kalba"
 
 #: searx/engines/semantic_scholar.py:141
 #, python-brace-format
@@ -707,11 +708,15 @@ msgstr ""
 msgid "The image could not be downloaded."
 msgstr "Nepavyko atsisiųsti vaizdo."
 
-#: searx/engines/zlibrary.py:79
+#: searx/engines/zlibrary.py:80
+msgid "Language"
+msgstr "Kalba"
+
+#: searx/engines/zlibrary.py:81
 msgid "Book rating"
 msgstr "Knygos įvertinimas"
 
-#: searx/engines/zlibrary.py:80
+#: searx/engines/zlibrary.py:82
 msgid "File quality"
 msgstr "Failo kokybė"
 
@@ -723,13 +728,13 @@ msgstr "Ahmia juodasis sąrašas"
 msgid "Filter out onion results that appear in Ahmia's blacklist."
 msgstr "Išfiltruoti onion rezultatus esančius Ahmia juodajame sąraše."
 
-#: searx/plugins/calculator.py:37
-msgid "Basic Calculator"
-msgstr "Bazinis skaičiuotuvas"
+#: searx/plugins/calculator.py:25
+msgid "Calculator"
+msgstr ""
 
-#: searx/plugins/calculator.py:38
-msgid "Calculate mathematical expressions via the search bar"
-msgstr "Apskaičiuoti matematines lygtis paieškos laukelyje"
+#: searx/plugins/calculator.py:26
+msgid "Parses and solves mathematical expressions."
+msgstr ""
 
 #: searx/plugins/hash_plugin.py:33
 msgid "Hash plugin"
@@ -752,6 +757,16 @@ msgstr "Serverių pavadinimų įskiepis"
 #: searx/plugins/hostnames.py:120
 msgid "Rewrite hostnames and remove or prioritize results based on the hostname"
 msgstr ""
+
+#: searx/plugins/infinite_scroll.py:25
+msgid "Infinite scroll"
+msgstr "Begalinis slinkimas"
+
+#: searx/plugins/infinite_scroll.py:26
+msgid ""
+"Automatically loads the next page when scrolling to bottom of the current"
+" page"
+msgstr "Automatiškai įkelti kitą puslapį, kai nuslenkama į esamo puslapio apačią"
 
 #: searx/plugins/oa_doi_rewrite.py:54
 msgid "Open Access DOI rewrite"
@@ -826,15 +841,15 @@ msgstr "Seklių URL šalintojas"
 msgid "Remove trackers arguments from the returned URL"
 msgstr "Šalinti seklių argumentus iš grąžinamų URL"
 
-#: searx/plugins/unit_converter.py:48
+#: searx/plugins/unit_converter.py:42
 msgid "Unit converter plugin"
 msgstr "Matavimo vienetų konvertavimo papildinys"
 
-#: searx/plugins/unit_converter.py:49
+#: searx/plugins/unit_converter.py:43
 msgid "Convert between units"
 msgstr "Konvertuoti tarp matavimo vienetų"
 
-#: searx/result_types/answer.py:226
+#: searx/result_types/answer.py:223
 #, python-brace-format
 msgid "{location}: {temperature}, {condition}"
 msgstr "{location}: {temperature}, {condition}"
@@ -852,45 +867,45 @@ msgstr "Pereiti į %(search_page)s."
 msgid "search page"
 msgstr "paieškos puslapį"
 
-#: searx/templates/simple/base.html:50
+#: searx/templates/simple/base.html:51
 msgid "Donate"
 msgstr "Paaukoti"
 
-#: searx/templates/simple/base.html:55 searx/templates/simple/base.html:57
-#: searx/templates/simple/preferences.html:156
+#: searx/templates/simple/base.html:56 searx/templates/simple/base.html:58
+#: searx/templates/simple/preferences.html:152
 msgid "Preferences"
 msgstr "Nuostatos"
 
-#: searx/templates/simple/base.html:68
+#: searx/templates/simple/base.html:69
 msgid "Powered by"
 msgstr "Veikia su"
 
-#: searx/templates/simple/base.html:68
+#: searx/templates/simple/base.html:69
 msgid "a privacy-respecting, open metasearch engine"
 msgstr "privatumą gerbiantis atviras metapaieškos variklis"
 
-#: searx/templates/simple/base.html:69
+#: searx/templates/simple/base.html:70
 #: searx/templates/simple/result_templates/packages.html:59
 msgid "Source code"
 msgstr "Šaltinio kodas"
 
-#: searx/templates/simple/base.html:70
+#: searx/templates/simple/base.html:71
 msgid "Issue tracker"
 msgstr "Klaidų sekiklis"
 
-#: searx/templates/simple/base.html:71 searx/templates/simple/stats.html:18
+#: searx/templates/simple/base.html:72 searx/templates/simple/stats.html:17
 msgid "Engine stats"
 msgstr "Statistika statistika"
 
-#: searx/templates/simple/base.html:73
+#: searx/templates/simple/base.html:74
 msgid "Public instances"
 msgstr "Viešos instancijos"
 
-#: searx/templates/simple/base.html:76
+#: searx/templates/simple/base.html:77
 msgid "Privacy policy"
 msgstr "Privatumo politika"
 
-#: searx/templates/simple/base.html:79
+#: searx/templates/simple/base.html:80
 msgid "Contact instance maintainer"
 msgstr "Susisiekite su instancijos prižiūrėtoju"
 
@@ -909,7 +924,7 @@ msgstr "Peržiūros"
 
 #: searx/templates/simple/macros.html:43
 #: searx/templates/simple/result_templates/file.html:18
-#: searx/templates/simple/result_templates/images.html:19
+#: searx/templates/simple/result_templates/images.html:52
 #: searx/templates/simple/result_templates/paper.html:14
 msgid "Author"
 msgstr "Autorius"
@@ -917,26 +932,6 @@ msgstr "Autorius"
 #: searx/templates/simple/macros.html:51
 msgid "cached"
 msgstr "patalpinta"
-
-#: searx/templates/simple/new_issue.html:64
-msgid "Start submitting a new issue on GitHub"
-msgstr "Pateikite naują klaidą Github'e"
-
-#: searx/templates/simple/new_issue.html:66
-msgid "Please check for existing bugs about this engine on GitHub"
-msgstr "Prasome paziurėti esamas klaidas apie šią sistemą Github'e"
-
-#: searx/templates/simple/new_issue.html:69
-msgid "I confirm there is no existing bug about the issue I encounter"
-msgstr "Aš patvirtinu, kad nera jokių esamų"
-
-#: searx/templates/simple/new_issue.html:71
-msgid "If this is a public instance, please specify the URL in the bug report"
-msgstr "Jei tai yra vieša, prašome nurodyti URL bugų pranešime"
-
-#: searx/templates/simple/new_issue.html:72
-msgid "Submit a new issue on Github including the above information"
-msgstr "Pateikite nauja klaidą Github, įvedant informaciją viršuje"
 
 #: searx/templates/simple/preferences.html:65
 msgid "No HTTPS"
@@ -957,91 +952,84 @@ msgid "!bang for its categories"
 msgstr "!bang šiom kategorijom"
 
 #: searx/templates/simple/preferences.html:102
-#: searx/templates/simple/stats.html:64
+#: searx/templates/simple/stats.html:63
 msgid "Median"
 msgstr "Mediana"
 
 #: searx/templates/simple/preferences.html:103
-#: searx/templates/simple/stats.html:70
+#: searx/templates/simple/stats.html:69
 msgid "P80"
 msgstr "P80"
 
 #: searx/templates/simple/preferences.html:104
-#: searx/templates/simple/stats.html:76
+#: searx/templates/simple/stats.html:75
 msgid "P95"
 msgstr "P95"
 
-#: searx/templates/simple/preferences.html:136
-msgid "Failed checker test(s): "
-msgstr "Nepavykęs tikrintojo testas (-ai): "
-
-#: searx/templates/simple/preferences.html:138
+#: searx/templates/simple/preferences.html:134
 msgid "Errors:"
 msgstr "Klaidos:"
 
-#: searx/templates/simple/preferences.html:160
+#: searx/templates/simple/preferences.html:156
 msgid ""
 "This is a preview of the settings used by the 'Search URL' you used to "
 "get here."
 msgstr ""
 
-#: searx/templates/simple/preferences.html:162
+#: searx/templates/simple/preferences.html:158
 msgid "Press save to copy these preferences to your browser."
 msgstr ""
 
-#: searx/templates/simple/preferences.html:163
+#: searx/templates/simple/preferences.html:159
 msgid "Click here to view your browser preferences instead:"
 msgstr ""
 
-#: searx/templates/simple/preferences.html:173
+#: searx/templates/simple/preferences.html:169
 msgid "General"
 msgstr "Bendra"
 
-#: searx/templates/simple/preferences.html:176
+#: searx/templates/simple/preferences.html:172
 msgid "Default categories"
 msgstr "Numatytosios kategorijos"
 
-#: searx/templates/simple/preferences.html:204
+#: searx/templates/simple/preferences.html:200
 msgid "User interface"
 msgstr "Naudotojo sąsaja"
 
-#: searx/templates/simple/preferences.html:227
+#: searx/templates/simple/preferences.html:220
 msgid "Privacy"
 msgstr "Privatumas"
 
-#: searx/templates/simple/preferences.html:242
+#: searx/templates/simple/preferences.html:235
+#: searx/templates/simple/result_templates/images.html:63
 msgid "Engines"
 msgstr "Sistemos"
 
-#: searx/templates/simple/preferences.html:244
+#: searx/templates/simple/preferences.html:237
 msgid "Currently used search engines"
 msgstr "Šiuo metu naudojamos paieškos sistemos"
 
-#: searx/templates/simple/preferences.html:253
+#: searx/templates/simple/preferences.html:246
 msgid "Special Queries"
 msgstr "Specialios Užklausos"
 
-#: searx/templates/simple/preferences.html:261
+#: searx/templates/simple/preferences.html:254
 msgid "Cookies"
 msgstr "Slapukai"
 
-#: searx/templates/simple/results.html:30
-msgid "Number of results"
-msgstr "Rezultatų skaičius"
-
-#: searx/templates/simple/results.html:36
+#: searx/templates/simple/results.html:32
 msgid "Info"
 msgstr "Informacija"
 
-#: searx/templates/simple/results.html:77
+#: searx/templates/simple/results.html:73
 msgid "Back to top"
 msgstr "Atgal į viršų"
 
-#: searx/templates/simple/results.html:95
+#: searx/templates/simple/results.html:91
 msgid "Previous page"
 msgstr "Praitas puslapis"
 
-#: searx/templates/simple/results.html:113
+#: searx/templates/simple/results.html:109
 msgid "Next page"
 msgstr "Kitas puslapis"
 
@@ -1064,95 +1052,83 @@ msgstr "išvalyti"
 msgid "search"
 msgstr "ieškoti"
 
-#: searx/templates/simple/stats.html:21
+#: searx/templates/simple/stats.html:20
 msgid "There is currently no data available. "
 msgstr "Šiuo metu nėra jokių prieinamų duomenų. "
 
 #: searx/templates/simple/preferences/engines.html:24
-#: searx/templates/simple/stats.html:25
+#: searx/templates/simple/stats.html:24
 msgid "Engine name"
 msgstr "Sistemos pavadinimas"
 
-#: searx/templates/simple/stats.html:26
+#: searx/templates/simple/stats.html:25
 msgid "Scores"
 msgstr "Įvertinimas"
 
-#: searx/templates/simple/stats.html:27
+#: searx/templates/simple/stats.html:26
 msgid "Result count"
 msgstr "Rezultatų skaičius"
 
 #: searx/templates/simple/elements/engines_msg.html:7
-#: searx/templates/simple/preferences/engines.html:31
-#: searx/templates/simple/stats.html:28
+#: searx/templates/simple/preferences/engines.html:30
+#: searx/templates/simple/stats.html:27
 msgid "Response time"
 msgstr "Atsakymo greitis"
 
-#: searx/templates/simple/preferences/engines.html:35
-#: searx/templates/simple/stats.html:29
+#: searx/templates/simple/preferences/engines.html:34
+#: searx/templates/simple/stats.html:28
 msgid "Reliability"
 msgstr "Patikimumas"
 
-#: searx/templates/simple/stats.html:59
+#: searx/templates/simple/stats.html:58
 msgid "Total"
 msgstr "Visas"
 
-#: searx/templates/simple/stats.html:60
+#: searx/templates/simple/stats.html:59
 msgid "HTTP"
 msgstr "HTTP"
 
-#: searx/templates/simple/stats.html:61
+#: searx/templates/simple/stats.html:60
 msgid "Processing"
 msgstr "Apdorojama"
 
-#: searx/templates/simple/stats.html:99
+#: searx/templates/simple/stats.html:98
 msgid "Warnings"
 msgstr "Ispėjimai"
 
-#: searx/templates/simple/stats.html:99
+#: searx/templates/simple/stats.html:98
 msgid "Errors and exceptions"
 msgstr "Klaidos ir išimtys"
 
-#: searx/templates/simple/stats.html:105
+#: searx/templates/simple/stats.html:104
 msgid "Exception"
 msgstr "Išimtis"
 
-#: searx/templates/simple/stats.html:107
+#: searx/templates/simple/stats.html:106
 msgid "Message"
 msgstr "Žinutė"
 
-#: searx/templates/simple/stats.html:109
+#: searx/templates/simple/stats.html:108
 msgid "Percentage"
 msgstr "Procentinė dalis"
 
-#: searx/templates/simple/stats.html:111
+#: searx/templates/simple/stats.html:110
 msgid "Parameter"
 msgstr "Parametras"
 
 #: searx/templates/simple/result_templates/code.html:29
 #: searx/templates/simple/result_templates/file.html:24
-#: searx/templates/simple/stats.html:119
+#: searx/templates/simple/stats.html:118
 msgid "Filename"
 msgstr "Failo pavadinimas"
 
-#: searx/templates/simple/stats.html:120
+#: searx/templates/simple/stats.html:119
 msgid "Function"
 msgstr "Funkcija"
 
-#: searx/templates/simple/stats.html:121
+#: searx/templates/simple/stats.html:120
 msgid "Code"
 msgstr "Kodas"
-
-#: searx/templates/simple/stats.html:128
-msgid "Checker"
-msgstr "Tikrintojas"
-
-#: searx/templates/simple/stats.html:131
-msgid "Failed test"
-msgstr "Nepavykęs testas"
-
-#: searx/templates/simple/stats.html:132
-msgid "Comment(s)"
-msgstr "Komentaras(-ai)"
 
 #: searx/templates/simple/answer/translations.html:12
 #: searx/templates/simple/preferences/answerers.html:8
@@ -1228,7 +1204,7 @@ msgstr "Automatiškai aptikti"
 #: searx/templates/simple/filters/safesearch.html:2
 #: searx/templates/simple/filters/safesearch.html:3
 #: searx/templates/simple/filters/safesearch.html:4
-#: searx/templates/simple/preferences/engines.html:27
+#: searx/templates/simple/preferences/engines.html:26
 #: searx/templates/simple/preferences/safesearch.html:2
 msgid "SafeSearch"
 msgstr "Saugi paieška"
@@ -1249,7 +1225,7 @@ msgid "None"
 msgstr "Nėra"
 
 #: searx/templates/simple/filters/time_range.html:1
-#: searx/templates/simple/preferences/engines.html:28
+#: searx/templates/simple/preferences/engines.html:27
 msgid "Time range"
 msgstr "Laiko diapazonas"
 
@@ -1446,15 +1422,11 @@ msgstr "Išjungti viska"
 msgid "!bang"
 msgstr "!pokšt"
 
-#: searx/templates/simple/preferences/engines.html:26
-msgid "Supports selected language"
-msgstr "Palaiko pasirinktą kalbą"
-
-#: searx/templates/simple/preferences/engines.html:29
+#: searx/templates/simple/preferences/engines.html:28
 msgid "Weight"
 msgstr "Svoris"
 
-#: searx/templates/simple/preferences/engines.html:33
+#: searx/templates/simple/preferences/engines.html:32
 msgid "Max time"
 msgstr "Maksimalus laikas"
 
@@ -1471,10 +1443,14 @@ msgid ""
 "These settings are stored in your cookies. This allows us not to store "
 "this data about you."
 msgstr ""
+"Šie nustatymai yra laikomi jūsų slapukuose, tai leidžia mums nesaugoti "
+"šių duomenų apie jus."
 
 #: searx/templates/simple/preferences/footer.html:3
 msgid "These cookies serve your sole convenience; we don't use them to track you."
 msgstr ""
+"Šie slapukai yra naudojami išskirtinai jūsų patogumui, mes nenaudojame "
+"jų, kad jus sektume."
 
 #: searx/templates/simple/preferences/footer.html:6
 msgid "Save"
@@ -1508,17 +1484,7 @@ msgstr "Paveikslų persiuntimas"
 
 #: searx/templates/simple/preferences/image_proxy.html:14
 msgid "Proxy image results through SearXNG"
-msgstr ""
-
-#: searx/templates/simple/preferences/infinite_scroll.html:2
-msgid "Infinite scroll"
-msgstr "Begalinis slinkimas"
-
-#: searx/templates/simple/preferences/infinite_scroll.html:14
-msgid ""
-"Automatically load the next page when scrolling to the bottom of the "
-"current page"
-msgstr ""
+msgstr "Persiunčiami paveikslai per SearXNG"
 
 #: searx/templates/simple/preferences/language.html:24
 msgid "What language do you prefer for search?"
@@ -1569,6 +1535,8 @@ msgid ""
 "Perform a search immediately if a category is selected. Disable to select"
 " multiple categories"
 msgstr ""
+"Jei pasirenkama kategorija, nedelsiant atlikti paiešką. Išjunkite "
+"norėdami pasirinkti kelias kategorijas"
 
 #: searx/templates/simple/preferences/theme.html:2
 msgid "Theme"
@@ -1643,7 +1611,7 @@ msgid "This site did not provide any description."
 msgstr "Šis tiklalapis nepridėjo jokio aprašymo."
 
 #: searx/templates/simple/result_templates/file.html:30
-#: searx/templates/simple/result_templates/images.html:22
+#: searx/templates/simple/result_templates/images.html:61
 #: searx/templates/simple/result_templates/torrent.html:18
 msgid "Filesize"
 msgstr "Failo dydis"
@@ -1661,19 +1629,19 @@ msgstr "Tipas"
 msgid "Download"
 msgstr ""
 
-#: searx/templates/simple/result_templates/images.html:20
+#: searx/templates/simple/result_templates/images.html:53
 msgid "Resolution"
 msgstr "Raiška"
 
-#: searx/templates/simple/result_templates/images.html:21
-msgid "Format"
-msgstr "Formatas"
+#: searx/templates/simple/result_templates/images.html:55
+msgid "Image formats"
+msgstr ""
 
-#: searx/templates/simple/result_templates/images.html:24
-msgid "Engine"
-msgstr "Sistema"
+#: searx/templates/simple/result_templates/images.html:56
+msgid "original format"
+msgstr ""
 
-#: searx/templates/simple/result_templates/images.html:25
+#: searx/templates/simple/result_templates/images.html:64
 msgid "View source"
 msgstr "Rodyti šaltinį"
 
@@ -2353,4 +2321,55 @@ msgstr "slėpti vaizdo įrašą"
 
 #~ msgid "repo"
 #~ msgstr "saugyklos"
+
+#~ msgid "Basic Calculator"
+#~ msgstr "Bazinis skaičiuotuvas"
+
+#~ msgid "Calculate mathematical expressions via the search bar"
+#~ msgstr "Apskaičiuoti matematines lygtis paieškos laukelyje"
+
+#~ msgid ""
+#~ "Automatically load the next page when"
+#~ " scrolling to the bottom of the "
+#~ "current page"
+#~ msgstr ""
+
+#~ msgid "Failed checker test(s): "
+#~ msgstr "Nepavykęs tikrintojo testas (-ai): "
+
+#~ msgid "Checker"
+#~ msgstr "Tikrintojas"
+
+#~ msgid "Failed test"
+#~ msgstr "Nepavykęs testas"
+
+#~ msgid "Comment(s)"
+#~ msgstr "Komentaras(-ai)"
+
+#~ msgid "Start submitting a new issue on GitHub"
+#~ msgstr "Pateikite naują klaidą Github'e"
+
+#~ msgid "Please check for existing bugs about this engine on GitHub"
+#~ msgstr "Prasome paziurėti esamas klaidas apie šią sistemą Github'e"
+
+#~ msgid "I confirm there is no existing bug about the issue I encounter"
+#~ msgstr "Aš patvirtinu, kad nera jokių esamų"
+
+#~ msgid "If this is a public instance, please specify the URL in the bug report"
+#~ msgstr "Jei tai yra vieša, prašome nurodyti URL bugų pranešime"
+
+#~ msgid "Submit a new issue on Github including the above information"
+#~ msgstr "Pateikite nauja klaidą Github, įvedant informaciją viršuje"
+
+#~ msgid "Supports selected language"
+#~ msgstr "Palaiko pasirinktą kalbą"
+
+#~ msgid "Number of results"
+#~ msgstr "Rezultatų skaičius"
+
+#~ msgid "Format"
+#~ msgstr "Formatas"
+
+#~ msgid "Engine"
+#~ msgstr "Sistema"
 
