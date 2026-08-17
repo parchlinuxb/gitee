@@ -13,6 +13,7 @@ from os.path import dirname, abspath
 import msgspec
 
 from typing_extensions import override
+from ._settings import SettingsPref
 from .brand import SettingsBrand
 from .sxng_locales import sxng_locales
 
@@ -266,9 +267,7 @@ SCHEMA: dict[str, t.Any] = {
         "ai_chat_model": SettingsValue(str, ""),
         "ai_chat_api_url": SettingsValue(str, ""),
     },
-    "preferences": {
-        "lock": SettingsValue(list, []),
-    },
+    "preferences": SettingsPref,
     "outgoing": {
         "useragent_suffix": SettingsValue(str, ""),
         "request_timeout": SettingsValue(numbers.Real, 3.0),
