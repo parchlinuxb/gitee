@@ -17,7 +17,8 @@ import babel.core
 
 import searx.plugins
 
-from searx import settings, autocomplete, favicons
+from searx import get_setting, settings, autocomplete, favicons
+from ._settings import SettingsPref
 from searx.enginelib import Engine
 from searx.engines import DEFAULT_CATEGORY
 from searx.extended_types import SXNG_Request
@@ -399,6 +400,8 @@ class Preferences:
     ):
 
         super().__init__()
+
+        self.cfg: SettingsPref = get_setting("preferences")
 
         self.key_value_settings: dict[str, Setting] = {
             # fmt: off
