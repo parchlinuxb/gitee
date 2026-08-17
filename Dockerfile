@@ -15,8 +15,10 @@ RUN set -eux -o pipefail; \
     python -m compileall -q -f -j 0 --invalidation-mode=unchecked-hash ./.venv/lib/; \
     find ./.venv/lib/python*/site-packages/*.dist-info/ -type f -name "RECORD" -exec sort -t, -k1,1 -o {} {} \;; \
     find ./.venv/ -exec touch -h --date="@$TIMESTAMP_VENV" {} +
-COPY --exclude=./searx/version_frozen.py ./searx/ ./searx/
+COPY ./searx/ ./searx/
 RUN set -eux -o pipefail; \
+    cd /usr/local/searxng; \
+    python -m searx.version freeze; \
     python -m compileall -q -f -j 0 --invalidation-mode=unchecked-hash ./searx/; \
     find ./searx/static/ -type f \
     \( -name "*.html" -o -name "*.css" -o -name "*.js" -o -name "*.svg" \) \
@@ -45,8 +47,11 @@ LABEL org.opencontainers.image.created="$CREATED" \
       org.opencontainers.image.url="https://github.com/parchlinuxb/gitee" \
       org.opencontainers.image.version="$VERSION"
 ENV SEARXNG_VERSION="$VERSION" \
+    __SEARXNG_VERSION="$VERSION" \
     CONFIG_PATH="$CONFIG_PATH" \
     DATA_PATH="$DATA_PATH" \
+    __SEARXNG_CONFIG_PATH="$CONFIG_PATH" \
+    __SEARXNG_DATA_PATH="$DATA_PATH" \
     SEARXNG_SETTINGS_PATH="$CONFIG_PATH/settings.yml" \
     GRANIAN_PROCESS_NAME="searxng" \
     GRANIAN_INTERFACE="wsgi" \
