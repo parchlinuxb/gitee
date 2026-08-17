@@ -406,6 +406,7 @@ def render(template_name: str, **kwargs):
     kwargs['DEFAULT_CATEGORY'] = DEFAULT_CATEGORY
 
     # i18n
+    kwargs['locales'] = LOCALE_NAMES
     kwargs['sxng_locales'] = [l for l in sxng_locales if l[0] in settings['search']['languages']]
 
     locale = sxng_request.preferences.get_value('locale')
